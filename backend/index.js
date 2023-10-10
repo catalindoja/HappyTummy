@@ -1,152 +1,22 @@
-const express = require("express");
-const mysql = require("mysql");
+import express from 'express'
+import {pool} from './db.js'
 
-// Create connection
 
-const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    port: "3307",
-    password: "usbw",
-    database: "example",
+const app = express();
+
+app.get('/employees', (req, res) => res.send("obtained employees"))
+app.post('/employee', (req, res) => res.send("created employee"))
+app.put('/employees', (req, res) => res.send("updating employee")) 
+app.delete('/employees', (req, res) => res.send("deleting employee"))
+
+app.get('/ping', async (req, res) => {
+  const result = await pool.query('SELECT 1 + 1 AS result')
+  res.json(result)
 });
 
+app.listen("3000", () => {
 
-// Connect to MySQL
+  console.log("Server started on port 3000");
+  console.log("nodemon test")
 
-db.connect((err) => {
-    if (err) {
-      throw err;
-    }
-
-    console.log("MySql Connected");
-  });
-
-  const app = express();
-
-
-  // Create DB
-
-app.get("/createdb", (req, res) => {
-    let sql = "CREATE DATABASE nodemysql";
-    db.query(sql, (err) => {
-      if (err) {
-        throw err;
-      }
-  
-      res.send("Database created");
-    });
-  });
-
-
-  // Create table
-
-app.get("/createemployee", (req, res) => {
-
-    let sql =
-      "CREATE TABLE employee(id int AUTO_INCREMENT, name VARCHAR(255), designation VARCHAR(255), PRIMARY KEY(id))";
-  
-    db.query(sql, (err) => {
-      if (err) {
-        throw err;
-      }
-  
-      res.send("Employee table created");
-  
-    });
-  });
-
-
-  // Insert employee 1
-
-app.get("/employee1", (req, res) => {
-
-    let post = { name: "Jake Smith", designation: "Chief Executive Officer" };
-  
-    let sql = "INSERT INTO employee SET ?";
-  
-    let query = db.query(sql, post, (err) => {
-  
-      if (err) {
-  
-        throw err;
-  
-      }
-  
-      res.send("Employee 1 added");
-  
-    });
-  
-  });
-
-
-  // Get employee 1
-  app.get("/employee/:id", (req, res) => {
-    
-        let sql = `SELECT * FROM employee WHERE id = ${req.params.id}`;
-        console.log(req.params.id)
-        let query = db.query(sql, (err, result) => {
-    
-        if (err) {
-    
-            throw err;
-    
-        }
-    
-        res.send(result);
-    
-        });
-    
-    });
-
-
-
-  // Update employee
-
-app.get("/updateemployee/:id", (req, res) => {
-
-    let newName = "Chewbacca";
-  
-    let sql = `UPDATE employee SET name = '${newName}' WHERE id = ${req.params.id}`;
-  
-    let query = db.query(sql, (err) => {
-  
-      if (err) {
-  
-        throw err;
-  
-      }
-  
-      res.send("Post updated...");
-  
-    });
-  
-  });
-
-
-  // Delete employee
-
-app.get("/deleteemployee/:id", (req, res) => {
-
-    let sql = `DELETE FROM employee WHERE id = ${req.params.id}`;
-  
-    let query = db.query(sql, (err) => {
-  
-      if (err) {
-  
-        throw err;
-  
-      }
-  
-      res.send("Employee deleted");
-  
-    });
-  
-  });
-
-
-  app.listen("3000", () => {
-
-    console.log("Server started on port 3000");
-  
-  });
+});
