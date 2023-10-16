@@ -1,0 +1,10 @@
+USER:
+{
+  "username": "Alex",
+  "password": "1234",
+  "email": "example@gmail.com",
+  "role": 3,
+  "premium": 0
+}
+
+

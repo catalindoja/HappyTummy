@@ -1,5 +1,5 @@
 CREATE TABLE user (
-    id int,
+    id int NOT NULL AUTO_INCREMENT,
     username varchar(64),
     password varchar(64),
     email varchar(255),
@@ -7,3 +7,5 @@ CREATE TABLE user (
     premium boolean,
 	PRIMARY KEY (id)
 );
+
+insert into user values (1, 'admin', 'admin', 'admin@gmail.com', 1, true);
