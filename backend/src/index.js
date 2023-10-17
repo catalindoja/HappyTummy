@@ -2,5 +2,5 @@ import app from './app.js'
 import {PORT} from './config.js'
 
 app.listen(PORT, () => {
-  console.log("Server started on port 3000");
+  console.log("Server started on port " + PORT + "...");
 });
