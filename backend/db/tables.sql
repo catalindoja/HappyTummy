@@ -8,4 +8,7 @@ CREATE TABLE user (
 	PRIMARY KEY (id)
 );
 
-insert into user values (1, 'admin', 'admin', 'admin@gmail.com', 1, true);
+insert into user values (1, 'admin', 'admin', 'admin@gmail.com', 1, TRUE);
+insert into user values (2, 'pol', '1234', 'pol@gmail.com', 1, false);
+insert into user values (3, 'ruben', '1234', 'ruben@gmail.com', 1, false);
+insert into user values (4, 'alex', '1234', 'alex@gmail.com', 1, false);

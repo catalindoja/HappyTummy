@@ -9,11 +9,11 @@ router.get('/users', getUsers)
 
 router.get('/users/:id', getUser)
 
-router.post('/user', createUser)
+router.post('/users', createUser)
 
-router.put('/user', updateUser)
+router.patch('/users/:id', updateUser)
 
-router.delete('/user', deleteUser)
+router.delete('/users/:id', deleteUser)
 
 
 export default router
