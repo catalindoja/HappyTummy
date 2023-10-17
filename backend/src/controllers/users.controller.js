@@ -64,7 +64,7 @@ export const updateUser = async (req, res) => {
         const {password, email, premium} = req.body
         const [result] = 
             await pool.query('UPDATE user SET password = IFNULL(?, password), email = IFNULL(?, email), premium = IFNULL(?, premium) WHERE id = ?', 
-            [email, password, premium, id])
+            [password, email, premium, id])
 
         if(result.affectedRows === 0) return res.status(404).json({
             message: 'User not found'
