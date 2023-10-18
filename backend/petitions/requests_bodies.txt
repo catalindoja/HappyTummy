@@ -28,3 +28,10 @@ SUPERMARKET:
 }
 
 
+CATEGORY:
+{
+  "id": 10,
+  "category_name": "carne fresca"
+}
+
+
