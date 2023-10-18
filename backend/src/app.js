@@ -1,5 +1,6 @@
 import express from 'express'
 import usersRoutes from './routes/users.routes.js'
+import paymentHistoryRoutes from './routes/paymenthistory.routes.js'
 import cors from 'cors'
 
 const app = express();
@@ -8,6 +9,7 @@ app.use(express.json())
 
 //routes
 app.use(usersRoutes)
+app.use(paymentHistoryRoutes)
 
 
 //middleware for when routes were not found
