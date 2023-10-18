@@ -16,3 +16,15 @@ PAYMENTHISTORY:
   "description": "example description"
 }
 
+
+SUPERMARKET:
+{
+  "id": 11,
+  "name": "lidl",
+  "description": "mas miedo",
+  "address": "address",
+  "city": "lleida",
+  "zipcode": "3"
+}
+
+
