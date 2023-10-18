@@ -43,3 +43,18 @@ ALLERGY:
 }
 
 
+PRODUCT:
+{
+    "id": 10,
+    "iduser": 10,
+    "idcategory": 10,
+    "idallergy": 10,
+    "barcode": "3",
+    "product_name": "ramen",
+    "traces": "gluten",
+    "brand": "gallina blanca",
+    "product_description": "ta bueno",
+    "price": "3.00",
+    "likes": 3,
+    "image": "text"
+}
