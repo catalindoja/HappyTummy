@@ -35,3 +35,11 @@ CATEGORY:
 }
 
 
+ALLERGY:
+{
+  "id": 14,
+  "allergy_name": "esteroides anabolicos",
+  "allergy_description": "esteroides"
+}
+
+
