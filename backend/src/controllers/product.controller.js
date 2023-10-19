@@ -74,7 +74,7 @@ export const updateProduct = async (req, res) => {
             'UPDATE product SET iduser = IFNULL(?, iduser), idcategory = IFNULL(?, idcategory), idallergy = IFNULL(?, idallergy), barcode = IFNULL(?, barcode), product_name = IFNULL(?, product_name), traces = IFNULL(?, traces), brand = IFNULL(?, brand), product_description = IFNULL(?, product_description), price = IFNULL(?, price), likes = IFNULL(?, likes), image = IFNULL(?, image) WHERE id = ?',
             [iduser, idcategory, idallergy, barcode, product_name, traces, brand, product_description, price, likes, image, id])
         
-        if(result.affectedRows <= 0) return res.status(404).json({
+        if(result.affectedRows === 0) return res.status(404).json({
             message: 'Product not found'
         })
 

@@ -9,7 +9,7 @@ import allergiesRoutes from './routes/allergies.routes.js'
 import productRoutes from './routes/product.routes.js'
 import stockRoutes from './routes/stock.routes.js'
 import recipesRoutes from './routes/recipe.routes.js'
-
+import ingredientsRoutes from './routes/ingredients.routes.js'
 
 const app = express();
 app.use(cors())
@@ -25,6 +25,7 @@ app.use(allergiesRoutes)
 app.use(productRoutes)
 app.use(stockRoutes)
 app.use(recipesRoutes)
+app.use(ingredientsRoutes)
 
 
 

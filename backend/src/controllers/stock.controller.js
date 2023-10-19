@@ -64,7 +64,7 @@ export const updateStock = async (req, res) => {
         const [result] = await pool.query('UPDATE stock SET idsupermarket = IFNULL(?, idsupermarket), idproduct = IFNULL(?, idproduct), available = IFNULL(?, available) WHERE id = ?', 
         [idsupermarket, idproduct, available, id])
 
-        if(result.affectedRows <= 0) return res.status(404).json({
+        if(result.affectedRows === 0) return res.status(404).json({
             message: 'Stock not found'
         })
         

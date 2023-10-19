@@ -67,7 +67,7 @@ export const updateRecipe = async (req, res) => {
             'UPDATE recipe SET idproduct = IFNULL(?, idproduct), iduser = IFNULL(?, iduser), description = IFNULL(?, description), likes = IFNULL(?, likes) WHERE id = ?', 
             [idproduct, iduser, description, likes, id])
 
-        if(result.affectedRows <= 0) return res.status(404).json({
+        if(result.affectedRows === 0) return res.status(404).json({
             message: 'Recipe not found'
         })
 

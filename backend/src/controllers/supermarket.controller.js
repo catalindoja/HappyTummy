@@ -68,7 +68,7 @@ export const updateMarket = async (req, res) => {
             'UPDATE supermarket SET name = IFNULL(?, name), description = IFNULL(?, description), address = IFNULL(?, address), city = IFNULL(?, city), zipcode = IFNULL(?, zipcode) WHERE id = ?', 
             [name, description, address, city, zipcode, id])
 
-        if(result.affectedRows <= 0) return res.status(404).json({
+        if(result.affectedRows === 0) return res.status(404).json({
             message: 'Supermarket not found'
         })
 

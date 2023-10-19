@@ -79,3 +79,13 @@ RECIPE:
 }
 
 
+INGREDIENT:
+{
+  "id": 11,
+  "idproduct": 11,
+  "idrecipe": 11,
+  "quantity": 4,
+  "measurementunit": "litros"
+}
+
+
