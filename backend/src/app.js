@@ -11,6 +11,7 @@ import stockRoutes from './routes/stock.routes.js'
 import recipesRoutes from './routes/recipe.routes.js'
 import ingredientsRoutes from './routes/ingredients.routes.js'
 import productAllergiesRoutes from './routes/productallergies.routes.js'
+import commentRoutes from './routes/comment.routes.js'
 
 const app = express();
 app.use(cors())
@@ -28,7 +29,7 @@ app.use(stockRoutes)
 app.use(recipesRoutes)
 app.use(ingredientsRoutes)
 app.use(productAllergiesRoutes)
-
+app.use(commentRoutes)
 
 
 //middleware for when routes were not found

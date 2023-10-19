@@ -97,3 +97,11 @@ PRODUCTALLERGIES:
 }
 
 
+COMMENT:
+{
+  "id": 11,
+  "iduser": 11,
+  "idproduct": 11,
+  "content": "olla",
+  "likes": 3
+}
