@@ -8,6 +8,7 @@ import categoryRoutes from './routes/category.routes.js'
 import allergiesRoutes from './routes/allergies.routes.js'
 import productRoutes from './routes/product.routes.js'
 import stockRoutes from './routes/stock.routes.js'
+import recipesRoutes from './routes/recipe.routes.js'
 
 
 const app = express();
@@ -23,6 +24,7 @@ app.use(categoryRoutes)
 app.use(allergiesRoutes)
 app.use(productRoutes)
 app.use(stockRoutes)
+app.use(recipesRoutes)
 
 
 

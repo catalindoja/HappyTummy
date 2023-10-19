@@ -58,3 +58,24 @@ PRODUCT:
     "likes": 3,
     "image": "text"
 }
+
+
+STOCK:
+{
+  "id": 14,
+  "idsupermarket": 11,
+  "idproduct": 12,
+  "available": 0
+}
+
+
+RECIPE:
+{
+  "id": 12,
+  "idproduct": 12,
+  "iduser": 12,
+  "description": "no c",
+  "likes": 5
+}
+
+
