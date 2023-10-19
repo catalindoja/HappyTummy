@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors'
 import usersRoutes from './routes/users.routes.js'
 import paymentHistoryRoutes from './routes/paymenthistory.routes.js'
 import supermarketRoutes from './routes/supermarket.routes.js'
@@ -6,7 +7,8 @@ import discountRoutes from './routes/discount.routes.js'
 import categoryRoutes from './routes/category.routes.js'
 import allergiesRoutes from './routes/allergies.routes.js'
 import productRoutes from './routes/product.routes.js'
-import cors from 'cors'
+import stockRoutes from './routes/stock.routes.js'
+
 
 const app = express();
 app.use(cors())
@@ -20,6 +22,7 @@ app.use(discountRoutes)
 app.use(categoryRoutes)
 app.use(allergiesRoutes)
 app.use(productRoutes)
+app.use(stockRoutes)
 
 
 
