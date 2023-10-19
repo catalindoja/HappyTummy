@@ -1,14 +1,53 @@
-import React , {Component} from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route
+} from "react-router-dom";
+import Register from './pages/Register';
+import Login from './pages/Login';
+// import "./style.scss"
 
-class App extends React.Component {
-  render() {
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <div>This is the root!</div>,
+  },
+  {
+    path: "/login",
+    element: <Login/>
+  },
+  {
+    path: "/register",
+    element: <Register/>
+  },
+]);
+
+function App() {
     return (
       <div>
-        <h1>Hello World</h1>
+       <RouterProvider router={router} />
       </div>
     );
-  }
-
 }
+
 export default App;
+
+
+// import React , {Component} from 'react';
+// import axios from 'axios';
+
+// import Home from "./pages/Home";
+// import Login from "./pages/Login";
+// import Register from "./pages/Register";
+
+// class App extends React.Component {
+//   render() {
+//     return (
+//       <div>
+//         <h1>Hello World!!</h1>
+//       </div>
+//     );
+//   }
+// }
+// export default App;
