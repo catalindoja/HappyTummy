@@ -22,7 +22,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:4000/users", inputs);  // "/auth/register"
+      await axios.post("auth/register", inputs); // "/auth/register" http://localhost:4000/users
       navigate("/login");
     } catch (err) {
       setError(err.response.data);
@@ -65,14 +65,3 @@ const Register = () => {
 };
 
 export default Register;
-
-
-// import React from 'react';
-
-// function Register() {
-//   return (
-//     <div>Register</div>
-//   );
-// }
-
-// export default Register;

@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "react-router-dom": "^6.17.0"
+    "axios": "^1.5.1",
+    "outlet": "^0.1.5",
+    "react-router-dom": "^6.17.0",
+    "sass": "^1.69.4"
   }
 }

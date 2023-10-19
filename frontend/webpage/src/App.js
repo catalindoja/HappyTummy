@@ -2,16 +2,37 @@ import React, { useState } from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
-  Route
+  Route,
+  Outlet
 } from "react-router-dom";
 import Register from './pages/Register';
 import Login from './pages/Login';
-// import "./style.scss"
+import Home from './pages/Home';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import "./style.scss"
+
+const Layout = () => {
+  return (
+    <>
+      <Navbar />
+      <Outlet />
+      <Footer />
+    </>
+  );
+};
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>This is the root!</div>,
+    element: <Layout/>,
+    children: [ 
+      {
+        path: "/",
+        element:<Home/>
+      }
+    ]
+    // element: <div>This is the root!</div>,
   },
   {
     path: "/login",
@@ -24,11 +45,13 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-    return (
-      <div>
-       <RouterProvider router={router} />
+  return (
+    <div className="app">
+      <div className="container">
+        <RouterProvider router={router} />
       </div>
-    );
+    </div>
+  );
 }
 
 export default App;

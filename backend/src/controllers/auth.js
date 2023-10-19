@@ -1,3 +1,5 @@
+// RUBEN
+
 import { pool } from "../db.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
@@ -30,7 +32,7 @@ export const register = (req, res) => {
 
 export const login = (req, res) => {
   //CHECK USER
-
+  console.log("I AM IN LOGIN!");
   const q = "SELECT * FROM users WHERE username = ?";
 
   db.query(q, [req.body.username], (err, data) => {
