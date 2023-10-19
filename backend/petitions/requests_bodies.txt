@@ -89,3 +89,11 @@ INGREDIENT:
 }
 
 
+PRODUCTALLERGIES:
+{
+  "id": 11,
+  "idproduct": 11,
+  "idallergies": 11
+}
+
+
