@@ -6,23 +6,11 @@ import authRoutes from "./routes/auth.js";
 
 import express from "express";
 
-// NECESARIO?? CREO QUE NO
+// CREO QUE NO ES NECESARIO
 // const app = express();
 // app.use(express.json());
 
-// ESTO ES LO ÚNICO QUE TIENE LA RAMA MAIN
+// RAMA MAIN
 app.listen(PORT, () => {
   console.log("index.js: Server started on port " + PORT + "!");
 });
-
-// app.get("/testeo", (req, res)=>{
-//   const q = "SELECT * FROM user"
-//   db.query(q,(err,data)=>{
-//     if (err) return res.json(err)
-//     return res.json(data)
-//   })
-// })
-
-//app.use("/backend/auth", authRoutes);
-//app.use("/api/users", userRoutes);
-//app.use("/api/posts", postRoutes);

@@ -19,11 +19,37 @@ const Register = () => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const isGmail = (email) => {
+    const gmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return gmailPattern.test(email);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (inputs.username.trim() === "") {
+      setError("The 'username' field cannot be empty");
+      return;
+    }
+
+    if (inputs.email.trim() === "") {
+      setError("The 'email' field cannot be empty");
+      return;
+    }
+
+    if (inputs.password.trim() === "") {
+      setError("The 'password' field cannot be empty");
+      return;
+    }
+
+    if (!isGmail(inputs.email)) {
+      setError("The email address is not in a valid format");
+      return;
+    }
+
     try {
       // http://localhost:4000/users  auth/register
-      await axios.post("/register", inputs); // !!!
+      await axios.post("/register", inputs); // DANGER!!!
       navigate("/login");
     } catch (err) {
       setError(err.response.data);

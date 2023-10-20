@@ -8,22 +8,11 @@ export const AuthContexProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || null
   );
 
-  // const [error, setError] = useState(null); // Declarar el estado de error
-
   const login = async (inputs) => {
-    console.log("HI THERE!");
-    //try {
-      // ESTO ES 3000 SEGURO
-      // http://localhost:4000/api/  "http://localhost:5000/backend/src/routes/auth/login"
-      const res = await axios.post("/login", inputs); // !!!
-      setCurrentUser(res.data);
-
-      // setError(null); // Limpiar el error si la autenticación es exitosa
-    //} catch (error) {
-      //console.error("Error al iniciar sesión:", error);
-      // Puedes establecer el error en el estado para mostrarlo en la interfaz de usuario
-      //setError(error.response.data.message || "Error desconocido al iniciar sesión");
-    //}
+    // console.log("Im in the login");
+    // http://localhost:4000/api/  "http://localhost:5000/backend/src/routes/auth/login"
+    const res = await axios.post("/login", inputs); // DANGER!!!
+    setCurrentUser(res.data);
   };
 
   const logout = async (inputs) => {
