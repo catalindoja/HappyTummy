@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import {  } from '../controllers/paymenthistory.controller.js'
+import { getPayments, getPayment, createPayment, updatePayment, deletePayment } from '../controllers/paymenthistory.controller.js'
 
 
 const router = Router()
