@@ -28,7 +28,7 @@ const Navbar = () => {
             <h6>STATISTICS</h6>
           </Link>
           <Link className="link" to="/">
-            <h6>PAYMENT</h6>
+            <h6>PAYMENTS</h6>
           </Link>
           <Link className="link" to="/">
             <h6>INFORMATION</h6>
@@ -41,14 +41,16 @@ const Navbar = () => {
           </span>
           {currentUser ? (
             <span onClick={logout}>Logout</span>
-          ) : (
-            <Link className="link" to="/login">
+          ): (
+            <span>Logout</span>)}
+
+             {/*<Link className="link" to="/login">
               Login
-            </Link>
-          )}
+            </Link>  */} 
+
           <span className="write">
-            <Link className="link" to="/write">
-              Write
+            <Link className="link" to="/postproduct">
+              Post
             </Link>
           </span>
         </div>

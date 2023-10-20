@@ -1,5 +1,12 @@
 $lightGreen: #b9e7e7;
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'NuevaFuente', sans-serif; /* También cambia la fuente para los títulos si lo deseas */
+}
+body {
+  font-family: 'NuevaFuente', sans-serif; /* Reemplaza 'NuevaFuente' con el nombre de la fuente que elijas */
+}
+
 .app {
   display: flex;
   justify-content: center;
@@ -64,6 +71,7 @@ $lightGreen: #b9e7e7;
     //NAVBAR
 
     .navbar {
+      font-weight: bold; /* Establece el texto en negrita */
       .container {
         padding: 10px 0px;
         display: flex;
@@ -77,15 +85,19 @@ $lightGreen: #b9e7e7;
         .links {
           display: flex;
           align-items: center;
-          gap: 15px;
+          gap: 17px;
 
           h6 {
             color: teal;
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 300;
           }
 
           span {
+            // User name, login and logout
+            background-color: $lightGreen;
+            padding: 5px 5px;
+            border-radius: 10%;
             cursor: pointer;
           }
 
@@ -216,6 +228,11 @@ $lightGreen: #b9e7e7;
         display: flex;
         flex-direction: column;
         gap: 30px;
+
+        h1 {
+          text-align: justify;
+          line-height: 30px;
+        }
 
         img {
           width: 100%;

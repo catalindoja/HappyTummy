@@ -3,6 +3,7 @@
     "axios": "^1.5.1",
     "dompurify": "^3.0.6",
     "outlet": "^0.1.5",
+    "react-quill": "^2.0.0",
     "react-router-dom": "^6.17.0",
     "sass": "^1.69.4"
   }

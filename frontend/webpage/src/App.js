@@ -5,12 +5,15 @@ import {
   // Route,
   Outlet
 } from "react-router-dom";
+
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import SingleProduct from './pages/SingleProduct';
+import PostProduct from './pages/PostProduct';
 import Recepies from './pages/Recepies';
+
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import "./style.scss"
@@ -27,7 +30,7 @@ const Layout = () => {
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/", 
     element: <Layout/>,
     children: [ 
       {
@@ -45,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "/recepies",
         element: <Recepies/>
+      },
+      {
+        path: "/postproduct",
+        element: <PostProduct/>
       },
     ]
   },

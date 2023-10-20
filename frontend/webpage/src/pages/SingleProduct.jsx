@@ -46,7 +46,6 @@ const SingleProduct = () => {
   }
 
   return (
-    <div>TEST</div>,
     <div className="single">
       <div className="content">
         <img src={`../upload/${post?.img}`} alt="" />

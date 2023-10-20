@@ -18,6 +18,8 @@ export const AuthContexProvider = ({ children }) => {
   const logout = async (inputs) => {
     await axios.post("/logout");
     setCurrentUser(null);
+    // Redirige al usuario a la página "/login" utilizando window.location
+    window.location.href = "/login";
   };
 
   useEffect(() => {
