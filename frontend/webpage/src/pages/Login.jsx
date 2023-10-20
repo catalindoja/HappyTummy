@@ -26,6 +26,8 @@ const Login = () => {
       await login(inputs)
       navigate("/");
     } catch (err) {
+      console.log("errorcillo por aqui");
+      console.log(err.response.data);
       setError(err.response.data);
     }
   };

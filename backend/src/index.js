@@ -15,6 +15,14 @@ app.listen(PORT, () => {
   console.log("index.js: Server started on port " + PORT + "!");
 });
 
-app.use("/backend/auth", authRoutes);
+// app.get("/testeo", (req, res)=>{
+//   const q = "SELECT * FROM user"
+//   db.query(q,(err,data)=>{
+//     if (err) return res.json(err)
+//     return res.json(data)
+//   })
+// })
+
+//app.use("/backend/auth", authRoutes);
 //app.use("/api/users", userRoutes);
 //app.use("/api/posts", postRoutes);
