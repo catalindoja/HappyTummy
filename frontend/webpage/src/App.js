@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
+  // Route,
   Outlet
 } from "react-router-dom";
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
+import Products from './pages/Products';
+import SingleProduct from './pages/SingleProduct';
+import Recepies from './pages/Recepies';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import "./style.scss"
@@ -30,9 +33,20 @@ const router = createBrowserRouter([
       {
         path: "/",
         element:<Home/>
-      }
+      },
+      {
+        path: "/products",
+        element: <Products/>
+      },
+      {
+        path: "/products/:id",
+        element: <SingleProduct/>
+      },
+      {
+        path: "/recepies",
+        element: <Recepies/>
+      },
     ]
-    // element: <div>This is the root!</div>,
   },
   {
     path: "/login",

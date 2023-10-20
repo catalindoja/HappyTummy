@@ -21,7 +21,7 @@ export const register = (req, res) => {
   const q = "SELECT * FROM user WHERE email = ? OR username = ?";
 
   db.query(q, [req.body.email, req.body.username], (err, data) => {
-    console.log("REGISTER!");
+    console.log("CHECK!");
     if (err) return res.status(500).json(err);
     if (data.length) return res.status(409).json("User already exists!");
 

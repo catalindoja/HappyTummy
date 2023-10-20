@@ -77,10 +77,11 @@ $lightGreen: #b9e7e7;
         .links {
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 15px;
 
           h6 {
-            font-size: 16px;
+            color: teal;
+            font-size: 17px;
             font-weight: 300;
           }
 
@@ -119,8 +120,14 @@ $lightGreen: #b9e7e7;
       align-items: center;
       justify-content: space-between;
       font-size: 12px;
-      img {
-        height: 50px;
+      .logo {
+        height: 65px;
+        border-radius: 50%;
+      } 
+      .social-icons {
+        display: flex;
+        height: 40px;
+        gap: 15px; /* Espacio entre las imágenes */
       }
     }
 
@@ -131,15 +138,16 @@ $lightGreen: #b9e7e7;
         margin-top: 50px;
         display: flex;
         flex-direction: column;
-        gap: 150px;
+        gap: 80px;
 
         .post {
           display: flex;
-          gap: 100px;
+          gap: 80px;
 
-          &:nth-child(2n + 1) {
-            flex-direction: row-reverse;
-          }
+          // To intercalate text and image (left and right)
+          // &:nth-child(2n + 1) {
+          //   flex-direction: row-reverse;
+          // }
 
           .img {
             flex: 2;
