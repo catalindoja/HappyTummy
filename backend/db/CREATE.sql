@@ -3,14 +3,26 @@ CREATE DATABASE `backend`;
 SHOW DATABASES;
 USE `backend`;
 
+CREATE TABLE supermarket (
+    id INT NOT NULL AUTO_INCREMENT,
+    name varchar(64),
+    description text,
+    address varchar(128),
+    city varchar(64),
+    zipcode VARCHAR (10),
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE user (
     id INT NOT NULL AUTO_INCREMENT,
+    idsupermarket int,
     usersname varchar(64),
     passwords varchar(64),
     email varchar(256),
     roles int,
     premium boolean,
 	PRIMARY KEY (id)
+    FOREIGN KEY (idsupermarket) REFERENCES supermarket(id)
 );
 
 CREATE TABLE paymenthistory (
@@ -21,16 +33,6 @@ CREATE TABLE paymenthistory (
     description varchar(256),
 	PRIMARY KEY (id),
     FOREIGN KEY (iduser) REFERENCES user(id)
-);
-
-CREATE TABLE supermarket (
-    id INT NOT NULL AUTO_INCREMENT,
-    name varchar(64),
-    description text,
-    address varchar(128),
-    city varchar(64),
-    zipcode VARCHAR (10),
-	PRIMARY KEY (id)
 );
 
 CREATE TABLE discount (
@@ -64,7 +66,8 @@ CREATE TABLE product (
     idallergy int,
     barcode varchar(64),
     product_name varchar(64),
-    traces varchar(64),
+    quantity decimal(10, 2),
+    measurement varchar(64),
     brand varchar(64),
     product_description  varchar(256),
     price decimal(10, 2),
@@ -92,6 +95,9 @@ CREATE TABLE recipe (
     iduser int,
     description varchar(64),
     likes int,
+    time int,
+    unit varchar(64),
+    ammountofpeople int,
 	PRIMARY KEY (id),
     FOREIGN KEY (idproduct) REFERENCES product(id),
     FOREIGN KEY (iduser) REFERENCES user(id)
