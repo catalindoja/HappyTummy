@@ -24,11 +24,11 @@ export const getProduct = async (req, res) => {
 
 export const createProduct = async (req, res) => {
     try {
-        const {iduser, idcategory, idallergy, barcode, product_name, traces, brand, product_description, price, likes, image} = req.body
+        const {iduser, idcategory, idallergy, barcode, product_name, quantity, measurement, brand, product_description, price, likes, image} = req.body
 
         const [rows] = await pool.query(
-            'INSERT INTO product (iduser, idcategory, idallergy, barcode, product_name, traces, brand, product_description, price, likes, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-            [iduser, idcategory, idallergy, barcode, product_name, traces, brand, product_description, price, likes, image])
+            'INSERT INTO product (iduser, idcategory, idallergy, barcode, product_name, quantity, measurement, brand, product_description, price, likes, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [iduser, idcategory, idallergy, barcode, product_name, quantity, measurement, brand, product_description, price, likes, image])
         
         res.send({
             id: rows.insertId,
@@ -37,7 +37,8 @@ export const createProduct = async (req, res) => {
             idallergy,
             barcode,
             product_name,
-            traces,
+            quantity,
+            measurement,
             brand,
             product_description,
             price,
@@ -45,6 +46,7 @@ export const createProduct = async (req, res) => {
             image
         })
     } catch (error) {
+        console.log(error)
         return res.status(500).json({
             message: 'Something went wrong while creating the product'
         })
@@ -68,11 +70,11 @@ export const deleteProduct = async (req, res) => {
 export const updateProduct = async (req, res) => {
     try {
         const {id} = req.params
-        const {iduser, idcategory, idallergy, barcode, product_name, traces, brand, product_description, price, likes, image} = req.body
+        const {iduser, idcategory, idallergy, barcode, product_name, quantity, measurement, brand, product_description, price, likes, image} = req.body
 
         const [result] = await pool.query(
-            'UPDATE product SET iduser = IFNULL(?, iduser), idcategory = IFNULL(?, idcategory), idallergy = IFNULL(?, idallergy), barcode = IFNULL(?, barcode), product_name = IFNULL(?, product_name), traces = IFNULL(?, traces), brand = IFNULL(?, brand), product_description = IFNULL(?, product_description), price = IFNULL(?, price), likes = IFNULL(?, likes), image = IFNULL(?, image) WHERE id = ?',
-            [iduser, idcategory, idallergy, barcode, product_name, traces, brand, product_description, price, likes, image, id])
+            'UPDATE product SET iduser = IFNULL(?, iduser), idcategory = IFNULL(?, idcategory), idallergy = IFNULL(?, idallergy), barcode = IFNULL(?, barcode), product_name = IFNULL(?, product_name), quantity = IFNULL(?, quantity), measurement = IFNULL(?, measurement), brand = IFNULL(?, brand), product_description = IFNULL(?, product_description), price = IFNULL(?, price), likes = IFNULL(?, likes), image = IFNULL(?, image) WHERE id = ?',
+            [iduser, idcategory, idallergy, barcode, product_name, quantity, measurement, brand, product_description, price, likes, image, id])
         
         if(result.affectedRows === 0) return res.status(404).json({
             message: 'Product not found'

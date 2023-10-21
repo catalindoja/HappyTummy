@@ -16,10 +16,10 @@ CREATE TABLE supermarket (
 CREATE TABLE user (
     id INT NOT NULL AUTO_INCREMENT,
     idsupermarket int,
-    usersname varchar(64),
-    passwords varchar(64),
+    username varchar(64),
+    password varchar(64),
     email varchar(256),
-    roles int,
+    role int,
     premium boolean,
 	PRIMARY KEY (id)
     FOREIGN KEY (idsupermarket) REFERENCES supermarket(id)

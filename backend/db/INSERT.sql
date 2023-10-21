@@ -2,9 +2,9 @@ INSERT INTO supermarket VALUES (10, "mercadona", "miedo", "address", "lleida", 3
 INSERT INTO supermarket VALUES (11, "lidl", "mas miedo", "address", "lleida", 3);
 INSERT INTO supermarket VALUES (12, "carrefour", "frances :(", "address", "lleida", 3);
 
-INSERT INTO user VALUES (10,10,"alex","1234","example1@gmail.com",10,TRUE);
-INSERT INTO user VALUES (11,11,"samer","1234","example1@gmail.com",11,TRUE);
-INSERT INTO user VALUES (12,12,"catalin","1234","example1@gmail.com",12,TRUE);
+INSERT INTO user VALUES (10,10,"alex","1234","example1@gmail.com",1,TRUE);
+INSERT INTO user VALUES (11,11,"samer","1234","example1@gmail.com",2,TRUE);
+INSERT INTO user VALUES (12,12,"catalin","1234","example1@gmail.com",3,TRUE);
 
 INSERT INTO PaymentHistory VALUES (10,10,3,CURRENT_DATE(),3);
 INSERT INTO PaymentHistory VALUES (11,11,4,CURRENT_DATE(),4);
