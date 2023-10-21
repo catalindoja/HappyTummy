@@ -18,9 +18,13 @@ INSERT INTO allergies VALUES (10, "lactosa", "bro tolerala y ya");
 INSERT INTO allergies VALUES (11, "gluten", "pan");
 INSERT INTO allergies VALUES (12, "marisco", "sobrevalorado");
 
-INSERT INTO product VALUES (10, 10, 10, 10, 3, "ramen", 100, "gramos", "gallina blanca", "ta bueno", 3, 3, "image");
-INSERT INTO product VALUES (11, 11, 11, 11, 4, "yogur", 100, "gramos", "danone", "donde estan los dinosaurios de danonino :'(", 4, 4, "image");
-INSERT INTO product VALUES (12, 12, 12, 12, 5, "clorox", 1, "litro", "don limpio", ":)", 5, 5, "image");
+INSERT INTO brand VALUES(10, "hacendado");
+INSERT INTO brand VALUES(11, "gallina blanca");
+INSERT INTO brand VALUES(12, "danone");
+
+INSERT INTO product VALUES (10, 10, 10, 10, 3, "ramen", 100, "gramos", 11, "ta bueno", 3, 3, "image");
+INSERT INTO product VALUES (11, 11, 11, 11, 4, "yogur", 100, "gramos", 12, "donde estan los dinosaurios de danonino :'(", 4, 4, "image");
+INSERT INTO product VALUES (12, 12, 12, 12, 5, "clorox", 1, "litro", 10, ":)", 5, 5, "image");
 
 INSERT INTO stock VALUES (10, 10, 10, TRUE);
 INSERT INTO stock VALUES (11, 11, 11, TRUE);

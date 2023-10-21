@@ -59,6 +59,12 @@ CREATE TABLE allergies (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE brand (
+    id INT NOT NULL AUTO_INCREMENT,
+    name varchar(64),
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE product (
     id INT NOT NULL AUTO_INCREMENT,
     iduser int,
@@ -68,7 +74,7 @@ CREATE TABLE product (
     product_name varchar(64),
     quantity decimal(10, 2),
     measurement varchar(64),
-    brand varchar(64),
+    idbrand int,
     product_description  varchar(256),
     price decimal(10, 2),
     likes int,
@@ -76,7 +82,8 @@ CREATE TABLE product (
 	PRIMARY KEY (id),
     FOREIGN KEY (iduser) REFERENCES user(id),
     FOREIGN KEY (idcategory) REFERENCES category(id),
-    FOREIGN KEY (idallergy) REFERENCES allergies(id)
+    FOREIGN KEY (idallergy) REFERENCES allergies(id),
+    FOREIGN KEY (idbrand) REFERENCES brand(id)
 );
 
 CREATE TABLE stock (
