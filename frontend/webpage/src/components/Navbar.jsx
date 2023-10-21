@@ -22,17 +22,17 @@ const Navbar = () => {
             <h6>RECEPIES</h6>
           </Link>
           <Link className="link" to="/">
-            <h6>MY COMMENTS</h6>
+            <h6>SUPERMARKETS INFO </h6>
           </Link>
           <Link className="link" to="/">
-            <h6>STATISTICS</h6>
+            <h6>ALLERGIES AND INTOLERANCES INFO</h6>
           </Link>
           <Link className="link" to="/">
-            <h6>PAYMENTS</h6>
+            <h6>MY STATISTICS</h6>
           </Link>
-          <Link className="link" to="/">
-            <h6>INFORMATION</h6>
-          </Link>
+          {/* <Link className="link" to="/">
+            <h6>MY PAYMENTS</h6>
+          </Link> */}
           {/* <Link className="link" to="/?cat=food">
             <h6>FOOD</h6>
           </Link> */}

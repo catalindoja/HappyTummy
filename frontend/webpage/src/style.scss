@@ -85,12 +85,14 @@ body {
         .links {
           display: flex;
           align-items: center;
-          gap: 17px;
+          justify-content: center;
+          gap: 13px;
 
           h6 {
             color: teal;
             font-size: 16px;
             font-weight: 300;
+            text-align: center;
           }
 
           span {
