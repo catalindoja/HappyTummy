@@ -6,12 +6,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 import gluten from "../img/gluten.png";
 import { useEffect } from "react";
-const uploadDirectory = "/upload"
 // const fs = require("fs");
 
 const Write = () => {
 
     const state = useLocation().state;
+    const navigate = useNavigate();
 
     // Para las alergias!!
     const [allergies, setAllergies] = useState([]);
@@ -27,7 +27,7 @@ const Write = () => {
         }
       };
       fetchData();
-    });
+    }, []);
 
     // Para las categorias!!
     const [categories, setCategories] = useState([]);
@@ -43,7 +43,7 @@ const Write = () => {
         }
       };
       fetchData();
-    });
+    }, []);
 
   // Para descripciones de alergias y categorias
   const getText = (html) =>{
@@ -63,15 +63,17 @@ const Write = () => {
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState(state?.cat || "");
 
-  const navigate = useNavigate()
-
   const upload = async () => {
     try {
-      console.log("QLE")
+      console.log("QUE")
       const formData = new FormData();
       formData.append("file", file);
+      console.log(formData)
+      console.log(file)
       console.log("QUE SUBO EL FILE")
+      
       const res = await axios.post("/upload", formData);    // ESTO ME FALLA
+      
       console.log("SUBIDO FILE")
       return res.data;
     } catch (err) {
