@@ -16,7 +16,7 @@ console.log("DB_USER: " + DB_USER)
 console.log("DB_PASSWORD: " + DB_PASSWORD)
 console.log("DB_DATABASE: " + DB_DATABASE)
 console.log("DB_HOST: " + DB_HOST)
-console.log("*****************************") 
+console.log("*****************************")
 
 // Create connection
 export const pool = createPool({  

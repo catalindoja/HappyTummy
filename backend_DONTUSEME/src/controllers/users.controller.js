@@ -24,15 +24,14 @@ export const getUser = async (req, res) => {
 
 export const createUser = async (req, res) => {
     try {
-        const {idsupermarket, username, password, email, role, premium} = req.body
+        const {username, password, email, role, premium} = req.body
 
         const [rows] = await pool.query(
-            'INSERT INTO user (idsupermarket, username, password, email, role, premium) VALUES (?, ?, ?, ?, ?, ?)', 
-            [idsupermarket, username, password, email, role, premium])
+            'INSERT INTO user (username, password, email, role, premium) VALUES (?, ?, ?, ?, ?)', 
+            [username, password, email, role, premium])
 
         res.send({
             id: rows.insertId,
-            idsupermarket,
             username,
             email,
             role,

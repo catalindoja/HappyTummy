@@ -1,12 +1,10 @@
 USER:
 {
-  "id": 11,
-  "idsupermarket": 11,
-  "usersname": "samer",
-  "passwords": "1234",
-  "email": "example1@gmail.com",
-  "roles": 11,
-  "premium": 1
+  "username": "Alex",
+  "password": "1234",
+  "email": "example@gmail.com",
+  "role": 3,
+  "premium": 0
 }
 
 
@@ -47,19 +45,18 @@ ALLERGY:
 
 PRODUCT:
 {
-  "id": 11,
-  "iduser": 11,
-  "idcategory": 11,
-  "idallergy": 11,
-  "barcode": "4",
-  "product_name": "yogur",
-  "quantity": "100.00",
-  "measurement": "gramos",
-  "brand": "danone",
-  "product_description": "donde estan los dinosaurios de danonino :'(",
-  "price": "4.00",
-  "likes": 4,
-  "image": "image"
+    "id": 10,
+    "iduser": 10,
+    "idcategory": 10,
+    "idallergy": 10,
+    "barcode": "3",
+    "product_name": "ramen",
+    "traces": "gluten",
+    "brand": "gallina blanca",
+    "product_description": "ta bueno",
+    "price": "3.00",
+    "likes": 3,
+    "image": "text"
 }
 
 
@@ -74,14 +71,11 @@ STOCK:
 
 RECIPE:
 {
-  "id": 11,
-  "idproduct": 11,
-  "iduser": 11,
-  "description": "receta para el desastre",
-  "likes": 4,
-  "time": 10,
-  "unit": "minutos",
-  "ammountofpeople": 10
+  "id": 12,
+  "idproduct": 12,
+  "iduser": 12,
+  "description": "no c",
+  "likes": 5
 }
 
 

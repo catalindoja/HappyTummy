@@ -9,8 +9,6 @@ router.get('/products', getProducts)
 
 router.get('/products/:id', getProduct)
 
-//router.get('/products/:iduser', getProductByUserId)
-
 router.post('/products', createProduct)
 
 router.patch('/products/:id', updateProduct)

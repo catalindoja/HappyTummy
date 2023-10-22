@@ -2,9 +2,27 @@ import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useEffect } from "react";
 
 const Register = () => {
+
+  // Para los supermercados!!
+  const [markets, setMarkets] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`/markets`);
+        // console.log(res.data)
+        setMarkets(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, []);
+  
   const [inputs, setInputs] = useState({
+    idsupermarket: "",
     username: "",
     email: "",
     password: "",
@@ -16,6 +34,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   const handleChange = (e) => {
+    console.log(e.target.value)
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -34,6 +53,11 @@ const Register = () => {
 
     if (inputs.email.trim() === "") {
       setError("The 'email' field cannot be empty");
+      return;
+    }
+
+    if (inputs.idsupermarket.trim() === "") {
+      setError("Select a supermarket");
       return;
     }
 
@@ -63,24 +87,46 @@ const Register = () => {
         <input
           required
           type="text"
-          placeholder="username"
+          placeholder="Username"
           name="username"
           onChange={handleChange}
         />
         <input
           required
           type="email"
-          placeholder="email"
+          placeholder="Email"
           name="email"
           onChange={handleChange}
         />
         <input
           required
           type="password"
-          placeholder="password"
+          placeholder="Password"
           name="password"
           onChange={handleChange}
         />
+
+        {/* <input
+          required
+          type="supermarket"
+          placeholder="Supermarket"
+          name="supermarket"
+          onChange={handleChange}
+        /> */}
+
+        {/*NEW*/}
+        <div className="boxes">
+          <fieldset>
+            <legend>Supermarket</legend>
+            {markets.map((market) => (
+              <div key={market.id}>
+                <input type="radio" id={market.name} name="idsupermarket" value={market.id} onChange={handleChange}/>
+                <label for={market.name}>{market.name}</label>
+              </div>
+            ))}
+          </fieldset>
+        </div>
+
         <button onClick={handleSubmit}>Register</button>
         {err && <p>{err}</p>}
         <span>

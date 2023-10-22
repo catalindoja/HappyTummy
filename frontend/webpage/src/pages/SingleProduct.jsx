@@ -31,7 +31,7 @@ const SingleProduct = () => {
     fetchData();
   }, [postId]);
 
-  const handleDelete = async ()=>{
+  const handleDelete = async () => {
     try {
       await axios.delete(`/products/${postId}`);
       navigate("/")
@@ -40,7 +40,7 @@ const SingleProduct = () => {
     }
   }
 
-  const getText = (html) =>{
+  const getText = (html) => {
     const doc = new DOMParser().parseFromString(html, "text/html")
     return doc.body.textContent
   }
@@ -73,9 +73,9 @@ const SingleProduct = () => {
             __html: DOMPurify.sanitize(post.product_description),
           }}
         ></p>
-          </div>
-            {<Menu cat={post.cat}/>}
-          </div>
+      </div>
+      {<Menu cat={post.cat} />}
+    </div>
   );
 
 };

@@ -1,10 +1,6 @@
-INSERT INTO supermarket VALUES (10, "mercadona", "miedo", "address", "lleida", 3);
-INSERT INTO supermarket VALUES (11, "lidl", "mas miedo", "address", "lleida", 3);
-INSERT INTO supermarket VALUES (12, "carrefour", "frances :(", "address", "lleida", 3);
-
-INSERT INTO user VALUES (10,10,"alex","1234","example1@gmail.com",1,TRUE);
-INSERT INTO user VALUES (11,11,"samer","1234","example1@gmail.com",2,TRUE);
-INSERT INTO user VALUES (12,12,"catalin","1234","example1@gmail.com",3,TRUE);
+INSERT INTO users VALUES (10,3,3,3,3,TRUE);
+INSERT INTO users VALUES (11,4,4,4,4,TRUE);
+INSERT INTO users VALUES (12,5,5,5,5,TRUE);
 
 INSERT INTO PaymentHistory VALUES (10,10,3,CURRENT_DATE(),3);
 INSERT INTO PaymentHistory VALUES (11,11,4,CURRENT_DATE(),4);
@@ -18,21 +14,21 @@ INSERT INTO allergies VALUES (10, "lactosa", "bro tolerala y ya");
 INSERT INTO allergies VALUES (11, "gluten", "pan");
 INSERT INTO allergies VALUES (12, "marisco", "sobrevalorado");
 
-INSERT INTO brand VALUES(10, "hacendado");
-INSERT INTO brand VALUES(11, "gallina blanca");
-INSERT INTO brand VALUES(12, "danone");
+INSERT INTO supermarket VALUES (10, "mercadona", "miedo", "address", "lleida", 3);
+INSERT INTO supermarket VALUES (11, "lidl", "mas miedo", "address", "lleida", 3);
+INSERT INTO supermarket VALUES (12, "carrefour", "frances :(", "address", "lleida", 3);
 
-INSERT INTO product VALUES (10, 10, 10, 10, 3, "ramen", 100, "gramos", 11, "ta bueno", 3, 3, "image");
-INSERT INTO product VALUES (11, 11, 11, 11, 4, "yogur", 100, "gramos", 12, "donde estan los dinosaurios de danonino :'(", 4, 4, "image");
-INSERT INTO product VALUES (12, 12, 12, 12, 5, "clorox", 1, "litro", 10, ":)", 5, 5, "image");
+INSERT INTO product VALUES (10, 10, 10, 10, 3, "ramen", "gluten", "gallina blanca", "ta bueno", 3, 3, "image");
+INSERT INTO product VALUES (11, 11, 11, 11, 4, "yogur", "lactosa", "danone", "donde estan los dinosaurios de danonino :'(", 4, 4, "image");
+INSERT INTO product VALUES (12, 12, 12, 12, 5, "clorox", "nuts", "don limpio", ":)", 5, 5, "image");
 
 INSERT INTO stock VALUES (10, 10, 10, TRUE);
 INSERT INTO stock VALUES (11, 11, 11, TRUE);
 INSERT INTO stock VALUES (12, 12, 12, TRUE);
 
-INSERT INTO recipe VALUES (10, 10, 10, "galletas y sal", 3, 5, "minutos", 3);
-INSERT INTO recipe VALUES (11, 11, 11, "receta para el desastre", 4, 10, "minutos", 10);
-INSERT INTO recipe VALUES (12, 12, 12, "no c", 5, 20, "minutos", 2);
+INSERT INTO recipe VALUES (10, 10, 10, "galletas y sal", 3);
+INSERT INTO recipe VALUES (11, 11, 11, "receta para el desastre", 4);
+INSERT INTO recipe VALUES (12, 12, 12, "no c", 5);
 
 INSERT INTO ingredients VALUES (10, 10, 10, 3, "kilos");
 INSERT INTO ingredients VALUES (11, 11, 11, 4, "litros");

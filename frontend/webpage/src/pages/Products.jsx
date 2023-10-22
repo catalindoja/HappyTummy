@@ -1,13 +1,3 @@
-// import React from 'react';
-
-// function Products() {
-//   return (
-//     <div>Products</div>
-//   );
-// }
-
-// export default Products;
-
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -32,10 +22,12 @@ const Products = () => {
     fetchData();
   }, [cat]);
 
-  const getText = (html) =>{
+  const getText = (html) => {
     const doc = new DOMParser().parseFromString(html, "text/html")
     return doc.body.textContent
   }
+
+  // TODO: Paginación
 
   return (
     <div className="home">
