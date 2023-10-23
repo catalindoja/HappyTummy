@@ -1,5 +1,12 @@
 $lightGreen: #b9e7e7;
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'NuevaFuente', sans-serif; /* También cambia la fuente para los títulos si lo deseas */
+}
+body {
+  font-family: 'NuevaFuente', sans-serif; /* Reemplaza 'NuevaFuente' con el nombre de la fuente que elijas */
+}
+
 .app {
   display: flex;
   justify-content: center;
@@ -64,6 +71,7 @@ $lightGreen: #b9e7e7;
     //NAVBAR
 
     .navbar {
+      font-weight: bold; /* Establece el texto en negrita */
       .container {
         padding: 10px 0px;
         display: flex;
@@ -77,14 +85,21 @@ $lightGreen: #b9e7e7;
         .links {
           display: flex;
           align-items: center;
-          gap: 10px;
+          justify-content: center;
+          gap: 13px;
 
           h6 {
+            color: teal;
             font-size: 16px;
             font-weight: 300;
+            text-align: center;
           }
 
           span {
+            // User name, login and logout
+            background-color: $lightGreen;
+            padding: 5px 5px;
+            border-radius: 10%;
             cursor: pointer;
           }
 
@@ -119,8 +134,14 @@ $lightGreen: #b9e7e7;
       align-items: center;
       justify-content: space-between;
       font-size: 12px;
-      img {
-        height: 50px;
+      .logo {
+        height: 65px;
+        border-radius: 50%;
+      } 
+      .social-icons {
+        display: flex;
+        height: 40px;
+        gap: 15px; /* Espacio entre las imágenes */
       }
     }
 
@@ -131,15 +152,16 @@ $lightGreen: #b9e7e7;
         margin-top: 50px;
         display: flex;
         flex-direction: column;
-        gap: 150px;
+        gap: 80px;
 
         .post {
           display: flex;
-          gap: 100px;
+          gap: 80px;
 
-          &:nth-child(2n + 1) {
-            flex-direction: row-reverse;
-          }
+          // To intercalate text and image (left and right)
+          // &:nth-child(2n + 1) {
+          //   flex-direction: row-reverse;
+          // }
 
           .img {
             flex: 2;
@@ -208,6 +230,11 @@ $lightGreen: #b9e7e7;
         display: flex;
         flex-direction: column;
         gap: 30px;
+
+        h1 {
+          text-align: justify;
+          line-height: 30px;
+        }
 
         img {
           width: 100%;
@@ -299,6 +326,20 @@ $lightGreen: #b9e7e7;
     }
 
     //WRITE
+    .boxes {
+      //border: 1px solid rgba(0, 0, 0, 0.2); /* Cambia el valor de 0.2 para ajustar la opacidad */
+      //padding: 10px;
+
+      .checkbox-image {
+        opacity: 0.3; /* Opacidad baja para mostrar la imagen desmarcada */
+        transition: opacity 0.3s; /* Transición suave para el cambio de opacidad */
+      }
+      
+      /* Cambiar el estilo de la imagen cuando la casilla está marcada */
+      .checkbox-image + input:checked {
+        opacity: 1; /* Opacidad completa para mostrar la imagen marcada */
+      }
+    }
 
     .add {
       margin-top: 20px;
@@ -310,6 +351,102 @@ $lightGreen: #b9e7e7;
         display: flex;
         flex-direction: column;
         gap: 20px;
+
+        .measurement-container {
+          display: flex;
+          justify-content: space-between;
+        }
+        
+        .measurement-input {
+          flex: 1;
+          margin-right: 10px; /* O ajusta el margen según tus preferencias */
+        }
+
+        .quantity-input {
+          flex: 1;
+          margin-right: 10px; /* O ajusta el margen según tus preferencias */
+        }
+        
+        .measurement-input input {
+          width: 98%; /* Ajusta el ancho de los cuadros de texto al 100% del espacio disponible */
+        }
+
+        .quantity-input input{
+          width: 95%; /* Ajusta el ancho de los cuadros de texto al 100% del espacio disponible */
+        }
+
+        .image{
+          color: teal;
+          font-size: 15px;
+          border: 2px solid #d1d1d1; /* Borde con un color específico */
+          padding: 10px; /* Relleno interior para separar el contenido del borde */
+          border-radius: 5px; /* Bordes redondeados */
+        }
+
+        .image-container {
+          font-size: 18px; /* Tamaño de fuente */
+          font-weight: bold; /* Negrita */
+          color: teal; /* Color del texto */
+          /* Otros estilos según tu preferencia */
+        }
+
+        .file{
+          text-decoration: underline;
+          cursor: pointer;
+        }
+
+        .buttons{
+          display: flex;
+          justify-content: space-between;
+          margin-top: 10px; /* Ajusta el margen superior según tus necesidades */
+          margin-bottom: 0px; /* Ajusta el margen inferior según tus necesidades */
+          margin: 0 auto; /* Centra horizontalmente los botones */
+          width: max-content; /* Ajusta el ancho al contenido */
+
+          :first-child{
+            cursor: pointer;
+            color: teal;
+            background-color: white;
+            border: 1px solid teal;
+            padding: 3px 5px;
+            font-size: 20x;
+          }
+          :last-child{
+            cursor: pointer;
+            color: white;
+            background-color: teal;
+            border: 5px solid teal;
+            padding: 5px 5px;
+            font-size: 20px;
+            border-radius: 6px; /* Bordes redondeados */
+          }
+        }
+
+        .market {
+          border: 2px solid #d1d1d1; /* Borde con un color específico */
+          padding: 10px; /* Relleno interior para separar el contenido del borde */
+          border-radius: 5px; /* Bordes redondeados */
+        }
+        
+        /* Estilos para el contenido dentro de "market" */
+        .market-container {
+          font-size: 18px; /* Tamaño de fuente */
+          font-weight: bold; /* Negrita */
+          color: teal; /* Color del texto */
+          /* Otros estilos según tu preferencia */
+        }
+
+        h3 {
+          margin-top: 0px; /* Ajusta el margen superior según tus necesidades */
+          margin-bottom: 10px; /* Ajusta el margen inferior según tus necesidades */
+          /* Otros estilos que desees aplicar al título */
+        }
+
+        h1 {
+          margin-top: 0px; /* Ajusta el margen superior según tus necesidades */
+          margin-bottom: 5px; /* Ajusta el margen inferior según tus necesidades */
+          /* Otros estilos que desees aplicar al título */
+        }
 
         input {
           padding: 10px;

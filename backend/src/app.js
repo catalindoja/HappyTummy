@@ -1,5 +1,7 @@
 import express from 'express'
 import cors from 'cors'
+import cookieParser from "cookie-parser";
+import multer from "multer";
 import usersRoutes from './routes/users.routes.js'
 import authRoutes from './routes/auth.js'
 import paymentHistoryRoutes from './routes/paymenthistory.routes.js'
@@ -17,10 +19,10 @@ import brandRoutes from './routes/brand.routes.js'
 
 const app = express();
 app.use(cors())
-app.use(express.json())
+app.use(express.json()) 
 
 //routes
-app.use(usersRoutes)
+app.use(usersRoutes) 
 app.use(paymentHistoryRoutes)
 app.use(supermarketRoutes)
 app.use(discountRoutes)
@@ -41,5 +43,26 @@ app.use((req, res, next) => {
     message: 'API endpoint not found'
   })
 })
+
+// TODO ESTO PARA SUBIR FOTOS
+app.use(express.json());
+app.use(cookieParser());
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "../frontend/webpage/public/upload");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + file.originalname);
+  },
+});
+
+const upload = multer({ storage });
+
+app.post("/upload", upload.single("file"), function (req, res) {
+  const file = req.file;
+  res.status(200).json(file.filename);
+});
+
+
 
 export default app;

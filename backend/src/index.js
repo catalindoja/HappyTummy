@@ -1,14 +1,8 @@
 import app from './app.js'
-import {PORT} from './config.js'
-import authRoutes from "./routes/auth.js";
-// import userRoutes from "./routes/users.js";
-// import postRoutes from "./routes/posts.js";
-
+import { PORT } from './config.js'
 import express from "express";
-
-// CREO QUE NO ES NECESARIO
-// const app = express();
-// app.use(express.json());
+import cookieParser from "cookie-parser";
+import multer from "multer";
 
 // RAMA MAIN
 app.listen(PORT, () => {
