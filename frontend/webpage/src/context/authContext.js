@@ -1,0 +1,34 @@
+import axios from "axios";
+import { createContext, useEffect, useState } from "react";
+
+export const AuthContext = createContext();
+
+export const AuthContexProvider = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem("user")) || null
+  );
+
+  const login = async (inputs) => {
+    // console.log("Im in the login");
+    // http://localhost:4000/api/  "http://localhost:5000/backend/src/routes/auth/login"
+    const res = await axios.post("/login", inputs); // DANGER!!!
+    setCurrentUser(res.data);
+  };
+
+  const logout = async (inputs) => {
+    await axios.post("/logout");
+    setCurrentUser(null);
+    // Redirige al usuario a la página "/login" utilizando window.location
+    window.location.href = "/login";
+  };
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(currentUser));
+  }, [currentUser]);
+
+  return (
+    <AuthContext.Provider value={{ currentUser, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
