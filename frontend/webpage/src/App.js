@@ -13,6 +13,8 @@ import Products from './pages/Products';
 import SingleProduct from './pages/SingleProduct';
 import PostProduct from './pages/PostProduct';
 import Recepies from './pages/Recepies';
+import Markets from './pages/Markets';
+import SingleMarket from './pages/SingleMarket';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -52,6 +54,14 @@ const router = createBrowserRouter([
       {
         path: "/postproduct",
         element: <PostProduct/>
+      },
+      {
+        path: "/markets",
+        element: <Markets/>
+      },
+      {
+        path: "/markets/:id",
+        element: <SingleMarket/>
       },
     ]
   },
