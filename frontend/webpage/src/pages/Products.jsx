@@ -13,7 +13,6 @@ const Products = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`/products${cat}`);
-        console.log(res.data)
         setPosts(res.data);
       } catch (err) {
         console.log(err);
