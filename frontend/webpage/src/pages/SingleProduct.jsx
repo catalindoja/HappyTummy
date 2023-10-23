@@ -68,10 +68,16 @@ const SingleProduct = () => {
   // Eliminar producto
   const handleDelete = async () => {
     try {
-      await axios.delete(`/products/${post.id}`);
+      const productResponse = await axios.delete(`/products/${post.id}`);
       navigate("/")
     } catch (err) {
-      console.log(err);
+      if (err.response) {
+        console.log("Respuesta del servidor con estado de error:", err.response.status);
+      } else if (err.request) {
+        console.log("La solicitud se realizó, pero no se recibió respuesta del servidor.");
+      } else {
+        console.log("Error al configurar la solicitud:", err.message);
+      }
     }
   }
 
@@ -170,6 +176,14 @@ const SingleProduct = () => {
 
         <h3 className="more-data-heading">More data</h3>
         <div className="more-data-container">
+          <div className="more-data-item">
+            <span className="more-data-label">Supermarket:</span>
+            <span className="more-data-value"></span>
+          </div>
+          <div className="more-data-item">
+            <span className="more-data-label">Category:</span>
+            <span className="more-data-value"></span>
+          </div>
           <div className="more-data-item">
             <span className="more-data-label">Quantity per unit:</span>
             <span className="more-data-value">{post.quantity} {post.measurement}</span>

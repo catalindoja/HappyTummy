@@ -22,10 +22,10 @@ const Navbar = () => {
             <h6>RECEPIES</h6>
           </Link>
           <Link className="link" to="/">
-            <h6>SUPERMARKETS INFO </h6>
+            <h6>SUPERMARKETS</h6>
           </Link>
           <Link className="link" to="/">
-            <h6>ALLERGIES AND INTOLERANCES INFO</h6>
+            <h6>ALLERGIES AND INTOLERANCES</h6>
           </Link>
           <Link className="link" to="/">
             <h6>MY STATISTICS</h6>

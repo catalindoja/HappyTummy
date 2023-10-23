@@ -44,7 +44,7 @@ app.use((req, res, next) => {
   })
 })
 
-// TODO ESTO PARA SUBIR FOTOS
+// ESTO ES PARA SUBIR FOTOS
 app.use(express.json());
 app.use(cookieParser());
 const storage = multer.diskStorage({
@@ -56,13 +56,11 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage });
+const upload = multer({ storage }); // dest: "./upload"
 
 app.post("/upload", upload.single("file"), function (req, res) {
   const file = req.file;
   res.status(200).json(file.filename);
 });
-
-
 
 export default app;

@@ -110,6 +110,27 @@ const Write = () => {
   const [file, setFile] = useState(null);
   const [cat, setCat] = useState(state?.cat || "");
 
+  // Para subir la imagen
+  const upload = async () => {
+    try {
+
+      console.log("1º LLAMADA A SUBIR FILE")
+      const formData = new FormData();
+      console.log(file)
+      formData.append("file", file);
+      console.log("2º A PUNTO DE SUBIR FILE")
+
+      const res = await axios.post("/upload", formData);    // ESTO ME FALLA
+
+      console.log("3º SUBIDO!")
+      return res.data;
+
+    } catch (err) {
+      console.log("ERROR :(")
+      console.log(err);
+    }
+  };
+
   // Para mostrar el contenido del array de alergias (solo para tests)
   // useEffect(() => {
   //   const interval = setInterval(() => {
@@ -122,28 +143,22 @@ const Write = () => {
   //   };
   // }, [selectedAllergies]);
 
-  // Para subir la imagen
-  const upload = async () => {
-    try {
-      console.log("1º LLAMADA A SUBIR FILE")
-      const formData = new FormData();
-      formData.append("file", file);
-      console.log("2º A PUNTO DE SUBIR FILE")
-
-      const res = await axios.post("/upload", formData);    // ESTO ME FALLA
-
-      console.log("3º SUBIDO!")
-      return res.data;
-    } catch (err) {
-      console.log("ERROR :(")
-      console.log(err);
+  // Imagen pero BLOB
+  const [imageData, setImageData] = useState(null);
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      console.log("PASAMELO A BLOB")
     }
-  };
+  }
+
+  
 
   // Cuando se hace click al botón de publish
   const handleClick = async (e) => {
     e.preventDefault();
-    // Para la imagen
+
+    // Para publicar la imagen
     const imgUrl = await upload();
 
     try {
@@ -324,8 +339,18 @@ const Write = () => {
               <label className="file" htmlFor="file">
                 Upload Image
               </label>
+
             </div>
           </div>
+
+          {/* <div>
+            <h1>Subir una imagen como BLOB</h1>
+            <input
+              type="file"
+              onChange={handleImageChange}
+              accept="image/*" // Asegura que solo se puedan seleccionar archivos de imagen
+            />
+          </div> */}
 
           <div className="buttons">
             {/*<button>Save as a draft</button>*/}
