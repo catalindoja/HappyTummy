@@ -11,6 +11,14 @@ const Products = () => {
 
   const postsPerPage = 5; // Cantidad de posts por página
 
+  const limitText = (text, limit) => {
+    if (text.length <= limit) {
+      return text;
+    } else {
+      return text.slice(0, limit) + "...";
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -45,7 +53,7 @@ const Products = () => {
           <Link className="link" to={`/products/${post.id}`}>
             <h1>{post.product_name}</h1>
           </Link>
-          <p>{getText(post.product_description)}</p>
+          <p>{limitText(getText(post.product_description), 210)}</p>
           <Link to={`/products/${post.id}`}>
             <button>Read More</button>
           </Link>

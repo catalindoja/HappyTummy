@@ -12,7 +12,7 @@ h6 {
 
 body {
   font-family: 'NuevaFuente', sans-serif;
-  
+
   /* Reemplaza 'NuevaFuente' con el nombre de la fuente que elijas */
 }
 
@@ -22,12 +22,14 @@ body {
   justify-content: center;
   list-style: none;
   padding: 0;
-  margin-top: 120px; /* Agregar un margen superior de 20px */
+  margin-top: 120px;
+  /* Agregar un margen superior de 20px */
   margin-bottom: 0px;
 }
 
 .pagination li {
-  margin: 0 6px; /* Agregar margen entre elementos de la paginación */
+  margin: 0 6px;
+  /* Agregar margen entre elementos de la paginación */
 }
 
 .pagination li a {
@@ -35,25 +37,27 @@ body {
   border: 1px solid $lightGreen;
   background-color: $lightGreen;
   color: #fff;
-  border-radius: 15px; /* Hace que los botones sean ligeramente redondeados */
+  border-radius: 15px;
+  /* Hace que los botones sean ligeramente redondeados */
   padding: 10px 20px;
 }
 
-.pagination li a:hover{
+.pagination li a:hover {
   background-color: #fff;
   color: $lightGreen;
 }
 
 .previous,
-.next{
+.next {
   margin: 0 10px;
   color: #fff;
-  border-radius: 15px; /* Hace que los botones sean ligeramente redondeados */
+  border-radius: 15px;
+  /* Hace que los botones sean ligeramente redondeados */
   padding: 8px 16px;
 }
 
 .previous:hover,
-.next:hover{
+.next:hover {
   background-color: #fff;
   color: $lightGreen;
 }
@@ -81,7 +85,7 @@ body {
       background-color: $lightGreen;
 
       h1 {
-        font-size: 20px;
+        font-size: 30px;
         color: teal;
         margin-bottom: 20px;
       }
@@ -95,7 +99,7 @@ body {
         gap: 20px;
 
         input {
-          padding: 10px;
+          padding: 15px;
           border: none;
           border-bottom: 1px solid gray;
         }
@@ -106,16 +110,17 @@ body {
           background-color: teal;
           cursor: pointer;
           color: white;
+          font-size: 14px;
         }
 
         p {
-          font-size: 12px;
+          font-size: 14px;
           color: red;
           text-align: center;
         }
 
         span {
-          font-size: 12px;
+          font-size: 14px;
           text-align: center;
         }
       }
@@ -286,42 +291,92 @@ body {
       display: flex;
       gap: 50px;
 
+      h1 {
+        font-size: 48px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+      }
+
+      p {
+        font-size: 18px;
+        margin-top: 0px;
+      }
+
       .content {
         flex: 5;
         display: flex;
         flex-direction: column;
         gap: 30px;
 
-        .more-data-heading {
-          font-size: 18px;
-          font-weight: bold;
-          margin-top: 20px;
+        .fancy-allergy {
+          font-size: 24px; // Tamaño de fuente
+          font-weight: bold; // Negrita
+          color: teal; // Color del texto
+          text-transform: uppercase; // Mayúsculas
+          margin: 5px 0; // Margen superior e inferior
+          display: flex;
+          align-items: center;
+          margin-bottom: 2px;
+
+          &::before {
+            content: "\2713"; // Símbolo de marca de verificación (✓)
+            font-size: 18px; // Tamaño del indicador
+            margin-right: 10px; // Espacio entre el indicador y el texto
+            color: teal; // Color del indicador
+            margin-bottom: 2px;
+          }
+
+          // Otros estilos según tus preferencias
         }
-        
+
+
+        .contains-heading {
+          font-size: 25px;
+          font-weight: bold;
+          margin-top: 60px;
+          margin-bottom: 0px;
+        }
+
+        .more-data-heading {
+          font-size: 25px;
+          font-weight: bold;
+          margin-top: 5px;
+          margin-bottom: -13px;
+        }
+
         .more-data-container {
           border: 1px solid #ccc;
           padding: 10px;
           border-radius: 5px;
-          margin-top: 10px;
+          margin-top: -10px;
+          font-size: 18px;
         }
-        
+
         .more-data-item {
           display: flex;
           justify-content: space-between;
-          margin-bottom: 5px;
+          margin-bottom: 7px;
         }
-        
+
         .more-data-label {
           font-weight: bold;
         }
-        
+
         .more-data-value {
           color: #333;
-        }        
+        }
+
+        .comments-heading {
+          font-size: 25px;
+          font-weight: bold;
+          margin-top: 20px;
+          margin-bottom: -10px;
+        }
 
         .comments-list {
           list-style: none;
           padding: 0;
+          margin-top: -20px;
         }
 
         .comment {
@@ -331,12 +386,44 @@ body {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          background-color: #f9f9f9;
+          background-color: #e9fdfd;
           border-radius: 5px;
         }
 
+        .user-image {
+          width: 50px;
+          /* Tamaño de la imagen del usuario */
+          height: 50px;
+          border-radius: 50%;
+          /* Borde redondeado para que la imagen sea circular */
+          margin-right: 10px;
+          /* Ajusta el margen entre la imagen del usuario y el nombre de usuario */
+        }
+
+        .user-info {
+          display: flex;
+          align-items: center;
+        }
+
         .comment-content {
-          flex: 1;
+          .username {
+            font-weight: bold;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            margin-left: -5px;
+          }
+
+          p {
+            text-align: justify;
+            line-height: 1.5;
+            /* Aumenta el espaciado entre líneas para mejorar la legibilidad */
+            font-size: 15px;
+            /* Aumenta el tamaño de fuente a 16px (ajusta según tus preferencias) */
+            line-height: 30px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 4px;
+          }
         }
 
         .comment-likes {
@@ -344,16 +431,23 @@ body {
           align-items: center;
         }
 
-        .comment-likes img {
-          width: 20px;
-          height: 20px;
-          margin-right: 5px;
+        .heart-icon {
+          width: 30px;
+          /* Ajusta el tamaño de la imagen del corazón según tus preferencias */
+          height: 30px;
+          margin-left: 500px;
+          /* Añade margen entre la imagen del corazón y el número */
         }
 
-        .comment-likes span {
+        .likes-count {
+          color: rgb(255, 0, 0);
+          /* Color blanco */
           font-weight: bold;
-          color: #FF5733;
-          /* Color del corazón */
+          /* Texto en negrita */
+          font-weight: bold;
+          /* Texto en negrita */
+          margin-left: 3px;
+          font-size: 18px;
         }
 
         h1 {
@@ -370,28 +464,31 @@ body {
         .user {
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 4px;
           font-size: 14px;
 
           img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            width: 78px;
+            height: 60px;
+            // border-radius: 100%;
             object-fit: cover;
           }
 
           span {
             font-weight: bold;
+            font-size: 20px;
+            margin-right: 438px;
+
           }
         }
 
         .edit {
           display: flex;
-          gap: 5px;
+          gap: 17px;
 
           img {
-            width: 20px;
-            height: 20px;
+            width: 35px;
+            height: 35px;
             cursor: pointer;
           }
         }
@@ -399,11 +496,42 @@ body {
         h1 {
           font-size: 42px;
           color: #333;
+          margin-top: 15px;
+          /* Reducir el margen superior entre h1 y el elemento padre */
         }
 
         p {
+          margin-top: 0px;
+          margin-bottom: 0px;
           text-align: justify;
           line-height: 30px;
+        }
+      }
+
+      .write-comment-heading {
+        font-size: 25px;
+        font-weight: bold;
+        margin-top: -25px;
+        margin-bottom: -15px;
+      }
+
+
+      .buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: -10px;
+        margin-bottom: 0px;
+        width: max-content;
+
+        :last-child {
+          cursor: pointer;
+          color: white;
+          background-color: teal;
+          border: 5px solid teal;
+          padding: 5px 5px;
+          font-size: 17px;
+          border-radius: 6px;
+          margin-left: 0;
         }
       }
 
@@ -411,7 +539,7 @@ body {
         flex: 2;
         display: flex;
         flex-direction: column;
-        gap: 25px;
+        gap: 20px;
 
         h1 {
           font-size: 20px;
@@ -421,7 +549,7 @@ body {
         .post {
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap: 0px;
 
           img {
             width: 100%;
@@ -441,6 +569,7 @@ body {
             color: teal;
             background-color: white;
             border: 1px solid teal;
+            margin-bottom: 45px;
 
             &:hover {
               border: 1px solid white;
@@ -481,6 +610,12 @@ body {
         display: flex;
         flex-direction: column;
         gap: 20px;
+
+        .error-message {
+          font-size: 15px;
+          color: red;
+          text-align: center;
+        }
 
         .measurement-container {
           display: flex;

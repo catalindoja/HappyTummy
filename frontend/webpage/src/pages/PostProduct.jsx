@@ -143,20 +143,68 @@ const Write = () => {
   //   };
   // }, [selectedAllergies]);
 
-  // Imagen pero BLOB
-  const [imageData, setImageData] = useState(null);
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      console.log("PASAMELO A BLOB")
-    }
-  }
+  // Imagen pero BLOB (solo es test)
+  // const [imageData, setImageData] = useState(null);
+  // const handleImageChange = (e) => {
+  //   const file = e.target.files[0];
+  //   if (file) {
+  //     console.log("PASAMELO A BLOB")
+  //   }
+  // }
 
-  
+  // Mensaje de error
+  const [error, setError] = useState(null);
 
   // Cuando se hace click al botón de publish
   const handleClick = async (e) => {
     e.preventDefault();
+
+    if (!product_name || product_name.trim() === "") {
+      setError("Name of the product required");
+      return;
+    }
+
+    if (!value || value.trim() === "") {
+      setError("Description of the product required");
+      return;
+    }
+
+    if (!price || price.trim() === "") {
+      setError("Price of the product required");
+      return;
+    }
+
+    if (!quantity || quantity.trim() === "") {
+      setError("Quantity per unit of the product required");
+      return;
+    }
+
+    if (!measurement || measurement.trim() === "") {
+      setError("Unit of measurement of the product required");
+      return;
+    }
+
+    if (!barcode || barcode.trim() === "") {
+      setError("Barcode of the product required");
+      return;
+    }
+    
+    // Puede ser que no tenga alérgenos
+    // console.log()
+    // if (selectedAllergies.length === 0) {
+    //   setError("Allergies of the product required");
+    //   return;
+    // }
+
+    if (!idbrand) {
+      setError("Brand of the product required");
+      return;
+    }
+    
+    if (!idcategory) {
+      setError("Category of the product required");
+      return;
+    }
 
     // Para publicar la imagen
     const imgUrl = await upload();
@@ -351,7 +399,7 @@ const Write = () => {
               accept="image/*" // Asegura que solo se puedan seleccionar archivos de imagen
             />
           </div> */}
-
+          {error && <p className="error-message">{error}</p>} {/* Mostrar mensaje de error si existe */}
           <div className="buttons">
             {/*<button>Save as a draft</button>*/}
             <button onClick={handleClick}>Publish</button>

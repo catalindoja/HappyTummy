@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Edit from "../img/edit.png";
 import Delete from "../img/delete.png";
+import ProfilePicture from "../img/profile.png";
+import Heart from "../img/heart.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Menu from "../components/Menu";
 import axios from "axios";
@@ -19,13 +21,41 @@ const SingleProduct = () => {
   const likes = 0;
   const postId = location.pathname.split("/")[2];
 
-  // Obtener tabla de comentarios SOLO de este producto
+  // Obtener texto
+  const getText = (html) => {
+    const doc = new DOMParser().parseFromString(html, "text/html")
+    return doc.body.textContent
+  }
+
+  // Obtener usuario actual
+  const { currentUser } = useContext(AuthContext);
+  const idCurrent = currentUser.id;
+  const usernameCurrent = currentUser.username;
+
+  // Comentarios
   const [comments, setComments] = useState([]);
   const [userComments, setUserComments] = useState({});
+  // Supermercados
+  const [stock, setStock] = useState([]);
+  const [markets, setMarkets] = useState([]);
+  // Alergias
+  const [productallergies, setProductallergies] = useState([]);
+  const [allergies, setAllergies] = useState([]);
+  // Usuario propietario del post
+  const idOwner = post.iduser;
+  const [userOwner, setOwner] = useState("");
+  // Brand
+  const idBrand = post.idbrand;
+  const [brandProduct, setBrand] = useState("");
+  // Category
+  const idCategory = post.idcategory;
+  const [categoryProduct, setCategory] = useState("");
 
-  // Obtener comentarios con detalles de usuarios
+  // Todo lo que requiere llamadas a la bdd
   useEffect(() => {
     const fetchData = async () => {
+
+      // Obtener comentarios con detalles de usuarios!!
       try {
         const res = await axios.get(`/comments/`);
         const filteredComments = res.data.filter((comment) => comment.idproduct == postId);
@@ -42,28 +72,83 @@ const SingleProduct = () => {
           userCommentsData[comment.id] = response.data;
         });
 
-        console.log(userCommentsData)
-
         setUserComments(userCommentsData);
       } catch (err) {
         console.log(err);
       }
-    };
-    fetchData();
-  }, [postId]);
 
-  // Obtener información del producto
-  useEffect(() => {
-    const fetchData = async () => {
+      // Obtener supermercados!!
+      try {
+        // Get stock
+        const res1 = await axios.get(`/stock/`);
+        const filteredStock = res1.data.filter((stock) => stock.idproduct == postId);
+        setStock(filteredStock);
+
+        // Get supermarkets
+        // DANGER! SOLO COJO UNO POR AHORA (PERO SI HAY MÁS, ES FÁCIL CAMBIARLO)
+        const myid = stock[0].idsupermarket
+        const res2 = await axios.get(`/markets/`);
+        const filteredMarkets = res2.data.filter((markets) => markets.id == myid);
+        setMarkets(filteredMarkets[0]);
+      } catch (err) {
+        console.log(err);
+      }
+
+      // Obtener alergias!!
+      try {
+        // Get productallergies
+        const res1 = await axios.get(`/productallergies/`);
+        const filteredProductallergies = res1.data.filter((productallergies) => productallergies.idproduct == postId);
+
+        // Obtener todas las IDs de alergias relacionadas
+        const allergyIds = filteredProductallergies.map((productallergy) => productallergy.idallergies);
+
+        // Obtener todas las alergias basadas en las IDs
+        const res2 = await axios.get(`/allergies/`);
+        const filteredAllergies = res2.data.filter((allergy) => allergyIds.includes(allergy.id));
+
+        // Ahora filteredAllergies contiene todas las alergias relacionadas al producto
+        console.log(filteredAllergies);
+        setAllergies(filteredAllergies);
+      } catch (err) {
+        console.log(err);
+      }
+
+      // Obtener información del producto!!
       try {
         const res = await axios.get(`/products/${postId}`);
         setPost(res.data);
       } catch (err) {
         console.log(err);
       }
+
+      // Obtener usuario propietario del post!!
+      try {
+        const response = await axios.get(`/users/${idOwner}`);
+        setOwner(response.data);
+      } catch (err) {
+        console.log(err);
+      }
+
+      // Obtener brand!!
+      try {
+        const res = await axios.get(`/brands/${idBrand}`);
+        setBrand(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+
+      // Obtener category!!
+      try {
+        const res = await axios.get(`/categories/${idCategory}`);
+        setCategory(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+
     };
     fetchData();
-  }, [postId]);
+  }, [postId, idOwner, idBrand, idCategory]);
 
   // Eliminar producto
   const handleDelete = async () => {
@@ -80,47 +165,6 @@ const SingleProduct = () => {
       }
     }
   }
-
-  // Obtener texto
-  const getText = (html) => {
-    const doc = new DOMParser().parseFromString(html, "text/html")
-    return doc.body.textContent
-  }
-
-  // Obtener usuario actual
-  const { currentUser } = useContext(AuthContext);
-  const idCurrent = currentUser.id;
-  const usernameCurrent = currentUser.username;
-
-  // Obtener usuario propietario del post
-  const idOwner = post.iduser;
-  const [userOwner, setOwner] = useState("");
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`/users/${idOwner}`);
-        setOwner(response.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
-  }, [idOwner]);
-
-  // Obtener brand
-  const idBrand = post.idbrand;
-  const [brandProduct, setBrand] = useState("");
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(`/brands/${idBrand}`);
-        setBrand(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
-  }, [idBrand]);
 
   // Escribir nuevo comentario
   const state = useLocation().state;
@@ -150,13 +194,14 @@ const SingleProduct = () => {
       <div className="content">
         <img src={`../upload/${post?.image}`} alt="" />
         <div className="user">
-          {userOwner.userImg && <img
+          <img src={ProfilePicture} />
+          {/* {userOwner.userImg && <img
             src={userOwner.userImg}
             alt=""
-          />}
+          />} */}
           <div className="info">
             <span>{userOwner.username}</span>
-            <p>Posted {moment(post.date).fromNow()}</p>
+            {/* <p>Posted {moment(post.date).fromNow()}</p> */}
           </div>
           {currentUser.username === userOwner.username && (
             <div className="edit">
@@ -168,29 +213,36 @@ const SingleProduct = () => {
           )}
         </div>
         <h1>{post.product_name}</h1>
-        <p
+        <p className="description"
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(post.product_description),
           }}
         ></p>
 
-        <h3 className="more-data-heading">More data</h3>
+        <div className="contains">
+          <h3 className="contains-heading">Contains</h3>
+          {allergies.map((allergy, index) => (
+            <span className="fancy-allergy" key={index}>{allergy.allergy_name}</span>
+          ))}
+        </div>
+
+        <h3 className="more-data-heading">More details</h3>
         <div className="more-data-container">
           <div className="more-data-item">
             <span className="more-data-label">Supermarket:</span>
-            <span className="more-data-value"></span>
-          </div>
-          <div className="more-data-item">
-            <span className="more-data-label">Category:</span>
-            <span className="more-data-value"></span>
-          </div>
-          <div className="more-data-item">
-            <span className="more-data-label">Quantity per unit:</span>
-            <span className="more-data-value">{post.quantity} {post.measurement}</span>
+            <span className="more-data-value">{markets.name}</span>
           </div>
           <div className="more-data-item">
             <span className="more-data-label">Brand:</span>
             <span className="more-data-value">{brandProduct.name}</span>
+          </div>
+          <div className="more-data-item">
+            <span className="more-data-label">Category:</span>
+            <span className="more-data-value">{categoryProduct.category_name}</span>
+          </div>
+          <div className="more-data-item">
+            <span className="more-data-label">Quantity per unit:</span>
+            <span className="more-data-value">{post.quantity} {post.measurement}</span>
           </div>
           <div className="more-data-item">
             <span className="more-data-label">Price:</span>
@@ -201,15 +253,18 @@ const SingleProduct = () => {
             <span className="more-data-value">{post.barcode}</span>
           </div>
         </div>
-        {/* category */}
-        {/* allergies */}
 
-        <h3>Comments</h3>
+        <h3 className="comments-heading">Comments</h3>
         <ul className="comments-list">
           {comments.map(comment => (
             <li key={comment.id} className="comment">
               <div className="comment-content">
-                <span>User: {userComments[comment.id] ? userComments[comment.id].username : "Unknown"}</span>  {/* <span>User: {comment.iduser}</span> */}
+                <div className="user-info">
+                  <img src={ProfilePicture} alt="Profile Picture" className="user-image" />
+                  <span className="username">
+                    {userComments[comment.id] ? userComments[comment.id].username : "Unknown"}
+                  </span>
+                </div>
                 <p
                   dangerouslySetInnerHTML={{
                     __html: DOMPurify.sanitize(comment.content)
@@ -217,13 +272,14 @@ const SingleProduct = () => {
                 ></p>
               </div>
               <div className="comment-likes">
-                <span>Likes: {comment.likes}</span>
+                <img src={Heart} alt="Heart Icon" className="heart-icon" />
+                <span className="likes-count">{comment.likes}</span>
               </div>
             </li>
           ))}
         </ul>
 
-        <h3>Write a new comment!</h3>
+        <h3 className="write-comment-heading">Write a new comment!</h3>
         <div className="editorContainer">
           <ReactQuill
             placeholder="New comment"
@@ -239,9 +295,7 @@ const SingleProduct = () => {
           <button onClick={handleClick}> Publish</button>
         </div>
 
-
       </div>
-
 
       {<Menu cat={post} />}
     </div>

@@ -1,9 +1,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const Menu = ({cat}) => {
+const Menu = ({ cat }) => {
   const [posts, setPosts] = useState([]);
+  const [shuffledPosts, setShuffledPosts] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,33 +18,35 @@ const Menu = ({cat}) => {
     fetchData();
   }, [cat]);
 
-  // Función para obtener un conjunto aleatorio de índices
-  const getRandomIndices = (max, count) => {
-    const indices = [];
-    const availableIndices = Array.from({ length: max }, (_, i) => i);
-  
-    while (indices.length < count && availableIndices.length > 0) {
-      const randomIndex = Math.floor(Math.random() * availableIndices.length);
-      indices.push(availableIndices[randomIndex]);
-      availableIndices.splice(randomIndex, 1);
-    }
-    return indices;
-  };
+  useEffect(() => {
+    // Función para obtener un conjunto aleatorio de índices
+    const getRandomIndices = (max, count) => {
+      const indices = [];
+      const availableIndices = Array.from({ length: max }, (_, i) => i);
 
-  // Limita el número de publicaciones a mostrar y cambia el orden
-  const limitAndShufflePosts = (allPosts) => {
-    const numberOfPostsToShow = 3;
-    const randomIndices = getRandomIndices(allPosts.length, numberOfPostsToShow);
-    const shuffledPosts = randomIndices.map((index) => allPosts[index]);
-    return shuffledPosts;
-  };
+      while (indices.length < count && availableIndices.length > 0) {
+        const randomIndex = Math.floor(Math.random() * availableIndices.length);
+        indices.push(availableIndices[randomIndex]);
+        availableIndices.splice(randomIndex, 1);
+      }
+      return indices;
+    };
 
-  const limitedAndShuffledPosts = limitAndShufflePosts(posts);
+    // Limita el número de publicaciones a mostrar y cambia el orden
+    const limitAndShufflePosts = (allPosts) => {
+      const numberOfPostsToShow = 3;
+      const randomIndices = getRandomIndices(allPosts.length, numberOfPostsToShow);
+      const shuffledPosts = randomIndices.map((index) => allPosts[index]);
+      setShuffledPosts(shuffledPosts);
+    };
+
+    limitAndShufflePosts(posts);
+  }, [posts]);
 
   return (
     <div className="menu">
       <h1>Other posts you may like</h1>
-      {limitedAndShuffledPosts.map((post) => (
+      {shuffledPosts.map((post) => (
         <div className="post" key={post.id}>
           <img src={`../products/${post?.img}`} alt="" />
           <h2>{post.product_name}</h2>
