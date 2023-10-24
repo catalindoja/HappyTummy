@@ -65,6 +65,7 @@ import axios from "axios";
 import "./Products.css";
 
 const Products = () => {
+  let idproduct;
   const [inputs, setInputs] = useState({
     idsupermarket: ""
   });
@@ -90,6 +91,7 @@ const Products = () => {
   const [idbrand, setidbrand] = useState(null);
   const [idcategory, setidcategory] = useState(null);
   const cat = useLocation().search;
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -127,10 +129,38 @@ const Products = () => {
     fetchData();
   }, [cat]);
 
+  
   const handleChange = (e) => {
-    console.log(e.target.value);
-    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+    return (
+      //console.log(e.target.value);
+      filteredPosts.map((post) => {
+        idproduct = post.id;
+        if (idproduct == e.target.value) {
+          console.log(e.target.value);
+          console.log(post.product_name);
+          filteredPosts.map((post) => {
+            <div className="post" key={post.id}>
+              <div className="img">
+                <img src={`../upload/${post.image}`} alt="" />
+              </div>
+              <div className="content">
+                <Link className="link" to={`/products/${post.id}`}>
+                  <h1>{post.product_name}</h1>
+                </Link>
+                <p>{getText(post.product_description)}</p>
+                <Link to={`/products/${post.id}`}>
+                  <button>Read More</button>
+                </Link>
+              </div>
+            </div>
+          })
+        }
+      })
+    )
+  }
+      
+  
+  
 
   const getText = (html) => {
     const doc = new DOMParser().parseFromString(html, "text/html");
@@ -168,7 +198,7 @@ const Products = () => {
                     id={brand.name}
                     name="idbrand"
                     value={brand.id}
-                    onChange={() => setidbrand(brand.id)}
+                    onChange={handleChange}
                   />
                   <label htmlFor={brand.name}>{brand.name}</label>
                 </div>
