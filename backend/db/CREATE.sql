@@ -10,6 +10,8 @@ CREATE TABLE supermarket (
     address varchar(128),
     city varchar(64),
     zipcode VARCHAR (10),
+    image blob,
+    image_url varchar(256),
 	PRIMARY KEY (id)
 );
 
@@ -21,7 +23,9 @@ CREATE TABLE user (
     email varchar(256),
     role int,
     premium boolean,
-	PRIMARY KEY (id)
+    image blob,
+    image_url varchar(256),
+	PRIMARY KEY (id),
     FOREIGN KEY (idsupermarket) REFERENCES supermarket(id)
 );
 
@@ -49,6 +53,8 @@ CREATE TABLE discount (
 CREATE TABLE category (
     id INT NOT NULL AUTO_INCREMENT,
     category_name varchar(64),
+    image blob,
+    image_url varchar(256),
 	PRIMARY KEY (id)
 );
 
@@ -62,6 +68,8 @@ CREATE TABLE allergies (
 CREATE TABLE brand (
     id INT NOT NULL AUTO_INCREMENT,
     name varchar(64),
+    image blob,
+    image_url varchar(256),
     PRIMARY KEY (id)
 );
 
@@ -75,10 +83,11 @@ CREATE TABLE product (
     quantity decimal(10, 2),
     measurement varchar(64),
     idbrand int,
-    product_description  varchar(256),
+    product_description text,
     price decimal(10, 2),
     likes int,
     image blob,
+    image_url varchar(256),
 	PRIMARY KEY (id),
     FOREIGN KEY (iduser) REFERENCES user(id),
     FOREIGN KEY (idcategory) REFERENCES category(id),
@@ -100,11 +109,13 @@ CREATE TABLE recipe (
     id INT NOT NULL AUTO_INCREMENT,
     idproduct int,
     iduser int,
-    description varchar(64),
+    description text,
     likes int,
     time int,
     unit varchar(64),
     ammountofpeople int,
+    image blob,
+    image_url varchar(256),
 	PRIMARY KEY (id),
     FOREIGN KEY (idproduct) REFERENCES product(id),
     FOREIGN KEY (iduser) REFERENCES user(id)

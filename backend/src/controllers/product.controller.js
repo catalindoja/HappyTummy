@@ -24,11 +24,11 @@ export const getProduct = async (req, res) => {
 
 export const createProduct = async (req, res) => {
     try {
-        const {iduser, idcategory, idallergy, barcode, product_name, quantity, measurement, idbrand, product_description, price, likes, image} = req.body
+        const {iduser, idcategory, idallergy, barcode, product_name, quantity, measurement, idbrand, product_description, price, likes, image, image_url} = req.body
 
         const [rows] = await pool.query(
-            'INSERT INTO product (iduser, idcategory, idallergy, barcode, product_name, quantity, measurement, idbrand, product_description, price, likes, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-            [iduser, idcategory, idallergy, barcode, product_name, quantity, measurement, idbrand, product_description, price, likes, image])
+            'INSERT INTO product (iduser, idcategory, idallergy, barcode, product_name, quantity, measurement, idbrand, product_description, price, likes, image, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [iduser, idcategory, idallergy, barcode, product_name, quantity, measurement, idbrand, product_description, price, likes, image, image_url])
         
         res.send({
             id: rows.insertId,
@@ -43,7 +43,8 @@ export const createProduct = async (req, res) => {
             product_description,
             price,
             likes,
-            image
+            image,
+            image_url
         })
     } catch (error) {
         console.log(error)
@@ -70,11 +71,11 @@ export const deleteProduct = async (req, res) => {
 export const updateProduct = async (req, res) => {
     try {
         const {id} = req.params
-        const {iduser, idcategory, idallergy, barcode, product_name, quantity, measurement, idbrand, product_description, price, likes, image} = req.body
+        const {iduser, idcategory, idallergy, barcode, product_name, quantity, measurement, idbrand, product_description, price, likes, image, image_url} = req.body
 
         const [result] = await pool.query(
-            'UPDATE product SET iduser = IFNULL(?, iduser), idcategory = IFNULL(?, idcategory), idallergy = IFNULL(?, idallergy), barcode = IFNULL(?, barcode), product_name = IFNULL(?, product_name), quantity = IFNULL(?, quantity), measurement = IFNULL(?, measurement), idbrand = IFNULL(?, idbrand), product_description = IFNULL(?, product_description), price = IFNULL(?, price), likes = IFNULL(?, likes), image = IFNULL(?, image) WHERE id = ?',
-            [iduser, idcategory, idallergy, barcode, product_name, quantity, measurement, idbrand, product_description, price, likes, image, id])
+            'UPDATE product SET iduser = IFNULL(?, iduser), idcategory = IFNULL(?, idcategory), idallergy = IFNULL(?, idallergy), barcode = IFNULL(?, barcode), product_name = IFNULL(?, product_name), quantity = IFNULL(?, quantity), measurement = IFNULL(?, measurement), idbrand = IFNULL(?, idbrand), product_description = IFNULL(?, product_description), price = IFNULL(?, price), likes = IFNULL(?, likes), image = IFNULL(?, image), image_url = IFNULL(?, image_url) WHERE id = ?',
+            [iduser, idcategory, idallergy, barcode, product_name, quantity, measurement, idbrand, product_description, price, likes, image, image_url, id])
         
         if(result.affectedRows === 0) return res.status(404).json({
             message: 'Product not found'
@@ -86,6 +87,50 @@ export const updateProduct = async (req, res) => {
         console.log(error)
         return res.status(500).json({
             message: 'Something went wrong while updating the product'
+        })
+    }
+}
+
+export const getProductByUserId = async (req, res) => {
+    try {
+        const [rows] = await pool.query('SELECT * FROM product WHERE iduser = ?', [req.params.iduser])
+        res.json(rows)
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Something went wrong while retrieving the product'
+        })
+    }
+}
+
+export const getProductByBrandId = async (req, res) => {
+    try {
+        const [rows] = await pool.query('SELECT * FROM product WHERE idbrand = ?', [req.params.idbrand])
+        res.json(rows)
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Something went wrong while retrieving the product'
+        })
+    }
+}
+
+export const getProductByCategoryId = async (req, res) => {
+    try {
+        const [rows] = await pool.query('SELECT * FROM product WHERE idcategory = ?', [req.params.idcategory])
+        res.json(rows)
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Something went wrong while retrieving the product'
+        })
+    }
+}
+
+export const getProductBySupermarketId = async (req, res) => {
+    try {
+        const [rows] = await pool.query('SELECT * FROM stock WHERE idsupermarket = ? AND available = TRUE', [req.params.idsupermarket])
+        res.json(rows)
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Something went wrong while retrieving the product'
         })
     }
 }
