@@ -2,3 +2,9 @@
     margin-top: 5px ;
     color: #008080;
 }
+
+.box {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
