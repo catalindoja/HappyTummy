@@ -53,6 +53,11 @@ const Navbar = () => {
               Post
             </Link>
           </span>
+          <span className="writemarket">
+            <Link className="link" to="/postmarket">
+              Create Market
+            </Link>
+          </span>
         </div>
       </div>
     </div>
