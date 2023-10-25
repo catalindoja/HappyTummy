@@ -155,6 +155,7 @@ body {
             font-size: 16px;
             font-weight: 300;
             text-align: center;
+            font-weight: bold;
           }
 
           span {
@@ -221,7 +222,7 @@ body {
 
         .post {
           display: flex;
-          gap: 80px;
+          gap: 70px;
 
           // To intercalate text and image (left and right)
           // &:nth-child(2n + 1) {
@@ -254,17 +255,53 @@ body {
             flex: 3;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            //justify-content: space-between;
 
             h1 {
-              font-size: 38px;
+              font-size: 40px;
+              margin-bottom: 0px;
             }
 
             p {
               font-size: 20px;
+              //margin-top: 5px;
+            }
+
+            .comment-likes {
+              display: flex;
+              align-items: center;
+    
+              button {
+                // display: none; /* Oculta solo el botón dentro de .heart-icon */
+                border: none; // Quita el borde del botón
+                background-color: #e9fdfd;
+                // padding: 0.1;   // Quita el relleno (padding) del botón
+              }
+    
+            }
+    
+            .heart-icon {
+              width: 30px;
+              /* Ajusta el tamaño de la imagen del corazón según tus preferencias */
+              height: 30px;
+              margin-left: -3px;
+              margin-right: -7px;
+              margin-bottom: -7px;
+              margin-top: -4px;
+              /* Añade margen entre la imagen del corazón y el número */
+    
+            }
+    
+            .likes-count {
+              color: rgb(255, 0, 0);
+              font-weight: bold;
+              font-weight: bold;
+              margin-left: 11px;
+              font-size: 18px;
             }
 
             button {
+              margin-top: 40px;
               font-size: 15px;
               width: max-content;
               padding: 10px 20px;
@@ -630,13 +667,20 @@ body {
         -webkit-appearance: none;
         // -moz-appearance: none;
         // appearance: none;
-        width: 9px;
-        height: 9px;
+        width: 8px;
+        height: 8px;
         border: 2px solid #333;
         border-radius: 3px;
         margin-right: 5px;
         margin-bottom: 2px;
         cursor: pointer;
+      }
+
+      span{
+        font-size: 15px;
+        color: teal;
+        font-weight: bold;
+        margin-left: 3px;
       }
 
       .custom-checkbox+label {
@@ -669,8 +713,12 @@ body {
 
       label {
         font-size: 17px;
-        /* Tamaño de fuente deseado */
-        text-align: center;
+        padding: 3px;
+        // gap: 10px;
+        // text-align: top;
+        // margin-bottom: 10px;
+        // display: flex;
+        //flex-direction: row;
       }
     }
 
@@ -718,8 +766,6 @@ body {
           /* Cambia el color del borde al pasar el cursor sobre el selector */
         }
 
-
-
         .quantity-input {
           flex: 1;
           margin-right: 10px;
@@ -734,6 +780,22 @@ body {
         .quantity-input input {
           width: 95%;
           /* Ajusta el ancho de los cuadros de texto al 100% del espacio disponible */
+        }
+
+        .super-bar-code {
+          display: flex;
+          //justify-content: space-between; /* Distribuye los elementos horizontalmente con espacio entre ellos */
+          gap: 10px; /* Añade un espacio de 10px entre las cajas */
+
+          h3{
+            font-size: 16px;
+            margin-top: -3px;
+            margin-bottom: -15px;
+          }
+
+          .super-bar-code input{
+            width: 95%;
+          }
         }
 
         .image {

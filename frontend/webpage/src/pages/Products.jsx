@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
+import Heart from "../img/heart.png";
 
 const Products = () => {
   const [posts, setPosts] = useState([]);
@@ -54,6 +55,10 @@ const Products = () => {
             <h1>{post.product_name}</h1>
           </Link>
           <p>{limitText(getText(post.product_description), 210)}</p>
+          <div className="comment-likes">
+                  <img src={Heart} alt="Heart Icon" className="heart-icon" />
+                  <span className="likes-count">{post.likes}</span>
+                </div>
           <Link to={`/products/${post.id}`}>
             <button>Read More</button>
           </Link>

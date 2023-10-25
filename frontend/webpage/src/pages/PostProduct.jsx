@@ -95,11 +95,30 @@ const Write = () => {
     fetchData();
   }, [currentUser.idsupermarket]);
 
+  const [combinedBarcode, setCombinedBarcode] = useState(state?.barcode || "");
+  const handleBarcodeChange = (e) => {
+    const { name, value } = e.target;
+    // Actualiza el estado correspondiente según el campo
+    if (name === "part1") {
+      // Combina el valor del primer campo con los valores de los otros dos campos
+      const combined = `${value}${combinedBarcode.substring(1, 7)}${combinedBarcode.substring(8, 14)}`;
+      setCombinedBarcode(combined);
+    } else if (name === "part2") {
+      // Combina el valor del segundo campo con los valores de los otros dos campos
+      const combined = `${combinedBarcode.substring(0, 1)}${value}${combinedBarcode.substring(8, 14)}`;
+      setCombinedBarcode(combined);
+    } else if (name === "part3") {
+      // Combina el valor del tercer campo con los valores de los otros dos campos
+      const combined = `${combinedBarcode.substring(0, 7)}${value}`;
+      setCombinedBarcode(combined);
+    }
+  };
+
+  // const [barcode, setProductBarcode] = useState(state?.barcode || "");
+  // const [measurement, setMeasurement] = useState(state?.measurement || "");
   const likes = 0;
-  const [barcode, setProductBarcode] = useState(state?.barcode || "");
   const [price, setPrice] = useState(state?.price || "");
   const [quantity, setQuantity] = useState(state?.quantity || "");
-  // const [measurement, setMeasurement] = useState(state?.measurement || "");
   const [idbrand, setidbrand] = useState(state?.idbrand || "");
   const [idcategory, setidcategory] = useState(state?.idcategory || "");
   const [selectedAllergies, setSelectedAllergies] = useState([]); // Allergies (post en 'productallergies' adicional, tabla intermedia)
@@ -190,7 +209,7 @@ const Write = () => {
       return;
     }
 
-    if (!barcode || barcode.trim() === "") {
+    if (!combinedBarcode) {
       setError("Barcode of the product required");
       return;
     }
@@ -228,7 +247,7 @@ const Write = () => {
           idcategory,
           iduser,
           idbrand,
-          barcode,
+          barcode: combinedBarcode,
           price,
           quantity,
           measurement,
@@ -266,7 +285,7 @@ const Write = () => {
           idcategory,
           iduser,
           idbrand,
-          barcode,
+          barcode: combinedBarcode,
           price,
           quantity,
           measurement,
@@ -358,21 +377,58 @@ const Write = () => {
             </div>
           </div>
 
-          <input
+          {/* <input
             type="text"
             placeholder="Bar code number (X-XXXXXX-XXXXXX)"
             onChange={(e) => setProductBarcode(e.target.value)}
-          />
+          /> */}
+
+          <div className="super-bar-code">
+            <h3>Bar code number EAN-13 / GTIN-13 (X-XXXXXX-XXXXXX)</h3>
+          </div>
+
+          <div className="super-bar-code">
+            <input
+              type="text"
+              pattern="[0-9]"
+              name="part1" // Agrega el nombre del campo
+              placeholder="X"
+              maxLength="1"
+              value={combinedBarcode.substring(0, 1)} // Usa el valor combinado para el primer campo
+              onChange={handleBarcodeChange} // Usa la función para el cambio
+            />
+
+            <input
+              type="text"
+              pattern="[0-9]"
+              name="part2" // Agrega el nombre del campo
+              placeholder="X X X X X X"
+              maxLength="6"
+              value={combinedBarcode.substring(1, 7)} // Usa el valor combinado para el segundo campo
+              onChange={handleBarcodeChange} // Usa la función para el cambio
+            />
+
+            <input
+              type="text"
+              pattern="[0-9]"
+              name="part3" // Agrega el nombre del campo
+              placeholder="X X X X X X"
+              maxLength="6"
+              value={combinedBarcode.substring(7, 13)} // Usa el valor combinado para el tercer campo
+              onChange={handleBarcodeChange} // Usa la función para el cambio
+            />
+          </div>
 
           <div className="boxes">
             <fieldset>
               <legend>Allergies and Intolerances</legend>
+              <span>It contains...</span>
               {allergies.map((allergy) => (
                 <div key={allergy.id}>
                   <input type="checkbox" id={allergy.allergy_name} name="alergies[]"
                     checked={selectedAllergies.includes(allergy.id)}
                     onChange={() => handleAllergyToggle(allergy.id)}
-                    className="custom-checkbox"/>
+                    className="custom-checkbox" />
                   <label htmlFor={allergy.allergy_name}>{allergy.allergy_name}</label>
                 </div>
               ))}
