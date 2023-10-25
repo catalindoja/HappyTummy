@@ -16,6 +16,48 @@ body {
   /* Reemplaza 'NuevaFuente' con el nombre de la fuente que elijas */
 }
 
+.allergies-intro {
+  p {
+    font-size: 18px;
+    color: #555;
+    margin: 5px 0;
+    margin-bottom: 17px;
+  }
+
+  .allergies-container {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    background-color: #b9e7e752;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+
+    .allergies-icon {
+      margin-right: 20px;
+
+      img {
+        max-width: 55px; // Ajusta el tamaño del icono según tus necesidades
+        height: auto;
+      }
+    }
+
+    .allergies-content {
+      h2 {
+        font-size: 25px;
+        margin: 0;
+      }
+
+      p {
+        font-size: 18px;
+        color: #555;
+        margin: 5px 0;
+        text-align: justify;
+      }
+    }
+  }
+}
+
 .pagination {
   font-size: 18px;
   display: flex;
@@ -270,16 +312,16 @@ body {
             .comment-likes {
               display: flex;
               align-items: center;
-    
+
               button {
                 // display: none; /* Oculta solo el botón dentro de .heart-icon */
                 border: none; // Quita el borde del botón
                 background-color: #e9fdfd;
                 // padding: 0.1;   // Quita el relleno (padding) del botón
               }
-    
+
             }
-    
+
             .heart-icon {
               width: 30px;
               /* Ajusta el tamaño de la imagen del corazón según tus preferencias */
@@ -289,9 +331,9 @@ body {
               margin-bottom: -7px;
               margin-top: -4px;
               /* Añade margen entre la imagen del corazón y el número */
-    
+
             }
-    
+
             .likes-count {
               color: rgb(255, 0, 0);
               font-weight: bold;
@@ -676,7 +718,7 @@ body {
         cursor: pointer;
       }
 
-      span{
+      span {
         font-size: 15px;
         color: teal;
         font-weight: bold;
@@ -785,15 +827,16 @@ body {
         .super-bar-code {
           display: flex;
           //justify-content: space-between; /* Distribuye los elementos horizontalmente con espacio entre ellos */
-          gap: 10px; /* Añade un espacio de 10px entre las cajas */
+          gap: 10px;
+          /* Añade un espacio de 10px entre las cajas */
 
-          h3{
+          h3 {
             font-size: 16px;
             margin-top: -3px;
             margin-bottom: -15px;
           }
 
-          .super-bar-code input{
+          .super-bar-code input {
             width: 95%;
           }
         }
