@@ -21,6 +21,8 @@ const SingleProduct = () => {
   const likes = 0;
   const postId = location.pathname.split("/")[2];
 
+
+
   // Obtener texto
   const getText = (html) => {
     const doc = new DOMParser().parseFromString(html, "text/html")
@@ -73,80 +75,83 @@ const SingleProduct = () => {
         });
 
         setUserComments(userCommentsData);
-      } catch (err) {
-        console.log(err);
-      }
+        // } catch (err) {
+        //   console.log(err);
+        // }
 
-      // Obtener supermercados!!
-      try {
-        // Get stock
-        const res1 = await axios.get(`/stock/`);
-        const filteredStock = res1.data.filter((stock) => stock.idproduct == postId);
-        setStock(filteredStock);
+        // Obtener supermercados!!
+        try {
+          // Get stock
+          const res1 = await axios.get(`/stock/`);
+          const filteredStock = res1.data.filter((stock) => stock.idproduct == postId);
+          setStock(filteredStock);
 
-        // Get supermarkets
-        // DANGER! SOLO COJO UNO POR AHORA (PERO SI HAY MÁS, ES FÁCIL CAMBIARLO)
-        const myid = stock[0].idsupermarket
-        const res2 = await axios.get(`/markets/`);
-        const filteredMarkets = res2.data.filter((markets) => markets.id == myid);
-        setMarkets(filteredMarkets[0]);
-      } catch (err) {
-        console.log(err);
-      }
+          // Get supermarkets
+          // DANGER! SOLO COJO UNO POR AHORA (PERO SI HAY MÁS, ES FÁCIL CAMBIARLO)
+          const myid = stock[0].idsupermarket
+          const res2 = await axios.get(`/markets/`);
+          const filteredMarkets = res2.data.filter((markets) => markets.id == myid);
+          setMarkets(filteredMarkets[0]);
+        } catch (err) {
+          console.log(err);
+        }
 
-      // Obtener alergias!!
-      try {
+        // Obtener alergias!!
+        // try {
         // Get productallergies
-        const res1 = await axios.get(`/productallergies/`);
-        const filteredProductallergies = res1.data.filter((productallergies) => productallergies.idproduct == postId);
+        const res3 = await axios.get(`/productallergies/`);
+        const filteredProductallergies = res3.data.filter((productallergies) => productallergies.idproduct == postId);
 
         // Obtener todas las IDs de alergias relacionadas
         const allergyIds = filteredProductallergies.map((productallergy) => productallergy.idallergies);
 
         // Obtener todas las alergias basadas en las IDs
-        const res2 = await axios.get(`/allergies/`);
-        const filteredAllergies = res2.data.filter((allergy) => allergyIds.includes(allergy.id));
+        const res4 = await axios.get(`/allergies/`);
+        const filteredAllergies = res4.data.filter((allergy) => allergyIds.includes(allergy.id));
 
         // Ahora filteredAllergies contiene todas las alergias relacionadas al producto
         console.log(filteredAllergies);
         setAllergies(filteredAllergies);
-      } catch (err) {
-        console.log(err);
-      }
+        // } catch (err) {
+        //   console.log(err);
+        // }
 
-      // Obtener información del producto!!
-      try {
-        const res = await axios.get(`/products/${postId}`);
-        setPost(res.data);
-      } catch (err) {
-        console.log(err);
-      }
+        // Obtener información del producto!!
+        // try {
+        const res5 = await axios.get(`/products/${postId}`);
+        setPost(res5.data);
+        // } catch (err) {
+        //   console.log(err);
+        // }
 
-      // Obtener usuario propietario del post!!
-      try {
+        // Obtener usuario propietario del post!!
+        // try {
         const response = await axios.get(`/users/${idOwner}`);
         setOwner(response.data);
-      } catch (err) {
-        console.log(err);
-      }
+        // } catch (err) {
+        //   console.log(err);
+        // }
 
-      // Obtener brand!!
-      try {
-        const res = await axios.get(`/brands/${idBrand}`);
-        setBrand(res.data);
-      } catch (err) {
-        console.log(err);
-      }
+        // Obtener brand!!
+        // try {
+        const res6 = await axios.get(`/brands/${idBrand}`);
+        setBrand(res6.data);
+        // } catch (err) {
+        //   console.log(err);
+        // }
 
-      // Obtener category!!
-      try {
-        const res = await axios.get(`/categories/${idCategory}`);
-        setCategory(res.data);
+        // Obtener category!!
+        // try {
+        const res7 = await axios.get(`/categories/${idCategory}`);
+        setCategory(res7.data);
+
+
       } catch (err) {
         console.log(err);
       }
 
     };
+
     fetchData();
   }, [postId, idOwner, idBrand, idCategory]);
 
@@ -188,6 +193,29 @@ const SingleProduct = () => {
     }
   }
 
+  // Botón de like
+  const handleLikeClick = async (commentId) => {
+    console.log("Like button clicked");
+    try {
+      // // Realiza una solicitud para aumentar el contador de "likes" en la base de datos
+      // const response = await axios.patch(`/comments/${commentId}`, { likes: comments.find((comment) => comment.id === commentId).likes + 1 });
+
+      // // Comprueba si la solicitud fue exitosa
+      // if (response.status === 200) {
+      //   // Actualiza el contador de "likes" en la interfaz de usuario
+      //   setComments((prevComments) =>
+      //     prevComments.map((comment) =>
+      //       comment.id === commentId
+      //         ? { ...comment, likes: comment.likes + 1 }
+      //         : comment
+      //     )
+      //   );
+      // }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   // Lo que se muestra en pantalla
   return (
     <div className="single">
@@ -200,15 +228,23 @@ const SingleProduct = () => {
             alt=""
           />} */}
           <div className="info">
-            <span>{userOwner.username}</span>
+            <span className="username">{userOwner.username}</span>
             {/* <p>Posted {moment(post.date).fromNow()}</p> */}
           </div>
-          {currentUser.username === userOwner.username && (
+          {currentUser.username === userOwner.username ? (
             <div className="edit">
-              <Link to={`/write?edit=2`} state={post}>
+              <Link to={`/editpost`} state={post}>
                 <img src={Edit} alt="" />
               </Link>
               <img onClick={handleDelete} src={Delete} alt="" />
+            </div>
+          ) : (
+            // Botón "like" para usuarios que no son propietarios del post
+            <div className="like">
+              <button onClick={handleLikeClick}>
+                <img src={Heart} alt="Heart Icon" className="heart-icon" />
+                <span className="likes-count">{post.likes}</span>
+              </button>
             </div>
           )}
         </div>
@@ -221,9 +257,12 @@ const SingleProduct = () => {
 
         <div className="contains">
           <h3 className="contains-heading">Contains</h3>
-          {allergies.map((allergy, index) => (
+          {allergies.length === 0 ? (
+            <p>This product is safe for all allergies and intolerances ❤</p>
+          ) : (
+          allergies.map((allergy, index) => (
             <span className="fancy-allergy" key={index}>{allergy.allergy_name}</span>
-          ))}
+          )))}
         </div>
 
         <h3 className="more-data-heading">More details</h3>
@@ -256,27 +295,33 @@ const SingleProduct = () => {
 
         <h3 className="comments-heading">Comments</h3>
         <ul className="comments-list">
-          {comments.map(comment => (
-            <li key={comment.id} className="comment">
-              <div className="comment-content">
-                <div className="user-info">
-                  <img src={ProfilePicture} alt="Profile Picture" className="user-image" />
-                  <span className="username">
-                    {userComments[comment.id] ? userComments[comment.id].username : "Unknown"}
-                  </span>
+          {comments.length === 0 ? (
+            <p>No comments yet!</p>
+          ) : (
+            comments.map(comment => (
+              <li key={comment.id} className="comment">
+                <div className="comment-content">
+                  <div className="user-info">
+                    <img src={ProfilePicture} alt="Profile Picture" className="user-image" />
+                    <span className="username">
+                      {userComments[comment.id] ? userComments[comment.id].username : "Unknown"}
+                    </span>
+                  </div>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(comment.content)
+                    }}
+                  ></p>
                 </div>
-                <p
-                  dangerouslySetInnerHTML={{
-                    __html: DOMPurify.sanitize(comment.content)
-                  }}
-                ></p>
-              </div>
-              <div className="comment-likes">
-                <img src={Heart} alt="Heart Icon" className="heart-icon" />
-                <span className="likes-count">{comment.likes}</span>
-              </div>
-            </li>
-          ))}
+                <div className="comment-likes">
+                  <button onClick={handleLikeClick}>
+                    <img src={Heart} alt="Heart Icon" className="heart-icon" />
+                  </button>
+                  <span className="likes-count">{comment.likes}</span>
+                </div>
+              </li>
+            )
+            ))}
         </ul>
 
         <h3 className="write-comment-heading">Write a new comment!</h3>

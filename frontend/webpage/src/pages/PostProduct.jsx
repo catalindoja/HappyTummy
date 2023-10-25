@@ -81,13 +81,13 @@ const Write = () => {
   const { currentUser } = useContext(AuthContext);
   const iduser = currentUser.id;
 
-  const [marketnameuser, setMarketNameUser] = useState("");
+  const [marketuser, setMarketNameUser] = useState("");
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`/markets/${currentUser.idsupermarket}`);
-        const name = response.data.name;
-        setMarketNameUser(name); // Actualiza el estado con el nombre del mercado
+        const data = response.data;
+        setMarketNameUser(data); // Actualiza el estado con el nombre del mercado
       } catch (err) {
         console.log(err);
       }
@@ -99,10 +99,11 @@ const Write = () => {
   const [barcode, setProductBarcode] = useState(state?.barcode || "");
   const [price, setPrice] = useState(state?.price || "");
   const [quantity, setQuantity] = useState(state?.quantity || "");
-  const [measurement, setMeasurement] = useState(state?.measurement || "");
+  // const [measurement, setMeasurement] = useState(state?.measurement || "");
   const [idbrand, setidbrand] = useState(state?.idbrand || "");
   const [idcategory, setidcategory] = useState(state?.idcategory || "");
   const [selectedAllergies, setSelectedAllergies] = useState([]); // Allergies (post en 'productallergies' adicional, tabla intermedia)
+  const [measurement, setSelectedMeasurement] = useState(state?.measurement || "");
 
   // Campos que ya estaban
   const [value, setValue] = useState(state?.product_description || "");
@@ -179,7 +180,12 @@ const Write = () => {
       return;
     }
 
-    if (!measurement || measurement.trim() === "") {
+    // if (!measurement || measurement.trim() === "") {
+    //   setError("Unit of measurement of the product required");
+    //   return;
+    // }
+
+    if (!measurement) {
       setError("Unit of measurement of the product required");
       return;
     }
@@ -188,7 +194,7 @@ const Write = () => {
       setError("Barcode of the product required");
       return;
     }
-    
+
     // Puede ser que no tenga alérgenos
     // console.log()
     // if (selectedAllergies.length === 0) {
@@ -200,7 +206,7 @@ const Write = () => {
       setError("Brand of the product required");
       return;
     }
-    
+
     if (!idcategory) {
       setError("Category of the product required");
       return;
@@ -240,6 +246,13 @@ const Write = () => {
           })
         });
 
+        // Post en tabla intermedia 'stock'
+        await axios.post(`/stock/`, {
+          idsupermarket: marketuser.id,
+          idproduct: productId,
+          available: 1
+        })
+
         navigate("/products");
 
       } else {
@@ -270,6 +283,13 @@ const Write = () => {
           })
         });
 
+        // Put en tabla intermedia 'stock'
+        await axios.put(`/stock/`, {
+          idsupermarket: marketuser.id,
+          idproduct: productId,
+          available: 1
+        })
+
         navigate("/products");
 
       }
@@ -288,7 +308,7 @@ const Write = () => {
           <div className="market">
             <h3>Supermarket</h3>
             <div className="market-container">
-              {marketnameuser}
+              {marketuser.name}
             </div>
           </div>
 
@@ -323,11 +343,18 @@ const Write = () => {
               />
             </div>
             <div className="measurement-input">
-              <input
-                type="text"
-                placeholder="Unit of measurement"
-                onChange={(e) => setMeasurement(e.target.value)}
-              />
+              <select
+                value={measurement}
+                onChange={(e) => setSelectedMeasurement(e.target.value)}
+              >
+                <option value="">Select a measurement unit</option>
+                <option value="g">g</option>
+                <option value="kg">kg</option>
+                <option value="mg">mg</option>
+                <option value="l">l</option>
+                <option value="ml">ml</option>
+                <option value="unidad">unidad</option>
+              </select>
             </div>
           </div>
 
@@ -344,7 +371,8 @@ const Write = () => {
                 <div key={allergy.id}>
                   <input type="checkbox" id={allergy.allergy_name} name="alergies[]"
                     checked={selectedAllergies.includes(allergy.id)}
-                    onChange={() => handleAllergyToggle(allergy.id)} />
+                    onChange={() => handleAllergyToggle(allergy.id)}
+                    className="custom-checkbox"/>
                   <label htmlFor={allergy.allergy_name}>{allergy.allergy_name}</label>
                 </div>
               ))}
@@ -385,7 +413,7 @@ const Write = () => {
                 onChange={(e) => setFile(e.target.files[0])}
               />
               <label className="file" htmlFor="file">
-                Upload Image
+                Upload Image (png or jpg)
               </label>
 
             </div>

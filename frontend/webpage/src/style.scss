@@ -429,14 +429,26 @@ body {
         .comment-likes {
           display: flex;
           align-items: center;
+
+          button {
+            // display: none; /* Oculta solo el botón dentro de .heart-icon */
+            border: none; // Quita el borde del botón
+            background-color: #e9fdfd;
+            // padding: 0.1;   // Quita el relleno (padding) del botón
+          }
+
         }
 
         .heart-icon {
           width: 30px;
           /* Ajusta el tamaño de la imagen del corazón según tus preferencias */
           height: 30px;
-          margin-left: 500px;
+          margin-left: -7px;
+          margin-right: -7px;
+          margin-bottom: -7px;
+          margin-top: -4px;
           /* Añade margen entre la imagen del corazón y el número */
+
         }
 
         .likes-count {
@@ -467,6 +479,38 @@ body {
           gap: 4px;
           font-size: 14px;
 
+          .heart-icon {
+            width: 40px;
+            height: 40px;
+            margin-left: -10px;
+            margin-right: -6px;
+            margin-bottom: -7px;
+            margin-top: -50px;
+            /* Añade margen entre la imagen del corazón y el número */
+          }
+
+          .likes-count {
+            color: rgb(255, 0, 0);
+            font-weight: bold;
+            /* Texto en negrita */
+            font-weight: bold;
+            /* Texto en negrita */
+            margin-left: 3px;
+            font-size: 18px;
+          }
+
+          button {
+            border: none; // Quita el borde del botón
+            background-color: #ffffff;
+            margin-left: 450px;
+          }
+
+          .likes-count {
+            font-weight: bold;
+            font-size: 25px;
+            margin-left: 8px;
+          }
+
           img {
             width: 78px;
             height: 60px;
@@ -477,8 +521,6 @@ body {
           span {
             font-weight: bold;
             font-size: 20px;
-            margin-right: 438px;
-
           }
         }
 
@@ -583,20 +625,52 @@ body {
 
     //WRITE
     .boxes {
-      //border: 1px solid rgba(0, 0, 0, 0.2); /* Cambia el valor de 0.2 para ajustar la opacidad */
-      //padding: 10px;
 
-      .checkbox-image {
-        opacity: 0.3;
-        /* Opacidad baja para mostrar la imagen desmarcada */
-        transition: opacity 0.3s;
-        /* Transición suave para el cambio de opacidad */
+      input[type="checkbox"] {
+        -webkit-appearance: none;
+        // -moz-appearance: none;
+        // appearance: none;
+        width: 9px;
+        height: 9px;
+        border: 2px solid #333;
+        border-radius: 3px;
+        margin-right: 5px;
+        margin-bottom: 2px;
+        cursor: pointer;
       }
 
-      /* Cambiar el estilo de la imagen cuando la casilla está marcada */
-      .checkbox-image+input:checked {
-        opacity: 1;
-        /* Opacidad completa para mostrar la imagen marcada */
+      .custom-checkbox+label {
+        font-size: 17px;
+        /* Tamaño de fuente deseado */
+      }
+
+      /* Estilo para el indicador del checkbox cuando está seleccionado */
+      input[type="checkbox"]:checked {
+        background-color: $lightGreen;
+      }
+
+      /* Estilo personalizado para radio buttons */
+      input[type="radio"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border: 2px solid #333;
+        border-radius: 50%;
+        margin-right: 5px;
+        cursor: pointer;
+      }
+
+      /* Estilo para el indicador del radio button cuando está seleccionado */
+      input[type="radio"]:checked {
+        background-color: $lightGreen;
+      }
+
+      label {
+        font-size: 17px;
+        /* Tamaño de fuente deseado */
+        text-align: center;
       }
     }
 
@@ -623,10 +697,28 @@ body {
         }
 
         .measurement-input {
-          flex: 1;
-          margin-right: 10px;
-          /* O ajusta el margen según tus preferencias */
+          margin-top: 0px;
+          display: flex;
+          align-items: center;
         }
+
+        .measurement-input select {
+          padding: 10px;
+          font-size: 14px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          background-color: #fff;
+          color: #333;
+          cursor: pointer;
+          transition: border-color 0.3s;
+        }
+
+        .measurement-input select:hover {
+          border-color: #007bff;
+          /* Cambia el color del borde al pasar el cursor sobre el selector */
+        }
+
+
 
         .quantity-input {
           flex: 1;
