@@ -1,4 +1,4 @@
-//yes esto es solo porque cata me lió con el git
+
 import React, { useState, useContext } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
