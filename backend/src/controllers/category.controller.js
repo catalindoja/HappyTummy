@@ -24,15 +24,17 @@ export const getCategory = async (req, res) => {
 
 export const createCategory = async (req, res) => {
     try {
-        const {category_name} = req.body
+        const {category_name, image, image_url} = req.body
 
         const [rows] = await pool.query(
-            'INSERT INTO category (category_name) VALUES (?)', 
-            [category_name])
+            'INSERT INTO category (category_name, image, image_url) VALUES (?, ?, ?)', 
+            [category_name, image, image_url])
 
         res.send({
             id: rows.insertId,
             category_name,
+            image,
+            image_url
         })
     } catch (error) {
         return res.status(500).json({
@@ -58,8 +60,9 @@ export const deleteCategory = async (req, res) => {
 export const updateCategory = async (req, res) => {
     try {
         const {id} = req.params
-        const {category_name} = req.body
-        const [result] = await pool.query('UPDATE category SET category_name = ? WHERE id = ?', [category_name, id])
+        const {category_name, image, image_url} = req.body
+        const [result] = await pool.query('UPDATE category SET category_name = IFNULL(?, category_name), image = IFNULL(?, image), image_url = IFNULL(?, image_url) WHERE id = ?',
+        [category_name, image, image_url, id])
         if(result.affectedRows === 0) return res.status(404).json({
             message: 'Category not found'
         })

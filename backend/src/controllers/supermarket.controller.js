@@ -24,11 +24,11 @@ export const getMarket = async (req, res) => {
 
 export const createMarket = async (req, res) => {
     try {
-        const {name, description, address, city, zipcode} = req.body
+        const {name, description, address, city, zipcode, image, image_url} = req.body
 
         const [rows] = await pool.query(
-            'INSERT INTO supermarket (name, description, address, city, zipcode) VALUES (?, ?, ?, ?, ?)', 
-            [name, description, address, city, zipcode])
+            'INSERT INTO supermarket (name, description, address, city, zipcode, image, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+            [name, description, address, city, zipcode, image, image_url])
 
         res.send({
             id: rows.insertId,
@@ -36,7 +36,9 @@ export const createMarket = async (req, res) => {
             description,
             address,
             city,
-            zipcode
+            zipcode, 
+            image, 
+            image_url
         })
     } catch (error) {
         return res.status(500).json({
@@ -62,11 +64,11 @@ export const deleteMarket = async (req, res) => {
 export const updateMarket = async (req, res) => {
     try {
         const {id} = req.params
-        const {name, description, address, city, zipcode} = req.body
+        const {name, description, address, city, zipcode, image, image_url} = req.body
 
         const [result] = await pool.query(
-            'UPDATE supermarket SET name = IFNULL(?, name), description = IFNULL(?, description), address = IFNULL(?, address), city = IFNULL(?, city), zipcode = IFNULL(?, zipcode) WHERE id = ?', 
-            [name, description, address, city, zipcode, id])
+            'UPDATE supermarket SET name = IFNULL(?, name), description = IFNULL(?, description), address = IFNULL(?, address), city = IFNULL(?, city), zipcode = IFNULL(?, zipcode), image = IFNULL(?, image), image_url = IFNULL(?, image_url) WHERE id = ?', 
+            [name, description, address, city, zipcode, image, image_url, id])
 
         if(result.affectedRows === 0) return res.status(404).json({
             message: 'Supermarket not found'
