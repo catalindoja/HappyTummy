@@ -15,6 +15,7 @@ import PostProduct from './pages/PostProduct';
 import Recepies from './pages/Recepies';
 import Categories from './pages/Categories';
 import Supermarket from "./pages/Supermaket";
+import Alergies from "./pages/Allergies";
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -57,7 +58,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/categories",
-        element: <Categories />
+        element: <Categories />  
+      },
+      {
+        path: "/alergies",
+        element: <Alergies/>  
       },
       {
         path: "/postproduct",
