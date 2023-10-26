@@ -21,7 +21,7 @@ CREATE TABLE user (
     email varchar(256),
     role int,
     premium boolean,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
     FOREIGN KEY (idsupermarket) REFERENCES supermarket(id)
 );
 
