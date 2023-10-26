@@ -2,7 +2,7 @@ import React from 'react';
 
 function Recepies() {
   return (
-    <div>Recepies</div>
+    <><h1>Recepies 🥧</h1><div>Recepies</div></>
   );
 }
 

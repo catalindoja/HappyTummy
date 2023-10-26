@@ -35,7 +35,7 @@ const Login = () => {
 
     try {
       await login(inputs)
-      navigate("/");
+      navigate("/products");
     } catch (err) {
       // console.log(err.response.data);
       setError(err.response.data);

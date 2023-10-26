@@ -2,8 +2,8 @@ import React from 'react';
 
 function Home() {
   return (
-    <div>Home :D</div>,
-    <div>If you see this, means that it is in development (sorry)</div>
+    <div>Hi</div>,
+    <div>You shouldn't been seeing this 🙄</div>
   );
 }
 

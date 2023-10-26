@@ -115,7 +115,7 @@ const Register = () => {
         /> */}
 
         {/*NEW*/}
-        <div className="boxes">
+        <div>
           <fieldset>
             <legend>Supermarket</legend>
             {markets.map((market) => (

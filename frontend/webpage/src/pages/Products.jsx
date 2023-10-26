@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import Heart from "../img/heart.png";
+import { AuthContext } from "../context/authContext";
 
 const Products = () => {
   const [posts, setPosts] = useState([]);
   const [pageNumber, setPageNumber] = useState(0); // Estado para el número de página actual
+  const { currentUser } = useContext(AuthContext); // Usuario actual
 
   const cat = useLocation().search;
 
@@ -43,7 +45,44 @@ const Products = () => {
     return doc.body.textContent;
   };
 
-  const displayPosts = posts
+  // const displayPosts = posts
+  //   .slice(pageNumber * postsPerPage, (pageNumber + 1) * postsPerPage)
+  //   .map((post) => (
+  //     <div className="post" key={post.id}>
+  //       <div className="img">
+  //         <img src={`../upload/${post.image}`} alt="" />
+  //       </div>
+  //       <div className="content">
+  //         <Link className="link" to={`/products/${post.id}`}>
+  //           <h1>{post.product_name}</h1>
+  //         </Link>
+  //         <p>{limitText(getText(post.product_description), 210)}</p>
+  //         <div className="comment-likes">
+  //           <img src={Heart} alt="Heart Icon" className="heart-icon" />
+  //           <span className="likes-count">{post.likes}</span>
+  //         </div>
+  //         <Link to={`/products/${post.id}`}>
+  //           <button>Read More</button>
+  //         </Link>
+  //       </div>
+  //     </div>
+  //   ));
+
+  const [isButtonActivated, setIsButtonActivated] = useState(false);
+  // Filtrar los productos que coinciden con el término de búsqueda
+  const [searchTerm, setSearchTerm] = useState("");
+  let filteredPosts = posts.filter((post) =>
+    post.product_name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  if (isButtonActivated) {
+    // Si el botón está activado, agregar filtro adicional
+    filteredPosts = filteredPosts.filter((post) =>
+      currentUser && post.iduser === currentUser.id
+    );
+  }
+
+  const displayFilteredPosts = filteredPosts
     .slice(pageNumber * postsPerPage, (pageNumber + 1) * postsPerPage)
     .map((post) => (
       <div className="post" key={post.id}>
@@ -56,9 +95,9 @@ const Products = () => {
           </Link>
           <p>{limitText(getText(post.product_description), 210)}</p>
           <div className="comment-likes">
-                  <img src={Heart} alt="Heart Icon" className="heart-icon" />
-                  <span className="likes-count">{post.likes}</span>
-                </div>
+            <img src={Heart} alt="Heart Icon" className="heart-icon" />
+            <span className="likes-count">{post.likes}</span>
+          </div>
           <Link to={`/products/${post.id}`}>
             <button>Read More</button>
           </Link>
@@ -66,9 +105,62 @@ const Products = () => {
       </div>
     ));
 
+  const filterOptions = ["All", "Allergens", "Category", "Brand", "Supermarket"];
+  const [filterOption, setFilterOption] = useState("All"); // Estado para la opción de filtro
+
+
   return (
     <div className="home">
-      <div className="posts">{displayPosts}</div>
+      <h1>Products 🛒</h1>
+
+      {/* Search by product name */}
+      <div className="box">
+        <div className="boxes">
+          <fieldset>
+            <legend>What are you looking for?</legend>
+            <input
+              type="text"
+              className="search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </fieldset>
+        </div>
+
+        {/* Filter */}
+        <div className="boxes">
+          <fieldset>
+            <legend>Filter</legend>
+            <select
+              value={filterOption}
+              onChange={(e) => setFilterOption(e.target.value)}
+            >
+              {filterOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </fieldset>
+        </div>
+
+        {/* My products button */}
+        <button onClick={() => setIsButtonActivated(!isButtonActivated)}>
+          {isButtonActivated ? "Show all products" : "Show my products"}
+        </button>
+      </div>
+
+      {/* Unfiltered posts */}
+      {/* <div className="posts">{displayPosts}</div> */}
+
+      {/* Filtered posts */}
+      {filteredPosts.length === 0 ? (
+        <h3>Sorry, there are no products matching your search 😕</h3>
+      ) : (
+        <div className="posts">{displayFilteredPosts}</div>
+      )}
+
+      {/* Pagination */}
       <ReactPaginate
         previousLabel={"Previous"}
         nextLabel={"Next"}

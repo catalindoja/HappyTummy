@@ -10,9 +10,9 @@ const Navbar = () => {
     <div className="navbar">
       <div className="container">
         <div className="logo">
-          <Link to="/">
+          {/* <Link to="/"> */}
           <img src={Logo} alt="" />
-          </Link>
+          {/* </Link> */}
         </div>
         <div className="links">
           <Link className="link" to="/products">
@@ -25,9 +25,9 @@ const Navbar = () => {
             <h6>SUPERMARKETS</h6>
           </Link>
           <Link className="link" to="/allergies">
-            <h6>ALLERGIES AND INTOLERANCES</h6>
+            <h6>ALLERGENS INFO</h6>
           </Link>
-          <Link className="link" to="/">
+          <Link className="link" to="/statistics">
             <h6>MY STATISTICS</h6>
           </Link>
           {/* <Link className="link" to="/">
@@ -36,9 +36,9 @@ const Navbar = () => {
           {/* <Link className="link" to="/?cat=food">
             <h6>FOOD</h6>
           </Link> */}
-          <span style={{ fontWeight: "bold" }}>
+          <Link to="/profile" style={{ fontWeight: "bold" }}>
             {currentUser?.username}
-          </span>
+          </Link>
           {currentUser ? (
             <span onClick={logout}>Logout</span>
           ): (

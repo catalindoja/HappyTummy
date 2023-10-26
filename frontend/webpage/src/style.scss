@@ -16,6 +16,26 @@ body {
   /* Reemplaza 'NuevaFuente' con el nombre de la fuente que elijas */
 }
 
+.statistics-intro {
+  p {
+    font-size: 18px;
+    color: #555;
+    margin: 5px 0;
+    margin-bottom: 17px;
+  }
+
+  h2 {
+    margin-top: 50px;
+  }
+
+  span{
+    font-size: 18px;
+    color: teal;
+    font-weight: bold;
+    margin-top: 0px;
+  }
+}
+
 .allergies-intro {
   p {
     font-size: 18px;
@@ -29,7 +49,7 @@ body {
     align-items: center;
     margin: 10px;
     padding: 10px;
-    background-color: #b9e7e752;
+    background-color: #b9e7e72c;
     border: 1px solid #ddd;
     border-radius: 5px;
 
@@ -37,14 +57,15 @@ body {
       margin-right: 20px;
 
       img {
-        max-width: 55px; // Ajusta el tamaño del icono según tus necesidades
+        max-width: 60px; // Ajusta el tamaño del icono según tus necesidades
         height: auto;
+        border-radius: 50%;
       }
     }
 
     .allergies-content {
       h2 {
-        font-size: 25px;
+        font-size: 24px;
         margin: 0;
       }
 
@@ -127,7 +148,7 @@ body {
       background-color: $lightGreen;
 
       h1 {
-        font-size: 30px;
+        font-size: 40px;
         color: teal;
         margin-bottom: 20px;
       }
@@ -211,13 +232,14 @@ body {
           .write {
             background-color: $lightGreen;
             width: 50px;
-            height: 38px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 300;
             border: 1px solid white;
+            font-size: 20px;
 
             &:hover {
               color: teal;
@@ -256,6 +278,60 @@ body {
     //HOME
 
     .home {
+
+      button {
+        margin-top: 20px;
+        font-size: 17px;
+        width: max-content;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        background-color: white;
+        border: 1px solid teal;
+        color: teal;
+
+        &:hover {
+          border: 1px solid white;
+          background-color: $lightGreen;
+          color: black;
+        }
+      }
+
+      .boxes {
+        // background-color: #e0e0e0;
+        // padding: 15px;
+        // margin: 10px;
+        // border: 1px solid #999;
+        // border-radius: 8px;
+        // box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        legend {
+          font-size: 20px;
+          font-weight: bold;
+          margin-top: 10px;
+          margin-bottom: 5px;
+        }
+
+        input {
+          margin-top: 10px;
+          margin-bottom: 10px;
+          font-size: 20px;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          width: 97%;
+        }
+
+        select {
+          margin-top: 10px;
+          margin-bottom: 10px;
+          font-size: 20px;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          width: 20%;
+        }
+      }
+
       .posts {
         margin-top: 50px;
         display: flex;
@@ -607,12 +683,22 @@ body {
           display: flex;
           gap: 17px;
 
-          img {
+          .editimg {
+            margin-left: 480px;
             width: 35px;
             height: 35px;
             cursor: pointer;
           }
+
+          
+        .delete {
+          margin-left: 0px;
+          width: 37px;
+          height: 37px;
+          cursor: pointer;
         }
+        }
+
 
         h1 {
           font-size: 42px;
@@ -947,6 +1033,7 @@ body {
           border: 1px solid lightgray;
 
           .editor {
+            
             height: 100%;
             border: none;
           }

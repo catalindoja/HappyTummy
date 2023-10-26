@@ -14,6 +14,8 @@ import SingleProduct from './pages/SingleProduct';
 import PostProduct from './pages/PostProduct';
 import Recepies from './pages/Recepies';
 import Allergies from './pages/Allergies';
+import Statistics from './pages/Statistics';
+import Profile from './pages/Profile';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -57,6 +59,14 @@ const router = createBrowserRouter([
       {
         path: "/allergies",
         element: <Allergies/>
+      },
+      {
+        path: "/statistics",
+        element: <Statistics/>
+      },
+      {
+        path: "/profile",
+        element: <Profile/>
       },
     ]
   },

@@ -232,12 +232,12 @@ const SingleProduct = () => {
             {/* <p>Posted {moment(post.date).fromNow()}</p> */}
           </div>
           {currentUser.username === userOwner.username ? (
-            <div className="edit">
+            <><div className="edit">
               <Link to={`/editpost`} state={post}>
-                <img src={Edit} alt="" />
+                <img className="editimg" src={Edit} alt="" />
               </Link>
-              <img onClick={handleDelete} src={Delete} alt="" />
-            </div>
+              <img className="delete" onClick={handleDelete} src={Delete} alt="" />
+            </div> </>
           ) : (
             // Botón "like" para usuarios que no son propietarios del post
             <div className="like">
@@ -260,9 +260,9 @@ const SingleProduct = () => {
           {allergies.length === 0 ? (
             <p>This product is safe for all allergies and intolerances ❤</p>
           ) : (
-          allergies.map((allergy, index) => (
-            <span className="fancy-allergy" key={index}>{allergy.allergy_name}</span>
-          )))}
+            allergies.map((allergy, index) => (
+              <span className="fancy-allergy" key={index}>{allergy.allergy_name}</span>
+            )))}
         </div>
 
         <h3 className="more-data-heading">More details</h3>
