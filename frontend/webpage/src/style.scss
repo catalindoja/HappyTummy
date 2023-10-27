@@ -16,6 +16,53 @@ body {
   /* Reemplaza 'NuevaFuente' con el nombre de la fuente que elijas */
 }
 
+.personal-profile{
+  h1{}
+
+  .heading {
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 13px;
+    .editimg{
+      width: 30px;
+      height: 30px;
+      margin-left: 20px;
+      margin-top: 0px;
+    }
+    .deleteimg{
+      width: 30px;
+      height: 30px;
+      margin-left: 1px;
+    }
+  }
+
+  .data{
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 0px;
+    font-size: 18px;
+    width: 55%;
+    margin-bottom: 40px;
+    .item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 7px;
+
+      .item-title {
+        font-weight: bold;
+      }
+    
+      .item-value {
+        color: #333;
+      }
+    }
+  }
+
+
+}
+
 .statistics-intro {
   p {
     font-size: 18px;
@@ -212,6 +259,13 @@ body {
           align-items: center;
           justify-content: center;
           gap: 20px;
+
+          .linkprofile{
+            color: teal;
+            font-size: 18px;
+            font-weight: bold;
+            
+          }
 
           h6 {
             color: teal;

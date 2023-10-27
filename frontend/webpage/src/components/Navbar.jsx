@@ -36,7 +36,7 @@ const Navbar = () => {
           {/* <Link className="link" to="/?cat=food">
             <h6>FOOD</h6>
           </Link> */}
-          <Link to="/profile" style={{ fontWeight: "bold" }}>
+          <Link className="linkprofile" to="/profile">
             {currentUser?.username}
           </Link>
           {currentUser ? (
