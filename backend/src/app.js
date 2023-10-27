@@ -3,7 +3,7 @@ import cors from 'cors'
 import cookieParser from "cookie-parser";
 import multer from "multer";
 import usersRoutes from './routes/users.routes.js'
-import authRoutes from './routes/auth.js'
+import authRoutes from './routes/auth.routes.js'
 import paymentHistoryRoutes from './routes/paymenthistory.routes.js'
 import supermarketRoutes from './routes/supermarket.routes.js'
 import discountRoutes from './routes/discount.routes.js'
