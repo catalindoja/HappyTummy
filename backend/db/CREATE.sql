@@ -109,6 +109,7 @@ CREATE TABLE recipe (
     id INT NOT NULL AUTO_INCREMENT,
     idproduct int,
     iduser int,
+    title varchar(64),
     description text,
     likes int,
     time int,
