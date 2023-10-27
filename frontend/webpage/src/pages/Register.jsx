@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
+import backgroundImage from "../img/background.png";
 
 const Register = () => {
 
@@ -20,7 +21,7 @@ const Register = () => {
     };
     fetchData();
   }, []);
-  
+
   const [inputs, setInputs] = useState({
     idsupermarket: "",
     username: "",
@@ -81,9 +82,9 @@ const Register = () => {
   };
 
   return (
-    <div className="auth">
-      <h1>Register</h1>
+    <div className="auth" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <form>
+        <h1>Register</h1>
         <input
           required
           type="text"
@@ -117,19 +118,19 @@ const Register = () => {
         {/*NEW*/}
         <div>
           <fieldset>
-            <legend>Supermarket</legend>
+            <legend style={{ fontSize: '16px' }}>Supermarket</legend>
             {markets.map((market) => (
               <div key={market.id}>
-                <input type="radio" id={market.name} name="idsupermarket" value={market.id} onChange={handleChange}/>
+                <input type="radio" id={market.name} name="idsupermarket" value={market.id} onChange={handleChange} />
                 <label for={market.name}>{market.name}</label>
               </div>
             ))}
           </fieldset>
         </div>
 
-        <button onClick={handleSubmit}>Register</button>
+        <button style={{ fontSize: '16px' }} onClick={handleSubmit}>Register</button>
         {err && <p>{err}</p>}
-        <span>
+        <span className="infotext">
           Do you have an account? <Link to="/login">Login</Link>
         </span>
       </form>

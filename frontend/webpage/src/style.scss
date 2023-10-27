@@ -16,6 +16,14 @@ body {
   /* Reemplaza 'NuevaFuente' con el nombre de la fuente que elijas */
 }
 
+.supertitle {
+  background-color: $lightGreen; /* Fondo blanco para el contenedor del título */
+  padding: 10px; /* Espacio interno alrededor del título */
+  padding: 8px; /* Espacio interno alrededor del título */
+  border-radius: 10px; /* Bordes redondeados */
+  display: inline-block;
+}
+
 .personal-profile{
   h1{}
 
@@ -193,11 +201,21 @@ body {
       justify-content: center;
       height: 100vh;
       background-color: $lightGreen;
+      backdrop-filter: blur(5px);
+
+      .infotext{
+        font-size: 16px;
+      }
+
+      input {
+        font-size: 16px;
+      }
 
       h1 {
-        font-size: 40px;
+        font-size: 35px;
         color: teal;
         margin-bottom: 20px;
+        text-align: center;
       }
 
       form {
@@ -207,6 +225,7 @@ body {
         background-color: white;
         width: 200px;
         gap: 20px;
+        border-radius: 6%;
 
         input {
           padding: 15px;
@@ -260,11 +279,62 @@ body {
           justify-content: center;
           gap: 20px;
 
+          .menu {
+            text-align: center; /* Centra el contenido */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 128, 128, 0.466); /* Fondo semitransparente */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999; /* Asegura que esté por encima de otros elementos */
+            display: block;
+          }
+
+          .menu-buttons {
+            display: flex; /* Activa el diseño flexbox */
+            margin-top: 0px; /* Ajusta el margen superior según tus necesidades */
+            margin-left: 838px; /* Ajusta el margen superior según tus necesidades */
+          }
+          
+          .menu-item {
+            font-size: 20px; /* Tamaño de fuente deseado */
+            color: teal;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 10px;
+          }
+
+          .menu-item a {
+            text-decoration: none; /* Elimina la decoración de texto, como el subrayado */
+            color: inherit; /* Mantiene el color del texto heredado */
+          }         
+
+          .menu-title {
+            margin-top: 20px; /* Ajusta el margen superior según tus necesidades */
+            font-size: 1.5rem; /* Tamaño de fuente deseado */
+            color: #414141; /* Color del texto deseado */
+            margin-top: 350px; /* Ajusta el margen superior según tus necesidades */
+            background-color: white; /* Fondo blanco para el contenedor del título */
+            padding: 10px; /* Espacio interno alrededor del título */
+            padding: 8px; /* Espacio interno alrededor del título */
+            border-radius: 5px; /* Bordes redondeados */
+            display: inline-block;
+          }
+          
+          .menu-item:hover {
+            background: #ddd; /* Cambia el fondo en el hover */
+          }          
+
           .linkprofile{
             color: teal;
             font-size: 18px;
             font-weight: bold;
-            
           }
 
           h6 {
@@ -332,6 +402,8 @@ body {
     //HOME
 
     .home {
+      
+
 
       button {
         margin-top: 20px;

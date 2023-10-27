@@ -47,7 +47,7 @@ const Recepies = () => {
   // Filtrar los productos que coinciden con el término de búsqueda
   const [searchTerm, setSearchTerm] = useState("");
   let filteredPosts = posts.filter((post) =>
-    post.description.toLowerCase().includes(searchTerm.toLowerCase())
+    post.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (isButtonActivated) {
@@ -66,7 +66,7 @@ const Recepies = () => {
         </div>
         <div className="content">
           <Link className="link" to={`/recipes/${post.id}`}>
-            <h1>{post.description}</h1>
+            <h1>{post.title}</h1>
           </Link>
           <p>{limitText(getText(post.description), 210)}</p>
           <div className="comment-likes">
@@ -86,7 +86,7 @@ const Recepies = () => {
 
   return (
     <div className="home">
-      <h1>Recipes 🥧</h1>
+      <h1 className="supertitle">Recipes 🥧</h1>
 
       {/* Search by product name */}
       <div className="box">

@@ -3,7 +3,7 @@ import cors from 'cors'
 import cookieParser from "cookie-parser";
 import multer from "multer";
 import usersRoutes from './routes/users.routes.js'
-import authRoutes from './routes/auth.js'
+import authRoutes from './routes/auth.routes.js'
 import paymentHistoryRoutes from './routes/paymenthistory.routes.js'
 import supermarketRoutes from './routes/supermarket.routes.js'
 import discountRoutes from './routes/discount.routes.js'
@@ -44,7 +44,7 @@ app.use((req, res, next) => {
   })
 })
 
-// ESTO ES PARA SUBIR FOTOS
+// TODO ESTO PARA SUBIR FOTOS
 app.use(express.json());
 app.use(cookieParser());
 const storage = multer.diskStorage({
@@ -56,11 +56,13 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage }); // dest: "./upload"
+const upload = multer({ storage });
 
 app.post("/upload", upload.single("file"), function (req, res) {
   const file = req.file;
   res.status(200).json(file.filename);
 });
+
+
 
 export default app;

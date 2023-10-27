@@ -38,7 +38,7 @@ const Profile = () => {
 
     return (
         <div className="personal-profile">
-            <h1>Profile 😉 </h1>
+            <h1 className="supertitle">Profile 😉 </h1>
             <div>
                 <h2 className="heading">Personal data <img className="editimg" src={Edit} alt="" /> <img className="deleteimg" src={Delete} alt="" /></h2>
                 <div className="data">

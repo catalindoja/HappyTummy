@@ -129,7 +129,7 @@ const App = () => {
 
     return (
         <div className="statistics-intro">
-            <h1>My statistics 📊</h1>
+            <h1 className="supertitle">My statistics 📊</h1>
             <p>These are the statistics of your personal profile and and the supermarket you are affiliated to.</p>
 
             <h2>Personal profile</h2>

@@ -105,7 +105,7 @@ function PostRecepie() {
 
     return (
         <div>
-            <h1>Post a new recipe ❤</h1>
+            <h1 className="supertitle">Post a new recipe ❤</h1>
             <div className="add">
                 <div className="content">
 

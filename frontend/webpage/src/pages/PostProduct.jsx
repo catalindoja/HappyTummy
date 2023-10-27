@@ -320,7 +320,7 @@ const Write = () => {
   // Lo que se muestra en pantalla
   return (
     <div>
-      <h1>Post a new product ❤</h1>
+      <h1 className="supertitle">Post a new product ❤</h1>
       <div className="add">
         <div className="content">
 

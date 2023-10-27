@@ -109,7 +109,7 @@ const Products = () => {
 
   return (
     <div className="home">
-      <h1>Products 🛒</h1>
+      <h1 className="supertitle">Products 🛒</h1>
 
       {/* Search by product name */}
       <div className="box">

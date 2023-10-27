@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
+import backgroundImage from "../img/background.png";
 
 const Login = () => {
   const [inputs, setInputs] = useState({
@@ -42,9 +43,9 @@ const Login = () => {
     }
   };
   return (
-    <div className="auth">
-      <h1>Login</h1>
+    <div className="auth" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <form>
+      <h1>Login</h1>
         <input
           required
           type="text"
@@ -59,9 +60,9 @@ const Login = () => {
           name="password"
           onChange={handleChange}
         />
-        <button onClick={handleSubmit}>Login</button>
+        <button style={{ fontSize: '16px' }} onClick={handleSubmit}>Login</button>
         {err && <p>{err}</p>}
-        <span>
+        <span className="infotext">
           Don't you have an account? <Link to="/register">Register</Link>
         </span>
       </form>

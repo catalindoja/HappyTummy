@@ -1,10 +1,21 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import { useRef } from 'react';
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import Logo from "../img/logo.png";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Popover from "react-bootstrap/Popover";
 
 const Navbar = () => {
   const { currentUser, logout } = useContext(AuthContext);
+
+  // V2 popup
+  const [isMenuVisible, setMenuVisible] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const handleOptionClick = (option) => {
+    setSelectedOption(option);
+    setMenuVisible(false);
+  };
 
   return (
     <div className="navbar">
@@ -35,21 +46,44 @@ const Navbar = () => {
           </Link>
           {currentUser ? (
             <span onClick={logout}>Logout</span>
-          ): (
+          ) : (
             <span>Logout</span>)}
 
-             {/*<Link className="link" to="/login">
+          {/*<Link className="link" to="/login">
               Login
-            </Link>  */} 
+            </Link>  */}
 
-          <span className="write">
+          {/* <span className="write">
             <Link className="link" to="/postproduct">
               Post
             </Link>
-          </span>
+          </span> */}
+
+          <div>
+            {/* Botón para abrir el menú emergente */}
+            <span className="write" onClick={() => setMenuVisible(true)}>
+              Post
+            </span>
+
+            {/* Menú emergente */}
+            {isMenuVisible && (
+              <div className="menu">
+                <h3 className="menu-title">What do you want to post?😏</h3>
+                <div className="menu-buttons">
+                  <div className="menu-item" onClick={() => handleOptionClick("product")}>
+                    <Link to="/postproduct">New product</Link>
+                  </div>
+                  <div className="menu-item" onClick={() => handleOptionClick("recipe")}>
+                    <Link to="/postrecipe">New recipe</Link>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

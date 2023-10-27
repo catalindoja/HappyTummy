@@ -110,8 +110,7 @@ const SingleRecipe = () => {
                             </div>
                         )}
                     </div>
-                    {/* CAMBIAR A TILTE!! */}
-                    <h1>{post.description}</h1>
+                    <h1>{post.title}</h1>
                     <h3 className="more-data-heading">Specifications</h3>
                     <div className="more-data-container">
                         <div className="more-data-item">
@@ -120,7 +119,7 @@ const SingleRecipe = () => {
                         </div>
                         <div className="more-data-item">
                             <span className="more-data-label">Number of people:</span>
-                            <span className="more-data-value">{post.ammountofpeople} persons</span>
+                            <span className="more-data-value">{post.ammountofpeople} people</span>
                         </div>
                     </div>
                     <h3 className="more-data-heading">Steps</h3>

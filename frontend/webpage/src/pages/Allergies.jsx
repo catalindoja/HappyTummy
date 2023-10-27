@@ -17,7 +17,7 @@ import Altramuces from "../img/allergens/altramuces.png";
 function Allergies() {
     return (
         <div className="allergies-intro">
-            <h1>Allergens info 🌾</h1>
+            <h1 className="supertitle">Allergens info 🌾</h1>
             <p>The main objective of Happy Tummy is to make the list of allergens in supermarket products easily accessible to everyone. These are the allergens that are identified in this service. ❤</p>
             <div className="allergies-container">
                 <div className="allergies-icon">
