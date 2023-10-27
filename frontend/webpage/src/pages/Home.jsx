@@ -28,7 +28,7 @@ const Home = () => {
             </div>
             <div className="btn">
                 <a className="link1"><button className="btn1">Enter</button></a>
-            </div>
+            </div> 
         </div>
 
         
