@@ -5,11 +5,10 @@ import ReactPaginate from "react-paginate";
 import Heart from "../img/heart.png";
 import { AuthContext } from "../context/authContext";
 
-const Products = () => {
+const Recepies = () => {
   const [posts, setPosts] = useState([]);
   const [pageNumber, setPageNumber] = useState(0); // Estado para el número de página actual
   const { currentUser } = useContext(AuthContext); // Usuario actual
-
   const postsPerPage = 5; // Cantidad de posts por página
 
   const limitText = (text, limit) => {
@@ -23,7 +22,8 @@ const Products = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/products`);
+        // Recepie
+        const res = await axios.get(`/recipes`);
         setPosts(res.data);
       } catch (err) {
         console.log(err);
@@ -43,34 +43,11 @@ const Products = () => {
     return doc.body.textContent;
   };
 
-  // const displayPosts = posts
-  //   .slice(pageNumber * postsPerPage, (pageNumber + 1) * postsPerPage)
-  //   .map((post) => (
-  //     <div className="post" key={post.id}>
-  //       <div className="img">
-  //         <img src={`../upload/${post.image}`} alt="" />
-  //       </div>
-  //       <div className="content">
-  //         <Link className="link" to={`/products/${post.id}`}>
-  //           <h1>{post.product_name}</h1>
-  //         </Link>
-  //         <p>{limitText(getText(post.product_description), 210)}</p>
-  //         <div className="comment-likes">
-  //           <img src={Heart} alt="Heart Icon" className="heart-icon" />
-  //           <span className="likes-count">{post.likes}</span>
-  //         </div>
-  //         <Link to={`/products/${post.id}`}>
-  //           <button>Read More</button>
-  //         </Link>
-  //       </div>
-  //     </div>
-  //   ));
-
   const [isButtonActivated, setIsButtonActivated] = useState(false);
   // Filtrar los productos que coinciden con el término de búsqueda
   const [searchTerm, setSearchTerm] = useState("");
   let filteredPosts = posts.filter((post) =>
-    post.product_name.toLowerCase().includes(searchTerm.toLowerCase())
+    post.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (isButtonActivated) {
@@ -88,15 +65,15 @@ const Products = () => {
           <img src={`../upload/${post.image}`} alt="" />
         </div>
         <div className="content">
-          <Link className="link" to={`/products/${post.id}`}>
-            <h1>{post.product_name}</h1>
+          <Link className="link" to={`/recipes/${post.id}`}>
+            <h1>{post.description}</h1>
           </Link>
-          <p>{limitText(getText(post.product_description), 210)}</p>
+          <p>{limitText(getText(post.description), 210)}</p>
           <div className="comment-likes">
             <img src={Heart} alt="Heart Icon" className="heart-icon" />
             <span className="likes-count">{post.likes}</span>
           </div>
-          <Link to={`/products/${post.id}`}>
+          <Link to={`/recipes/${post.id}`}>
             <button>Read More</button>
           </Link>
         </div>
@@ -109,7 +86,7 @@ const Products = () => {
 
   return (
     <div className="home">
-      <h1>Products 🛒</h1>
+      <h1>Recipes 🥧</h1>
 
       {/* Search by product name */}
       <div className="box">
@@ -144,7 +121,7 @@ const Products = () => {
 
         {/* My products button */}
         <button onClick={() => setIsButtonActivated(!isButtonActivated)}>
-          {isButtonActivated ? "Show all products" : "Show my products"}
+          {isButtonActivated ? "Show all recipes" : "Show my recipes"}
         </button>
       </div>
 
@@ -153,7 +130,7 @@ const Products = () => {
 
       {/* Filtered posts */}
       {filteredPosts.length === 0 ? (
-        <h3>Sorry, there are no products matching your search 😕</h3>
+        <h3>Sorry, there are no recipes matching your search 😕</h3>
       ) : (
         <div className="posts">{displayFilteredPosts}</div>
       )}
@@ -174,4 +151,6 @@ const Products = () => {
   );
 };
 
-export default Products;
+
+
+export default Recepies;

@@ -12,10 +12,11 @@ import Home from './pages/Home';
 import Products from './pages/Products';
 import SingleProduct from './pages/SingleProduct';
 import PostProduct from './pages/PostProduct';
-import Recepies from './pages/Recepies';
+import Recipes from './pages/Recipes';
 import Allergies from './pages/Allergies';
 import Statistics from './pages/Statistics';
 import Profile from './pages/Profile';
+import SingleRecipe from './pages/SingleRecipe';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -49,12 +50,16 @@ const router = createBrowserRouter([
         element: <SingleProduct/>
       },
       {
-        path: "/recepies",
-        element: <Recepies/>
-      },
-      {
         path: "/postproduct",
         element: <PostProduct/>
+      },
+      {
+        path: "/recipes",
+        element: <Recipes/>
+      },
+      {
+        path: "/recipes/:id",
+        element: <SingleRecipe/>
       },
       {
         path: "/allergies",

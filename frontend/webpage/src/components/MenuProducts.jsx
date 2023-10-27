@@ -9,7 +9,7 @@ const Menu = ({ cat }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/products/?cat=${cat}`);
+        const res = await axios.get(`/products/`);
         setPosts(res.data);
       } catch (err) {
         console.log(err);

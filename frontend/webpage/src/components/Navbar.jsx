@@ -18,8 +18,8 @@ const Navbar = () => {
           <Link className="link" to="/products">
             <h6>PRODUCTS</h6>
           </Link>
-          <Link className="link" to="/recepies">
-            <h6>RECEPIES</h6>
+          <Link className="link" to="/recipes">
+            <h6>RECIPES</h6>
           </Link>
           <Link className="link" to="/">
             <h6>SUPERMARKETS</h6>
@@ -30,12 +30,6 @@ const Navbar = () => {
           <Link className="link" to="/statistics">
             <h6>MY STATISTICS</h6>
           </Link>
-          {/* <Link className="link" to="/">
-            <h6>MY PAYMENTS</h6>
-          </Link> */}
-          {/* <Link className="link" to="/?cat=food">
-            <h6>FOOD</h6>
-          </Link> */}
           <Link className="linkprofile" to="/profile">
             {currentUser?.username}
           </Link>

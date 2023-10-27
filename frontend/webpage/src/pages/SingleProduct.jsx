@@ -4,7 +4,7 @@ import Delete from "../img/delete.png";
 import ProfilePicture from "../img/profile.png";
 import Heart from "../img/heart.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import Menu from "../components/Menu";
+import Menu from "../components/MenuProducts";
 import axios from "axios";
 import moment from "moment";
 import { useContext } from "react";
@@ -20,8 +20,6 @@ const SingleProduct = () => {
 
   const likes = 0;
   const postId = location.pathname.split("/")[2];
-
-
 
   // Obtener texto
   const getText = (html) => {
@@ -342,7 +340,7 @@ const SingleProduct = () => {
 
       </div>
 
-      {<Menu cat={post} />}
+      {<Menu/>}
     </div>
   );
 
