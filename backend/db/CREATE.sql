@@ -78,7 +78,7 @@ CREATE TABLE product (
     product_description  varchar(256),
     price decimal(10, 2),
     likes int,
-    image blob,
+    image BLOB,
 	PRIMARY KEY (id),
     FOREIGN KEY (iduser) REFERENCES user(id),
     FOREIGN KEY (idcategory) REFERENCES category(id),

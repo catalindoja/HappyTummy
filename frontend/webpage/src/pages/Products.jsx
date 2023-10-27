@@ -158,31 +158,33 @@ const Products = () => {
             </fieldset>
           </div>
         </div>
-        {/* Mostrar todos los productos sin filtrar */}
-        {posts.map((post) => (
-          <div className="post" key={post.id}>
-            <div className="img">
-              <img src={`../upload/${post.image}`} alt="" />
+
+        {/* Mostrar todos los productos sin filtrar */
+          posts.map((post) => (
+            <div className="post" key={post.id}>
+              <div className="img">
+                <img src={`../upload/${post.product_image}`} alt="" /> {/* Ajusta la ruta según sea necesario */}
+              </div>
+              <div className="content">
+                <Link className="link" to={`/products/${post.id}`}>
+                  <h1>{post.product_name}</h1>
+                </Link>
+                <p>{getText(post.product_description)}</p>
+                <Link to={`/products/${post.id}`}>
+                  <button>Read More</button>
+                </Link>
+              </div>
             </div>
-            <div className="content">
-              <Link className="link" to={`/products/${post.id}`}>
-                <h1>{post.product_name}</h1>
-              </Link>
-              <p>{getText(post.product_description)}</p>
-              <Link to={`/products/${post.id}`}>
-                <button>Read More</button>
-              </Link>
-            </div>
-          </div>
-        ))}
-        {/* Mostrar productos filtrados si existen */}
-        {filteredPosts.length === 0 ? (
+          ))}
+
+        {/* Mostrar productos filtrados si existen */
+        filteredPosts.length === 0 ? (
           <p>Sorry, There is not any product!</p>
         ) : (
           filteredPosts.map((post) => (
             <div className="post" key={post.id}>
               <div className="img">
-                <img src={`../upload/${post.image}`} alt="" />
+                <img src={`../upload/${post.product_image}`} alt="" /> {/* Ajusta la ruta según sea necesario */}
               </div>
               <div className="content">
                 <Link className="link" to={`/products/${post.id}`}>

@@ -6,9 +6,9 @@ import {
   Outlet
 } from "react-router-dom";
 
+import Home from "./pages/Home";
 import Register from './pages/Register';
 import Login from './pages/Login';
-import Home from './pages/Home';
 import Products from './pages/Products';
 import SingleProduct from './pages/SingleProduct';
 import PostProduct from './pages/PostProduct';
@@ -37,8 +37,8 @@ const router = createBrowserRouter([
     element: <Layout/>,
     children: [ 
       {
-        path: "/",
-        element:<Home/>
+        path: "/home",
+        element: <Home />
       },
       {
         path: "/supermarket",
