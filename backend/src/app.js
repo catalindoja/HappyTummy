@@ -2,6 +2,9 @@ import express from 'express'
 import cors from 'cors'
 import cookieParser from "cookie-parser";
 import multer from "multer";
+import cors from 'cors'
+import cookieParser from "cookie-parser";
+import multer from "multer";
 import usersRoutes from './routes/users.routes.js'
 import authRoutes from './routes/auth.routes.js'
 import paymentHistoryRoutes from './routes/paymenthistory.routes.js'
@@ -20,8 +23,23 @@ import brandRoutes from './routes/brand.routes.js'
 const app = express();
 app.use(cors())
 app.use(express.json()) 
+app.use(express.json()) 
 
 //routes
+app.use(usersRoutes) 
+app.use(paymentHistoryRoutes)
+app.use(supermarketRoutes)
+app.use(discountRoutes)
+app.use(categoryRoutes)
+app.use(allergiesRoutes)
+app.use(productRoutes)
+app.use(stockRoutes)
+app.use(recipesRoutes)
+app.use(ingredientsRoutes)
+app.use(productAllergiesRoutes)
+app.use(commentRoutes)
+app.use(authRoutes)
+app.use(brandRoutes)
 app.use(usersRoutes) 
 app.use(paymentHistoryRoutes)
 app.use(supermarketRoutes)

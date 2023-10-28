@@ -33,6 +33,7 @@ export const createUser = async (req, res) => {
         res.send({
             id: rows.insertId,
             idsupermarket,
+            idsupermarket,
             username,
             email,
             role,
