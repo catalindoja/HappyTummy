@@ -37,14 +37,18 @@ app.use(commentRoutes)
 app.use(authRoutes)
 app.use(brandRoutes)
 
-//middleware for when routes were not found
+/**
+ *Middleware for when routes were not found, returns a 404 state
+ */
 app.use((req, res, next) => {
   res.status(404).json({
     message: 'API endpoint not found'
   })
 })
 
-// TODO ESTO PARA SUBIR FOTOS
+/**
+ * This allows us to upload images inputed by the user to the server
+ */
 app.use(express.json());
 app.use(cookieParser());
 const storage = multer.diskStorage({
@@ -58,6 +62,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+/**
+ * Uploads the image and returns a 200 state
+ */
 app.post("/upload", upload.single("file"), function (req, res) {
   const file = req.file;
   res.status(200).json(file.filename);

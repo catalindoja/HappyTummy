@@ -5,6 +5,9 @@ import { getProducts, getProduct, createProduct, updateProduct, deleteProduct, g
 const router = Router()
 
 
+/**
+ * When one of the product endpoints is reached, these functions trigger the corresponding function
+ */
 router.get('/products', getProducts)
 
 router.get('/products/:id', getProduct)

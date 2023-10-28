@@ -4,7 +4,9 @@ import { getIngredients, getIngredient, createIngredient, updateIngredient, dele
 
 const router = Router()
 
-
+/**
+ * When one of the ingredients endpoints is reached, these functions trigger the corresponding function
+ */
 router.get('/ingredients', getIngredients)
 
 router.get('/ingredients/:id', getIngredient)

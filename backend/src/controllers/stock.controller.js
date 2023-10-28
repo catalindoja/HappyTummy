@@ -1,5 +1,12 @@
 import {pool} from '../db.js'
 
+/**
+ * Recovers the stocks from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getStocks = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM stock')
@@ -11,6 +18,13 @@ export const getStocks = async (req, res) => {
     }
 }
 
+/**
+ * Recovers a specific stock from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getStock = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM stock WHERE id = ?', [req.params.id])
@@ -22,6 +36,13 @@ export const getStock = async (req, res) => {
     }
 }
 
+/**
+ * Creates a new stock entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the newly created data
+ */
 export const createStock = async (req, res) => {
     try {
         const {idsupermarket, idproduct, available} = req.body

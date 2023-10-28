@@ -4,7 +4,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import multer from "multer";
 
-// RAMA MAIN
+// Initializes the server based on the information in app.js and config.js
 app.listen(PORT, () => {
   console.log("index.js: Server started on port " + PORT + "!");
 });

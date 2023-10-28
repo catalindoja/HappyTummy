@@ -1,5 +1,12 @@
 import {pool} from '../db.js'
 
+/**
+ * Recovers the payments from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getPayments = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM paymenthistory')
@@ -11,6 +18,13 @@ export const getPayments = async (req, res) => {
     }
 }
 
+/**
+ * Recovers a specific payment from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getPayment = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM paymenthistory WHERE id = ?', [req.params.id])
@@ -22,6 +36,13 @@ export const getPayment = async (req, res) => {
     }
 }
 
+/**
+ * Creates a new payment entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the newly created data
+ */
 export const createPayment = async (req, res) => {
     try {
         const {iduser, ammount, date, description} = req.body
@@ -44,6 +65,13 @@ export const createPayment = async (req, res) => {
     }
 }
 
+/**
+ * Deletes a specific entry from the payment table
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {CodecState} Code confirming a succsesful operation
+ */
 export const deletePayment = async (req, res) => {
     try {
         const [result] = await pool.query('DELETE FROM paymenthistory WHERE id = ?', [req.params.id])
@@ -58,6 +86,13 @@ export const deletePayment = async (req, res) => {
     }
 }
 
+/**
+ * Updates an existing payment entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} Json containing the new information
+ */
 export const updatePayment = async (req, res) => {
     try {
         const {id} = req.params

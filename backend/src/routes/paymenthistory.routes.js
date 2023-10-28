@@ -4,7 +4,9 @@ import { getPayments, getPayment, createPayment, updatePayment, deletePayment } 
 
 const router = Router()
 
-
+/**
+ * When one of the payment endpoints is reached, these functions trigger the corresponding function
+ */
 router.get('/payments', getPayments)
 
 router.get('/payments/:id', getPayment)

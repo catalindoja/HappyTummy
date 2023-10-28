@@ -1,5 +1,13 @@
 import {pool} from '../db.js'
 
+
+/**
+ * Recovers the comments from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getComments = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM comment')
@@ -11,6 +19,13 @@ export const getComments = async (req, res) => {
     }
 }
 
+/**
+ * Recovers a specific comment from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getComment = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM comment WHERE id = ?', [req.params.id])
@@ -22,6 +37,13 @@ export const getComment = async (req, res) => {
     }
 }
 
+/**
+ * Creates a new comment entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the newly created data
+ */
 export const createComment = async (req, res) => {
     try {
         const {iduser, idproduct, content, likes} = req.body
@@ -44,6 +66,13 @@ export const createComment = async (req, res) => {
     }
 }
 
+/**
+ * Deletes a specific entry from the comment table
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {CodecState} Code confirming a succsesful operation
+ */
 export const deleteComment = async (req, res) => {
     try {
         const [result] = await pool.query('DELETE FROM comment WHERE id = ?', [req.params.id])
@@ -58,6 +87,13 @@ export const deleteComment = async (req, res) => {
     }
 }
 
+/**
+ * Updates an existing comment entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} Json containing the new information
+ */
 export const updateComment = async (req, res) => {
     try {
         const {id} = req.params

@@ -1,5 +1,12 @@
 import {pool} from '../db.js'
 
+/**
+ * Recovers the categories from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getCategories = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM category')
@@ -11,6 +18,13 @@ export const getCategories = async (req, res) => {
     }
 }
 
+/**
+ * Recovers a specific category from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getCategory = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM category WHERE id = ?', [req.params.id])
@@ -22,6 +36,13 @@ export const getCategory = async (req, res) => {
     }
 }
 
+/**
+ * Creates a new category entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the newly created data
+ */
 export const createCategory = async (req, res) => {
     try {
         const {category_name, image, image_url} = req.body
@@ -43,6 +64,13 @@ export const createCategory = async (req, res) => {
     }
 }
 
+/**
+ * Deletes a specific entry from the category table
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {CodecState} Code confirming a succsesful operation
+ */
 export const deleteCategory = async (req, res) => {
     try {
         const [result] = await pool.query('DELETE FROM category WHERE id = ?', [req.params.id])
@@ -57,6 +85,13 @@ export const deleteCategory = async (req, res) => {
     }
 }   
 
+/**
+ * Updates an existing category entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} Json containing the new information
+ */
 export const updateCategory = async (req, res) => {
     try {
         const {id} = req.params
