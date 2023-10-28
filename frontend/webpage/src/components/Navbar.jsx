@@ -5,6 +5,7 @@ import { AuthContext } from "../context/authContext";
 import Logo from "../img/logo.png";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Popover from "react-bootstrap/Popover";
+import Dot from "../img/teal.png";
 
 const Navbar = () => {
   const { currentUser, logout } = useContext(AuthContext);
@@ -28,18 +29,23 @@ const Navbar = () => {
         <div className="links">
           <Link className="link" to="/products">
             <h6>PRODUCTS</h6>
+            <img className="justadot" src={Dot} alt="" />
           </Link>
           <Link className="link" to="/recipes">
             <h6>RECIPES</h6>
+            <img className="justadot" src={Dot} alt="" />
           </Link>
           <Link className="link" to="/">
             <h6>SUPERMARKETS</h6>
+            <img className="justadot" src={Dot} alt="" />
           </Link>
           <Link className="link" to="/allergies">
             <h6>ALLERGENS INFO</h6>
+            <img className="justadot" src={Dot} alt="" />
           </Link>
           <Link className="link" to="/statistics">
             <h6>MY STATISTICS</h6>
+            <img className="justadot" src={Dot} alt="" />
           </Link>
           <Link className="linkprofile" to="/profile">
             {currentUser?.username}

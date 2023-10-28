@@ -7,6 +7,9 @@ import backgroundImage from "../img/background.png";
 
 const Register = () => {
 
+  // Para la imagen!!
+  const [image, setFile] = useState(null);
+
   // Para los supermercados!!
   const [markets, setMarkets] = useState([]);
   useEffect(() => {
@@ -28,7 +31,9 @@ const Register = () => {
     email: "",
     password: "",
     role: 3,
-    premium: 0
+    premium: 0,
+    image: "",
+    image_url: "",
   });
   const [err, setError] = useState(null);
 
@@ -127,6 +132,30 @@ const Register = () => {
             ))}
           </fieldset>
         </div>
+
+        <div className="image">
+          <div className="image-container">
+            <input
+              style={{ display: "none" }}
+              type="image"
+              id="image"
+              name=""
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+            <label className="file" htmlFor="file">
+              Upload profile picture
+            </label>
+
+          </div>
+        </div>
+
+        <input
+          required
+          type="image_url"
+          placeholder="Image url"
+          name="image_url"
+          onChange={handleChange}
+        />
 
         <button style={{ fontSize: '16px' }} onClick={handleSubmit}>Register</button>
         {err && <p>{err}</p>}

@@ -128,7 +128,8 @@ const Write = () => {
   const [value, setValue] = useState(state?.product_description || "");
   const [product_name, setProductName] = useState(state?.product_name || "");
   const [file, setFile] = useState(null);
-  const [cat, setCat] = useState(state?.cat || "");
+  const [image_url, setImageUrl] = useState(null);
+  
 
   // Para subir la imagen
   const upload = async () => {
@@ -252,6 +253,7 @@ const Write = () => {
           quantity,
           measurement,
           likes,
+          image_url,
         });
 
         // Obtener el ID del producto creado
@@ -289,6 +291,7 @@ const Write = () => {
           price,
           quantity,
           measurement,
+          image_url,
         });
 
         // Obtener el ID del producto creado
@@ -458,6 +461,12 @@ const Write = () => {
               ))}
             </fieldset>
           </div>
+
+          <input
+            type="text"
+            placeholder="Image url"
+            onChange={(e) => setImageUrl(e.target.value)}
+          />
 
           <div className="image">
             <div className="image-container">

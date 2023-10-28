@@ -48,7 +48,8 @@ const Menu = ({ cat }) => {
       <h1>Other posts you may like</h1>
       {shuffledPosts.map((post) => (
         <div className="post" key={post.id}>
-          <img src={`../products/${post?.img}`} alt="" />
+          <img src={post.image_url} alt="" />
+          {/* <img src={`../products/${post?.img}`} alt="" /> */}
           <h2>{post.product_name}</h2>
           <Link to={`/products/${post.id}`}>
             <button>Read More</button>

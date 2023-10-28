@@ -62,7 +62,8 @@ const Recepies = () => {
     .map((post) => (
       <div className="post" key={post.id}>
         <div className="img">
-          <img src={`../upload/${post.image}`} alt="" />
+          {/* <img src={`../upload/${post.image}`} alt="" /> */}
+          <img src={post.image_url} alt="" />
         </div>
         <div className="content">
           <Link className="link" to={`/recipes/${post.id}`}>

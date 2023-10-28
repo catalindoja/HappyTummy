@@ -21,6 +21,7 @@ function PostRecepie() {
     const [ammountofpeople, setPeople] = useState(state?.ammountofpeople || "");
     const [unit, setSelectedTimeMeasurement] = useState(state?.unit || "");
     const [file, setFile] = useState(null);
+    const [image_url, setImageUrl] = useState(null);
 
     // Mensaje de error
     const [error, setError] = useState(null);
@@ -83,8 +84,9 @@ function PostRecepie() {
                     likes,
                     image: file ? imgUrl : "",
                     date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+                    image_url,
                 });
-            }  else {
+            } else {
                 const recipeResponse = await axios.patch(`/recipes/`, {
                     iduser,
                     title,
@@ -95,10 +97,11 @@ function PostRecepie() {
                     likes,
                     image: file ? imgUrl : "",
                     date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+                    image_url,
                 });
             }
             navigate("/recipes");
-        } catch (err){
+        } catch (err) {
             console.log(err);
         }
     };
@@ -153,6 +156,12 @@ function PostRecepie() {
                         />
                     </div>
 
+                    <input
+                        type="text"
+                        placeholder="Image url"
+                        onChange={(e) => setImageUrl(e.target.value)}
+                    />
+
                     <div className="image">
                         <div className="image-container">
                             <input
@@ -171,7 +180,7 @@ function PostRecepie() {
 
                     {error && <p className="error-message">{error}</p>}
                     <div className="buttons">
-                    <button onClick={handleClick}>Publish</button>
+                        <button onClick={handleClick}>Publish</button>
                     </div>
 
                 </div>

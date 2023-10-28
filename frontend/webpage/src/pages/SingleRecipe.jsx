@@ -85,7 +85,8 @@ const SingleRecipe = () => {
         <div>
             <div className="single">
                 <div className="content">
-                    <img src={`../upload/${post?.image}`} alt="" />
+                    {/* <img src={`../upload/${post?.image}`} alt="" /> */}
+                    <img className="super-image" src={post.image_url} alt="" />
                     <div className="user">
                         <img src={ProfilePicture} />
                         {/* {userOwner.userImg && <img src={userOwner.userImg} alt="" />} */}
