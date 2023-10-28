@@ -1,19 +1,30 @@
 import React, { useState, useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/authContext";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
-import { useEffect } from "react";
-import { AuthContext } from "../context/authContext";
 
+// Create the PostRecepie component
 function PostRecepie() {
+
     const { currentUser } = useContext(AuthContext);
     const iduser = currentUser.id;
     const state = useLocation().state;
     const navigate = useNavigate();
 
-    // Fields
+    // Set up the state variable 'error'
+    const [error, setError] = useState(null);
+
+    // Set up the state variables
+    // - title: a string that represents the title of the recipe
+    // - value: a string that represents the description of the recipe
+    // - time: a string that represents the time of preparation of the recipe
+    // - ammountofpeople: a string that represents the number of people that the recipe is for
+    // - unit: a string that represents the time measure of the preparation of the recipe
+    // - file: a file that represents the image of the recipe
+    // - image_url: a string that represents the image url of the recipe
     const likes = 0;
     const [title, setRecipeTitle] = useState(state?.title || "");
     const [value, setValue] = useState(state?.description || "");
@@ -23,24 +34,20 @@ function PostRecepie() {
     const [file, setFile] = useState(null);
     const [image_url, setImageUrl] = useState(null);
 
-    // Mensaje de error
-    const [error, setError] = useState(null);
-
-    // Para subir la imagen
+    // Set up the function that uploads the image
     const upload = async () => {
         try {
             const formData = new FormData();
-            console.log(file)
             formData.append("file", file);
-            const res = await axios.post("/upload", formData);    // ESTO ME FALLA
+            const res = await axios.post("/upload", formData);
             return res.data;
         } catch (err) {
-            console.log("ERROR :(")
             console.log(err);
         }
     };
 
-    // Cuando se hace click al botón de publish
+    // Set up the function that handles the form submission
+    // - if the user does not fill in the input fields, the function will set the error message
     const handleClick = async (e) => {
         e.preventDefault();
 
@@ -69,11 +76,10 @@ function PostRecepie() {
             return;
         }
 
-        // Para publicar la imagen
         const imgUrl = await upload();
-
         try {
             if (!state) {
+                // Post
                 const recipeResponse = await axios.post(`/recipes/`, {
                     iduser,
                     title,
@@ -87,6 +93,7 @@ function PostRecepie() {
                     image_url,
                 });
             } else {
+                // Patch
                 const recipeResponse = await axios.patch(`/recipes/`, {
                     iduser,
                     title,
@@ -106,6 +113,7 @@ function PostRecepie() {
         }
     };
 
+    // Return the JSX elements
     return (
         <div>
             <h1 className="supertitle">Post a new recipe ❤</h1>
@@ -189,4 +197,5 @@ function PostRecepie() {
     );
 }
 
+// Export the PostRecepie component so that it can be used in other files.
 export default PostRecepie;

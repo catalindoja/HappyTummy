@@ -1,26 +1,18 @@
 import React, { useEffect, useState } from "react";
-import Edit from "../img/edit.png";
-import Delete from "../img/delete.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import moment from "moment";
-import { useContext } from "react";
-import { AuthContext } from "../context/authContext";
 import DOMPurify from "dompurify";
-import ReactQuill from "react-quill";
 import Arrow from "../img/arrow.png";
 
+// Create the SingleMarket component
 const SingleMarket = () => {
-    const [post, setPost] = useState({});
 
+    const [post, setPost] = useState({});
     const location = useLocation();
     const navigate = useNavigate();
-
-    const likes = 0;
     const postId = location.pathname.split("/")[2];
 
-
-    // Obtener información del market
+    // Obtaining the market
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -33,7 +25,7 @@ const SingleMarket = () => {
         fetchData();
     }, [postId]);
 
-    // Eliminar market
+    // Delete the market
     const handleDelete = async () => {
         try {
             await axios.delete(`/markets/${post.id}`);
@@ -43,13 +35,13 @@ const SingleMarket = () => {
         }
     }
 
-    // Obtener texto
+    // Obtaining the text
     const getText = (html) => {
         const doc = new DOMParser().parseFromString(html, "text/html")
         return doc.body.textContent
     }
 
-    // Lo que se muestra en pantalla
+    // Render the SingleMarket component
     return (
         <div className="single">
             <div className="content">
@@ -83,7 +75,7 @@ const SingleMarket = () => {
             </div>
         </div>
     );
-
 };
 
+// Export the SingleMarket component
 export default SingleMarket;

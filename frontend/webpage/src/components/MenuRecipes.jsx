@@ -2,10 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+// Create the Menu component
 const Menu = ({ cat }) => {
   const [posts, setPosts] = useState([]);
   const [shuffledPosts, setShuffledPosts] = useState([]);
 
+  // Obtaining the posts
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -18,8 +20,8 @@ const Menu = ({ cat }) => {
     fetchData();
   }, [cat]);
 
+  // Shuffle the posts
   useEffect(() => {
-    // Función para obtener un conjunto aleatorio de índices
     const getRandomIndices = (max, count) => {
       const indices = [];
       const availableIndices = Array.from({ length: max }, (_, i) => i);
@@ -32,7 +34,7 @@ const Menu = ({ cat }) => {
       return indices;
     };
 
-    // Limita el número de publicaciones a mostrar y cambia el orden
+    // Limit and shuffle the posts
     const limitAndShufflePosts = (allPosts) => {
       const numberOfPostsToShow = 3;
       const randomIndices = getRandomIndices(allPosts.length, numberOfPostsToShow);
@@ -43,12 +45,12 @@ const Menu = ({ cat }) => {
     limitAndShufflePosts(posts);
   }, [posts]);
 
+  // Render the Menu component
   return (
     <div className="menu">
       <h1>Other posts you may like</h1>
       {shuffledPosts.map((post) => (
         <div className="post" key={post.id}>
-          {/* <img src={`../recipes/${post?.img}`} alt="" /> */}
           <img src={post.image_url} alt="" />
           <h2>{post.title}</h2>
           <Link to={`/recipes/${post.id}`}>
@@ -60,4 +62,5 @@ const Menu = ({ cat }) => {
   );
 };
 
+// Export the Menu component
 export default Menu;

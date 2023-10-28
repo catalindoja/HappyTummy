@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import Chart from "react-apexcharts";
 import { AuthContext } from "../context/authContext";
-import axios from "axios";
 import { useEffect } from "react";
+import axios from "axios";
+import Chart from "react-apexcharts";
 
 const App = () => {
 

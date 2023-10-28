@@ -1,26 +1,27 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/authContext";
+import { useEffect } from "react";
 import axios from 'axios';
 import Edit from "../img/edit.png";
 import Delete from "../img/delete.png";
-import { AuthContext } from "../context/authContext";
-import { useEffect } from "react";
 import ProfilePicture from "../img/profile.png";
 
+// Create the Profile component
 const Profile = () => {
     const history = useNavigate();
 
     // Current user 
     const { currentUser } = useContext(AuthContext);
 
-    // Supermarket
+    // Obtaining the market
     const [marketuser, setMarketNameUser] = useState("");
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`/markets/${currentUser.idsupermarket}`);
                 const data = response.data;
-                setMarketNameUser(data); // Actualiza el estado con el nombre del mercado
+                setMarketNameUser(data);
             } catch (err) {
                 console.log(err);
             }
@@ -28,6 +29,7 @@ const Profile = () => {
         fetchData();
     }, [currentUser.idsupermarket]);
 
+    // Delete the user
     const handleDelete = async () => {
         try {
             await axios.delete('/api/user/profile');
@@ -37,12 +39,12 @@ const Profile = () => {
         }
     };
 
+    // Render the Profile component
     return (
         <div className="personal-profile">
             <h1 className="supertitle">Profile 😉 </h1>
             <div>
                 <h2 className="heading">Personal data <img className="editimg" src={Edit} alt="" /> <img className="deleteimg" src={Delete} alt="" /></h2>
-                {/* <img className="profile-picture" src={ProfilePicture} /> */}
                 <div className="data">
                     <div className="item">
                         <span className="item-title">Username: </span>
@@ -85,4 +87,5 @@ const Profile = () => {
     );
 };
 
+// Export the Profile component
 export default Profile;

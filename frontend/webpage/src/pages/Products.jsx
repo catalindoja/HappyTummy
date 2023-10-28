@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
-import axios from "axios";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../context/authContext";
 import ReactPaginate from "react-paginate";
 import Heart from "../img/heart.png";
-import { AuthContext } from "../context/authContext";
+import axios from "axios";
 
+// Create the Products component
 const Products = () => {
+
+  // Obtaining the products
   const [posts, setPosts] = useState([]);
-  const [pageNumber, setPageNumber] = useState(0); // Estado para el número de página actual
-  const { currentUser } = useContext(AuthContext); // Usuario actual
+  const { currentUser } = useContext(AuthContext);
 
-  const postsPerPage = 5; // Cantidad de posts por página
-
-  // Para la lista de usuario!!
+  // Obtaining the users
   const [users, setUsers] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -27,6 +27,7 @@ const Products = () => {
     fetchData();
   }, []);
 
+  // Limit the text
   const limitText = (text, limit) => {
     if (text.length <= limit) {
       return text;
@@ -35,6 +36,7 @@ const Products = () => {
     }
   };
 
+  // Obtaining the products
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -47,60 +49,39 @@ const Products = () => {
     fetchData();
   }, []);
 
+  // Pagination
+  const [pageNumber, setPageNumber] = useState(0);
+  const postsPerPage = 5;
   const pageCount = Math.ceil(posts.length / postsPerPage);
-
   const changePage = ({ selected }) => {
     setPageNumber(selected);
   };
 
+  // Obtaining the text
   const getText = (html) => {
     const doc = new DOMParser().parseFromString(html, "text/html");
     return doc.body.textContent;
   };
 
-  // const displayPosts = posts
-  //   .slice(pageNumber * postsPerPage, (pageNumber + 1) * postsPerPage)
-  //   .map((post) => (
-  //     <div className="post" key={post.id}>
-  //       <div className="img">
-  //         <img src={`../upload/${post.image}`} alt="" />
-  //       </div>
-  //       <div className="content">
-  //         <Link className="link" to={`/products/${post.id}`}>
-  //           <h1>{post.product_name}</h1>
-  //         </Link>
-  //         <p>{limitText(getText(post.product_description), 210)}</p>
-  //         <div className="comment-likes">
-  //           <img src={Heart} alt="Heart Icon" className="heart-icon" />
-  //           <span className="likes-count">{post.likes}</span>
-  //         </div>
-  //         <Link to={`/products/${post.id}`}>
-  //           <button>Read More</button>
-  //         </Link>
-  //       </div>
-  //     </div>
-  //   ));
-
+  // Filter
   const [isButtonActivated, setIsButtonActivated] = useState(false);
-  // Filtrar los productos que coinciden con el término de búsqueda
   const [searchTerm, setSearchTerm] = useState("");
   let filteredPosts = posts.filter((post) =>
     post.product_name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   if (isButtonActivated) {
-    // Si el botón está activado, agregar filtro adicional
     filteredPosts = filteredPosts.filter((post) =>
       currentUser && post.iduser === currentUser.id
     );
   }
 
+  // Display filtered posts
   const displayFilteredPosts = filteredPosts
     .slice(pageNumber * postsPerPage, (pageNumber + 1) * postsPerPage)
     .map((post) => (
       <div className="post" key={post.id}>
         <div className="img">
-          {/* <img src={`../upload/${post.image}`} alt="" /> */}
           <img src={post.image_url} alt="" />
         </div>
         <div className="content">
@@ -120,14 +101,12 @@ const Products = () => {
     ));
 
   const filterOptions = ["All", "Allergens", "Category", "Brand", "Supermarket"];
-  const [filterOption, setFilterOption] = useState("All"); // Estado para la opción de filtro
+  const [filterOption, setFilterOption] = useState("All");
 
-
+  // Display posts
   return (
     <div className="home">
       <h1 className="supertitle">Products 🛒</h1>
-
-      {/* Search by product name */}
       <div className="box">
         <div className="boxes">
           <fieldset>
@@ -141,7 +120,6 @@ const Products = () => {
           </fieldset>
         </div>
 
-        {/* Filter */}
         <div className="boxes">
           <fieldset>
             <legend>Filter</legend>
@@ -158,23 +136,17 @@ const Products = () => {
           </fieldset>
         </div>
 
-        {/* My products button */}
         <button onClick={() => setIsButtonActivated(!isButtonActivated)}>
           {isButtonActivated ? "Show all products" : "Show my products"}
         </button>
       </div>
 
-      {/* Unfiltered posts */}
-      {/* <div className="posts">{displayPosts}</div> */}
-
-      {/* Filtered posts */}
       {filteredPosts.length === 0 ? (
         <h3>Sorry, there are no products matching your search 😕</h3>
       ) : (
         <div className="posts">{displayFilteredPosts}</div>
       )}
 
-      {/* Pagination */}
       <ReactPaginate
         previousLabel={"Previous"}
         nextLabel={"Next"}
@@ -190,4 +162,5 @@ const Products = () => {
   );
 };
 
+// Export the Products component
 export default Products;

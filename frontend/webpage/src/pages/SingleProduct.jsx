@@ -1,84 +1,106 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/authContext";
 import Edit from "../img/edit.png";
 import Delete from "../img/delete.png";
 import ProfilePicture from "../img/profile.png";
 import Arrow from "../img/arrow.png";
 import Heart from "../img/heart.png";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import Menu from "../components/MenuProducts";
 import axios from "axios";
 import moment from "moment";
-import { useContext } from "react";
-import { AuthContext } from "../context/authContext";
 import DOMPurify from "dompurify";
 import ReactQuill from "react-quill";
 
+// Create the SingleProduct component
 const SingleProduct = () => {
-  const [post, setPost] = useState({});
 
+  // Set up state variables
+  // - location: an object that contains the details of the current URL
+  // - navigate: a function that redirects the user to another page
+  // - postId: a string that represents the ID of the post
   const location = useLocation();
   const navigate = useNavigate();
-
-  const likes = 0;
   const postId = location.pathname.split("/")[2];
+    
+  // - post: an object that contains the details of the post
+  const [post, setPost] = useState({});
 
-  // Obtener texto
-  const getText = (html) => {
-    const doc = new DOMParser().parseFromString(html, "text/html")
-    return doc.body.textContent
-  }
-
-  // Obtener usuario actual
+  // - currentUser: an object that contains the details of the current user
+  // - idCurrent: a string that represents the ID of the current user
+  // - usernameCurrent: a string that represents the username of the current user
   const { currentUser } = useContext(AuthContext);
   const idCurrent = currentUser.id;
   const usernameCurrent = currentUser.username;
 
-  // Comentarios
+  // - likes: a number that represents the number of likes of the post
+  const likes = 0;
+
+  // - comments: an array that contains the details of the comments of the post
+  // - userComments: an object that contains the details of the users who wrote the comments
   const [comments, setComments] = useState([]);
   const [userComments, setUserComments] = useState({});
-  // Supermercados
+
+  // - stock: an array that contains the details of the stock of the post
+  // - markets: an object that contains the details of the markets of the post
   const [stock, setStock] = useState([]);
   const [markets, setMarkets] = useState([]);
-  // Alergias
+
+  // - productallergies: an array that contains the details of the productallergies of the post
+  // - allergies: an array that contains the details of the allergies of the post
   const [productallergies, setProductallergies] = useState([]);
   const [allergies, setAllergies] = useState([]);
-  // Usuario propietario del post
+
+  // - idOwner: a string that represents the ID of the owner of the post
+  // - userOwner: an object that contains the details of the owner of the post
   const idOwner = post.iduser;
   const [userOwner, setOwner] = useState("");
-  // Brand
+
+  // - idBrand: a string that represents the ID of the brand of the post
+  // - brandProduct: an object that contains the details of the brand of the post
   const idBrand = post.idbrand;
   const [brandProduct, setBrand] = useState("");
-  // Category
+
+  // - idCategory: a string that represents the ID of the category of the post
+  // - categoryProduct: an object that contains the details of the category of the post
   const idCategory = post.idcategory;
   const [categoryProduct, setCategory] = useState("");
 
-  // Todo lo que requiere llamadas a la bdd
+  // fetchData: a function that fetches 
+  // - data of the post
+  // - owner of the post
+  // - brand of the post
+  // - category of the post
+  // - comments of the post
+  // - users who wrote the comments
+  // - stock of the post
+  // - supermarkets of the post
+  // - productallergies of the post
+  // - allergies of the post
   useEffect(() => {
     const fetchData = async () => {
 
-      // Obtener comentarios con detalles de usuarios!!
       try {
+        // Obtain comments
         const res = await axios.get(`/comments/`);
         const filteredComments = res.data.filter((comment) => comment.idproduct == postId);
         setComments(filteredComments);
 
-        // Obtener los detalles de los usuarios para cada comentario
+        // Obtain users who wrote the comments
         const userPromises = filteredComments.map((comment) => axios.get(`/users/${comment.iduser}`));
         const userResponses = await Promise.all(userPromises);
 
-        // Crear un objeto con detalles de usuario para cada comentario
+        // Create an object that contains the details of the users who wrote the comments
         const userCommentsData = {};
         userResponses.forEach((response, index) => {
           const comment = filteredComments[index];
           userCommentsData[comment.id] = response.data;
         });
 
+        // Set the state variable 'userComments' to the object that contains the details of the users who wrote the comments
         setUserComments(userCommentsData);
-        // } catch (err) {
-        //   console.log(err);
-        // }
 
-        // Obtener supermercados!!
+        // Obtain stock and supermarkets
         try {
           // Get stock
           const res1 = await axios.get(`/stock/`);
@@ -86,7 +108,6 @@ const SingleProduct = () => {
           setStock(filteredStock);
 
           // Get supermarkets
-          // DANGER! SOLO COJO UNO POR AHORA (PERO SI HAY MÁS, ES FÁCIL CAMBIARLO)
           const myid = stock[0].idsupermarket
           const res2 = await axios.get(`/markets/`);
           const filteredMarkets = res2.data.filter((markets) => markets.id == myid);
@@ -95,66 +116,46 @@ const SingleProduct = () => {
           console.log(err);
         }
 
-        // Obtener alergias!!
-        // try {
-        // Get productallergies
+        // Obtain productallergies and allergies
         const res3 = await axios.get(`/productallergies/`);
         const filteredProductallergies = res3.data.filter((productallergies) => productallergies.idproduct == postId);
 
-        // Obtener todas las IDs de alergias relacionadas
+        // Obtain the IDs of the allergies
         const allergyIds = filteredProductallergies.map((productallergy) => productallergy.idallergies);
-
-        // Obtener todas las alergias basadas en las IDs
         const res4 = await axios.get(`/allergies/`);
         const filteredAllergies = res4.data.filter((allergy) => allergyIds.includes(allergy.id));
-
-        // Ahora filteredAllergies contiene todas las alergias relacionadas al producto
-        console.log(filteredAllergies);
         setAllergies(filteredAllergies);
-        // } catch (err) {
-        //   console.log(err);
-        // }
 
-        // Obtener información del producto!!
-        // try {
         const res5 = await axios.get(`/products/${postId}`);
         setPost(res5.data);
-        // } catch (err) {
-        //   console.log(err);
-        // }
 
-        // Obtener usuario propietario del post!!
-        // try {
+        // Obtain owner of the post
         const response = await axios.get(`/users/${idOwner}`);
         setOwner(response.data);
-        // } catch (err) {
-        //   console.log(err);
-        // }
 
-        // Obtener brand!!
-        // try {
+        // Obtain brand of the post
         const res6 = await axios.get(`/brands/${idBrand}`);
         setBrand(res6.data);
-        // } catch (err) {
-        //   console.log(err);
-        // }
 
-        // Obtener category!!
-        // try {
+        // Obtain category of the post
         const res7 = await axios.get(`/categories/${idCategory}`);
         setCategory(res7.data);
-
 
       } catch (err) {
         console.log(err);
       }
-
     };
 
     fetchData();
   }, [postId, idOwner, idBrand, idCategory]);
 
-  // Eliminar producto
+  // Obtener texto
+  const getText = (html) => {
+    const doc = new DOMParser().parseFromString(html, "text/html")
+    return doc.body.textContent
+  }
+
+  // Delete post
   const handleDelete = async () => {
     try {
       const productResponse = await axios.delete(`/products/${post.id}`);
@@ -170,10 +171,11 @@ const SingleProduct = () => {
     }
   }
 
-  // Escribir nuevo comentario
+  // Write new comment
   const state = useLocation().state;
   const [value, setValue] = useState(state?.newComment || "");
-  // Cuando se hace click al botón de publish
+  
+  // Post comment
   const handleClick = async (e) => {
     e.preventDefault();
     try {
@@ -192,47 +194,27 @@ const SingleProduct = () => {
     }
   }
 
-  // Botón de like
+  // Like button
   const handleLikeClick = async (commentId) => {
     console.log("Like button clicked");
     try {
-      // // Realiza una solicitud para aumentar el contador de "likes" en la base de datos
-      // const response = await axios.patch(`/comments/${commentId}`, { likes: comments.find((comment) => comment.id === commentId).likes + 1 });
-
-      // // Comprueba si la solicitud fue exitosa
-      // if (response.status === 200) {
-      //   // Actualiza el contador de "likes" en la interfaz de usuario
-      //   setComments((prevComments) =>
-      //     prevComments.map((comment) =>
-      //       comment.id === commentId
-      //         ? { ...comment, likes: comment.likes + 1 }
-      //         : comment
-      //     )
-      //   );
-      // }
     } catch (err) {
       console.error(err);
     }
   };
 
-  // Lo que se muestra en pantalla
+  // Return the JSX that renders the SingleProduct page
   return (
     <div className="single">
       <div className="content">
         <Link to="#" onClick={() => window.history.back()}>
           <img className="arrow-img" src={Arrow} alt="" />
         </Link>
-        {/* <img src={`../upload/${post?.image}`} alt="" /> */}
         <img className="super-image" src={post.image_url} alt="" />
         <div className="user">
           <img src={ProfilePicture} />
-          {/* {userOwner.userImg && <img
-            src={userOwner.userImg}
-            alt=""
-          />} */}
           <div className="info">
             <span className="username">{userOwner.username}</span>
-            {/* <p>Posted {moment(post.date).fromNow()}</p> */}
           </div>
           {currentUser.username === userOwner.username ? (
             <><div className="edit">
@@ -242,7 +224,6 @@ const SingleProduct = () => {
               <img className="delete" onClick={handleDelete} src={Delete} alt="" />
             </div> </>
           ) : (
-            // Botón "like" para usuarios que no son propietarios del post
             <div className="like">
               <button onClick={handleLikeClick}>
                 <img src={Heart} alt="Heart Icon" className="heart-icon" />
@@ -251,6 +232,7 @@ const SingleProduct = () => {
             </div>
           )}
         </div>
+
         <h1 className="product-name">{post.product_name}</h1>
         <p className="description"
           dangerouslySetInnerHTML={{
@@ -339,16 +321,14 @@ const SingleProduct = () => {
         </div>
 
         <div className="buttons">
-          {/*<button>Save as a draft</button>*/}
           <button onClick={handleClick}> Publish</button>
         </div>
-
       </div>
 
       {<Menu />}
     </div>
   );
-
 };
 
+// Export the component to be used on other pages
 export default SingleProduct;

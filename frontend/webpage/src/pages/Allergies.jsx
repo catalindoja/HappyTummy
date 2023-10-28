@@ -3,9 +3,9 @@ import Gluten from "../img/allergens/gluten.png";
 import Leche from "../img/allergens/leche.png";
 import Huevo from "../img/allergens/huevo.png";
 import Pescado from "../img/allergens/pescado.png";
-import Cacahuetos from "../img/allergens/cacahuetes.png";
+import Cacahuetes from "../img/allergens/cacahuetes.png";
 import Soja from "../img/allergens/soja.png";
-import Frutassecas from "../img/allergens/frutossecos.png";
+import Frutossecas from "../img/allergens/frutossecos.png";
 import Marisco from "../img/allergens/marisco.png";
 import Moluscos from "../img/allergens/moluscos.png";
 import Mostaza from "../img/allergens/mostaza.png";
@@ -14,6 +14,8 @@ import Sulfitos from "../img/allergens/sulfitos.png";
 import Sesamo from "../img/allergens/sesamo.png";
 import Altramuces from "../img/allergens/altramuces.png";
 
+// Create the Allergies component
+// This component displays the list of allergens that are identified in this service
 function Allergies() {
     return (
         <div className="allergies-intro">
@@ -42,7 +44,7 @@ function Allergies() {
                     </p>
                 </div>
             </div>
-           
+
             <div className="allergies-container">
                 <div className="allergies-icon">
                     <img src={Huevo} alt="Icono de alergia" />
@@ -69,7 +71,7 @@ function Allergies() {
 
             <div className="allergies-container">
                 <div className="allergies-icon">
-                    <img src={Cacahuetos} alt="Icono de alergia" />
+                    <img src={Cacahuetes} alt="Icono de alergia" />
                 </div>
                 <div className="allergies-content">
                     <h2>Peanuts</h2>
@@ -89,7 +91,7 @@ function Allergies() {
                         Soybeans, or simply "soy," are a type of legume. They are small, round beans and come in different varieties. Soy is used to make many food products like tofu, soy milk, and soy sauce. It's also an ingredient in various dishes and is known for being a source of plant-based protein. Soybeans are versatile and can be used in both savory and sweet dishes, making them a popular choice for vegetarian and vegan diets.
                     </p>
                 </div>
-            </div> 
+            </div>
 
             <div className="allergies-container">
                 <div className="allergies-icon">
@@ -105,7 +107,7 @@ function Allergies() {
 
             <div className="allergies-container">
                 <div className="allergies-icon">
-                    <img src={Frutassecas} alt="Icono de alergia" />
+                    <img src={Frutossecas} alt="Icono de alergia" />
                 </div>
                 <div className="allergies-content">
                     <h2>Nuts</h2>
@@ -190,4 +192,5 @@ function Allergies() {
     );
 }
 
+// Export the Allergies component so that it can be used in other files.
 export default Allergies;

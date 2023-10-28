@@ -6,25 +6,18 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'NuevaFuente', sans-serif;
-  /* También cambia la fuente para los títulos si lo deseas */
+  font-family: sans-serif;
 }
 
 body {
-  font-family: 'NuevaFuente', sans-serif;
-
-  /* Reemplaza 'NuevaFuente' con el nombre de la fuente que elijas */
+  font-family: sans-serif;
 }
 
 .supertitle {
   background-color: $lightGreen;
-  /* Fondo blanco para el contenedor del título */
   padding: 10px;
-  /* Espacio interno alrededor del título */
   padding: 8px;
-  /* Espacio interno alrededor del título */
   border-radius: 10px;
-  /* Bordes redondeados */
   display: inline-block;
 }
 
@@ -94,8 +87,6 @@ body {
       }
     }
   }
-
-
 }
 
 .statistics-intro {
@@ -139,7 +130,7 @@ body {
       margin-right: 20px;
 
       img {
-        max-width: 60px; // Ajusta el tamaño del icono según tus necesidades
+        max-width: 60px;
         height: auto;
         border-radius: 50%;
       }
@@ -168,13 +159,11 @@ body {
   list-style: none;
   padding: 0;
   margin-top: 120px;
-  /* Agregar un margen superior de 20px */
   margin-bottom: 0px;
 }
 
 .pagination li {
   margin: 0 6px;
-  /* Agregar margen entre elementos de la paginación */
 }
 
 .pagination li a {
@@ -183,7 +172,6 @@ body {
   background-color: $lightGreen;
   color: #fff;
   border-radius: 15px;
-  /* Hace que los botones sean ligeramente redondeados */
   padding: 10px 20px;
 }
 
@@ -197,7 +185,6 @@ body {
   margin: 0 10px;
   color: #fff;
   border-radius: 15px;
-  /* Hace que los botones sean ligeramente redondeados */
   padding: 8px 16px;
 }
 
@@ -219,8 +206,6 @@ body {
       color: inherit;
     }
 
-    //LOGIN & REGISTER
-
     .auth {
       display: flex;
       flex-direction: column;
@@ -234,21 +219,14 @@ body {
         color: teal;
         font-size: 15px;
         border: 2px solid #d1d1d1;
-        /* Borde con un color específico */
         padding: 10px;
-        /* Relleno interior para separar el contenido del borde */
         border-radius: 5px;
-        /* Bordes redondeados */
       }
 
       .image-container {
         font-size: 16px;
-        /* Tamaño de fuente */
         font-weight: bold;
-        /* Negrita */
         color: teal;
-        /* Color del texto */
-        /* Otros estilos según tu preferencia */
       }
 
       .file {
@@ -308,12 +286,9 @@ body {
       }
     }
 
-    //NAVBAR
-
     .navbar {
       font-weight: bold;
 
-      /* Establece el texto en negrita */
       .container {
         padding: 10px 0px;
         display: flex;
@@ -327,7 +302,6 @@ body {
         }
 
         .link {
-          //display: flex;
           text-align: center;
           margin-bottom: 30px;
         }
@@ -337,7 +311,6 @@ body {
           align-items: center;
           justify-content: center;
           gap: 20px;
-
 
           .justadot {
             margin-left: 5px;
@@ -352,34 +325,28 @@ body {
 
           .menu {
             text-align: center;
-            /* Centra el contenido */
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: rgba(0, 128, 128, 0.466);
-            /* Fondo semitransparente */
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 999;
-            /* Asegura que esté por encima de otros elementos */
             display: block;
 
           }
 
           .menu-buttons {
             display: flex;
-            /* Activa el diseño flexbox */
             margin-top: 0px;
-            /* Ajusta el margen superior según tus necesidades */
             justify-content: center;
           }
 
           .menu-item {
             font-size: 20px;
-            /* Tamaño de fuente deseado */
             color: teal;
             background: white;
             padding: 20px;
@@ -390,45 +357,31 @@ body {
 
           .menu-item a {
             text-decoration: none;
-            /* Elimina la decoración de texto, como el subrayado */
             color: inherit;
-            /* Mantiene el color del texto heredado */
           }
 
           .menu-title {
             margin-top: 20px;
-            /* Ajusta el margen superior según tus necesidades */
             font-size: 1.5rem;
-            /* Tamaño de fuente deseado */
             color: #414141;
-            /* Color del texto deseado */
             margin-top: 350px;
-            /* Ajusta el margen superior según tus necesidades */
             background-color: white;
-            /* Fondo blanco para el contenedor del título */
             padding: 10px;
-            /* Espacio interno alrededor del título */
             padding: 8px;
-            /* Espacio interno alrededor del título */
             border-radius: 5px;
-            /* Bordes redondeados */
             display: inline-block;
           }
 
           .close-icon {
             position: absolute;
             top: 40px;
-            /* Ajusta la posición vertical según tus necesidades */
             left: 40px;
-            /* Ajusta la posición horizontal según tus necesidades */
             cursor: pointer;
             font-size: 20px;
-            /* Ajusta el tamaño del ícono según tus necesidades */
           }
 
           .menu-item:hover {
             background: #ddd;
-            /* Cambia el fondo en el hover */
           }
 
           .linkprofile {
@@ -447,7 +400,6 @@ body {
           }
 
           span {
-            // User name, login and logout
             background-color: $lightGreen;
             padding: 5px 5px;
             border-radius: 10%;
@@ -478,8 +430,6 @@ body {
       }
     }
 
-    //FOOTER
-
     footer {
       margin-top: 100px;
       padding: 20px;
@@ -498,11 +448,8 @@ body {
         display: flex;
         height: 40px;
         gap: 15px;
-        /* Espacio entre las imágenes */
       }
     }
-
-    //HOME
 
     .home {
 
@@ -526,12 +473,6 @@ body {
 
       .boxes {
 
-        // background-color: #e0e0e0;
-        // padding: 15px;
-        // margin: 10px;
-        // border: 1px solid #999;
-        // border-radius: 8px;
-        // box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
         legend {
           font-size: 20px;
           font-weight: bold;
@@ -570,11 +511,6 @@ body {
           display: flex;
           gap: 70px;
 
-          // To intercalate text and image (left and right)
-          // &:nth-child(2n + 1) {
-          //   flex-direction: row-reverse;
-          // }
-
           .img {
             flex: 2;
             position: relative;
@@ -601,25 +537,19 @@ body {
             flex: 3;
             display: flex;
             flex-direction: column;
-            //justify-content: space-between;
 
             h1 {
               font-size: 40px;
               margin-bottom: 0px;
               background-color: $lightGreen;
-              /* Fondo blanco para el contenedor del título */
               padding: 10px;
-              /* Espacio interno alrededor del título */
               padding: 8px;
-              /* Espacio interno alrededor del título */
               border-radius: 10px;
-              /* Bordes redondeados */
               display: inline-block;
             }
 
             p {
               font-size: 20px;
-              //margin-top: 5px;
             }
 
             .comment-likes {
@@ -627,24 +557,18 @@ body {
               align-items: center;
 
               button {
-                // display: none; /* Oculta solo el botón dentro de .heart-icon */
-                border: none; // Quita el borde del botón
+                border: none;
                 background-color: #e9fdfd;
-                // padding: 0.1;   // Quita el relleno (padding) del botón
               }
-
             }
 
             .heart-icon {
               width: 30px;
-              /* Ajusta el tamaño de la imagen del corazón según tus preferencias */
               height: 30px;
               margin-left: -3px;
               margin-right: -7px;
               margin-bottom: -7px;
               margin-top: -4px;
-              /* Añade margen entre la imagen del corazón y el número */
-
             }
 
             .likes-count {
@@ -677,8 +601,6 @@ body {
       }
     }
 
-    //SINGLE
-
     .single {
       display: flex;
       gap: 50px;
@@ -695,6 +617,7 @@ body {
       }
 
       .market-table {
+
         .data {
           border: 1px solid #ccc;
           padding: 10px;
@@ -720,7 +643,6 @@ body {
         }
       }
 
-
       .content {
         flex: 5;
         display: flex;
@@ -739,29 +661,24 @@ body {
           background-color: $lightGreen;
         }
 
-        .product-name{
-        }
-
         .fancy-allergy {
-          font-size: 24px; // Tamaño de fuente
-          font-weight: bold; // Negrita
-          color: teal; // Color del texto
-          text-transform: uppercase; // Mayúsculas
-          margin: 5px 0; // Margen superior e inferior
+          font-size: 24px;
+          font-weight: bold;
+          color: teal;
+          text-transform: uppercase;
+          margin: 5px 0;
           display: flex;
           align-items: center;
           margin-bottom: 2px;
 
           &::before {
-            content: "\2713"; // Símbolo de marca de verificación (✓)
-            font-size: 18px; // Tamaño del indicador
-            margin-right: 10px; // Espacio entre el indicador y el texto
-            color: teal; // Color del indicador
+            content: "\2713";
+            font-size: 18px;
+            margin-right: 10px;
+            color: teal;
             margin-bottom: 2px;
           }
-
         }
-
 
         .contains-heading {
           font-size: 25px;
@@ -825,12 +742,9 @@ body {
 
         .user-image {
           width: 50px;
-          /* Tamaño de la imagen del usuario */
           height: 50px;
           border-radius: 50%;
-          /* Borde redondeado para que la imagen sea circular */
           margin-right: 10px;
-          /* Ajusta el margen entre la imagen del usuario y el nombre de usuario */
         }
 
         .user-info {
@@ -849,9 +763,7 @@ body {
           p {
             text-align: justify;
             line-height: 1.5;
-            /* Aumenta el espaciado entre líneas para mejorar la legibilidad */
             font-size: 15px;
-            /* Aumenta el tamaño de fuente a 16px (ajusta según tus preferencias) */
             line-height: 30px;
             margin-top: 10px;
             margin-bottom: 10px;
@@ -864,33 +776,24 @@ body {
           align-items: center;
 
           button {
-            // display: none; /* Oculta solo el botón dentro de .heart-icon */
-            border: none; // Quita el borde del botón
+            border: none;
             background-color: #e9fdfd;
-            // padding: 0.1;   // Quita el relleno (padding) del botón
           }
-
         }
 
         .heart-icon {
           width: 30px;
-          /* Ajusta el tamaño de la imagen del corazón según tus preferencias */
           height: 30px;
           margin-left: -7px;
           margin-right: -7px;
           margin-bottom: -7px;
           margin-top: -4px;
-          /* Añade margen entre la imagen del corazón y el número */
-
         }
 
         .likes-count {
           color: rgb(255, 0, 0);
-          /* Color blanco */
           font-weight: bold;
-          /* Texto en negrita */
           font-weight: bold;
-          /* Texto en negrita */
           margin-left: 3px;
           font-size: 18px;
         }
@@ -919,21 +822,17 @@ body {
             margin-right: -6px;
             margin-bottom: -7px;
             margin-top: -50px;
-            /* Añade margen entre la imagen del corazón y el número */
           }
 
           .likes-count {
             color: rgb(255, 0, 0);
             font-weight: bold;
-            /* Texto en negrita */
-            font-weight: bold;
-            /* Texto en negrita */
             margin-left: 3px;
             font-size: 18px;
           }
 
           button {
-            border: none; // Quita el borde del botón
+            border: none;
             background-color: #ffffff;
             margin-left: 450px;
           }
@@ -947,7 +846,6 @@ body {
           img {
             width: 78px;
             height: 60px;
-            // border-radius: 100%;
             object-fit: cover;
           }
 
@@ -968,7 +866,6 @@ body {
             cursor: pointer;
           }
 
-
           .delete {
             margin-left: 0px;
             width: 37px;
@@ -977,12 +874,10 @@ body {
           }
         }
 
-
         h1 {
           font-size: 42px;
           color: #333;
           margin-top: 15px;
-          /* Reducir el margen superior entre h1 y el elemento padre */
         }
 
         p {
@@ -999,7 +894,6 @@ body {
         margin-top: -25px;
         margin-bottom: -15px;
       }
-
 
       .buttons {
         display: flex;
@@ -1067,13 +961,10 @@ body {
       }
     }
 
-    //WRITE
     .boxes {
 
       input[type="checkbox"] {
         -webkit-appearance: none;
-        // -moz-appearance: none;
-        // appearance: none;
         width: 8px;
         height: 8px;
         border: 2px solid #333;
@@ -1092,15 +983,12 @@ body {
 
       .custom-checkbox+label {
         font-size: 17px;
-        /* Tamaño de fuente deseado */
       }
 
-      /* Estilo para el indicador del checkbox cuando está seleccionado */
       input[type="checkbox"]:checked {
         background-color: $lightGreen;
       }
 
-      /* Estilo personalizado para radio buttons */
       input[type="radio"] {
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -1113,7 +1001,6 @@ body {
         cursor: pointer;
       }
 
-      /* Estilo para el indicador del radio button cuando está seleccionado */
       input[type="radio"]:checked {
         background-color: $lightGreen;
       }
@@ -1121,11 +1008,6 @@ body {
       label {
         font-size: 17px;
         padding: 3px;
-        // gap: 10px;
-        // text-align: top;
-        // margin-bottom: 10px;
-        // display: flex;
-        //flex-direction: row;
       }
     }
 
@@ -1170,30 +1052,24 @@ body {
 
         .measurement-input select:hover {
           border-color: #007bff;
-          /* Cambia el color del borde al pasar el cursor sobre el selector */
         }
 
         .quantity-input {
           flex: 1;
           margin-right: 10px;
-          /* O ajusta el margen según tus preferencias */
         }
 
         .measurement-input input {
           width: 98%;
-          /* Ajusta el ancho de los cuadros de texto al 100% del espacio disponible */
         }
 
         .quantity-input input {
           width: 95%;
-          /* Ajusta el ancho de los cuadros de texto al 100% del espacio disponible */
         }
 
         .super-bar-code {
           display: flex;
-          //justify-content: space-between; /* Distribuye los elementos horizontalmente con espacio entre ellos */
           gap: 10px;
-          /* Añade un espacio de 10px entre las cajas */
 
           h3 {
             font-size: 16px;
@@ -1210,21 +1086,14 @@ body {
           color: teal;
           font-size: 15px;
           border: 2px solid #d1d1d1;
-          /* Borde con un color específico */
           padding: 10px;
-          /* Relleno interior para separar el contenido del borde */
           border-radius: 5px;
-          /* Bordes redondeados */
         }
 
         .image-container {
           font-size: 18px;
-          /* Tamaño de fuente */
           font-weight: bold;
-          /* Negrita */
           color: teal;
-          /* Color del texto */
-          /* Otros estilos según tu preferencia */
         }
 
         .file {
@@ -1236,13 +1105,9 @@ body {
           display: flex;
           justify-content: space-between;
           margin-top: 10px;
-          /* Ajusta el margen superior según tus necesidades */
           margin-bottom: 0px;
-          /* Ajusta el margen inferior según tus necesidades */
           margin: 0 auto;
-          /* Centra horizontalmente los botones */
           width: max-content;
-          /* Ajusta el ancho al contenido */
 
           :first-child {
             cursor: pointer;
@@ -1261,44 +1126,29 @@ body {
             padding: 5px 5px;
             font-size: 20px;
             border-radius: 6px;
-            /* Bordes redondeados */
           }
         }
 
         .market {
           border: 2px solid #d1d1d1;
-          /* Borde con un color específico */
           padding: 10px;
-          /* Relleno interior para separar el contenido del borde */
           border-radius: 5px;
-          /* Bordes redondeados */
         }
 
-        /* Estilos para el contenido dentro de "market" */
         .market-container {
           font-size: 18px;
-          /* Tamaño de fuente */
           font-weight: bold;
-          /* Negrita */
           color: teal;
-          /* Color del texto */
-          /* Otros estilos según tu preferencia */
         }
 
         h3 {
           margin-top: 0px;
-          /* Ajusta el margen superior según tus necesidades */
           margin-bottom: 10px;
-          /* Ajusta el margen inferior según tus necesidades */
-          /* Otros estilos que desees aplicar al título */
         }
 
         h1 {
           margin-top: 0px;
-          /* Ajusta el margen superior según tus necesidades */
           margin-bottom: 5px;
-          /* Ajusta el margen inferior según tus necesidades */
-          /* Otros estilos que desees aplicar al título */
         }
 
         input {
@@ -1312,7 +1162,6 @@ body {
           border: 1px solid lightgray;
 
           .editor {
-
             height: 100%;
             border: none;
           }

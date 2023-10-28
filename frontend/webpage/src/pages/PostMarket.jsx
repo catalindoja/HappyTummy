@@ -1,18 +1,25 @@
 
-import React, { useState, useContext } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import axios from "axios";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import "react-quill/dist/quill.snow.css";
+import ReactQuill from "react-quill";
+import axios from "axios";
 import moment from "moment";
-import { useEffect } from "react";
-import { AuthContext } from "../context/authContext";
-// const fs = require("fs");
 
+// Create the PostMarket component
 const PostMarket = () => {
+
     const state = useLocation().state;
     const navigate = useNavigate();
 
+    // Set up the state variables
+    // - name: a string that represents the name of the market
+    // - value: a string that represents the description of the market
+    // - address: a string that represents the address of the market
+    // - city: a string that represents the city of the market
+    // - zipcode: a string that represents the zipcode of the market
+    // - image_url: a string that represents the image url of the market
+    // - file: a file that represents the image of the market
     const [name, setMarketName] = useState(state?.name || "");
     const [value, setValue] = useState(state?.description || "");
     const [address, setMarketAddress] = useState(state?.address || "");
@@ -21,32 +28,26 @@ const PostMarket = () => {
     const [image_url, setImageUrl] = useState(state?.image_url || "");
     const [file, setFile] = useState(null);
 
-
+    // Set up the function that uploads the image
     const upload = async () => {
         try {
-            console.log("1º LLAMADA A SUBIR FILE")
             const formData = new FormData();
             formData.append("file", file);
-            console.log("2º A PUNTO DE SUBIR FILE")
-
-            const res = await axios.post("/upload", formData);    // ESTO ME FALLA
-
-            console.log("3º SUBIDO!")
+            const res = await axios.post("/upload", formData);
             return res.data;
         } catch (err) {
-            console.log("ERROR :(")
             console.log(err);
         }
     };
 
+    // Set up the function that handles the form submission
     const handleClick = async (e) => {
         e.preventDefault();
-        // Para la imagen
         const imgUrl = await upload();
 
         try {
             if (!state) {
-
+                // Post
                 const marketResponse = await axios.post(`/markets/`, {
                     name,
                     description: value,
@@ -73,13 +74,13 @@ const PostMarket = () => {
                 });
 
                 navigate("/markets");
-
             }
         } catch (err) {
             console.log(err);
         }
     };
 
+    // Return the JSX elements
     return (
         <div>
             <h1 className="supertitle">Post a new market ❤</h1>
@@ -142,7 +143,6 @@ const PostMarket = () => {
                     </div>
 
                     <div className="buttons">
-                        {/*<button>Save as a draft</button>*/}
                         <button onClick={handleClick}>Publish</button>
                     </div>
 
@@ -152,4 +152,5 @@ const PostMarket = () => {
     );
 };
 
+// Export the PostMarket component so that it can be used in other files.
 export default PostMarket;

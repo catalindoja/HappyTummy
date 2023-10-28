@@ -1,8 +1,6 @@
-// import React, { useState } from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
-  // Route,
   Outlet
 } from "react-router-dom";
 
@@ -21,7 +19,6 @@ import PostRecipe from './pages/PostRecipe';
 import Markets from './pages/Markets';
 import SingleMarket from './pages/SingleMarket';
 import PostMarket from './pages/PostMarket';
-
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import "./style.scss"
@@ -116,22 +113,3 @@ function App() {
 }
 
 export default App;
-
-
-// import React , {Component} from 'react';
-// import axios from 'axios';
-
-// import Home from "./pages/Home";
-// import Login from "./pages/Login";
-// import Register from "./pages/Register";
-
-// class App extends React.Component {
-//   render() {
-//     return (
-//       <div>
-//         <h1>Hello World!!</h1>
-//       </div>
-//     );
-//   }
-// }
-// export default App;
