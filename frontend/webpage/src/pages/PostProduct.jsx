@@ -123,13 +123,12 @@ const Write = () => {
   const [idcategory, setidcategory] = useState(state?.idcategory || "");
   const [selectedAllergies, setSelectedAllergies] = useState([]); // Allergies (post en 'productallergies' adicional, tabla intermedia)
   const [measurement, setSelectedMeasurement] = useState(state?.measurement || "");
+  const [image_url, setImageUrl] = useState(state?.image_url || "");
 
   // Campos que ya estaban
   const [value, setValue] = useState(state?.product_description || "");
   const [product_name, setProductName] = useState(state?.product_name || "");
-  const [file, setFile] = useState(null);
-  const [image_url, setImageUrl] = useState(null);
-  
+  const [file, setFile] = useState(null);  
 
   // Para subir la imagen
   const upload = async () => {

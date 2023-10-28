@@ -35,8 +35,8 @@ const Navbar = () => {
             <h6>RECIPES</h6>
             <img className="justadot" src={Dot} alt="" />
           </Link>
-          <Link className="link" to="/supermarkets">
-            <h6>SUPERMARKETS</h6>
+          <Link className="link" to="/markets">
+            <h6>MARKETS INFO</h6>
             <img className="justadot" src={Dot} alt="" />
           </Link>
           <Link className="link" to="/allergies">

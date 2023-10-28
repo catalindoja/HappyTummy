@@ -18,7 +18,9 @@ import Statistics from './pages/Statistics';
 import Profile from './pages/Profile';
 import SingleRecipe from './pages/SingleRecipe';
 import PostRecipe from './pages/PostRecipe';
-import Supermarkets from './pages/Supermarkets';
+import Markets from './pages/Markets';
+import SingleMarket from './pages/SingleMarket';
+import PostMarket from './pages/PostMarket';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -36,62 +38,70 @@ const Layout = () => {
 
 const router = createBrowserRouter([
   {
-    path: "/", 
-    element: <Layout/>,
-    children: [ 
+    path: "/",
+    element: <Layout />,
+    children: [
       {
         path: "/",
-        element:<Home/>
+        element: <Home />
       },
       {
         path: "/products",
-        element: <Products/>
+        element: <Products />
       },
       {
         path: "/products/:id",
-        element: <SingleProduct/>
+        element: <SingleProduct />
       },
       {
         path: "/postproduct",
-        element: <PostProduct/>
+        element: <PostProduct />
       },
       {
         path: "/recipes",
-        element: <Recipes/>
+        element: <Recipes />
       },
       {
         path: "/recipes/:id",
-        element: <SingleRecipe/>
+        element: <SingleRecipe />
       },
       {
         path: "/postrecipe",
-        element: <PostRecipe/>
+        element: <PostRecipe />
       },
       {
-        path: "/Supermarkets",
-        element: <Supermarkets/>
+        path: "/markets",
+        element: <Markets />
+      },
+      {
+        path: "/markets/:id",
+        element: <SingleMarket />
+      },
+      {
+        path: "/postmarket",
+        element: <PostMarket />
       },
       {
         path: "/allergies",
-        element: <Allergies/>
+        element: <Allergies />
       },
       {
         path: "/statistics",
-        element: <Statistics/>
+        element: <Statistics />
       },
       {
         path: "/profile",
-        element: <Profile/>
+        element: <Profile />
       },
     ]
   },
   {
     path: "/login",
-    element: <Login/>
+    element: <Login />
   },
   {
     path: "/register",
-    element: <Register/>
+    element: <Register />
   },
 ]);
 

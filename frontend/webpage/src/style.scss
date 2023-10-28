@@ -17,35 +17,61 @@ body {
 }
 
 .supertitle {
-  background-color: $lightGreen; /* Fondo blanco para el contenedor del título */
-  padding: 10px; /* Espacio interno alrededor del título */
-  padding: 8px; /* Espacio interno alrededor del título */
-  border-radius: 10px; /* Bordes redondeados */
+  background-color: $lightGreen;
+  /* Fondo blanco para el contenedor del título */
+  padding: 10px;
+  /* Espacio interno alrededor del título */
+  padding: 8px;
+  /* Espacio interno alrededor del título */
+  border-radius: 10px;
+  /* Bordes redondeados */
   display: inline-block;
 }
 
-.personal-profile{
-  h1{}
+.rolebutton {
+  margin-left: 17px;
+  border-radius: 10px;
+}
+
+.description {
+  font-size: 18px;
+  color: #555;
+  margin: 5px 0;
+  margin-bottom: 17px;
+}
+
+.personal-profile {
 
   .heading {
     font-size: 25px;
     font-weight: bold;
     margin-top: 20px;
     margin-bottom: 13px;
-    .editimg{
+
+    .editimg {
       width: 30px;
       height: 30px;
       margin-left: 20px;
       margin-top: 0px;
     }
-    .deleteimg{
+
+    .deleteimg {
       width: 30px;
       height: 30px;
       margin-left: 1px;
     }
   }
 
-  .data{
+  .profile-picture {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-left: 20px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+  }
+
+  .data {
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;
@@ -53,6 +79,7 @@ body {
     font-size: 18px;
     width: 55%;
     margin-bottom: 40px;
+
     .item {
       display: flex;
       justify-content: space-between;
@@ -61,7 +88,7 @@ body {
       .item-title {
         font-weight: bold;
       }
-    
+
       .item-value {
         color: #333;
       }
@@ -83,7 +110,7 @@ body {
     margin-top: 50px;
   }
 
-  span{
+  span {
     font-size: 18px;
     color: teal;
     font-weight: bold;
@@ -229,7 +256,7 @@ body {
         cursor: pointer;
       }
 
-      .infotext{
+      .infotext {
         font-size: 16px;
       }
 
@@ -310,9 +337,9 @@ body {
           align-items: center;
           justify-content: center;
           gap: 20px;
-          
 
-          .justadot{
+
+          .justadot {
             margin-left: 5px;
             justify-content: center;
             text-align: center;
@@ -324,29 +351,35 @@ body {
           }
 
           .menu {
-            text-align: center; /* Centra el contenido */
+            text-align: center;
+            /* Centra el contenido */
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 128, 128, 0.466); /* Fondo semitransparente */
+            background: rgba(0, 128, 128, 0.466);
+            /* Fondo semitransparente */
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 999; /* Asegura que esté por encima de otros elementos */
+            z-index: 999;
+            /* Asegura que esté por encima de otros elementos */
             display: block;
-            
+
           }
 
           .menu-buttons {
-            display: flex; /* Activa el diseño flexbox */
-            margin-top: 0px; /* Ajusta el margen superior según tus necesidades */
+            display: flex;
+            /* Activa el diseño flexbox */
+            margin-top: 0px;
+            /* Ajusta el margen superior según tus necesidades */
             justify-content: center;
           }
-          
+
           .menu-item {
-            font-size: 20px; /* Tamaño de fuente deseado */
+            font-size: 20px;
+            /* Tamaño de fuente deseado */
             color: teal;
             background: white;
             padding: 20px;
@@ -356,35 +389,49 @@ body {
           }
 
           .menu-item a {
-            text-decoration: none; /* Elimina la decoración de texto, como el subrayado */
-            color: inherit; /* Mantiene el color del texto heredado */
-          }         
+            text-decoration: none;
+            /* Elimina la decoración de texto, como el subrayado */
+            color: inherit;
+            /* Mantiene el color del texto heredado */
+          }
 
           .menu-title {
-            margin-top: 20px; /* Ajusta el margen superior según tus necesidades */
-            font-size: 1.5rem; /* Tamaño de fuente deseado */
-            color: #414141; /* Color del texto deseado */
-            margin-top: 350px; /* Ajusta el margen superior según tus necesidades */
-            background-color: white; /* Fondo blanco para el contenedor del título */
-            padding: 10px; /* Espacio interno alrededor del título */
-            padding: 8px; /* Espacio interno alrededor del título */
-            border-radius: 5px; /* Bordes redondeados */
+            margin-top: 20px;
+            /* Ajusta el margen superior según tus necesidades */
+            font-size: 1.5rem;
+            /* Tamaño de fuente deseado */
+            color: #414141;
+            /* Color del texto deseado */
+            margin-top: 350px;
+            /* Ajusta el margen superior según tus necesidades */
+            background-color: white;
+            /* Fondo blanco para el contenedor del título */
+            padding: 10px;
+            /* Espacio interno alrededor del título */
+            padding: 8px;
+            /* Espacio interno alrededor del título */
+            border-radius: 5px;
+            /* Bordes redondeados */
             display: inline-block;
           }
 
           .close-icon {
             position: absolute;
-            top: 40px; /* Ajusta la posición vertical según tus necesidades */
-            left: 40px; /* Ajusta la posición horizontal según tus necesidades */
+            top: 40px;
+            /* Ajusta la posición vertical según tus necesidades */
+            left: 40px;
+            /* Ajusta la posición horizontal según tus necesidades */
             cursor: pointer;
-            font-size: 20px; /* Ajusta el tamaño del ícono según tus necesidades */
+            font-size: 20px;
+            /* Ajusta el tamaño del ícono según tus necesidades */
           }
-          
-          .menu-item:hover {
-            background: #ddd; /* Cambia el fondo en el hover */
-          }          
 
-          .linkprofile{
+          .menu-item:hover {
+            background: #ddd;
+            /* Cambia el fondo en el hover */
+          }
+
+          .linkprofile {
             color: teal;
             font-size: 18px;
             font-weight: bold;
@@ -458,8 +505,6 @@ body {
     //HOME
 
     .home {
-      
-
 
       button {
         margin-top: 20px;
@@ -480,6 +525,7 @@ body {
       }
 
       .boxes {
+
         // background-color: #e0e0e0;
         // padding: 15px;
         // margin: 10px;
@@ -560,6 +606,15 @@ body {
             h1 {
               font-size: 40px;
               margin-bottom: 0px;
+              background-color: $lightGreen;
+              /* Fondo blanco para el contenedor del título */
+              padding: 10px;
+              /* Espacio interno alrededor del título */
+              padding: 8px;
+              /* Espacio interno alrededor del título */
+              border-radius: 10px;
+              /* Bordes redondeados */
+              display: inline-block;
             }
 
             p {
@@ -639,13 +694,40 @@ body {
         margin-top: 0px;
       }
 
+      .market-table {
+        .data {
+          border: 1px solid #ccc;
+          padding: 10px;
+          border-radius: 5px;
+          margin-top: 0px;
+          font-size: 18px;
+          width: 50%;
+          margin-bottom: 40px;
+
+          .item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 7px;
+
+            .item-title {
+              font-weight: bold;
+            }
+
+            .item-value {
+              color: #333;
+            }
+          }
+        }
+      }
+
+
       .content {
         flex: 5;
         display: flex;
         flex-direction: column;
         gap: 30px;
 
-        .arrow-img{
+        .arrow-img {
           width: 80px;
           height: 80px;
           margin-left: 0px;
@@ -653,8 +735,11 @@ body {
           margin-bottom: -35px;
         }
 
-        .super-image{
+        .super-image {
           background-color: $lightGreen;
+        }
+
+        .product-name{
         }
 
         .fancy-allergy {
@@ -883,13 +968,13 @@ body {
             cursor: pointer;
           }
 
-          
-        .delete {
-          margin-left: 0px;
-          width: 37px;
-          height: 37px;
-          cursor: pointer;
-        }
+
+          .delete {
+            margin-left: 0px;
+            width: 37px;
+            height: 37px;
+            cursor: pointer;
+          }
         }
 
 
@@ -1227,7 +1312,7 @@ body {
           border: 1px solid lightgray;
 
           .editor {
-            
+
             height: 100%;
             border: none;
           }

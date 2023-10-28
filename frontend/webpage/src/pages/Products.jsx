@@ -12,6 +12,21 @@ const Products = () => {
 
   const postsPerPage = 5; // Cantidad de posts por página
 
+  // Para la lista de usuario!!
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`/users`);
+        console.log(res.data)
+        setUsers(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, []);
+
   const limitText = (text, limit) => {
     if (text.length <= limit) {
       return text;

@@ -5,6 +5,7 @@ import Edit from "../img/edit.png";
 import Delete from "../img/delete.png";
 import { AuthContext } from "../context/authContext";
 import { useEffect } from "react";
+import ProfilePicture from "../img/profile.png";
 
 const Profile = () => {
     const history = useNavigate();
@@ -41,6 +42,7 @@ const Profile = () => {
             <h1 className="supertitle">Profile 😉 </h1>
             <div>
                 <h2 className="heading">Personal data <img className="editimg" src={Edit} alt="" /> <img className="deleteimg" src={Delete} alt="" /></h2>
+                {/* <img className="profile-picture" src={ProfilePicture} /> */}
                 <div className="data">
                     <div className="item">
                         <span className="item-title">Username: </span>
