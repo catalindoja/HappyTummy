@@ -18,6 +18,7 @@ import Statistics from './pages/Statistics';
 import Profile from './pages/Profile';
 import SingleRecipe from './pages/SingleRecipe';
 import PostRecipe from './pages/PostRecipe';
+import Supermarkets from './pages/Supermarkets';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "/postrecipe",
         element: <PostRecipe/>
+      },
+      {
+        path: "/Supermarkets",
+        element: <Supermarkets/>
       },
       {
         path: "/allergies",

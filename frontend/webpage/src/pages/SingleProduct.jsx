@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Edit from "../img/edit.png";
 import Delete from "../img/delete.png";
 import ProfilePicture from "../img/profile.png";
+import Arrow from "../img/arrow.png";
 import Heart from "../img/heart.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Menu from "../components/MenuProducts";
@@ -218,6 +219,9 @@ const SingleProduct = () => {
   return (
     <div className="single">
       <div className="content">
+        <Link to="#" onClick={() => window.history.back()}>
+          <img className="arrow-img" src={Arrow} alt="" />
+        </Link>
         {/* <img src={`../upload/${post?.image}`} alt="" /> */}
         <img className="super-image" src={post.image_url} alt="" />
         <div className="user">
@@ -247,7 +251,7 @@ const SingleProduct = () => {
             </div>
           )}
         </div>
-        <h1>{post.product_name}</h1>
+        <h1 className="product-name">{post.product_name}</h1>
         <p className="description"
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(post.product_description),
@@ -341,7 +345,7 @@ const SingleProduct = () => {
 
       </div>
 
-      {<Menu/>}
+      {<Menu />}
     </div>
   );
 

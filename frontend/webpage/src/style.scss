@@ -371,6 +371,14 @@ body {
             border-radius: 5px; /* Bordes redondeados */
             display: inline-block;
           }
+
+          .close-icon {
+            position: absolute;
+            top: 40px; /* Ajusta la posición vertical según tus necesidades */
+            left: 40px; /* Ajusta la posición horizontal según tus necesidades */
+            cursor: pointer;
+            font-size: 20px; /* Ajusta el tamaño del ícono según tus necesidades */
+          }
           
           .menu-item:hover {
             background: #ddd; /* Cambia el fondo en el hover */
@@ -636,6 +644,14 @@ body {
         display: flex;
         flex-direction: column;
         gap: 30px;
+
+        .arrow-img{
+          width: 80px;
+          height: 80px;
+          margin-left: 0px;
+          margin-top: -10px;
+          margin-bottom: -35px;
+        }
 
         .super-image{
           background-color: $lightGreen;

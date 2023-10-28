@@ -3,6 +3,7 @@ import Edit from "../img/edit.png";
 import Delete from "../img/delete.png";
 import ProfilePicture from "../img/profile.png";
 import Heart from "../img/heart.png";
+import Arrow from "../img/arrow.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Menu from "../components/MenuRecipes";
 import axios from "axios";
@@ -85,6 +86,9 @@ const SingleRecipe = () => {
         <div>
             <div className="single">
                 <div className="content">
+                    <Link to="#" onClick={() => window.history.back()}>
+                        <img className="arrow-img" src={Arrow} alt="" />
+                    </Link>
                     {/* <img src={`../upload/${post?.image}`} alt="" /> */}
                     <img className="super-image" src={post.image_url} alt="" />
                     <div className="user">
@@ -131,7 +135,7 @@ const SingleRecipe = () => {
                     ></p>
                 </div>
 
-                {<Menu/>}
+                {<Menu />}
             </div>
         </div>
     );

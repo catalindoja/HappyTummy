@@ -152,7 +152,7 @@ const Register = () => {
         <input
           required
           type="image_url"
-          placeholder="Image url"
+          placeholder="Profile picture url"
           name="image_url"
           onChange={handleChange}
         />

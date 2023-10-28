@@ -35,7 +35,7 @@ const Navbar = () => {
             <h6>RECIPES</h6>
             <img className="justadot" src={Dot} alt="" />
           </Link>
-          <Link className="link" to="/">
+          <Link className="link" to="/supermarkets">
             <h6>SUPERMARKETS</h6>
             <img className="justadot" src={Dot} alt="" />
           </Link>
@@ -74,6 +74,9 @@ const Navbar = () => {
             {/* Menú emergente */}
             {isMenuVisible && (
               <div className="menu">
+                <span className="close-icon" onClick={() => setMenuVisible(false)}>
+                  &#10006; {/* Este es el carácter "X" para representar una cruz */}
+                </span>
                 <h3 className="menu-title">What do you want to post?😏</h3>
                 <div className="menu-buttons">
                   <div className="menu-item" onClick={() => handleOptionClick("product")}>
