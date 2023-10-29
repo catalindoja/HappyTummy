@@ -71,6 +71,75 @@ body {
 
 }
 
+/* Home.css */
+
+.image-style {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+
+.title1 {
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+  color: red;
+}
+
+
+.logo1 {
+  width: 120px;
+  margin-top: -106px;
+  margin-bottom: 20px;
+}
+
+.center1 {
+  margin-top: 60px;
+}
+
+.para {
+  font-size: 28px;
+}
+
+.btn {
+  margin-top: 45px;
+}
+
+.btn1 {
+  padding: 10px;
+  font-size: 18px;
+  background: green;
+  color: white;
+  border: navy;
+  margin: 45px 50%;
+  cursor: pointer;
+}
+
+//alergiies style 
+.content {
+  margin-top: 5px;
+  color: #008080;
+}
+
+.box {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.allergies {
+  margin: auto 50% 20px;
+}
+
+.heart,
+.allergies {
+  color: red;
+}
+
+h2 {
+  color: green;
+}
+
 .statistics-intro {
   p {
     font-size: 18px;
