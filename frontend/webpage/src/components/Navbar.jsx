@@ -1,16 +1,14 @@
 import React, { useContext, useState } from "react";
-import { useRef } from 'react';
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import Logo from "../img/logo.png";
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Popover from "react-bootstrap/Popover";
 import Dot from "../img/teal.png";
 
+// Create the Navbar component
 const Navbar = () => {
   const { currentUser, logout } = useContext(AuthContext);
 
-  // V2 popup
+  // Menu visible
   const [isMenuVisible, setMenuVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const handleOptionClick = (option) => {
@@ -18,13 +16,12 @@ const Navbar = () => {
     setMenuVisible(false);
   };
 
+  // Render the Navbar component
   return (
     <div className="navbar">
       <div className="container">
         <div className="logo">
-          {/* <Link to="/"> */}
           <img src={Logo} alt="" />
-          {/* </Link> */}
         </div>
         <div className="links">
           <Link className="link" to="/products">
@@ -35,8 +32,8 @@ const Navbar = () => {
             <h6>RECIPES</h6>
             <img className="justadot" src={Dot} alt="" />
           </Link>
-          <Link className="link" to="/supermarkets">
-            <h6>SUPERMARKETS</h6>
+          <Link className="link" to="/markets">
+            <h6>MARKETS INFO</h6>
             <img className="justadot" src={Dot} alt="" />
           </Link>
           <Link className="link" to="/allergies">
@@ -55,27 +52,15 @@ const Navbar = () => {
           ) : (
             <span>Logout</span>)}
 
-          {/*<Link className="link" to="/login">
-              Login
-            </Link>  */}
-
-          {/* <span className="write">
-            <Link className="link" to="/postproduct">
-              Post
-            </Link>
-          </span> */}
-
           <div>
-            {/* Botón para abrir el menú emergente */}
             <span className="write" onClick={() => setMenuVisible(true)}>
               Post
             </span>
 
-            {/* Menú emergente */}
             {isMenuVisible && (
               <div className="menu">
                 <span className="close-icon" onClick={() => setMenuVisible(false)}>
-                  &#10006; {/* Este es el carácter "X" para representar una cruz */}
+                  &#10006;
                 </span>
                 <h3 className="menu-title">What do you want to post?😏</h3>
                 <div className="menu-buttons">
@@ -96,4 +81,5 @@ const Navbar = () => {
   );
 };
 
+// Export the Navbar component
 export default Navbar;

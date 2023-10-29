@@ -1,36 +1,34 @@
 import React, { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/authContext";
 import Edit from "../img/edit.png";
 import Delete from "../img/delete.png";
 import ProfilePicture from "../img/profile.png";
 import Heart from "../img/heart.png";
 import Arrow from "../img/arrow.png";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import Menu from "../components/MenuRecipes";
 import axios from "axios";
-import moment from "moment";
-import { useContext } from "react";
-import { AuthContext } from "../context/authContext";
 import DOMPurify from "dompurify";
-import ReactQuill from "react-quill";
 
+// Create the SingleRecipe component
 const SingleRecipe = () => {
+
     const location = useLocation();
     const navigate = useNavigate();
-    const likes = 0;
     const postId = location.pathname.split("/")[2];
+    const [post, setPosts] = useState([]);
 
-    // Obtener usuario actual
+    // Current user
     const { currentUser } = useContext(AuthContext);
     const idCurrent = currentUser.id;
     const usernameCurrent = currentUser.username;
 
-    // Obtener post
-    const [post, setPosts] = useState([]);
-
-    // Usuario propietario del post
+    // Owner of the post
     const idOwner = post.iduser;
     const [userOwner, setOwner] = useState("");
 
+    // Obtaining the recipe
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -49,13 +47,13 @@ const SingleRecipe = () => {
         fetchData();
     }, [postId, idOwner]);
 
-    // Obtener texto
+    // Obtaining the text
     const getText = (html) => {
         const doc = new DOMParser().parseFromString(html, "text/html")
         return doc.body.textContent
     }
 
-    // Eliminar receta
+    // Delete the recipe
     const handleDelete = async () => {
         try {
             const productResponse = await axios.delete(`/recipes/${post.id}`);
@@ -71,7 +69,7 @@ const SingleRecipe = () => {
         }
     }
 
-    // Botón de like
+    // Like button
     const handleLikeClick = async (commentId) => {
         console.log("Like button clicked");
         try {
@@ -81,7 +79,7 @@ const SingleRecipe = () => {
         }
     };
 
-    // Lo que se muestra en pantalla
+    // Render the SingleRecipe component
     return (
         <div>
             <div className="single">
@@ -89,14 +87,11 @@ const SingleRecipe = () => {
                     <Link to="#" onClick={() => window.history.back()}>
                         <img className="arrow-img" src={Arrow} alt="" />
                     </Link>
-                    {/* <img src={`../upload/${post?.image}`} alt="" /> */}
                     <img className="super-image" src={post.image_url} alt="" />
                     <div className="user">
                         <img src={ProfilePicture} />
-                        {/* {userOwner.userImg && <img src={userOwner.userImg} alt="" />} */}
                         <div className="info">
                             <span className="username">{userOwner.username}</span>
-                            {/* <p>Posted {moment(post.date).fromNow()}</p> */}
                         </div>
                         {currentUser.username === userOwner.username ? (
                             <><div className="edit">
@@ -106,7 +101,6 @@ const SingleRecipe = () => {
                                 <img className="delete" onClick={handleDelete} src={Delete} alt="" />
                             </div> </>
                         ) : (
-                            // Botón "like" para usuarios que no son propietarios del post
                             <div className="like">
                                 <button onClick={handleLikeClick}>
                                     <img src={Heart} alt="Heart Icon" className="heart-icon" />
@@ -141,4 +135,5 @@ const SingleRecipe = () => {
     );
 }
 
+// Export the SingleRecipe component
 export default SingleRecipe;

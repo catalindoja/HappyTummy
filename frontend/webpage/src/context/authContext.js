@@ -9,16 +9,13 @@ export const AuthContexProvider = ({ children }) => {
   );
 
   const login = async (inputs) => {
-    // console.log("Im in the login");
-    // http://localhost:4000/api/  "http://localhost:5000/backend/src/routes/auth/login"
-    const res = await axios.post("/login", inputs); // DANGER!!!
+    const res = await axios.post("/login", inputs);
     setCurrentUser(res.data);
   };
 
   const logout = async (inputs) => {
     await axios.post("/logout");
     setCurrentUser(null);
-    // Redirige al usuario a la página "/login" utilizando window.location
     window.location.href = "/login";
   };
 

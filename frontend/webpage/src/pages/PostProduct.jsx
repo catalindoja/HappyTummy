@@ -1,19 +1,20 @@
 import React, { useState, useContext } from "react";
+import { useEffect } from "react";
+import { AuthContext } from "../context/authContext";
+import { useLocation, useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
-import { useEffect } from "react";
-import { AuthContext } from "../context/authContext";
-// const fs = require("fs");
 
+// Create the Write component
 const Write = () => {
 
+  // Obtains the state from the location
   const state = useLocation().state;
   const navigate = useNavigate();
 
-  // Para la lista de brands!!
+  // Obtains the list of brands from the backend
   const [brands, setBrands] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -28,9 +29,8 @@ const Write = () => {
     fetchData();
   }, []);
 
-  // Para la lista de alergias!!
+  // Obtains the list of allergies from the backend
   const [allergies, setAllergies] = useState([]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -44,9 +44,8 @@ const Write = () => {
     fetchData();
   }, []);
 
-  // Para la lista de categorias!!
+  // Obtains the list of categories from the backend
   const [categories, setCategories] = useState([]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -60,34 +59,27 @@ const Write = () => {
     fetchData();
   }, []);
 
-  // Para descripciones de alergias y categorias (no lo uso)
-  const getText = (html) => {
-    const doc = new DOMParser().parseFromString(html, "text/html")
-    return doc.body.textContent
-  }
-
-  // Para agregar o eliminar alergias del array
+  // Function to handle the toggle of the checkboxes
   const handleAllergyToggle = (allergyId) => {
     if (selectedAllergies.includes(allergyId)) {
-      // Si la alergia ya está seleccionada, la eliminamos del array.
       setSelectedAllergies(selectedAllergies.filter((id) => id !== allergyId));
     } else {
-      // Si la alergia no está seleccionada, la agregamos al array.
       setSelectedAllergies([...selectedAllergies, allergyId]);
     }
   };
 
-  // Nuevos campos
+  // Obtains the current user from the context
   const { currentUser } = useContext(AuthContext);
   const iduser = currentUser.id;
 
+  // Obtains the name of the market from the backend
   const [marketuser, setMarketNameUser] = useState("");
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`/markets/${currentUser.idsupermarket}`);
         const data = response.data;
-        setMarketNameUser(data); // Actualiza el estado con el nombre del mercado
+        setMarketNameUser(data);
       } catch (err) {
         console.log(err);
       }
@@ -95,88 +87,64 @@ const Write = () => {
     fetchData();
   }, [currentUser.idsupermarket]);
 
+  // Bar code number combination
   const [combinedBarcode, setCombinedBarcode] = useState(state?.barcode || "");
   const handleBarcodeChange = (e) => {
     const { name, value } = e.target;
-    // Actualiza el estado correspondiente según el campo
     if (name === "part1") {
-      // Combina el valor del primer campo con los valores de los otros dos campos
       const combined = `${value}${combinedBarcode.substring(1, 7)}${combinedBarcode.substring(8, 14)}`;
       setCombinedBarcode(combined);
     } else if (name === "part2") {
-      // Combina el valor del segundo campo con los valores de los otros dos campos
       const combined = `${combinedBarcode.substring(0, 1)}${value}${combinedBarcode.substring(8, 14)}`;
       setCombinedBarcode(combined);
     } else if (name === "part3") {
-      // Combina el valor del tercer campo con los valores de los otros dos campos
       const combined = `${combinedBarcode.substring(0, 7)}${value}`;
       setCombinedBarcode(combined);
     }
   };
 
-  // const [barcode, setProductBarcode] = useState(state?.barcode || "");
-  // const [measurement, setMeasurement] = useState(state?.measurement || "");
+  // To upload the image
+  const upload = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await axios.post("/upload", formData);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // Set up the state variables
+  // - error: a string that represents the error message if the user does not fill in the input fields
+  //          (default value is null)
+  // - likes: a number that represents the number of likes of the product
+  // - price: a number that represents the price of the product
+  // - quantity: a number that represents the quantity per unit of the product
+  // - idbrand: a number that represents the id of the brand of the product
+  // - idcategory: a number that represents the id of the category of the product
+  // - selectedAllergies: an array that represents the list of allergies of the product
+  // - measurement: a string that represents the unit of measurement of the product
+  // - image_url: a string that represents the image url of the product
+  // - value: a string that represents the description of the product
+  // - product_name: a string that represents the name of the product
+  // - file: a file that represents the image of the product
+  const [error, setError] = useState(null);
   const likes = 0;
   const [price, setPrice] = useState(state?.price || "");
   const [quantity, setQuantity] = useState(state?.quantity || "");
   const [idbrand, setidbrand] = useState(state?.idbrand || "");
   const [idcategory, setidcategory] = useState(state?.idcategory || "");
-  const [selectedAllergies, setSelectedAllergies] = useState([]); // Allergies (post en 'productallergies' adicional, tabla intermedia)
+  const [selectedAllergies, setSelectedAllergies] = useState([]);
   const [measurement, setSelectedMeasurement] = useState(state?.measurement || "");
-
-  // Campos que ya estaban
+  const [image_url, setImageUrl] = useState(state?.image_url || "");
   const [value, setValue] = useState(state?.product_description || "");
   const [product_name, setProductName] = useState(state?.product_name || "");
   const [file, setFile] = useState(null);
-  const [image_url, setImageUrl] = useState(null);
-  
 
-  // Para subir la imagen
-  const upload = async () => {
-    try {
-
-      console.log("1º LLAMADA A SUBIR FILE")
-      const formData = new FormData();
-      console.log(file)
-      formData.append("file", file);
-      console.log("2º A PUNTO DE SUBIR FILE")
-
-      const res = await axios.post("/upload", formData);    // ESTO ME FALLA
-
-      console.log("3º SUBIDO!")
-      return res.data;
-
-    } catch (err) {
-      console.log("ERROR :(")
-      console.log(err);
-    }
-  };
-
-  // Para mostrar el contenido del array de alergias (solo para tests)
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     console.log(selectedAllergies);
-  //   }, 1000); // El valor 2000 representa 2 segundos en milisegundos
-
-  //   // Limpia el interval cuando el componente se desmonta
-  //   return () => {
-  //     clearInterval(interval);
-  //   };
-  // }, [selectedAllergies]);
-
-  // Imagen pero BLOB (solo es test)
-  // const [imageData, setImageData] = useState(null);
-  // const handleImageChange = (e) => {
-  //   const file = e.target.files[0];
-  //   if (file) {
-  //     console.log("PASAMELO A BLOB")
-  //   }
-  // }
-
-  // Mensaje de error
-  const [error, setError] = useState(null);
-
-  // Cuando se hace click al botón de publish
+  // Set up the function that handles the form submission
+  // - handleClick: a function that posts the product when the user clicks the 'Publish' button
+  //                (if the user does not fill in the input fields, the function will set the error message)
   const handleClick = async (e) => {
     e.preventDefault();
 
@@ -200,11 +168,6 @@ const Write = () => {
       return;
     }
 
-    // if (!measurement || measurement.trim() === "") {
-    //   setError("Unit of measurement of the product required");
-    //   return;
-    // }
-
     if (!measurement) {
       setError("Unit of measurement of the product required");
       return;
@@ -214,13 +177,6 @@ const Write = () => {
       setError("Barcode of the product required");
       return;
     }
-
-    // Puede ser que no tenga alérgenos
-    // console.log()
-    // if (selectedAllergies.length === 0) {
-    //   setError("Allergies of the product required");
-    //   return;
-    // }
 
     if (!idbrand) {
       setError("Brand of the product required");
@@ -232,19 +188,15 @@ const Write = () => {
       return;
     }
 
-    // Para publicar la imagen
     const imgUrl = await upload();
-
     try {
       if (!state) {
-
+        // Post
         const productResponse = await axios.post(`/products/`, {
           product_name,
           product_description: value,
           image: file ? imgUrl : "",
           date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-
-          // Nuevos
           idcategory,
           iduser,
           idbrand,
@@ -256,10 +208,10 @@ const Write = () => {
           image_url,
         });
 
-        // Obtener el ID del producto creado
+        // Obtain the ID of the created product
         const productId = productResponse.data.id;
 
-        // Post en tabla intermedia 'productallergies'
+        // Post in intermediate table 'productallergies'
         selectedAllergies.forEach(async (idallergies) => {
           await axios.post(`/productallergies/`, {
             idallergies: idallergies,
@@ -267,7 +219,7 @@ const Write = () => {
           })
         });
 
-        // Post en tabla intermedia 'stock'
+        // Post in intermediate table 'stock'
         await axios.post(`/stock/`, {
           idsupermarket: marketuser.id,
           idproduct: productId,
@@ -275,15 +227,12 @@ const Write = () => {
         })
 
         navigate("/products");
-
       } else {
         // Patch
         const productResponse = await axios.patch(`/products/${state.id}`, {
           product_name,
           product_description: value,
           image: file ? imgUrl : "",
-
-          // Nuevos
           idcategory,
           iduser,
           idbrand,
@@ -294,10 +243,10 @@ const Write = () => {
           image_url,
         });
 
-        // Obtener el ID del producto creado
+        // Obtain the ID of the created product
         const productId = productResponse.data.id;
 
-        // Put en tabla intermedia 'productallergies'
+        // Put in intermediate table 'productallergies'
         selectedAllergies.forEach(async (idallergies) => {
           await axios.put(`/productallergies/`, {
             idallergies: idallergies,
@@ -305,7 +254,7 @@ const Write = () => {
           })
         });
 
-        // Put en tabla intermedia 'stock'
+        // Put in intermediate table 'stock'
         await axios.put(`/stock/`, {
           idsupermarket: marketuser.id,
           idproduct: productId,
@@ -313,14 +262,13 @@ const Write = () => {
         })
 
         navigate("/products");
-
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-  // Lo que se muestra en pantalla
+  // Return the JSX elements
   return (
     <div>
       <h1 className="supertitle">Post a new product ❤</h1>
@@ -380,12 +328,6 @@ const Write = () => {
             </div>
           </div>
 
-          {/* <input
-            type="text"
-            placeholder="Bar code number (X-XXXXXX-XXXXXX)"
-            onChange={(e) => setProductBarcode(e.target.value)}
-          /> */}
-
           <div className="super-bar-code">
             <h3>Bar code number EAN-13 / GTIN-13 (X-XXXXXX-XXXXXX)</h3>
           </div>
@@ -394,31 +336,31 @@ const Write = () => {
             <input
               type="text"
               pattern="[0-9]"
-              name="part1" // Agrega el nombre del campo
+              name="part1"
               placeholder="X"
               maxLength="1"
-              value={combinedBarcode.substring(0, 1)} // Usa el valor combinado para el primer campo
-              onChange={handleBarcodeChange} // Usa la función para el cambio
+              value={combinedBarcode.substring(0, 1)}
+              onChange={handleBarcodeChange}
             />
 
             <input
               type="text"
               pattern="[0-9]"
-              name="part2" // Agrega el nombre del campo
+              name="part2"
               placeholder="X X X X X X"
               maxLength="6"
-              value={combinedBarcode.substring(1, 7)} // Usa el valor combinado para el segundo campo
-              onChange={handleBarcodeChange} // Usa la función para el cambio
+              value={combinedBarcode.substring(1, 7)}
+              onChange={handleBarcodeChange}
             />
 
             <input
               type="text"
               pattern="[0-9]"
-              name="part3" // Agrega el nombre del campo
+              name="part3"
               placeholder="X X X X X X"
               maxLength="6"
-              value={combinedBarcode.substring(7, 13)} // Usa el valor combinado para el tercer campo
-              onChange={handleBarcodeChange} // Usa la función para el cambio
+              value={combinedBarcode.substring(7, 13)}
+              onChange={handleBarcodeChange}
             />
           </div>
 
@@ -484,17 +426,8 @@ const Write = () => {
             </div>
           </div>
 
-          {/* <div>
-            <h1>Subir una imagen como BLOB</h1>
-            <input
-              type="file"
-              onChange={handleImageChange}
-              accept="image/*" // Asegura que solo se puedan seleccionar archivos de imagen
-            />
-          </div> */}
-          {error && <p className="error-message">{error}</p>} {/* Mostrar mensaje de error si existe */}
+          {error && <p className="error-message">{error}</p>}
           <div className="buttons">
-            {/*<button>Save as a draft</button>*/}
             <button onClick={handleClick}>Publish</button>
           </div>
 
@@ -504,4 +437,5 @@ const Write = () => {
   );
 };
 
+// Export the Write component so that it can be used in other files.
 export default Write;
