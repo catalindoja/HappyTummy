@@ -2,9 +2,6 @@ import express from 'express'
 import cors from 'cors'
 import cookieParser from "cookie-parser";
 import multer from "multer";
-import cors from 'cors'
-import cookieParser from "cookie-parser";
-import multer from "multer";
 import usersRoutes from './routes/users.routes.js'
 import authRoutes from './routes/auth.routes.js'
 import paymentHistoryRoutes from './routes/paymenthistory.routes.js'
