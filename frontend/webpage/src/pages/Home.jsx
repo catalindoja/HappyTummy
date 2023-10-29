@@ -1,5 +1,5 @@
 import React from "react";
-import Homeimage from "../img/homeimage.png";
+import Homeimage from "../img/homeimage.jpg";
 import Logo from "../img/logo.png";
 import FoodContent from "../img/foodcontent.jpeg";
 
@@ -7,7 +7,6 @@ const Home = () => {
     return (
         <div className="Welcome">
                 <h1 className="title1">Welcome To Happy Tummy</h1>
-                <img src={Logo} alt="Logo" className="logo1" />
             <img src={Homeimage} alt="Home Image" className="image-style" />
             
             <div className="center1">
@@ -26,9 +25,6 @@ const Home = () => {
                     </tr>
                 </table>
             </div>
-            <div className="btn">
-                <a className="link1"><button className="btn1">Enter</button></a>
-            </div> 
         </div>
 
         
