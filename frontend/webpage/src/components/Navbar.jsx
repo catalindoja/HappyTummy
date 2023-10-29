@@ -10,9 +10,7 @@ const Navbar = () => {
 
   // Menu visible
   const [isMenuVisible, setMenuVisible] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
   const handleOptionClick = (option) => {
-    setSelectedOption(option);
     setMenuVisible(false);
   };
 
@@ -21,7 +19,9 @@ const Navbar = () => {
     <div className="navbar">
       <div className="container">
         <div className="logo">
+        <Link className="link" to="/">
           <img src={Logo} alt="" />
+        </Link>
         </div>
         <div className="links">
           <Link className="link" to="/products">
