@@ -4,7 +4,9 @@ import { getAllergies, getAllergy, createAllergy, updateAllergy, deleteAllergy }
 
 const router = Router()
 
-
+/**
+ * When one of the allergies endpoints is reached, these functions trigger the corresponding function
+ */
 router.get('/allergies', getAllergies)
 
 router.get('/allergies/:id', getAllergy)

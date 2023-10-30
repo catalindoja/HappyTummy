@@ -1,5 +1,12 @@
 import {pool} from '../db.js'
 
+/**
+ * Recovers the allergie/product relations from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getProductAllergies = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM productallergies')
@@ -11,6 +18,13 @@ export const getProductAllergies = async (req, res) => {
     }
 }
 
+/**
+ * Recovers the allergies from a specific product from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getProductAllergy = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM productallergies WHERE id = ?', [req.params.id])
@@ -22,6 +36,13 @@ export const getProductAllergy = async (req, res) => {
     }
 }
 
+/**
+ * Creates a new allergy/product relation entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the newly created data
+ */
 export const createProductAllergy = async (req, res) => {
     try {
         const {idproduct, idallergies} = req.body
@@ -42,6 +63,13 @@ export const createProductAllergy = async (req, res) => {
     }
 }
 
+/**
+ * Deletes a specific entry from the table
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {CodecState} Code confirming a succsesful operation
+ */
 export const deleteProductAllergy = async (req, res) => {
     try {
         const [result] = await pool.query('DELETE FROM productallergies WHERE id = ?', [req.params.id])
@@ -56,6 +84,13 @@ export const deleteProductAllergy = async (req, res) => {
     }
 }
 
+/**
+ * Updates an existing allergy/product relation entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} Json containing the new information
+ */
 export const updateProductAllergy = async (req, res) => {
     try {
         const {id} = req.params

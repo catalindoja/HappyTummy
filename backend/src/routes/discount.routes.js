@@ -4,7 +4,9 @@ import { getDiscounts, getDiscount, createDiscount, updateDiscount, deleteDiscou
 
 const router = Router()
 
-
+/**
+ * When one of the discounts endpoints is reached, these functions trigger the corresponding function
+ */
 router.get('/discounts', getDiscounts)
 
 router.get('/discounts/:id', getDiscount)

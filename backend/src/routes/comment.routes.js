@@ -5,6 +5,9 @@ import { getComments, getComment, createComment, updateComment, deleteComment } 
 const router = Router()
 
 
+/**
+ * When one of the comments endpoints is reached, these functions trigger the corresponding function
+ */
 router.get('/comments', getComments)
 
 router.get('/comments/:id', getComment)

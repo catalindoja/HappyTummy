@@ -1,5 +1,12 @@
 import {pool} from '../db.js'
 
+/**
+ * Recovers the discounts from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getDiscounts = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM discount')
@@ -11,6 +18,13 @@ export const getDiscounts = async (req, res) => {
     }
 }
 
+/**
+ * Recovers a specific discount from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getDiscount = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM discount WHERE id = ?', [req.params.id])
@@ -22,6 +36,13 @@ export const getDiscount = async (req, res) => {
     }
 }
 
+/**
+ * Creates a new discount entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the newly created data
+ */
 export const createDiscount = async (req, res) => {
     try {
         const {idclient, idsupermarket, percentage, expiration} = req.body
@@ -44,6 +65,13 @@ export const createDiscount = async (req, res) => {
     }
 }
 
+/**
+ * Deletes a specific entry from the discount table
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {CodecState} Code confirming a succsesful operation
+ */
 export const deleteDiscount = async (req, res) => {
     try {
         const [result] = await pool.query('DELETE FROM discount WHERE id = ?', [req.params.id])
@@ -58,6 +86,13 @@ export const deleteDiscount = async (req, res) => {
     }
 }
 
+/**
+ * Updates an existing discount entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} Json containing the new information
+ */
 export const updateDiscount = async (req, res) => {
     try {
         const {id} = req.params

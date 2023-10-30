@@ -5,6 +5,9 @@ import {  getRecipes, getRecipe, createRecipe, updateRecipe, deleteRecipe } from
 const router = Router()
 
 
+/**
+ * When one of the recipes endpoints is reached, these functions trigger the corresponding function
+ */
 router.get('/recipes', getRecipes)
 
 router.get('/recipes/:id', getRecipe)

@@ -5,6 +5,9 @@ import { getProductAllergies, getProductAllergy, createProductAllergy, updatePro
 const router = Router()
 
 
+/**
+ * When one of the product/allergy relations endpoints is reached, these functions trigger the corresponding function
+ */
 router.get('/productallergies', getProductAllergies)
 
 router.get('/productallergies/:id', getProductAllergy)

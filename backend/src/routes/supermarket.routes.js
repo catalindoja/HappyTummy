@@ -5,6 +5,9 @@ import { getMarkets, getMarket, createMarket, updateMarket, deleteMarket } from 
 const router = Router()
 
 
+/**
+ * When one of the supermarket endpoints is reached, these functions trigger the corresponding function
+ */
 router.get('/markets', getMarkets)
 
 router.get('/markets/:id', getMarket)
