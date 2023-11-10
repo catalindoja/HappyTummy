@@ -2,3 +2,89 @@
     margin: 0 auto;
     padding: 20px;
 }
+
+.box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.boxes {
+    flex: 1;
+    /* Para distribuir el espacio entre los elementos .boxes */
+    margin: 0 10px;
+    /* Espacio entre los elementos .boxes */
+}
+
+fieldset {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+legend {
+    font-weight: bold;
+}
+
+/* Estilos para el botón */
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Estilos para el input y select */
+input,
+select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Cambiar la apariencia del select en algunos navegadores */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* Cambiar el ícono del select en algunos navegadores */
+select::-ms-expand {
+    display: none;
+}
+
+.supertitle {
+    width: 20%;
+    color: red;
+    text-align: center;
+    border: none;
+    margin-bottom: 30px;
+    margin: 0 50%;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.img img {
+    background: none;
+}
+
+.search {
+    margin-left: -10px;
+}
+
+.home {
+    background-color: white !important;
+}
+
+.content {
+    background-color: #eee;
+    padding-left: 20px;
+}
+
+a {
+    color: #000 !important;
+}

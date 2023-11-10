@@ -4,6 +4,7 @@ import axios from "axios";
 import ReactPaginate from "react-paginate";
 import Heart from "../img/heart.png";
 import { AuthContext } from "../context/authContext";
+import "./Products.css";
 
 const Products = () => {
   const [posts, setPosts] = useState([]);
