@@ -27,8 +27,8 @@ const Navbar = () => {
           <Link className="link" to="/categories">
             <h6>CATEGORIES </h6>
           </Link>
-          <Link className="link" to="/allergies&intolerances">
-            <h6>ALLERGIES AND INTOLERANCES</h6>
+          <Link className="link" to="/alergies">
+            <h6>ALLERGIES</h6>
           </Link>
           <Link className="link" to="/statistics">
             <h6>STATISTICS</h6>

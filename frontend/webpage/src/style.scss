@@ -1,15 +1,113 @@
 $lightGreen: #b9e7e7;
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'NuevaFuente', sans-serif; /* También cambia la fuente para los títulos si lo deseas */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'NuevaFuente', sans-serif;
+  /* También cambia la fuente para los títulos si lo deseas */
 }
+
 body {
-  font-family: 'NuevaFuente', sans-serif; /* Reemplaza 'NuevaFuente' con el nombre de la fuente que elijas */
+  font-family: 'NuevaFuente', sans-serif;
+
+  /* Reemplaza 'NuevaFuente' con el nombre de la fuente que elijas */
+}
+
+.allergies-intro {
+  p {
+    font-size: 18px;
+    color: #555;
+    margin: 5px 0;
+    margin-bottom: 17px;
+  }
+
+  .allergies-container {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    padding: 10px;
+    background-color: #b9e7e752;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+
+    .allergies-icon {
+      margin-right: 20px;
+
+      img {
+        max-width: 55px; // Ajusta el tamaño del icono según tus necesidades
+        height: auto;
+      }
+    }
+
+    .allergies-content {
+      h2 {
+        font-size: 25px;
+        margin: 0;
+      }
+
+      p {
+        font-size: 18px;
+        color: #555;
+        margin: 5px 0;
+        text-align: justify;
+      }
+    }
+  }
+}
+
+.pagination {
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin-top: 120px;
+  /* Agregar un margen superior de 20px */
+  margin-bottom: 0px;
+}
+
+.pagination li {
+  margin: 0 6px;
+  /* Agregar margen entre elementos de la paginación */
+}
+
+.pagination li a {
+  margin: 0 10px;
+  border: 1px solid $lightGreen;
+  background-color: $lightGreen;
+  color: #fff;
+  border-radius: 15px;
+  /* Hace que los botones sean ligeramente redondeados */
+  padding: 10px 20px;
+}
+
+.pagination li a:hover {
+  background-color: #fff;
+  color: $lightGreen;
+}
+
+.previous,
+.next {
+  margin: 0 10px;
+  color: #fff;
+  border-radius: 15px;
+  /* Hace que los botones sean ligeramente redondeados */
+  padding: 8px 16px;
+}
+
+.previous:hover,
+.next:hover {
+  background-color: #fff;
+  color: $lightGreen;
 }
 
 .app {
   display: flex;
   justify-content: center;
+
   .container {
     width: 1024px;
 
@@ -17,6 +115,7 @@ body {
       text-decoration: none;
       color: inherit;
     }
+
     //LOGIN & REGISTER
 
     .auth {
@@ -28,7 +127,7 @@ body {
       background-color: $lightGreen;
 
       h1 {
-        font-size: 20px;
+        font-size: 30px;
         color: teal;
         margin-bottom: 20px;
       }
@@ -42,7 +141,7 @@ body {
         gap: 20px;
 
         input {
-          padding: 10px;
+          padding: 15px;
           border: none;
           border-bottom: 1px solid gray;
         }
@@ -53,16 +152,17 @@ body {
           background-color: teal;
           cursor: pointer;
           color: white;
+          font-size: 14px;
         }
 
         p {
-          font-size: 12px;
+          font-size: 14px;
           color: red;
           text-align: center;
         }
 
         span {
-          font-size: 12px;
+          font-size: 14px;
           text-align: center;
         }
       }
@@ -71,28 +171,33 @@ body {
     //NAVBAR
 
     .navbar {
-      font-weight: bold; /* Establece el texto en negrita */
+      font-weight: bold;
+
+      /* Establece el texto en negrita */
       .container {
         padding: 10px 0px;
         display: flex;
         align-items: center;
         justify-content: space-between;
+
         .logo {
           img {
             width: 120px;
           }
         }
+
         .links {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 13px;
+          gap: 20px;
 
           h6 {
             color: teal;
             font-size: 16px;
             font-weight: 300;
             text-align: center;
+            font-weight: bold;
           }
 
           span {
@@ -106,7 +211,7 @@ body {
           .write {
             background-color: $lightGreen;
             width: 50px;
-            height: 50px;
+            height: 38px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -134,14 +239,17 @@ body {
       align-items: center;
       justify-content: space-between;
       font-size: 12px;
+
       .logo {
         height: 65px;
         border-radius: 50%;
-      } 
+      }
+
       .social-icons {
         display: flex;
         height: 40px;
-        gap: 15px; /* Espacio entre las imágenes */
+        gap: 15px;
+        /* Espacio entre las imágenes */
       }
     }
 
@@ -156,7 +264,7 @@ body {
 
         .post {
           display: flex;
-          gap: 80px;
+          gap: 70px;
 
           // To intercalate text and image (left and right)
           // &:nth-child(2n + 1) {
@@ -189,17 +297,54 @@ body {
             flex: 3;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            //justify-content: space-between;
 
             h1 {
-              font-size: 48px;
+              font-size: 40px;
+              margin-bottom: 0px;
             }
 
             p {
+              font-size: 20px;
+              //margin-top: 5px;
+            }
+
+            .comment-likes {
+              display: flex;
+              align-items: center;
+
+              button {
+                // display: none; /* Oculta solo el botón dentro de .heart-icon */
+                border: none; // Quita el borde del botón
+                background-color: #e9fdfd;
+                // padding: 0.1;   // Quita el relleno (padding) del botón
+              }
+
+            }
+
+            .heart-icon {
+              width: 30px;
+              /* Ajusta el tamaño de la imagen del corazón según tus preferencias */
+              height: 30px;
+              margin-left: -3px;
+              margin-right: -7px;
+              margin-bottom: -7px;
+              margin-top: -4px;
+              /* Añade margen entre la imagen del corazón y el número */
+
+            }
+
+            .likes-count {
+              color: rgb(255, 0, 0);
+              font-weight: bold;
+              font-weight: bold;
+              margin-left: 11px;
               font-size: 18px;
             }
 
             button {
+              margin-top: 40px;
+              font-size: 15px;
               width: max-content;
               padding: 10px 20px;
               border: none;
@@ -225,11 +370,176 @@ body {
       display: flex;
       gap: 50px;
 
+      h1 {
+        font-size: 48px;
+        margin-top: 10px;
+        margin-bottom: 5px;
+      }
+
+      p {
+        font-size: 18px;
+        margin-top: 0px;
+      }
+
       .content {
         flex: 5;
         display: flex;
         flex-direction: column;
         gap: 30px;
+
+        .fancy-allergy {
+          font-size: 24px; // Tamaño de fuente
+          font-weight: bold; // Negrita
+          color: teal; // Color del texto
+          text-transform: uppercase; // Mayúsculas
+          margin: 5px 0; // Margen superior e inferior
+          display: flex;
+          align-items: center;
+          margin-bottom: 2px;
+
+          &::before {
+            content: "\2713"; // Símbolo de marca de verificación (✓)
+            font-size: 18px; // Tamaño del indicador
+            margin-right: 10px; // Espacio entre el indicador y el texto
+            color: teal; // Color del indicador
+            margin-bottom: 2px;
+          }
+
+          // Otros estilos según tus preferencias
+        }
+
+
+        .contains-heading {
+          font-size: 25px;
+          font-weight: bold;
+          margin-top: 60px;
+          margin-bottom: 0px;
+        }
+
+        .more-data-heading {
+          font-size: 25px;
+          font-weight: bold;
+          margin-top: 5px;
+          margin-bottom: -13px;
+        }
+
+        .more-data-container {
+          border: 1px solid #ccc;
+          padding: 10px;
+          border-radius: 5px;
+          margin-top: -10px;
+          font-size: 18px;
+        }
+
+        .more-data-item {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 7px;
+        }
+
+        .more-data-label {
+          font-weight: bold;
+        }
+
+        .more-data-value {
+          color: #333;
+        }
+
+        .comments-heading {
+          font-size: 25px;
+          font-weight: bold;
+          margin-top: 20px;
+          margin-bottom: -10px;
+        }
+
+        .comments-list {
+          list-style: none;
+          padding: 0;
+          margin-top: -20px;
+        }
+
+        .comment {
+          border: 1px solid #ccc;
+          margin: 10px 0;
+          padding: 10px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background-color: #e9fdfd;
+          border-radius: 5px;
+        }
+
+        .user-image {
+          width: 50px;
+          /* Tamaño de la imagen del usuario */
+          height: 50px;
+          border-radius: 50%;
+          /* Borde redondeado para que la imagen sea circular */
+          margin-right: 10px;
+          /* Ajusta el margen entre la imagen del usuario y el nombre de usuario */
+        }
+
+        .user-info {
+          display: flex;
+          align-items: center;
+        }
+
+        .comment-content {
+          .username {
+            font-weight: bold;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            margin-left: -5px;
+          }
+
+          p {
+            text-align: justify;
+            line-height: 1.5;
+            /* Aumenta el espaciado entre líneas para mejorar la legibilidad */
+            font-size: 15px;
+            /* Aumenta el tamaño de fuente a 16px (ajusta según tus preferencias) */
+            line-height: 30px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: 4px;
+          }
+        }
+
+        .comment-likes {
+          display: flex;
+          align-items: center;
+
+          button {
+            // display: none; /* Oculta solo el botón dentro de .heart-icon */
+            border: none; // Quita el borde del botón
+            background-color: #e9fdfd;
+            // padding: 0.1;   // Quita el relleno (padding) del botón
+          }
+
+        }
+
+        .heart-icon {
+          width: 30px;
+          /* Ajusta el tamaño de la imagen del corazón según tus preferencias */
+          height: 30px;
+          margin-left: -7px;
+          margin-right: -7px;
+          margin-bottom: -7px;
+          margin-top: -4px;
+          /* Añade margen entre la imagen del corazón y el número */
+
+        }
+
+        .likes-count {
+          color: rgb(255, 0, 0);
+          /* Color blanco */
+          font-weight: bold;
+          /* Texto en negrita */
+          font-weight: bold;
+          /* Texto en negrita */
+          margin-left: 3px;
+          font-size: 18px;
+        }
 
         h1 {
           text-align: justify;
@@ -245,27 +555,61 @@ body {
         .user {
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap: 4px;
           font-size: 14px;
+
+          .heart-icon {
+            width: 40px;
+            height: 40px;
+            margin-left: -10px;
+            margin-right: -6px;
+            margin-bottom: -7px;
+            margin-top: -50px;
+            /* Añade margen entre la imagen del corazón y el número */
+          }
+
+          .likes-count {
+            color: rgb(255, 0, 0);
+            font-weight: bold;
+            /* Texto en negrita */
+            font-weight: bold;
+            /* Texto en negrita */
+            margin-left: 3px;
+            font-size: 18px;
+          }
+
+          button {
+            border: none; // Quita el borde del botón
+            background-color: #ffffff;
+            margin-left: 450px;
+          }
+
+          .likes-count {
+            font-weight: bold;
+            font-size: 25px;
+            margin-left: 8px;
+          }
+
           img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            width: 78px;
+            height: 60px;
+            // border-radius: 100%;
             object-fit: cover;
           }
 
           span {
             font-weight: bold;
+            font-size: 20px;
           }
         }
 
         .edit {
           display: flex;
-          gap: 5px;
+          gap: 17px;
 
           img {
-            width: 20px;
-            height: 20px;
+            width: 35px;
+            height: 35px;
             cursor: pointer;
           }
         }
@@ -273,18 +617,50 @@ body {
         h1 {
           font-size: 42px;
           color: #333;
+          margin-top: 15px;
+          /* Reducir el margen superior entre h1 y el elemento padre */
         }
 
         p {
+          margin-top: 0px;
+          margin-bottom: 0px;
           text-align: justify;
           line-height: 30px;
         }
       }
+
+      .write-comment-heading {
+        font-size: 25px;
+        font-weight: bold;
+        margin-top: -25px;
+        margin-bottom: -15px;
+      }
+
+
+      .buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: -10px;
+        margin-bottom: 0px;
+        width: max-content;
+
+        :last-child {
+          cursor: pointer;
+          color: white;
+          background-color: teal;
+          border: 5px solid teal;
+          padding: 5px 5px;
+          font-size: 17px;
+          border-radius: 6px;
+          margin-left: 0;
+        }
+      }
+
       .menu {
         flex: 2;
         display: flex;
         flex-direction: column;
-        gap: 25px;
+        gap: 20px;
 
         h1 {
           font-size: 20px;
@@ -294,7 +670,7 @@ body {
         .post {
           display: flex;
           flex-direction: column;
-          gap: 10px;
+          gap: 0px;
 
           img {
             width: 100%;
@@ -314,6 +690,7 @@ body {
             color: teal;
             background-color: white;
             border: 1px solid teal;
+            margin-bottom: 45px;
 
             &:hover {
               border: 1px solid white;
@@ -327,17 +704,63 @@ body {
 
     //WRITE
     .boxes {
-      //border: 1px solid rgba(0, 0, 0, 0.2); /* Cambia el valor de 0.2 para ajustar la opacidad */
-      //padding: 10px;
 
-      .checkbox-image {
-        opacity: 0.3; /* Opacidad baja para mostrar la imagen desmarcada */
-        transition: opacity 0.3s; /* Transición suave para el cambio de opacidad */
+      input[type="checkbox"] {
+        -webkit-appearance: none;
+        // -moz-appearance: none;
+        // appearance: none;
+        width: 8px;
+        height: 8px;
+        border: 2px solid #333;
+        border-radius: 3px;
+        margin-right: 5px;
+        margin-bottom: 2px;
+        cursor: pointer;
       }
-      
-      /* Cambiar el estilo de la imagen cuando la casilla está marcada */
-      .checkbox-image + input:checked {
-        opacity: 1; /* Opacidad completa para mostrar la imagen marcada */
+
+      span {
+        font-size: 15px;
+        color: teal;
+        font-weight: bold;
+        margin-left: 3px;
+      }
+
+      .custom-checkbox+label {
+        font-size: 17px;
+        /* Tamaño de fuente deseado */
+      }
+
+      /* Estilo para el indicador del checkbox cuando está seleccionado */
+      input[type="checkbox"]:checked {
+        background-color: $lightGreen;
+      }
+
+      /* Estilo personalizado para radio buttons */
+      input[type="radio"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border: 2px solid #333;
+        border-radius: 50%;
+        margin-right: 5px;
+        cursor: pointer;
+      }
+
+      /* Estilo para el indicador del radio button cuando está seleccionado */
+      input[type="radio"]:checked {
+        background-color: $lightGreen;
+      }
+
+      label {
+        font-size: 17px;
+        padding: 3px;
+        // gap: 10px;
+        // text-align: top;
+        // margin-bottom: 10px;
+        // display: flex;
+        //flex-direction: row;
       }
     }
 
@@ -352,58 +775,111 @@ body {
         flex-direction: column;
         gap: 20px;
 
+        .error-message {
+          font-size: 15px;
+          color: red;
+          text-align: center;
+        }
+
         .measurement-container {
           display: flex;
           justify-content: space-between;
         }
-        
+
         .measurement-input {
-          flex: 1;
-          margin-right: 10px; /* O ajusta el margen según tus preferencias */
+          margin-top: 0px;
+          display: flex;
+          align-items: center;
+        }
+
+        .measurement-input select {
+          padding: 10px;
+          font-size: 14px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          background-color: #fff;
+          color: #333;
+          cursor: pointer;
+          transition: border-color 0.3s;
+        }
+
+        .measurement-input select:hover {
+          border-color: #007bff;
+          /* Cambia el color del borde al pasar el cursor sobre el selector */
         }
 
         .quantity-input {
           flex: 1;
-          margin-right: 10px; /* O ajusta el margen según tus preferencias */
+          margin-right: 10px;
+          /* O ajusta el margen según tus preferencias */
         }
-        
+
         .measurement-input input {
-          width: 98%; /* Ajusta el ancho de los cuadros de texto al 100% del espacio disponible */
+          width: 98%;
+          /* Ajusta el ancho de los cuadros de texto al 100% del espacio disponible */
         }
 
-        .quantity-input input{
-          width: 95%; /* Ajusta el ancho de los cuadros de texto al 100% del espacio disponible */
+        .quantity-input input {
+          width: 95%;
+          /* Ajusta el ancho de los cuadros de texto al 100% del espacio disponible */
         }
 
-        .image{
+        .super-bar-code {
+          display: flex;
+          //justify-content: space-between; /* Distribuye los elementos horizontalmente con espacio entre ellos */
+          gap: 10px;
+          /* Añade un espacio de 10px entre las cajas */
+
+          h3 {
+            font-size: 16px;
+            margin-top: -3px;
+            margin-bottom: -15px;
+          }
+
+          .super-bar-code input {
+            width: 95%;
+          }
+        }
+
+        .image {
           color: teal;
           font-size: 15px;
-          border: 2px solid #d1d1d1; /* Borde con un color específico */
-          padding: 10px; /* Relleno interior para separar el contenido del borde */
-          border-radius: 5px; /* Bordes redondeados */
+          border: 2px solid #d1d1d1;
+          /* Borde con un color específico */
+          padding: 10px;
+          /* Relleno interior para separar el contenido del borde */
+          border-radius: 5px;
+          /* Bordes redondeados */
         }
 
         .image-container {
-          font-size: 18px; /* Tamaño de fuente */
-          font-weight: bold; /* Negrita */
-          color: teal; /* Color del texto */
+          font-size: 18px;
+          /* Tamaño de fuente */
+          font-weight: bold;
+          /* Negrita */
+          color: teal;
+          /* Color del texto */
           /* Otros estilos según tu preferencia */
         }
 
-        .file{
+        .file {
           text-decoration: underline;
           cursor: pointer;
         }
 
-        .buttons{
+        .buttons {
           display: flex;
           justify-content: space-between;
-          margin-top: 10px; /* Ajusta el margen superior según tus necesidades */
-          margin-bottom: 0px; /* Ajusta el margen inferior según tus necesidades */
-          margin: 0 auto; /* Centra horizontalmente los botones */
-          width: max-content; /* Ajusta el ancho al contenido */
+          margin-top: 10px;
+          /* Ajusta el margen superior según tus necesidades */
+          margin-bottom: 0px;
+          /* Ajusta el margen inferior según tus necesidades */
+          margin: 0 auto;
+          /* Centra horizontalmente los botones */
+          width: max-content;
+          /* Ajusta el ancho al contenido */
 
-          :first-child{
+          :first-child {
             cursor: pointer;
             color: teal;
             background-color: white;
@@ -411,40 +887,52 @@ body {
             padding: 3px 5px;
             font-size: 20x;
           }
-          :last-child{
+
+          :last-child {
             cursor: pointer;
             color: white;
             background-color: teal;
             border: 5px solid teal;
             padding: 5px 5px;
             font-size: 20px;
-            border-radius: 6px; /* Bordes redondeados */
+            border-radius: 6px;
+            /* Bordes redondeados */
           }
         }
 
         .market {
-          border: 2px solid #d1d1d1; /* Borde con un color específico */
-          padding: 10px; /* Relleno interior para separar el contenido del borde */
-          border-radius: 5px; /* Bordes redondeados */
+          border: 2px solid #d1d1d1;
+          /* Borde con un color específico */
+          padding: 10px;
+          /* Relleno interior para separar el contenido del borde */
+          border-radius: 5px;
+          /* Bordes redondeados */
         }
-        
+
         /* Estilos para el contenido dentro de "market" */
         .market-container {
-          font-size: 18px; /* Tamaño de fuente */
-          font-weight: bold; /* Negrita */
-          color: teal; /* Color del texto */
+          font-size: 18px;
+          /* Tamaño de fuente */
+          font-weight: bold;
+          /* Negrita */
+          color: teal;
+          /* Color del texto */
           /* Otros estilos según tu preferencia */
         }
 
         h3 {
-          margin-top: 0px; /* Ajusta el margen superior según tus necesidades */
-          margin-bottom: 10px; /* Ajusta el margen inferior según tus necesidades */
+          margin-top: 0px;
+          /* Ajusta el margen superior según tus necesidades */
+          margin-bottom: 10px;
+          /* Ajusta el margen inferior según tus necesidades */
           /* Otros estilos que desees aplicar al título */
         }
 
         h1 {
-          margin-top: 0px; /* Ajusta el margen superior según tus necesidades */
-          margin-bottom: 5px; /* Ajusta el margen inferior según tus necesidades */
+          margin-top: 0px;
+          /* Ajusta el margen superior según tus necesidades */
+          margin-bottom: 5px;
+          /* Ajusta el margen inferior según tus necesidades */
           /* Otros estilos que desees aplicar al título */
         }
 
@@ -474,34 +962,35 @@ body {
         .item {
           border: 1px solid lightgray;
           padding: 10px;
-          flex:1;
+          flex: 1;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
           font-size: 12px;
           color: #555;
 
-          h1{
+          h1 {
             font-size: 20px;
           }
 
-          .file{
+          .file {
             text-decoration: underline;
             cursor: pointer;
           }
 
-          .buttons{
+          .buttons {
             display: flex;
             justify-content: space-between;
 
-            :first-child{
+            :first-child {
               cursor: pointer;
               color: teal;
               background-color: white;
               border: 1px solid teal;
               padding: 3px 5px;
             }
-            :last-child{
+
+            :last-child {
               cursor: pointer;
               color: white;
               background-color: teal;
@@ -510,7 +999,7 @@ body {
             }
           }
 
-          .cat{
+          .cat {
             display: flex;
             align-items: center;
             gap: 2px;
