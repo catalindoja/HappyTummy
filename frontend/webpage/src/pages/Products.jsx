@@ -145,7 +145,7 @@ const Products = () => {
           filteredPosts.map((post) => (
             <div className="post" key={post.id}>
               <div className="img">
-                <img src={`../upload/${post.image}`} alt="" />
+                <img src={`../upload/${post.product_image}`} alt="" /> {/* Ajusta la ruta según sea necesario */}
               </div>
               <div className="content">
                 <Link className="link" to={`/products/${post.id}`}>

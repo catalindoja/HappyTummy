@@ -8,3 +8,17 @@
     flex-wrap: nowrap;
     justify-content: space-between;
 }
+
+.allergies {
+    margin: auto 50% 20px;
+}
+
+.heart , .allergies { 
+    color: red;  
+}
+
+h2 {
+    color: green;
+}
+
+

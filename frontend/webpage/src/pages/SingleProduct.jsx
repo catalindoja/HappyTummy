@@ -11,6 +11,7 @@ import DOMPurify from "dompurify";
 
 const SingleProduct = () => {
   const [post, setPost] = useState({});
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -34,33 +35,62 @@ const SingleProduct = () => {
   const handleDelete = async () => {
     try {
       await axios.delete(`/products/${postId}`);
-      navigate("/")
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
-  }
+  };
+
+  const handleImageChange = (e) => {
+    setSelectedImage(e.target.files[0]);
+  };
+
+  const handleImageUpload = async () => {
+    if (selectedImage) {
+      const reader = new FileReader();
+      reader.readAsDataURL(selectedImage);
+
+      reader.onload = async () => {
+        const imageData = reader.result.split(",")[1]; // Obtén los datos binarios de la imagen
+        try {
+          // Envía los datos binarios al servidor para almacenarlos en la base de datos
+          const response = await axios.post(`/upload-image/${postId}`, {
+            image: imageData,
+          });
+
+          console.log("Imagen subida exitosamente");
+          // Puedes manejar la respuesta del servidor, como obtener la URL de la imagen guardada y mostrarla.
+        } catch (error) {
+          console.error("Error al subir la imagen:", error);
+        }
+      };
+    }
+  };
 
   const getText = (html) => {
-    const doc = new DOMParser().parseFromString(html, "text/html")
-    return doc.body.textContent
-  }
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent;
+  };
 
   return (
     <div className="single">
       <div className="content">
         <img src={`../upload/${post?.image}`} alt="" />
+        {currentUser.username === post.username && (
+          <div>
+            <input type="file" accept="image/*" onChange={handleImageChange} />
+            <button onClick={handleImageUpload}>Subir imagen</button>
+          </div>
+        )}
         <div className="user">
-          {post.userImg && <img
-            src={post.userImg}
-            alt=""
-          />}
+          {post.userImg && <img src={post.userImg} alt="" />}
           <div className="info">
             <span>{post.username}</span>
             <p>Posted {moment(post.date).fromNow()}</p>
           </div>
           {currentUser.username === post.username && (
             <div className="edit">
-              <Link to={`/write?edit=2`} state={post}>
+              <Link to={`/write?edit=${postId}`} state={post}>
                 <img src={Edit} alt="" />
               </Link>
               <img onClick={handleDelete} src={Delete} alt="" />
@@ -77,43 +107,6 @@ const SingleProduct = () => {
       {<Menu cat={post.cat} />}
     </div>
   );
-
 };
 
 export default SingleProduct;
-
-/*
-  return (
-    <div>TEST</div>,
-    <div className="single">
-      <div className="content">
-        <img src={`../upload/${post?.img}`} alt="" />
-        <div className="user">
-          {post.userImg && <img
-            src={post.userImg}
-            alt=""
-          />}
-          <div className="info">
-            <span>{post.username}</span>
-            <p>Posted {moment(post.date).fromNow()}</p>
-          </div>
-          {currentUser.username === post.username && (
-            <div className="edit">
-              <Link to={`/write?edit=2`} state={post}>
-                <img src={Edit} alt="" />
-              </Link>
-              <img onClick={handleDelete} src={Delete} alt="" />
-            </div>
-          )}
-        </div>
-        <h1>{post.title}</h1>
-        <p
-          dangerouslySetInnerHTML={{
-            __html: DOMPurify.sanitize(post.desc),
-          }}
-        ></p>      </div>
-      <Menu cat={post.cat}/>
-    </div>
-  );
-*/
-
