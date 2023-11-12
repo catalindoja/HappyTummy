@@ -23,6 +23,11 @@ CREATE TABLE user (
     email varchar(256),
     role int,
     premium boolean,
+    age INT,
+    gender BOOL,
+    realname varchar(64)  ,
+    realsurname VARCHAR(64) ,
+    country	VARCHAR(64) ,
     image blob,
     image_url varchar(256),
 	PRIMARY KEY (id),
@@ -148,7 +153,57 @@ CREATE TABLE comment (
     idproduct int,
     content varchar(64) ,
     likes int,
+    idparent   int,
 	PRIMARY KEY (id),
     FOREIGN KEY (iduser) REFERENCES user(id),
-    FOREIGN KEY (idproduct) REFERENCES product(id)
+    FOREIGN KEY (idproduct) REFERENCES product(id),
+    FOREIGN KEY (idparent) REFERENCES comment(id)
+);
+
+CREATE TABLE commentRecipe (
+    id         int NOT NULL AUTO_INCREMENT        ,
+    idusers    int         ,
+    idrecipe   int         ,
+    content    varchar(64) ,
+    likes      int         ,
+    idparent   int         ,
+	    PRIMARY KEY (id),
+        FOREIGN KEY (idusers) REFERENCES users(id),
+        FOREIGN KEY (idrecipe) REFERENCES product(id),
+        FOREIGN KEY (idparent) REFERENCES commentRecipe(id)
+);
+	
+CREATE TABLE shoppinglist (
+	id  INT NOT NULL AUTO_INCREMENT,
+	creationdate DATE,
+	idUser INT,
+	   PRIMARY KEY (id),
+      FOREIGN KEY (idUser) REFERENCES users(id)
+);
+	
+CREATE TABLE productList (
+	idShoppingList INT,
+	idProduct INT,
+	quantity INT,
+		PRIMARY KEY (idShoppingList, idProduct),
+      FOREIGN KEY (idShoppingList) REFERENCES shoppinglist(id),
+      FOREIGN KEY (idProduct) REFERENCES product(id)
+);
+	
+CREATE TABLE commentReport (
+	id INT NOT NULL AUTO_INCREMENT,
+	idUser INT,
+   content    varchar(64) ,
+   idComment INT,
+		PRIMARY KEY (id),
+      FOREIGN KEY (idUser) REFERENCES users(id),
+      FOREIGN KEY (idComment) REFERENCES comment(id)
+);
+	
+CREATE TABLE errorReport (
+	id INT NOT NULL AUTO_INCREMENT,
+	idProduct INT,
+   content    varchar(64) ,
+		PRIMARY KEY (id),
+      FOREIGN KEY (idProduct) REFERENCES product(id)
 );
