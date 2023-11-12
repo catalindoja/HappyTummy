@@ -15,14 +15,14 @@ function Counter(props) {
 
     return(
         <div className="container">
-            <div className='col-sm-12'>
+            <div className='d-flex justify-content-center'>
                 <h3 >Counter App</h3>
             </div>
-            <div className='col-sm-12'>
-                <button type="button" class="btn btn-success" onClick={increment}>+</button>
-                <button type="button" class="btn btn-danger" onClick={decrement}>-</button>
+            <div className='d-flex justify-content-center'>
+                <button type="button" className="btn btn-success" onClick={increment}>+</button>
+                <button type="button" className="btn btn-danger" onClick={decrement}>-</button>
             </div>
-            <div className='col-sm-12'>
+            <div className='d-flex justify-content-center'>
                 <h4 >Current Count: {count}</h4>
             </div>
             
