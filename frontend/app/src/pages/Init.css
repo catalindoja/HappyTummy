@@ -1,0 +1,48 @@
+.content {
+    background-size: cover;
+    /* Hace que la imagen ocupe toda la pantalla */
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    /* Ocupa el 100% de la altura de la pantalla */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: sans-serif;
+
+    background-color: #b9e7e7;
+}
+
+.display-3 {
+    margin-top: 20px;
+    color: #333;
+}
+
+.buttons button {
+    margin: 0 10px;
+    /* Separación horizontal entre los botones */
+}
+
+.buttons {
+    margin: 0 5px;
+    /* Separación horizontal entre los botones */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    /* Puedes ajustar el color de fondo si es necesario */
+    text-align: center;
+    border: 1px solid #ccc;
+    /* Borde alrededor del rectángulo */
+    padding: 25px 20px;
+    /* Espaciado interno */
+    background-color: #b9e7e7;
+}
+
+.logo img {
+    width: 100px;
+    height: auto;
+}
