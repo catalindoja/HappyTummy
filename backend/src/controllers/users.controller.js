@@ -45,22 +45,26 @@ export const getUser = async (req, res) => {
  */
 export const createUser = async (req, res) => {
     try {
-        const {idsupermarket, username, password, email, role, premium, image, image_url} = req.body
+        const {idsupermarket, username, password, email, role, premium, image, image_url, age, gender, realname, realsurname, country} = req.body
 
         const [rows] = await pool.query(
-            'INSERT INTO user (idsupermarket, username, password, email, role, premium, image, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
-            [idsupermarket, username, password, email, role, premium, image, image_url])
-
+            'INSERT INTO user (idsupermarket, username, password, email, role, premium, image, image_url, age, gender, realname, realsurname, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [idsupermarket, username, password, email, role, premium, image, image_url, age, gender, realname, realsurname, country])
+                
         res.send({
             id: rows.insertId,
-            idsupermarket,
             idsupermarket,
             username,
             email,
             role,
             premium,
             image,
-            image_url
+            image_url,
+            age, 
+            gender, 
+            realname, 
+            realsurname, 
+            country
         })
     } catch (error) {
         return res.status(500).json({
@@ -100,10 +104,10 @@ export const deleteUser = async (req, res) => {
 export const updateUser = async (req, res) => {
     try {
         const {id} = req.params
-        const {password, email, premium, image, image_url} = req.body
+        const {password, email, premium, image, image_url, age, gender, realname, realsurname, country} = req.body
         const [result] = 
-            await pool.query('UPDATE user SET password = IFNULL(?, password), email = IFNULL(?, email), premium = IFNULL(?, premium), image = IFNULL(?, image), image_url = IFNULL(?, image_url) WHERE id = ?',
-            [password, email, premium, image, image_url, id])
+            await pool.query('UPDATE user SET password = IFNULL(?, password), email = IFNULL(?, email), premium = IFNULL(?, premium), image = IFNULL(?, image), image_url = IFNULL(?, image_url), age = IFNULL(?, age), gender = IFNULL(?, gender), realname = IFNULL(?, realname), realsurname = IFNULL(?, realsurname), country = IFNULL(?, country) WHERE id = ?',
+            [password, email, premium, image, image_url, age, gender, realname, realsurname, country, id])
 
         if(result.affectedRows === 0) return res.status(404).json({
             message: 'User not found'
