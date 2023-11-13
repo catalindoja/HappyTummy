@@ -1,15 +1,22 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Nutella from "../img/nutella.jpeg";
 import Milk from "../img/milk.jpeg";
 import Homeimage from "../img/homeimage.jpg";
 import FoodContent from "../img/foodcontent.jpeg";
 import "./Products.css";
+import PublishNewProduct from "./PublishNewProduct";
 
 const Products = () => {
     const [activeSection, setActiveSection] = useState("products");
 
     const handleSectionChange = (section) => {
         setActiveSection(section);
+    };
+
+    const handlePublishClick = () => {
+        // Aquí puedes realizar cualquier lógica adicional antes de mostrar la alerta
+        window.alert("Product published successfully!");
     };
 
     return (
@@ -37,13 +44,18 @@ const Products = () => {
 
             <div className="form_search my-3">
                 <form className="form-inline my-2 my-lg-0">
-                    <input className="form-control mr-sm-2" type="search" placeholder="Search" />
+                    <input
+                        className="form-control mr-sm-2"
+                        type="search"
+                        placeholder="Search"
+                    />
                 </form>
             </div>
 
             {activeSection === "products" && (
                 <div className="card_image my-5">
                     <div className="card-deck">
+                        {/* Contenido de productos */}
                         <div className="card">
                             <img src={Nutella} className="card-img-top" />
                             <div className="card-body">
@@ -73,27 +85,23 @@ const Products = () => {
                         choices for a healthier, safer dining experience.
                     </div>
                     <div className="d-flex p-2 bd-highlight">
-                        <img
-                            src={FoodContent}
-                            alt="Food Content"
-                            className="img-fluid"
-                        />
+                        <img src={FoodContent} alt="Food Content" className="img-fluid" />
                     </div>
                 </div>
-                
             )}
-            
-            <div className="btn container-fluid d-flex align-items-center justify-content-center">
+
+            {/* Botón para mostrar alerta */}
+            <div className="container-fluid d-flex align-items-center justify-content-center">
                 <div className="text-center">
-                    <a href="https://www.google.com">
-                        <button type="button" className="btn btn-success">
-                            Publish a Product
-                        </button>
-                    </a>
-                    
+                    <button
+                        type="button"
+                        className="btn btn-success"
+                        onClick={handlePublishClick}
+                    >
+                        Publish a Product
+                    </button>
                 </div>
             </div>
-
         </div>
     );
 };

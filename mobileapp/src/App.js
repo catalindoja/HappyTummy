@@ -11,6 +11,7 @@ import Counter from './components/Counter';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Products from "./pages/Products";
+import PublishNewProduct from "./pages/PublishNewProduct";
 
 const Layout = () => {
   return (
@@ -27,10 +28,10 @@ const router = createBrowserRouter([
     children: [               // NAVBAR
       {
         path: "/",
-        element: <Home />
+        element: <Home />    
       },
       {
-        path: "/products",
+        path: "/products",            
         element: <Products />
       }
     ]
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />
+  },
+  {
+    path: "/publishnewproduct",
+    element: <PublishNewProduct />
   }
 ]);
 
