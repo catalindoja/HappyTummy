@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function ProductCard(props) {
+function RecipeCard(props) {
 
     return(
         <div className="card mb-2 d-flex" style={{width: "18rem;"}}>
@@ -15,4 +15,4 @@ function ProductCard(props) {
 };
 
 
-export default ProductCard;
+export default RecipeCard;
