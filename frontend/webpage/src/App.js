@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 
 import Register from './pages/Register';
-import Login from './pages/Login';
+//import Login from './pages/Login';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import SingleProduct from './pages/SingleProduct';
