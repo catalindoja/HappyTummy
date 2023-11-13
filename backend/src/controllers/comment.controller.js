@@ -46,18 +46,19 @@ export const getComment = async (req, res) => {
  */
 export const createComment = async (req, res) => {
     try {
-        const {iduser, idproduct, content, likes} = req.body
+        const {iduser, idproduct, content, likes, parentId} = req.body
 
         const [rows] = await pool.query(
-            'INSERT INTO comment (iduser, idproduct, content, likes) VALUES (?, ?, ?, ?)', 
-            [iduser, idproduct, content, likes])
+            'INSERT INTO comment (iduser, idproduct, content, likes, parentId) VALUES (?, ?, ?, ?, ?)', 
+            [iduser, idproduct, content, likes, parentId])
 
         res.send({
             id: rows.insertId,
             iduser,
             idproduct,
             content,
-            likes
+            likes,
+            parentId
         })
     } catch (error) {
         return res.status(500).json({

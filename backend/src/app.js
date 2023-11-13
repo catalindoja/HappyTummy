@@ -16,6 +16,11 @@ import ingredientsRoutes from './routes/ingredients.routes.js'
 import productAllergiesRoutes from './routes/productallergies.routes.js'
 import commentRoutes from './routes/comment.routes.js'
 import brandRoutes from './routes/brand.routes.js'
+import commentRecipeRoutes from './routes/commentrecipe.routes.js'
+import commentReportRoutes from './routes/commentreport.routes.js'
+import errorReportRoutes from './routes/errorreport.routes.js'
+import productListRoutes from './routes/productlist.routes.js'
+import shoppingListRoutes from './routes/shoppinglist.routes.js'
 
 const app = express();
 app.use(cors())
@@ -51,6 +56,11 @@ app.use(productAllergiesRoutes)
 app.use(commentRoutes)
 app.use(authRoutes)
 app.use(brandRoutes)
+app.use(commentRecipeRoutes)
+app.use(commentReportRoutes)
+app.use(errorReportRoutes)
+app.use(productListRoutes)
+app.use(shoppingListRoutes)
 
 /**
  *Middleware for when routes were not found, returns a 404 state
