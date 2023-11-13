@@ -1,4 +1,4 @@
-.content {
+.login_content {
     background-size: cover;
     /* Hace que la imagen ocupe toda la pantalla */
     background-position: center;
@@ -11,22 +11,27 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-family: sans-serif;
+    font-family: 'Lato', sans-serif;
 
     background-color: #b9e7e7;
 }
 
-.display-3 {
-    margin-top: 20px;
-    color: #333;
+.display-2 {
+    margin-top: 0px;
+    color: #505050;
+    font-weight: bold;
 }
 
-.buttons button {
+.login_logo img {
+    border-radius: 50%;
+}
+
+.login_buttons button {
     margin: 0 10px;
     /* Separación horizontal entre los botones */
 }
 
-.buttons {
+.login_buttons {
     margin: 0 5px;
     /* Separación horizontal entre los botones */
     position: fixed;
@@ -42,7 +47,16 @@
     background-color: #b9e7e7;
 }
 
-.logo img {
+.login_logo img {
     width: 100px;
     height: auto;
 }
+
+/*
+.login_buttons {
+
+    .btn {
+        background-color: #FF5733;
+    }
+}
+*/

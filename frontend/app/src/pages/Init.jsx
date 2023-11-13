@@ -5,20 +5,22 @@ import backgroundImage from "../img/clearbackground.png";
 
 function Init() {
 
+
+
+
   return (
-    <div class="content" style={{ backgroundImage: `url(${backgroundImage})` }}>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
+    <div className="login_content" style={{ backgroundImage: `url(${backgroundImage})` }}>
 
-      <h1 class="display-3">Happy Tummy</h1>
-      <p>Welcome to the mafia :D</p>
+      <h1 className="display-2">Happy Tummy</h1>
+      <p>Your partner in allergy-free shopping ♥ </p>
 
-      <div className="logo">
-          <img src={Logo} alt="" />
+      <div className="login_logo">
+        <img src={Logo} alt="" />
       </div>
 
-      <div class="buttons">
-        <button type="button" class="btn btn-primary btn-sm">LOG IN</button>
-        <button type="button" class="btn btn-secondary btn-sm">REGISTER</button>
+      <div className="login_buttons">
+        <button type="button" className="btn btn-primary btn-sm">LOG IN</button>
+        <button type="button" className="btn btn-secondary btn-sm">REGISTER</button>
       </div>
 
     </div>
