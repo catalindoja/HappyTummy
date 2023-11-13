@@ -12,11 +12,11 @@ import ProfileIcon from "../img/profile.jpg"
 
 const Menu = () => {
     return (
-        <div className="container">
+        <div className="w-100 sticky-bottom">
             <Link to="/">
                 <img src="../img/logo2.png" alt="" className="logo" />
             </Link>
-            <div className="container-fluid" style={{backgroundColor: "#C9FFFF"}}>
+            <div className="d-flex justify-content-around w-100" style={{backgroundColor: "#C9FFFF"}}>
                 <Link to="/">
                 <img className="p-2" src={HomeIcon} alt="d4" />
                 </Link>

@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Counter from './components/Counter';
+import BarcodeScanner from './pages/Scanner';
 import Home from './pages/Home';
 import Menu from './components/Menu';
 import {
@@ -32,13 +33,16 @@ const router = createBrowserRouter([
       }
     ]
   },
-  
+  {
+    path: "/scanner",
+    element: <BarcodeScanner />
+  }
 ]);
 
 function App() {
   return (
     <div className="app">
-      <div className="container">
+      <div className="w-100">
         <RouterProvider router={router} />
       </div>
     </div>
