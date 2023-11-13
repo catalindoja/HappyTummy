@@ -9,14 +9,18 @@ import PublishNewProduct from "./PublishNewProduct";
 
 const Products = () => {
     const [activeSection, setActiveSection] = useState("products");
+    const [showModal, setShowModal] = useState(false);
 
     const handleSectionChange = (section) => {
         setActiveSection(section);
     };
 
     const handlePublishClick = () => {
-        // Aquí puedes realizar cualquier lógica adicional antes de mostrar la alerta
-        window.alert("Product published successfully!");
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
     };
 
     return (
@@ -90,7 +94,7 @@ const Products = () => {
                 </div>
             )}
 
-            {/* Botón para mostrar alerta */}
+            {/* Botón para mostrar modal */}
             <div className="container-fluid d-flex align-items-center justify-content-center">
                 <div className="text-center">
                     <button
@@ -102,6 +106,43 @@ const Products = () => {
                     </button>
                 </div>
             </div>
+
+            {/* Modal */}
+            {showModal && (
+                <div className="modal bg-secondary" tabIndex="-1" role="dialog" style={{ display: "block" }}>
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">Publish a New Product</h5>
+                                <button
+                                    type="button"
+                                    className="close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                    onClick={closeModal}
+                                >
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                {/* Contenido del modal */}
+                                <PublishNewProduct />
+                            </div>
+                            <div className="modal-footer">
+                                <button
+                                    type="button"
+                                    className="btn btn-secondary"
+                                    data-dismiss="modal"
+                                    onClick={closeModal}
+                                >
+                                    Close
+                                </button>
+                                {/* Puedes agregar más botones según tus necesidades */}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

@@ -9,3 +9,8 @@
 .btn {
     margin-top: 10px;
 }
+
+/* Estilos para el modal */
+.modal {
+    height: 30%;
+}
