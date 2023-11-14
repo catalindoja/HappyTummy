@@ -19,11 +19,15 @@ const Products = () => {
     };
 
     const publishNewProduct = () => {
-        return "H";
+        return (
+            alert("Publish a new product")
+        ) 
     }
 
     const publishNewReceipe = () => {
-        return "H";
+        return (
+            alert("Publish a new receipe")
+        ) 
     }
 
     return (
