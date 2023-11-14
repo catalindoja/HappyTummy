@@ -5,6 +5,9 @@ import { getBrands, getBrand, createBrand, updateBrand, deleteBrand } from '../c
 const router = Router()
 
 
+/**
+ * When one of the brands endpoints is reached, these functions trigger the corresponding function
+ */
 router.get('/brands', getBrands)
 
 router.get('/brands/:id', getBrand)

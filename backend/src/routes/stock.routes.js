@@ -5,6 +5,9 @@ import { getStocks, getStock, createStock, updateStock, deleteStock } from '../c
 const router = Router()
 
 
+/**
+ * When one of the stock endpoints is reached, these functions trigger the corresponding function
+ */
 router.get('/stock', getStocks)
 
 router.get('/stock/:id', getStock)

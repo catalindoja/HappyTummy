@@ -1,5 +1,12 @@
 import {pool} from '../db.js'
 
+/**
+ * Recovers the markets from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getMarkets = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM supermarket')
@@ -11,6 +18,13 @@ export const getMarkets = async (req, res) => {
     }
 }
 
+/**
+ * Recovers a specific market from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getMarket = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM supermarket WHERE id = ?', [req.params.id])
@@ -22,13 +36,20 @@ export const getMarket = async (req, res) => {
     }
 }
 
+/**
+ * Creates a new market entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the newly created data
+ */
 export const createMarket = async (req, res) => {
     try {
-        const {name, description, address, city, zipcode} = req.body
+        const {name, description, address, city, zipcode, image, image_url} = req.body
 
         const [rows] = await pool.query(
-            'INSERT INTO supermarket (name, description, address, city, zipcode) VALUES (?, ?, ?, ?, ?)', 
-            [name, description, address, city, zipcode])
+            'INSERT INTO supermarket (name, description, address, city, zipcode, image, image_url) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+            [name, description, address, city, zipcode, image, image_url])
 
         res.send({
             id: rows.insertId,
@@ -36,7 +57,9 @@ export const createMarket = async (req, res) => {
             description,
             address,
             city,
-            zipcode
+            zipcode, 
+            image, 
+            image_url
         })
     } catch (error) {
         return res.status(500).json({
@@ -45,6 +68,13 @@ export const createMarket = async (req, res) => {
     }
 }
 
+/**
+ * Deletes a specific entry from the market table
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {CodecState} Code confirming a succsesful operation
+ */
 export const deleteMarket = async (req, res) => {
     try {
         const [result] = await pool.query('DELETE FROM supermarket WHERE id = ?', [req.params.id])
@@ -59,14 +89,21 @@ export const deleteMarket = async (req, res) => {
     }
 }
 
+/**
+ * Updates an existing market entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} Json containing the new information
+ */
 export const updateMarket = async (req, res) => {
     try {
         const {id} = req.params
-        const {name, description, address, city, zipcode} = req.body
+        const {name, description, address, city, zipcode, image, image_url} = req.body
 
         const [result] = await pool.query(
-            'UPDATE supermarket SET name = IFNULL(?, name), description = IFNULL(?, description), address = IFNULL(?, address), city = IFNULL(?, city), zipcode = IFNULL(?, zipcode) WHERE id = ?', 
-            [name, description, address, city, zipcode, id])
+            'UPDATE supermarket SET name = IFNULL(?, name), description = IFNULL(?, description), address = IFNULL(?, address), city = IFNULL(?, city), zipcode = IFNULL(?, zipcode), image = IFNULL(?, image), image_url = IFNULL(?, image_url) WHERE id = ?', 
+            [name, description, address, city, zipcode, image, image_url, id])
 
         if(result.affectedRows === 0) return res.status(404).json({
             message: 'Supermarket not found'

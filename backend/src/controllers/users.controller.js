@@ -1,5 +1,12 @@
 import {pool} from '../db.js'
 
+/**
+ * Recovers the users from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getUsers = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM user')
@@ -11,6 +18,13 @@ export const getUsers = async (req, res) => {
     }
 }
 
+/**
+ * Recovers a specific user from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getUser = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM user WHERE id = ?', [req.params.id])
@@ -22,21 +36,35 @@ export const getUser = async (req, res) => {
     }
 }
 
+/**
+ * Creates a new user entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the newly created data
+ */
 export const createUser = async (req, res) => {
     try {
-        const {idsupermarket, username, password, email, role, premium} = req.body
+        const {idsupermarket, username, password, email, role, premium, image, image_url, age, gender, realname, realsurname, country} = req.body
 
         const [rows] = await pool.query(
-            'INSERT INTO user (idsupermarket, username, password, email, role, premium) VALUES (?, ?, ?, ?, ?, ?)', 
-            [idsupermarket, username, password, email, role, premium])
-
+            'INSERT INTO user (idsupermarket, username, password, email, role, premium, image, image_url, age, gender, realname, realsurname, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [idsupermarket, username, password, email, role, premium, image, image_url, age, gender, realname, realsurname, country])
+                
         res.send({
             id: rows.insertId,
             idsupermarket,
             username,
             email,
             role,
-            premium
+            premium,
+            image,
+            image_url,
+            age, 
+            gender, 
+            realname, 
+            realsurname, 
+            country
         })
     } catch (error) {
         return res.status(500).json({
@@ -45,6 +73,13 @@ export const createUser = async (req, res) => {
     }
 }
 
+/**
+ * Deletes a specific entry from the user table
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {CodecState} Code confirming a succsesful operation
+ */
 export const deleteUser = async (req, res) => {
     try {
         const [result] = await pool.query('DELETE FROM user WHERE id = ?', [req.params.id])
@@ -59,13 +94,20 @@ export const deleteUser = async (req, res) => {
     }
 }
 
+/**
+ * Updates an existing user entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} Json containing the new information
+ */
 export const updateUser = async (req, res) => {
     try {
         const {id} = req.params
-        const {password, email, premium} = req.body
+        const {password, email, premium, image, image_url, age, gender, realname, realsurname, country} = req.body
         const [result] = 
-            await pool.query('UPDATE user SET password = IFNULL(?, password), email = IFNULL(?, email), premium = IFNULL(?, premium) WHERE id = ?', 
-            [password, email, premium, id])
+            await pool.query('UPDATE user SET password = IFNULL(?, password), email = IFNULL(?, email), premium = IFNULL(?, premium), image = IFNULL(?, image), image_url = IFNULL(?, image_url), age = IFNULL(?, age), gender = IFNULL(?, gender), realname = IFNULL(?, realname), realsurname = IFNULL(?, realsurname), country = IFNULL(?, country) WHERE id = ?',
+            [password, email, premium, image, image_url, age, gender, realname, realsurname, country, id])
 
         if(result.affectedRows === 0) return res.status(404).json({
             message: 'User not found'
@@ -74,6 +116,7 @@ export const updateUser = async (req, res) => {
         const [rows] = await pool.query('SELECT * FROM user WHERE id = ?', [id])
         res.json(rows);
     } catch (error) {
+        console.log(error)
         return res.status(500).json({
             message: 'Something went wrong while updating the user'
         })

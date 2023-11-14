@@ -1,12 +1,19 @@
 import React from "react";
+import axios from "axios";
+import backgroundImage from "../img/background.png";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useEffect } from "react";
 
+// Create the Register component
 const Register = () => {
 
-  // Para los supermercados!!
+  const navigate = useNavigate();
+
+  // Image
+  const [image, setFile] = useState(null);
+
+  // Obtaining the markets
   const [markets, setMarkets] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -20,29 +27,33 @@ const Register = () => {
     };
     fetchData();
   }, []);
-  
+
+  // Create the inputs
   const [inputs, setInputs] = useState({
     idsupermarket: "",
     username: "",
     email: "",
     password: "",
-    role: 3,
-    premium: 0
+    role: 2,
+    premium: 0,
+    image: "",
+    image_url: "",
   });
   const [err, setError] = useState(null);
 
-  const navigate = useNavigate();
-
+  // Handle the change
   const handleChange = (e) => {
     console.log(e.target.value)
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  // Gmail validation
   const isGmail = (email) => {
     const gmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return gmailPattern.test(email);
   };
 
+  // Handle the submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -72,18 +83,18 @@ const Register = () => {
     }
 
     try {
-      // http://localhost:4000/users  auth/register
-      await axios.post("/register", inputs); // DANGER!!!
+      await axios.post("/register", inputs);
       navigate("/login");
     } catch (err) {
       setError(err.response.data);
     }
   };
 
+  // Render the Register component
   return (
-    <div className="auth">
-      <h1>Register</h1>
+    <div className="auth" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <form>
+        <h1>Register</h1>
         <input
           required
           type="text"
@@ -106,30 +117,45 @@ const Register = () => {
           onChange={handleChange}
         />
 
-        {/* <input
-          required
-          type="supermarket"
-          placeholder="Supermarket"
-          name="supermarket"
-          onChange={handleChange}
-        /> */}
-
-        {/*NEW*/}
-        <div className="boxes">
+        <div>
           <fieldset>
-            <legend>Supermarket</legend>
+            <legend style={{ fontSize: '16px' }}>Supermarket</legend>
             {markets.map((market) => (
               <div key={market.id}>
-                <input type="radio" id={market.name} name="idsupermarket" value={market.id} onChange={handleChange}/>
+                <input type="radio" id={market.name} name="idsupermarket" value={market.id} onChange={handleChange} />
                 <label for={market.name}>{market.name}</label>
               </div>
             ))}
           </fieldset>
         </div>
 
-        <button onClick={handleSubmit}>Register</button>
+        <div className="image">
+          <div className="image-container">
+            <input
+              style={{ display: "none" }}
+              type="image"
+              id="image"
+              name=""
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+            <label className="file" htmlFor="file">
+              Upload profile picture
+            </label>
+
+          </div>
+        </div>
+
+        <input
+          required
+          type="image_url"
+          placeholder="Profile picture url"
+          name="image_url"
+          onChange={handleChange}
+        />
+
+        <button style={{ fontSize: '16px' }} onClick={handleSubmit}>Register</button>
         {err && <p>{err}</p>}
-        <span>
+        <span className="infotext">
           Do you have an account? <Link to="/login">Login</Link>
         </span>
       </form>
@@ -137,4 +163,5 @@ const Register = () => {
   );
 };
 
+// Export the Register component
 export default Register;

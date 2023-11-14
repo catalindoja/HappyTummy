@@ -1,9 +1,9 @@
 # HappyTummy
-Master's Degree Project of Ruben, Alex, Samer and Catalin
+Project TIC - Sprint 1
+Master's Degree Project of Rubén, Alex, Samer and Catalin
 
-HOW TO RUN FRONTEND
+## How to run frontend
 > (...)\HappyTummy\frontend\webpage> npm start
 
-HOW TO RUN BACKEND
+## How to run backend
 > (...)\HappyTummy\HappyTummy\backend> npm start
-(and execute USBWebserver)

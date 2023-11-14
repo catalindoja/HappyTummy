@@ -1,67 +1,85 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import Logo from "../img/logo.png";
+import Dot from "../img/teal.png";
 
+// Create the Navbar component
 const Navbar = () => {
   const { currentUser, logout } = useContext(AuthContext);
 
+  // Menu visible
+  const [isMenuVisible, setMenuVisible] = useState(false);
+  const handleOptionClick = (option) => {
+    setMenuVisible(false);
+  };
+
+  // Render the Navbar component
   return (
     <div className="navbar">
       <div className="container">
         <div className="logo">
-          <Link to="/">
+        <Link className="link" to="/">
           <img src={Logo} alt="" />
-          </Link>
+        </Link>
         </div>
         <div className="links">
           <Link className="link" to="/products">
             <h6>PRODUCTS</h6>
+            <img className="justadot" src={Dot} alt="" />
           </Link>
-          <Link className="link" to="/recepies">
-            <h6>RECEPIES</h6>
+          <Link className="link" to="/recipes">
+            <h6>RECIPES</h6>
+            <img className="justadot" src={Dot} alt="" />
           </Link>
           <Link className="link" to="/markets">
-            <h6>SUPERMARKETS INFO </h6>
+            <h6>MARKETS INFO</h6>
+            <img className="justadot" src={Dot} alt="" />
           </Link>
-          <Link className="link" to="/">
-            <h6>ALLERGIES AND INTOLERANCES INFO</h6>
+          <Link className="link" to="/allergies">
+            <h6>ALLERGENS INFO</h6>
+            <img className="justadot" src={Dot} alt="" />
           </Link>
-          <Link className="link" to="/">
+          <Link className="link" to="/statistics">
             <h6>MY STATISTICS</h6>
+            <img className="justadot" src={Dot} alt="" />
           </Link>
-          {/* <Link className="link" to="/">
-            <h6>MY PAYMENTS</h6>
-          </Link> */}
-          {/* <Link className="link" to="/?cat=food">
-            <h6>FOOD</h6>
-          </Link> */}
-          <span style={{ fontWeight: "bold" }}>
+          <Link className="linkprofile" to="/profile">
             {currentUser?.username}
-          </span>
+          </Link>
           {currentUser ? (
             <span onClick={logout}>Logout</span>
-          ): (
+          ) : (
             <span>Logout</span>)}
 
-             {/*<Link className="link" to="/login">
-              Login
-            </Link>  */} 
-
-          <span className="write">
-            <Link className="link" to="/postproduct">
+          <div>
+            <span className="write" onClick={() => setMenuVisible(true)}>
               Post
-            </Link>
-          </span>
-          <span className="writemarket">
-            <Link className="link" to="/postmarket">
-              Create Market
-            </Link>
-          </span>
+            </span>
+
+            {isMenuVisible && (
+              <div className="menu">
+                <span className="close-icon" onClick={() => setMenuVisible(false)}>
+                  &#10006;
+                </span>
+                <h3 className="menu-title">What do you want to post?😏</h3>
+                <div className="menu-buttons">
+                  <div className="menu-item" onClick={() => handleOptionClick("product")}>
+                    <Link to="/postproduct">New product</Link>
+                  </div>
+                  <div className="menu-item" onClick={() => handleOptionClick("recipe")}>
+                    <Link to="/postrecipe">New recipe</Link>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
+// Export the Navbar component
 export default Navbar;

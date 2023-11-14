@@ -4,6 +4,7 @@ import instagram from "../img/instagram.png"
 import twitter from "../img/twitter.png"
 import facebook from "../img/facebook.png"
 
+// Create the Footer component
 const Footer = () => {
   return (
     <footer>
@@ -17,4 +18,5 @@ const Footer = () => {
   );
 };
 
+// Export the Footer component
 export default Footer;

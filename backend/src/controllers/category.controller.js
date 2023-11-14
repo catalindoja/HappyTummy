@@ -1,5 +1,12 @@
 import {pool} from '../db.js'
 
+/**
+ * Recovers the categories from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getCategories = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM category')
@@ -11,6 +18,13 @@ export const getCategories = async (req, res) => {
     }
 }
 
+/**
+ * Recovers a specific category from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getCategory = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM category WHERE id = ?', [req.params.id])
@@ -22,17 +36,26 @@ export const getCategory = async (req, res) => {
     }
 }
 
+/**
+ * Creates a new category entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the newly created data
+ */
 export const createCategory = async (req, res) => {
     try {
-        const {category_name} = req.body
+        const {category_name, image, image_url} = req.body
 
         const [rows] = await pool.query(
-            'INSERT INTO category (category_name) VALUES (?)', 
-            [category_name])
+            'INSERT INTO category (category_name, image, image_url) VALUES (?, ?, ?)', 
+            [category_name, image, image_url])
 
         res.send({
             id: rows.insertId,
             category_name,
+            image,
+            image_url
         })
     } catch (error) {
         return res.status(500).json({
@@ -41,6 +64,13 @@ export const createCategory = async (req, res) => {
     }
 }
 
+/**
+ * Deletes a specific entry from the category table
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {CodecState} Code confirming a succsesful operation
+ */
 export const deleteCategory = async (req, res) => {
     try {
         const [result] = await pool.query('DELETE FROM category WHERE id = ?', [req.params.id])
@@ -55,11 +85,19 @@ export const deleteCategory = async (req, res) => {
     }
 }   
 
+/**
+ * Updates an existing category entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} Json containing the new information
+ */
 export const updateCategory = async (req, res) => {
     try {
         const {id} = req.params
-        const {category_name} = req.body
-        const [result] = await pool.query('UPDATE category SET category_name = ? WHERE id = ?', [category_name, id])
+        const {category_name, image, image_url} = req.body
+        const [result] = await pool.query('UPDATE category SET category_name = IFNULL(?, category_name), image = IFNULL(?, image), image_url = IFNULL(?, image_url) WHERE id = ?',
+        [category_name, image, image_url, id])
         if(result.affectedRows === 0) return res.status(404).json({
             message: 'Category not found'
         })

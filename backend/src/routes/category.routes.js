@@ -5,6 +5,9 @@ import { getCategories, getCategory, createCategory, updateCategory, deleteCateg
 const router = Router()
 
 
+/**
+ * When one of the categories endpoints is reached, these functions trigger the corresponding function
+ */
 router.get('/categories', getCategories)
 
 router.get('/categories/:id', getCategory)

@@ -1,5 +1,12 @@
 import {pool} from '../db.js'
 
+/**
+ * Recovers the recipes from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getRecipes = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM recipe')
@@ -11,6 +18,13 @@ export const getRecipes = async (req, res) => {
     }
 }
 
+/**
+ * Recovers a specific recipe from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getRecipe = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM recipe WHERE id = ?', [req.params.id])
@@ -22,23 +36,33 @@ export const getRecipe = async (req, res) => {
     }
 }
 
+/**
+ * Creates a new recipe entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the newly created data
+ */
 export const createRecipe = async (req, res) => {
     try {
-        const {idproduct, iduser, description, likes, time, unit, ammountofpeople} = req.body
+        const {idproduct, iduser, title, description, likes, time, unit, ammountofpeople, image, image_url} = req.body
 
         const [rows] = await pool.query(
-            'INSERT INTO recipe (idproduct, iduser, description, likes, time, unit, ammountofpeople) VALUES (?, ?, ?, ?, ?, ?, ?)', 
-            [idproduct, iduser, description, likes, time, unit, ammountofpeople])
+            'INSERT INTO recipe (idproduct, iduser, title, description, likes, time, unit, ammountofpeople, image, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+            [idproduct, iduser, title, description, likes, time, unit, ammountofpeople, image, image_url])
 
         res.send({
             id: rows.insertId,
             idproduct,
             iduser,
+            title,
             description,
             likes,
             time,
             unit,
-            ammountofpeople
+            ammountofpeople,
+            image,
+            image_url
         })
     } catch (error) {
         return res.status(500).json({
@@ -47,6 +71,13 @@ export const createRecipe = async (req, res) => {
     }
 }
 
+/**
+ * Deletes a specific entry from the recipe table
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {CodecState} Code confirming a succsesful operation
+ */
 export const deleteRecipe = async (req, res) => {
     try {
         const [result] = await pool.query('DELETE FROM recipe WHERE id = ?', [req.params.id])
@@ -61,14 +92,21 @@ export const deleteRecipe = async (req, res) => {
     }
 }
 
+/**
+ * Updates an existing recipe entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} Json containing the new information
+ */
 export const updateRecipe = async (req, res) => {
     try {
         const {id} = req.params
-        const {idproduct, iduser, description, likes, time, unit, ammountofpeople} = req.body
+        const {idproduct, iduser, title, description, likes, time, unit, ammountofpeople, image, image_url} = req.body
 
         const [result] = await pool.query(
-            'UPDATE recipe SET idproduct = IFNULL(?, idproduct), iduser = IFNULL(?, iduser), description = IFNULL(?, description), likes = IFNULL(?, likes), time = IFNULL(?, time), unit = IFNULL(?, unit), ammountofpeople = IFNULL(?, ammountofpeople) WHERE id = ?', 
-            [idproduct, iduser, description, likes, time, unit, ammountofpeople, id])
+            'UPDATE recipe SET idproduct = IFNULL(?, idproduct), iduser = IFNULL(?, iduser), title = IFNULL(?, title), description = IFNULL(?, description), likes = IFNULL(?, likes), time = IFNULL(?, time), unit = IFNULL(?, unit), ammountofpeople = IFNULL(?, ammountofpeople), image = IFNULL(?, image), image_url = IFNULL(?, image_url) WHERE id = ?',
+            [idproduct, iduser, title, description, likes, time, unit, ammountofpeople, image, image_url, id])
 
         if(result.affectedRows === 0) return res.status(404).json({
             message: 'Recipe not found'
