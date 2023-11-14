@@ -17,3 +17,7 @@
 .modal-header {
     margin-bottom: 40px;
 }
+
+div#popup-2 {
+    background: #00ffffa3 !important;
+}
