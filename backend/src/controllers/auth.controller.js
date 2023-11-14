@@ -2,6 +2,13 @@ import { pool, db } from "../db.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+/**
+ * Recovers the users from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const justinfo = async (req, res) => {
   try {
       const [rows] = await pool.query('SELECT * FROM user')
@@ -13,6 +20,12 @@ export const justinfo = async (req, res) => {
   }
 }
 
+/**
+ * Registers a new user after checking it doesn't already exist
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containing the new user's data
+ */
 export const register = (req, res) => {
   console.log("REGISTER");
 
@@ -38,27 +51,31 @@ export const register = (req, res) => {
   });
 };
 
+/**
+ * Asynchronously registers a new user after checking it doesn't already exist
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containing the new user's data
+ */
 export const registerAsync = async (req, res) => {
   try{
-    const { idsupermarket, username, email, password, role, premium, image, image_url } = req.body;
+    const { username, email, password, role, premium } = req.body;
     const [checkExistingUser] = await pool.query('SELECT * FROM user WHERE email = ? OR username = ?', [email, username])
     if(checkExistingUser.length) return res.status(409).json('User already exists!')
 
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
 
-    const [result] = await pool.query( 'INSERT INTO user (idsupermarket, username, email, password, role, premium, image, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)', 
-    [idsupermarket, username, email, hash, role, premium, image, image_url])
+    const [result] = await pool.query( 'INSERT INTO user (username, email, password, role, premium) VALUES (?, ?, ?, ?, ?)', 
+    [username, email, hash, role, premium])
 
     res.send({
         id: result.insertId,
-        idsupermarket,
         username,
         email,
         role,
-        premium,
-        image,
-        image_url
+        premium
     })
   } catch(error){
     return res.status(500).json({
@@ -67,6 +84,12 @@ export const registerAsync = async (req, res) => {
   } 
 }
 
+/**
+ * Checks that the user exists and the password is correct, and logs the user is
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {Response} 200 response
+ */
 export const login = async (req, res) => {
   console.log("LOGIN");
 
@@ -99,6 +122,13 @@ export const login = async (req, res) => {
   });
 };
 
+/**
+ * Asynchronously checks that the user exists and the password is correct, and logs the user is
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {Response} 200 response
+ */
 export const loginAsync = async (req, res) => {
   try{
     const { username, password } = req.body;
@@ -125,6 +155,12 @@ export const loginAsync = async (req, res) => {
   } 
 }
 
+/**
+ * Des loggege al usuari
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {Response} 200 response
+ */
 export const logout = (req, res) => {
   res.clearCookie("access_token",{
     sameSite:"none",

@@ -1,5 +1,12 @@
 import {pool} from '../db.js'
 
+/**
+ * Recovers the recipes from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getRecipes = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM recipe')
@@ -11,6 +18,13 @@ export const getRecipes = async (req, res) => {
     }
 }
 
+/**
+ * Recovers a specific recipe from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getRecipe = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM recipe WHERE id = ?', [req.params.id])
@@ -22,6 +36,13 @@ export const getRecipe = async (req, res) => {
     }
 }
 
+/**
+ * Creates a new recipe entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the newly created data
+ */
 export const createRecipe = async (req, res) => {
     try {
         const {idproduct, iduser, title, description, likes, time, unit, ammountofpeople, image, image_url} = req.body
@@ -50,6 +71,13 @@ export const createRecipe = async (req, res) => {
     }
 }
 
+/**
+ * Deletes a specific entry from the recipe table
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {CodecState} Code confirming a succsesful operation
+ */
 export const deleteRecipe = async (req, res) => {
     try {
         const [result] = await pool.query('DELETE FROM recipe WHERE id = ?', [req.params.id])
@@ -64,6 +92,13 @@ export const deleteRecipe = async (req, res) => {
     }
 }
 
+/**
+ * Updates an existing recipe entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} Json containing the new information
+ */
 export const updateRecipe = async (req, res) => {
     try {
         const {id} = req.params

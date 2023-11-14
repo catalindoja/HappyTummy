@@ -1,5 +1,12 @@
 import {pool} from '../db.js'
 
+/**
+ * Recovers the markets from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getMarkets = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM supermarket')
@@ -11,6 +18,13 @@ export const getMarkets = async (req, res) => {
     }
 }
 
+/**
+ * Recovers a specific market from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getMarket = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM supermarket WHERE id = ?', [req.params.id])
@@ -22,6 +36,13 @@ export const getMarket = async (req, res) => {
     }
 }
 
+/**
+ * Creates a new market entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the newly created data
+ */
 export const createMarket = async (req, res) => {
     try {
         const {name, description, address, city, zipcode, image, image_url} = req.body
@@ -47,6 +68,13 @@ export const createMarket = async (req, res) => {
     }
 }
 
+/**
+ * Deletes a specific entry from the market table
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {CodecState} Code confirming a succsesful operation
+ */
 export const deleteMarket = async (req, res) => {
     try {
         const [result] = await pool.query('DELETE FROM supermarket WHERE id = ?', [req.params.id])
@@ -61,6 +89,13 @@ export const deleteMarket = async (req, res) => {
     }
 }
 
+/**
+ * Updates an existing market entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} Json containing the new information
+ */
 export const updateMarket = async (req, res) => {
     try {
         const {id} = req.params

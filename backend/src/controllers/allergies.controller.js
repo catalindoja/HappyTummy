@@ -1,5 +1,12 @@
 import {pool} from '../db.js'
 
+/**
+ * Recovers the allergies from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getAllergies = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM allergies')
@@ -11,6 +18,13 @@ export const getAllergies = async (req, res) => {
     }
 }
 
+/**
+ * Recovers a specific allergy from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
 export const getAllergy = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM allergies WHERE id = ?', [req.params.id])
@@ -22,6 +36,13 @@ export const getAllergy = async (req, res) => {
     }
 }
 
+/**
+ * Creates a new allergy entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the newly created data
+ */
 export const createAllergy = async (req, res) => {
     try {
         const {allergy_name, allergy_description} = req.body
@@ -42,6 +63,13 @@ export const createAllergy = async (req, res) => {
     }
 }
 
+/**
+ * Deletes a specific entry from the allergy table
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {CodecState} Code confirming a succsesful operation
+ */
 export const deleteAllergy = async (req, res) => {
     try {
         const [result] = await pool.query('DELETE FROM allergies WHERE id = ?', [req.params.id])
@@ -56,6 +84,13 @@ export const deleteAllergy = async (req, res) => {
     }
 }
 
+/**
+ * Updates an existing allergy entry
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} Json containing the new information
+ */
 export const updateAllergy = async (req, res) => {
     try {
         const {id} = req.params
