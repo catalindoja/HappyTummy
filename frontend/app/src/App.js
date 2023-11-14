@@ -12,6 +12,7 @@ import Register1 from './pages/Register1';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import Scanner from './pages/Scanner';
+import SearchProduct from './pages/SearchProduct';
 
 const Layout = () => {
   return (
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
         element: <Profile />
       },
     ]
+  },
+  {
+    path: "/searchproduct",
+    element: <SearchProduct />
   },
   {
     path: "/scanner",
