@@ -8,6 +8,8 @@ import "./Products.css";
 import PublishNewProduct from "./PublishNewProduct";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
 const Products = () => {
     const [activeSection, setActiveSection] = useState("products");
@@ -15,6 +17,14 @@ const Products = () => {
     const handleSectionChange = (section) => {
         setActiveSection(section);
     };
+
+    const publishNewProduct = () => {
+        return "H";
+    }
+
+    const publishNewReceipe = () => {
+        return "H";
+    }
 
     return (
         <div className="container">
@@ -98,7 +108,7 @@ const Products = () => {
                         {(close) => (
                             <>
                                 <div className="modal-header">
-                                    <h5 className="modal-title">Publish a New Product</h5>
+                                    <h5 className="modal-title text-center">Publish a New Product</h5>
                                     <button className="close" onClick={close}>
                                         &times;
                                     </button>
@@ -107,12 +117,17 @@ const Products = () => {
                                     {/* Content of the popup */}
                                     <PublishNewProduct />
                                 </div>
-                                <div className="modal-footer">
-                                    <button className="btn btn-secondary" onClick={close}>
-                                        Close
+                                <div className="modal-footer text-center justify-content-center">
+                                    <button className="btn btn-success" onClick={publishNewProduct}>
+                                        Product
+                                    </button>
+
+                                    <button className="btn btn-danger" onClick={publishNewReceipe}>
+                                        Receipe
                                     </button>
                                     {/* You can add more buttons as needed */}
                                 </div>
+
                             </>
                         )}
                     </Popup>
