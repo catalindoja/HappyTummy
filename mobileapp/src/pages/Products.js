@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import Nutella from "../img/nutella.jpeg";
-import Milk from "../img/milk.jpeg";
-import Homeimage from "../img/homeimage.jpg";
-import FoodContent from "../img/foodcontent.jpeg";
-import "./Products.css";
-import PublishNewProduct from "./PublishNewProduct";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGlassWhiskey, faHatCowboy } from "@fortawesome/free-solid-svg-icons";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import Nutella from "../img/nutella.jpeg";
+import Milk from "../img/milk.jpeg";
+import FoodContent from "../img/foodcontent.jpeg";
+import PublishNewProduct from "./PublishNewProduct";
+import "./Products.css";
 
 const Products = () => {
     const [activeSection, setActiveSection] = useState("products");
@@ -19,16 +17,12 @@ const Products = () => {
     };
 
     const publishNewProduct = () => {
-        return (
-            alert("Publish a new product")
-        ) 
-    }
+        return alert("Publish a new product");
+    };
 
     const publishNewReceipe = () => {
-        return (
-            alert("Publish a new receipe")
-        ) 
-    }
+        return alert("Publish a new receipe");
+    };
 
     return (
         <div className="container">
@@ -67,7 +61,6 @@ const Products = () => {
             {activeSection === "products" && (
                 <div className="card_image my-5">
                     <div className="card-deck">
-                        {/* Product content */}
                         <div className="card">
                             <img src={Nutella} className="card-img-top" alt="Product 1" />
                             <div className="card-body">
@@ -90,7 +83,6 @@ const Products = () => {
             {activeSection === "recipes" && (
                 <div className="container">
                     <div className="d-flex p-2 bd-highlight">
-                        {/* Recipe content */}
                         Discover Your Food Allergies Explore a world of culinary knowledge
                         and uncover potential allergens. Our platform provides insights into
                         foods and their associated allergies, helping you make informed
@@ -102,7 +94,6 @@ const Products = () => {
                 </div>
             )}
 
-            {/* Button to show the popup */}
             <div className="container-fluid d-flex align-items-center justify-content-center">
                 <div className="text-center">
                     <Popup
@@ -112,33 +103,31 @@ const Products = () => {
                         {(close) => (
                             <>
                                 <div className="modal-header">
-                                    <h5 className="modal-title text-center">Publish a New Product</h5>
-                                    <button className="close" onClick={close}>
+                                    <h5 className="modal-title text-center">Publish a New Post</h5>
+                                    <button className="close" onClick={close} style={{ border: 'none', fontWeight: 'bold', fontSize:'30px'}}>
                                         &times;
                                     </button>
+
                                 </div>
                                 <div className="modal-body">
-                                    {/* Content of the popup */}
                                     <PublishNewProduct />
                                 </div>
                                 <div className="modal-footer text-center justify-content-center">
                                     <button className="btn btn-success" onClick={publishNewProduct}>
+                                        <FontAwesomeIcon icon={faGlassWhiskey} style={{ marginRight: '5px' }} />
                                         Product
                                     </button>
 
                                     <button className="btn btn-danger" onClick={publishNewReceipe}>
                                         Receipe
+                                        <FontAwesomeIcon icon={faHatCowboy} style={{ marginLeft: '5px' }} />
                                     </button>
-                                    {/* You can add more buttons as needed */}
                                 </div>
-
                             </>
                         )}
                     </Popup>
                 </div>
             </div>
-
-            {/* ... (unchanged code) */}
         </div>
     );
 };
