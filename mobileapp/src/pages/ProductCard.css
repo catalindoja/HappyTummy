@@ -1,0 +1,20 @@
+/* ProductCard.css */
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.heart-icon {
+    width: 20px;
+    height: 20px;
+    /* Ajusta el margen derecho según tus necesidades */
+    margin-right: 10px;
+}
+
+.custom-btn {
+    background-color: #87CEEB; /* Código de color para azul celeste */
+    color: #fff; /* Color del texto */
+    /* Puedes agregar más estilos según tus necesidades */
+}

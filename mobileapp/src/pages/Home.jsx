@@ -1,71 +1,97 @@
 import React from "react";
-import Homeimage from "../img/homeimage.jpg";
-import Logo from "../img/logo.png";
-import FoodContent from "../img/foodcontent.jpeg";
+import Teal from "../img/teal.png";
+import './Home.css';
+import backgroundImage from "../img/clearbackground.png";
 import Card from "../components/ProductCard";
-import { Link } from "react-router-dom";
 
-const cardsinfo = [
-    {
-        "title": "Huevos Rancheros",
-        "text": "Huevos Rancheros de los buenos papi",
-        "image": "https://galleria.riza.it/files/article/nelle-uova-una-miniera-di-sostanze-utili.jpg",
-        "alt": "Huevos Rancheros papa",
-        "link": "/huevosrancheros"
-    },
-    {
-        "title": "Salchicha",
-        "text": "Salchias de las buenas papi",
-        "image": "https://cdn02.plentymarkets.com/xlzn8fmweulj/item/images/5240/full/5240-Wiener-Wuerstchen-Lebensmittel-Attrappe-15-cm-Wiener-Wuerstchen-Lebensmittel-Attrappe-52039300.png",
-        "alt": "Salchichas papa",
-        "link": "/salchichas"
-    }
-];
+function Home() {
 
-const Home = () => {
+
+
+    const cardsinfo = [
+        {
+        },
+    ];
+
     return (
-        <div className="container Welcome">
-                <h1 className="title1">Welcome To Happy Tummy</h1>
-            <img src={Homeimage} alt="Home Image" className="img-fluid" />
-            
-            <div className="container">
-                <div className="d-flex p-4 bd-highlight">
-                    Discover Your Food Allergies
-                    Explore a world of culinary knowledge and uncover potential allergens.
-                    Our platform provides insights into foods and their associated allergies,
-                    helping you make informed
-                    choices for a healthier, safer dining experience.
+        <div className="home_content">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
+
+            <h4 className="maintitles">Recommended products ♥</h4>
+
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src={Teal} alt="First slide" />
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src={Teal} alt="Second slide" />
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src={Teal} alt="Third slide" />
+                    </div>
                 </div>
-                <div className="d-flex p-4 bd-highlight">
-                    <img src={FoodContent} alt="Food Content" className="img-fluid" />
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+            <h4 className="maintitles">Recipes just for you ♥</h4>
+
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100" src={Teal} alt="First slide" />
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src={Teal} alt="Second slide" />
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" src={Teal} alt="Third slide" />
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+            <h4 className="maintitles">New posts ✨</h4>
+            <div>
+                <div className="card-container">
+                    {cardsinfo.map(card => (
+                        <Card
+                            image={card.image}
+                            alt={card.alt}
+                            title={card.title}
+                            text={card.text}
+                            link={card.link}
+                        />
+                    ))}
                 </div>
             </div>
 
-            <div>
-                <h2>Cards</h2>
-                <div className="card-container">
-                {cardsinfo.map(card => (
-                    <Card
-                    image={card.image}
-                    alt={card.alt}
-                    title={card.title}
-                    text={card.text}
-                    link={card.link}
-                    />
-                ))}
-                </div>
-            </div>
-            <div className="scanner">
-                <Link to={"/scanner/"}>
-                    <button>Scan product</button>
-                </Link>
-             </div>
-        
-        </div>  
-    
-    
-       
-    )
-};
+        </div>
+    );
+}
 
 export default Home;
