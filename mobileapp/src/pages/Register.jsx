@@ -1,13 +1,30 @@
 import React from "react";
 import axios from "axios";
-//import backgroundImage from "../img/background.png";
+import $ from "jquery"
+import BackgroundImg from "../img/clearbackground.png";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import Menu from '../components/Menu'
 
+
 // Create the Register component
 const Register = () => {
+
+  let userData = {
+    username: "",
+    password: "",
+    email: "",
+    role: 3,
+    premium: 0,
+    image: "",
+    image_url: "",
+    age: 0,
+    gender: "",
+    realname: "",
+    realsurname: "",
+    country: ""
+  }
 
   const navigate = useNavigate();
 
@@ -39,12 +56,16 @@ const Register = () => {
     premium: 0,
     image: "",
     image_url: "",
+    age: 0,
+    gender: "",
+    realname: "",
+    realsurname: "",
+    country: ""
   });
   const [err, setError] = useState(null);
 
   // Handle the change
   const handleChange = (e) => {
-    console.log(e.target.value)
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -68,11 +89,6 @@ const Register = () => {
       return;
     }
 
-    if (inputs.idsupermarket.trim() === "") {
-      setError("Select a supermarket");
-      return;
-    }
-
     if (inputs.password.trim() === "") {
       setError("The 'password' field cannot be empty");
       return;
@@ -83,6 +99,12 @@ const Register = () => {
       return;
     }
 
+    /*if (inputs.age < 0 || isNaN(inputs.age)) {
+      setError("The age must be a positive number");
+      return;
+    }
+    */
+    
     try {
       await axios.post("/register", inputs);
       navigate("/login");
@@ -90,80 +112,100 @@ const Register = () => {
       setError(err.response.data);
     }
   };
+  
+  const setValue = (name, value) => {
+    userData[name] = value;
+  }
+
+  const handleEmailStep = () => {
+    
+    $("#registerForm").html("");
+    $("#registerForm").html("<h1>Me gusta pincharme heroina en vena</h1>");
+    console.log(inputs.username)
+  }
+
+  const handleUserInformationStep = () => {
+      
+  }
+
+  const handleAllergiesStep = () => {
+      
+  }
 
   // Render the Register component
   //style={{ backgroundImage: `url(${backgroundImage})` }}
   return (
-    <div className="auth">
-      <form>
-        <h1>Register</h1>
-        <input
-          required
-          type="text"
-          placeholder="Username"
-          name="username"
-          onChange={handleChange}
-        />
-        <input
-          required
-          type="email"
-          placeholder="Email"
-          name="email"
-          onChange={handleChange}
-        />
-        <input
-          required
-          type="password"
-          placeholder="Password"
-          name="password"
-          onChange={handleChange}
-        />
+    <div className="auth" style={{ backgroundImage: `url(${BackgroundImg})` }}>
+      <button id="jqrytest" onClick={handleEmailStep}>Test Jquery</button>
+      <div id="registerForm">
+        <form>
+          <h1>Register</h1>
+          <input
+            required
+            type="text"
+            placeholder="Username"
+            name="username"
+            onChange={handleChange}
+          />
+          <input
+            required
+            type="email"
+            placeholder="Email"
+            name="email"
+            onChange={handleChange}
+          />
+          <input
+            required
+            type="password"
+            placeholder="Password"
+            name="password"
+            onChange={handleChange}
+          />
 
-        <div>
-          <fieldset>
-            <legend style={{ fontSize: '16px' }}>Supermarket</legend>
-            {markets.map((market) => (
-              <div key={market.id}>
-                <input type="radio" id={market.name} name="idsupermarket" value={market.id} onChange={handleChange} />
-                <label for={market.name}>{market.name}</label>
-              </div>
-            ))}
-          </fieldset>
-        </div>
-
-        <div className="image">
-          <div className="image-container">
-            <input
-              style={{ display: "none" }}
-              type="image"
-              id="image"
-              name=""
-              onChange={(e) => setFile(e.target.files[0])}
-            />
-            <label className="file" htmlFor="file">
-              Upload profile picture
-            </label>
-
+          <div>
+            <fieldset>
+              <legend style={{ fontSize: '16px' }}>Supermarket</legend>
+              {markets.map((market) => (
+                <div key={market.id}>
+                  <input type="radio" id={market.name} name="idsupermarket" value={market.id} onChange={handleChange} />
+                  <label for={market.name}>{market.name}</label>
+                </div>
+              ))}
+            </fieldset>
           </div>
-        </div>
 
-        <input
-          required
-          type="image_url"
-          placeholder="Profile picture url"
-          name="image_url"
-          onChange={handleChange}
-        />
+          <div className="image">
+            <div className="image-container">
+              <input
+                style={{ display: "none" }}
+                type="image"
+                id="image"
+                name=""
+                onChange={(e) => setFile(e.target.files[0])}
+              />
+              <label className="file" htmlFor="file">
+                Upload profile picture
+              </label>
 
-        <button style={{ fontSize: '16px' }} onClick={handleSubmit}>Register</button>
-        {err && <p>{err}</p>}
-        <span className="infotext">
-          Do you have an account? <Link to="/login">Login</Link>
-        </span>
-      </form>
-      <Menu />
+            </div>
+          </div>
+
+          <input
+            required
+            type="image_url"
+            placeholder="Profile picture url"
+            name="image_url"
+            onChange={handleChange}
+          />
+
+          <button style={{ fontSize: '16px' }} onClick={handleSubmit}>Register</button>
+          {err && <p>{err}</p>}
+          <span className="infotext">
+            Do you have an account? <Link to="/login">Login</Link>
+          </span>
+        </form>
+      </div>
     </div>
-    
   );
 };
 

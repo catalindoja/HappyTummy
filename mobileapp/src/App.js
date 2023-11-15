@@ -7,6 +7,7 @@ import Splash from './pages/Splash';
 import Home from './pages/Home';
 import Menu from './components/Menu';
 import Register from './pages/Register'
+import Login from './pages/Login'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -46,8 +47,11 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />
+  },
+  {
+    path: "/login",
+    element: <Login />
   }
-
 ]);
 
 function App() {
