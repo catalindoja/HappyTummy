@@ -21,3 +21,22 @@ thead {
     color: #080af5 !important;
     margin-left: 5px !important;
 }
+
+.box_arrow {
+    width: 45% !important;
+    margin-bottom: -40px !important;
+    
+}
+
+.arrow , .go_back{
+    font-size: 20px;
+    color :#fff;
+}
+.btn1 {
+    border: 1px solid #000 !important;
+    border-radius: 5px !important;
+}
+
+.arrow {
+    margin-left: 10px !important;
+}
