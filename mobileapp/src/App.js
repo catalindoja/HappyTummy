@@ -12,6 +12,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Products from "./pages/Products";
 import PublishNewProduct from "./pages/PublishNewProduct";
+import MyShoppingList from "./pages/MyShoppingList";
 
 const Layout = () => {
   return (
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
       {
         path: "/products",            
         element: <Products />
+      },
+      {
+        path: "/myshoppinglist",
+        element: <MyShoppingList />
       }
     ]
   },                          // NO NAVBAR
