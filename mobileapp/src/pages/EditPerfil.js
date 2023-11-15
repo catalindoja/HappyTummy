@@ -20,20 +20,30 @@ const EditPerfil = () => {
             </div>
             <div className="form1">
                 <form>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+                    <div class="form-group mb-3">
+                        <label for="username">Username </label>
+                        <input type="text" class="form-control" id="username" placeholder="Enter Your Username" />
+
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="email">Email Address</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter Your Email Address" />
                             
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                    <div class="form-group mb-3">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" placeholder="Enter Your Name" />
                     </div>
-                    <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    <div class="form-group mb-3">
+                        <label for="pass">Password</label>
+                        <input type="password" class="form-control" id="pass" placeholder="Enter Your Password" />
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="form-group form-check mb-3">
+                        <input type="checkbox" class="form-check-input" id="check" />
+                        <label class="form-check-label" for="check">Check me out</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Send</button>
                 </form>
             </div>
             
