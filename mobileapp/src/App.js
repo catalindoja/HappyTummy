@@ -14,6 +14,7 @@ import Products from "./pages/Products";
 import PublishNewProduct from "./pages/PublishNewProduct";
 import MyShoppingList from "./pages/MyShoppingList";
 import EditPerfil from "./pages/EditPerfil";
+import Allergies from "./pages/Allergies";
 
 const Layout = () => {
   return (
@@ -38,7 +39,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/myshoppinglist",
-        element: <MyShoppingList />
+        element: <MyShoppingList />              
+      },
+      {
+        path: "/allergies",
+        element: <Allergies />
       }
     ]
   },                          // NO NAVBAR
