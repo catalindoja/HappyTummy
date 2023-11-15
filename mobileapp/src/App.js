@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Counter from './components/Counter';
 import BarcodeScanner from './pages/Scanner';
+import Splash from './pages/Splash';
 import Home from './pages/Home';
 import Menu from './components/Menu';
 import {
@@ -16,7 +17,7 @@ const Layout = () => {
     <>
 
       <Outlet />
-      <Counter />
+      
       <Menu />
     </>
   );
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />
+        element: <Splash />
       }
     ]
   },

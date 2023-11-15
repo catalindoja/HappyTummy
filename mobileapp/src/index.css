@@ -15,3 +15,7 @@ code {
 .overflow-hidden {
   overflow: hidden !important;
 }
+
+.ht-bg-color {
+  background-color: #cdfefe !important;
+}
