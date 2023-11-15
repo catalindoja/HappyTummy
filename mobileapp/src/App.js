@@ -6,6 +6,7 @@ import BarcodeScanner from './pages/Scanner';
 import Splash from './pages/Splash';
 import Home from './pages/Home';
 import Menu from './components/Menu';
+import Register from './pages/Register'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -37,7 +38,16 @@ const router = createBrowserRouter([
   {
     path: "/scanner",
     element: <BarcodeScanner />
+  },
+  {
+    path: "/home",
+    element: <Home />
+  },
+  {
+    path: "/register",
+    element: <Register />
   }
+
 ]);
 
 function App() {
