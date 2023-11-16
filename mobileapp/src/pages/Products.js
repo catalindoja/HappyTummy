@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGlassWhiskey, faHatCowboy } from "@fortawesome/free-solid-svg-icons";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import Nutella from "../img/nutella.jpeg";
 import Milk from "../img/milk.jpeg";
-import FoodContent from "../img/foodcontent.jpeg";
 import PublishNewProduct from "./PublishNewProduct";
 import "./Products.css";
 
 const Products = () => {
     const [activeSection, setActiveSection] = useState("products");
+    const [products, setProducts] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
 
     const handleSectionChange = (section) => {
         setActiveSection(section);
@@ -20,9 +22,27 @@ const Products = () => {
         return alert("Publish a new product");
     };
 
-    const publishNewReceipe = () => {
-        return alert("Publish a new receipe");
+    const publishNewRecipe = () => {
+        return alert("Publish a new recipe");
     };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get("/products");
+                setProducts(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    // Filtrar productos según el término de búsqueda
+    const filteredProducts = products.filter(product =>
+        product.product_name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <div className="container">
@@ -54,6 +74,8 @@ const Products = () => {
                         className="form-control mr-sm-2"
                         type="search"
                         placeholder="Search"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
                     />
                 </form>
             </div>
@@ -61,21 +83,15 @@ const Products = () => {
             {activeSection === "products" && (
                 <div className="card_image my-5">
                     <div className="card-deck">
-                        <div className="card">
-                            <img src={Nutella} className="card-img-top" alt="Product 1" />
-                            <div className="card-body">
-                                <h5 className="card-title">Product Title 1</h5>
-                                <p className="card-text">Short description of Product 1.</p>
+                        {filteredProducts.map(product => (
+                            <div className="card" key={product.id}>
+                                <img src={product.image_url} className="card-img-top" alt={product.product_name} />
+                                <div className="card-body">
+                                    <h5 className="card-title">{product.product_name}</h5>
+                                    <p className="card-text">{product.product_description}</p>
+                                </div>
                             </div>
-                        </div>
-
-                        <div className="card">
-                            <img src={Milk} className="card-img-top" alt="Product 2" />
-                            <div className="card-body">
-                                <h5 className="card-title">Product Title 2</h5>
-                                <p className="card-text">Short description of Product 2.</p>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             )}
@@ -89,7 +105,7 @@ const Products = () => {
                         choices for a healthier, safer dining experience.
                     </div>
                     <div className="d-flex p-2 bd-highlight">
-                        <img src={FoodContent} alt="Food Content" className="img-fluid" />
+                        <img src={Milk} alt="Food Content" className="img-fluid" />
                     </div>
                 </div>
             )}
@@ -98,16 +114,15 @@ const Products = () => {
                 <div className="text-center">
                     <Popup
                         trigger={<button className="btn btn-success">Publish a Product</button>}
-np                        modal
+                        modal
                     >
                         {(close) => (
                             <>
                                 <div className="modal-header">
                                     <h5 className="modal-title text-center">Publish a New Post</h5>
-                                    <button className="close" onClick={close} style={{ border: 'none', fontWeight: 'bold', fontSize:'30px'}}>
+                                    <button className="close" onClick={close} style={{ border: 'none', fontWeight: 'bold', fontSize: '30px' }}>
                                         &times;
                                     </button>
-
                                 </div>
                                 <div className="modal-body">
                                     <PublishNewProduct />
@@ -117,9 +132,8 @@ np                        modal
                                         <FontAwesomeIcon icon={faGlassWhiskey} style={{ marginRight: '5px' }} />
                                         Product
                                     </button>
-
-                                    <button className="btn btn-danger" onClick={publishNewReceipe}>
-                                        Receipe
+                                    <button className="btn btn-danger" onClick={publishNewRecipe}>
+                                        Recipe
                                         <FontAwesomeIcon icon={faHatCowboy} style={{ marginLeft: '5px' }} />
                                     </button>
                                 </div>
@@ -132,6 +146,4 @@ np                        modal
     );
 };
 
-
 export default Products;
-
