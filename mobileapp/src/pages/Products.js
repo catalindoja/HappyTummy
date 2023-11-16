@@ -98,7 +98,7 @@ const Products = () => {
                 <div className="text-center">
                     <Popup
                         trigger={<button className="btn btn-success">Publish a Product</button>}
-                        modal
+np                        modal
                     >
                         {(close) => (
                             <>
@@ -132,4 +132,6 @@ const Products = () => {
     );
 };
 
+
 export default Products;
+
