@@ -10,5 +10,11 @@
     margin-top: 10px;
 }
 
-/* Estilos para el modal */
+.form_search.my-3 {
+    width: 70%;
+}
+
+img.card-img-top {
+    margin-top: 45px;
+}
 

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGlassWhiskey, faHatCowboy } from "@fortawesome/free-solid-svg-icons";
+import { faGlassWhiskey, faHatCowboy, faTimes, faEdit, faSave } from "@fortawesome/free-solid-svg-icons";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
+
 import Nutella from "../img/nutella.jpeg";
-import Milk from "../img/milk.jpeg";
+import Milk from "../img/milk.jpeg"; // Asegúrate de tener esta importación
 import PublishNewProduct from "./PublishNewProduct";
 import "./Products.css";
 
@@ -13,6 +14,12 @@ const Products = () => {
     const [activeSection, setActiveSection] = useState("products");
     const [products, setProducts] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
+    const [editedProduct, setEditedProduct] = useState({
+        id: null,
+        product_name: "",
+        product_description: "",
+        image_url: "",
+    });
 
     const handleSectionChange = (section) => {
         setActiveSection(section);
@@ -24,6 +31,56 @@ const Products = () => {
 
     const publishNewRecipe = () => {
         return alert("Publish a new recipe");
+    };
+
+    const deleteProduct = async (productId) => {
+        try {
+            await axios.delete(`/products/${productId}`);
+            setProducts(products.filter(product => product.id !== productId));
+        } catch (error) {
+            console.error("Error deleting product:", error);
+        }
+    };
+
+    const editProduct = (product) => {
+        setEditedProduct({
+            id: product.id,
+            product_name: product.product_name,
+            product_description: product.product_description,
+            image_url: product.image_url,
+        });
+    };
+
+    const handleEditFormChange = (e) => {
+        const { name, value } = e.target.value;
+        setEditedProduct((prevProduct) => ({
+            ...prevProduct,
+            [name]: value,
+        }));
+    };
+
+    const saveChanges = async () => {
+        try {
+            if (!editedProduct.id) {
+                console.error("No product selected for editing");
+                return;
+            }
+
+            await axios.put(`/products/${editedProduct.id}`, {
+                product_name: editedProduct.product_name,
+                product_description: editedProduct.product_description,
+                image_url: editedProduct.image_url,
+            });
+
+            setEditedProduct({
+                id: null,
+                product_name: "",
+                product_description: "",
+                image_url: "",
+            });
+        } catch (error) {
+            console.error("Error saving changes:", error);
+        }
     };
 
     useEffect(() => {
@@ -39,7 +96,6 @@ const Products = () => {
         fetchData();
     }, []);
 
-    // Filtrar productos según el término de búsqueda
     const filteredProducts = products.filter(product =>
         product.product_name.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -68,28 +124,55 @@ const Products = () => {
                 </span>
             </div>
 
+            {/* Botones de búsqueda con icono de borrar */}
             <div className="form_search my-3">
-                <form className="form-inline my-2 my-lg-0">
+                <div className="input-group">
                     <input
-                        className="form-control mr-sm-2"
+                        className="form-control"
                         type="search"
-                        placeholder="Search"
+                        placeholder="Enter search term"
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                     />
-                </form>
+                    {/* Icono de borrar */}
+                    <div className="input-group-append">
+                        <span
+                            className="input-group-text"
+                            onClick={() => setSearchTerm("")}
+                            style={{ cursor: "pointer" }}
+                        >
+                            <FontAwesomeIcon icon={faTimes} />
+                        </span>
+                    </div>
+                </div>
             </div>
 
             {activeSection === "products" && (
                 <div className="card_image my-5">
                     <div className="card-deck">
-                        {filteredProducts.map(product => (
+                        {filteredProducts.map((product) => (
                             <div className="card" key={product.id}>
                                 <img src={product.image_url} className="card-img-top" alt={product.product_name} />
                                 <div className="card-body">
                                     <h5 className="card-title">{product.product_name}</h5>
                                     <p className="card-text">{product.product_description}</p>
                                 </div>
+                                {/* Botón de borrar a la derecha */}
+                                <button
+                                    className="btn btn-danger"
+                                    style={{ position: "absolute", top: "0", right: "0", margin: "8px" }}
+                                    onClick={() => deleteProduct(product.id)}
+                                >
+                                    <FontAwesomeIcon icon={faTimes} />
+                                </button>
+                                {/* Botón de editar a la izquierda */}
+                                <button
+                                    className="btn btn-primary"
+                                    style={{ position: "absolute", top: "0", left: "0", margin: "8px" }}
+                                    onClick={() => editProduct(product)}
+                                >
+                                    <FontAwesomeIcon icon={faEdit} />
+                                </button>
                             </div>
                         ))}
                     </div>
@@ -142,6 +225,66 @@ const Products = () => {
                     </Popup>
                 </div>
             </div>
+
+            {/* Modal de edición */}
+            <Popup
+                trigger={<button className="btn btn-primary">Edit Product</button>}
+                modal
+            >
+                {(close) => (
+                    <>
+                        <div className="modal-header">
+                            <h5 className="modal-title text-center">Edit Product</h5>
+                            <button className="close" onClick={close} style={{ border: 'none', fontWeight: 'bold', fontSize: '30px' }}>
+                                &times;
+                            </button>
+                        </div>
+                        <div className="modal-body">
+                            {/* Formulario de edición */}
+                            <form>
+                                <div className="form-group">
+                                    <label htmlFor="product_name">Product Name</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="product_name"
+                                        name="product_name"
+                                        value={editedProduct.product_name}
+                                        onChange={handleEditFormChange}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="product_description">Product Description</label>
+                                    <textarea
+                                        className="form-control"
+                                        id="product_description"
+                                        name="product_description"
+                                        value={editedProduct.product_description}
+                                        onChange={handleEditFormChange}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label htmlFor="image_url">Image URL</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="image_url"
+                                        name="image_url"
+                                        value={editedProduct.image_url}
+                                        onChange={handleEditFormChange}
+                                    />
+                                </div>
+                            </form>
+                        </div>
+                        <div className="modal-footer text-center justify-content-center">
+                            <button className="btn btn-primary" onClick={saveChanges}>
+                                <FontAwesomeIcon icon={faSave} style={{ marginRight: '5px' }} />
+                                Save Changes
+                            </button>
+                        </div>
+                    </>
+                )}
+            </Popup>
         </div>
     );
 };
