@@ -1,213 +1,280 @@
-import React from "react";
+import React, { useState } from 'react';
+import backgroundImage from "../img/clearbackground.png";
+import './Register.css';
 import axios from "axios";
-import $ from "jquery"
-import BackgroundImg from "../img/clearbackground.png";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import Menu from '../components/Menu'
+import $ from "jquery";
 
-
-// Create the Register component
 const Register = () => {
+  let id = 0;
 
-  let userData = {
-    username: "",
-    password: "",
-    email: "",
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    username: '',
     role: 3,
     premium: 0,
-    image: "",
-    image_url: "",
     age: 0,
-    gender: "",
-    realname: "",
-    realsurname: "",
-    country: ""
-  }
-
-  const navigate = useNavigate();
-
-  // Image
-  const [image, setFile] = useState(null);
-
-  // Obtaining the markets
-  const [markets, setMarkets] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(`/markets`);
-        // console.log(res.data)
-        setMarkets(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
-  }, []);
-
-  // Create the inputs
-  const [inputs, setInputs] = useState({
-    idsupermarket: "",
-    username: "",
-    email: "",
-    password: "",
-    role: 3,
-    premium: 0,
-    image: "",
-    image_url: "",
-    age: 0,
-    gender: "",
-    realname: "",
-    realsurname: "",
-    country: ""
+    gender: '',
+    realname: '',
+    realsurname: '',
+    country: ''
+    // Add other form fields for different steps
   });
-  const [err, setError] = useState(null);
-
-  // Handle the change
-  const handleChange = (e) => {
-    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
-
-  // Gmail validation
-  const isGmail = (email) => {
-    const gmailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return gmailPattern.test(email);
-  };
-
-  // Handle the submit
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (inputs.username.trim() === "") {
-      setError("The 'username' field cannot be empty");
-      return;
-    }
-
-    if (inputs.email.trim() === "") {
-      setError("The 'email' field cannot be empty");
-      return;
-    }
-
-    if (inputs.password.trim() === "") {
-      setError("The 'password' field cannot be empty");
-      return;
-    }
-
-    if (!isGmail(inputs.email)) {
-      setError("The email address is not in a valid format");
-      return;
-    }
-
-    /*if (inputs.age < 0 || isNaN(inputs.age)) {
-      setError("The age must be a positive number");
-      return;
-    }
-    */
-    
-    try {
-      await axios.post("/register", inputs);
-      navigate("/login");
-    } catch (err) {
-      setError(err.response.data);
-    }
-  };
   
-  const setValue = (name, value) => {
-    userData[name] = value;
-  }
+  const [passwords, setPasswords] = useState({
+    password: '',
+    confirmPassword: ''
+  });
 
-  const handleEmailStep = () => {
+  const handlePasswords = (e) => {
+    const { name, value } = e.target;
+    setPasswords((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const [error, setError] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleNextStep = async (e) => {
+    e.preventDefault();
+    if (step === 1) {
+      if (!validateEmail(formData.email)) {
+        setError("Please enter a valid email address");
+        return;
+      }else{
+        const json = {
+          email: formData.email
+        }
+        console.log(json)
+        try{
+          let response = await axios.post("/userexists", json);
+          console.log(response)
+          setStep(step + 1);
+        } catch (err){
+          $("#errorMail").toggleClass("invisible", "visible");
+        }
+      }
+    } else if (step === 2) {
+      // Validation for step 2, if needed
+      if (formData.username.trim() === "") {
+        //$("#username").attr("placeholder", "Please introduce a user!")
+        alert("Please introduce an username!");
+      }
+
+      if (formData.realname.trim() === "") {
+        alert("Please introduce a name!");
+      }
+
+      if (formData.realsurname.trim() === "") {
+        alert("Please introduce a surname!");
+      }
+
+      if (formData.age.trim() === "") {
+        alert("Please introduce an age!");
+      }
+
+      if (passwords.password.trim() === "") {
+        alert("Please introduce a password!");
+      }
+
+      if (passwords.confirmPassword.trim() === "") {
+        alert("Please confirm your password!");
+      }
+
+      if (passwords.password !== passwords.confirmPassword) {
+        alert("Passwords do not match!");
+      }else{
+        formData.password = passwords.password
+        console.log(formData.password)
+        
+        try{
+          let response = await axios.post("/register", formData);
+          console.log(response)
+          setStep(step + 1);
+        } catch (err){
+          $("#errorMail").toggleClass("invisible", "visible");
+        }
+      }
+
+    }
+
     
-    $("#registerForm").html("");
-    $("#registerForm").html("<h1>Me gusta pincharme heroina en vena</h1>");
-    console.log(inputs.username)
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const print = () => {
+    console.log(formData.email)
   }
 
-  const handleUserInformationStep = () => {
-      
-  }
-
-  const handleAllergiesStep = () => {
-      
-  }
-
-  // Render the Register component
-  //style={{ backgroundImage: `url(${backgroundImage})` }}
-  return (
-    <div className="auth" style={{ backgroundImage: `url(${BackgroundImg})` }}>
-      <button id="jqrytest" onClick={handleEmailStep}>Test Jquery</button>
-      <div id="register-form">
-        <form>
-          <h1>Register</h1>
-          <input
-            required
-            type="text"
-            placeholder="Username"
-            name="username"
-            onChange={handleChange}
-          />
-          <input
-            required
-            type="email"
-            placeholder="Email"
-            name="email"
-            onChange={handleChange}
-          />
-          <input
-            required
-            type="password"
-            placeholder="Password"
-            name="password"
-            onChange={handleChange}
-          />
-
+  const renderStep = () => {
+    switch (step) {
+      case 1:
+        return (
           <div>
-            <fieldset>
-              <legend style={{ fontSize: '16px' }}>Supermarket</legend>
-              {markets.map((market) => (
-                <div key={market.id}>
-                  <input type="radio" id={market.name} name="idsupermarket" value={market.id} onChange={handleChange} />
-                  <label for={market.name}>{market.name}</label>
+            <h1>Step 1: Email</h1>
+            <form onSubmit={handleNextStep}>
+              <div className="form-group">
+                <label htmlFor="exampleInputEmail1">Email address</label>
+                <input name="email" type="email" value={formData.email} onChange={handleChange} className="form-control"
+                  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
+                  <label id="errorMail" htmlFor="ErrorMail" className='invisible text-danger'>This user already exists in our database! Register with another email.</label>
                 </div>
-              ))}
-            </fieldset>
+              {error && <p className="error-msg">{error}</p>}
+              <button onClick={print} type="submit" className="btn btn-primary">Next</button>
+            </form>
           </div>
+        );
+      case 2:
+        const countries = [
+          "Select a country",
+          "Spain",
+          "France",
+          "Italy",
+          "Germany"
+          // Add your list of countries here
+        ];
 
-          <div className="image">
-            <div className="image-container">
+        return (
+          <div>
+          <h1>Step 2: User Information</h1>
+          <form onSubmit={handleNextStep}>
+            <div className="form-group">
+              <label htmlFor="realname">Name</label>
               <input
-                style={{ display: "none" }}
-                type="image"
-                id="image"
-                name=""
-                onChange={(e) => setFile(e.target.files[0])}
+                name="realname"
+                type="text"
+                value={formData.realname}
+                onChange={handleChange}
+                className="form-control"
+                id="realname"
+                placeholder="Enter your name"
               />
-              <label className="file" htmlFor="file">
-                Upload profile picture
-              </label>
-
             </div>
+            <div className="form-group">
+              <label htmlFor="realsurname">Surname</label>
+              <input
+                name="realsurname"
+                type="text"
+                value={formData.realsurname}
+                onChange={handleChange}
+                className="form-control"
+                id="realsurname"
+                placeholder="Enter your surname"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="username">Username</label>
+              <input
+                name="username"
+                type="text"
+                value={formData.username}
+                onChange={handleChange}
+                className="form-control"
+                id="username"
+                placeholder="Enter your username"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                name="password"
+                type="password"
+                value={passwords.password}
+                onChange={handlePasswords}
+                className="form-control"
+                id="password"
+                placeholder="Enter your password"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <input
+                name="confirmPassword"
+                type="password"
+                value={passwords.confirmPassword}
+                onChange={handlePasswords}
+                className="form-control"
+                id="confirmPassword"
+                placeholder="Confirm your password"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="age">Age</label>
+              <input
+                name="age"
+                type="number"
+                value={formData.age}
+                onChange={handleChange}
+                className="form-control"
+                id="age"
+                placeholder="Enter your age"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="gender">Gender</label>
+              <select
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+                className="form-control"
+                id="gender">
+                <option>select your geneder</option>
+                <option value="m">Male</option>
+                <option value="f">Female</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label htmlFor="country">Country</label>
+              <select
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+                className="form-control"
+                id="country"
+              >
+                {countries.map((country, index) => (
+                  <option key={index} value={country}>
+                    {country}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {/* Add other form fields for step 2 */}
+            <button type="submit" className="btn btn-primary">Next</button>
+          </form>
+        </div>
+        );
+      case 3:
+        return (
+          <div>
+            <h1>Step 3: Checkboxes</h1>
+            {/* Step 3 form fields */}
           </div>
+        );
+      default:
+        return null;
+    }
+  };
 
-          <input
-            required
-            type="image_url"
-            placeholder="Profile picture url"
-            name="image_url"
-            onChange={handleChange}
-          />
-
-          <button style={{ fontSize: '16px' }} onClick={handleSubmit}>Register</button>
-          {err && <p>{err}</p>}
-          <span className="infotext">
-            Do you have an account? <Link to="/login">Login</Link>
-          </span>
-        </form>
-      </div>
+  return (
+    <div className="login-form" style={{ backgroundImage: `url(${backgroundImage})` }}>
+      {renderStep()}
     </div>
   );
 };
 
-// Export the Register component
 export default Register;
