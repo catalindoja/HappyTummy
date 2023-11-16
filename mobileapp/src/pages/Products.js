@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
+
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGlassWhiskey, faHatCowboy, faTimes, faEdit, faSave } from "@fortawesome/free-solid-svg-icons";
@@ -34,8 +36,18 @@ const Products = () => {
     };
 
     const deleteProduct = async (productId) => {
+        console.log(productId);
         try {
+            console.log(productId);
+            // Obtener la información del producto antes de eliminarlo
+            const deletedProduct = products.find(product => product.id === productId);
+            console.log(products);
+            console.log(deletedProduct.product_name);
+            console.log(deletedProduct.product_description);
+            console.log(deletedProduct.image_url);
+            // Eliminar el producto
             await axios.delete(`/products/${productId}`);
+            // Actualizar la interfaz de usuario eliminando el producto de la lista
             setProducts(products.filter(product => product.id !== productId));
         } catch (error) {
             console.error("Error deleting product:", error);
@@ -211,9 +223,11 @@ const Products = () => {
                                     <PublishNewProduct />
                                 </div>
                                 <div className="modal-footer text-center justify-content-center">
-                                    <button className="btn btn-success" onClick={publishNewProduct}>
-                                        <FontAwesomeIcon icon={faGlassWhiskey} style={{ marginRight: '5px' }} />
-                                        Product
+                                    <button className="btn btn-success">
+                                        <Link to="/publish-new-product">
+                                            <FontAwesomeIcon icon={faGlassWhiskey} style={{ marginRight: '5px' }} />
+                                            Product
+                                        </Link>
                                     </button>
                                     <button className="btn btn-danger" onClick={publishNewRecipe}>
                                         Recipe
@@ -225,66 +239,6 @@ const Products = () => {
                     </Popup>
                 </div>
             </div>
-
-            {/* Modal de edición */}
-            <Popup
-                trigger={<button className="btn btn-primary">Edit Product</button>}
-                modal
-            >
-                {(close) => (
-                    <>
-                        <div className="modal-header">
-                            <h5 className="modal-title text-center">Edit Product</h5>
-                            <button className="close" onClick={close} style={{ border: 'none', fontWeight: 'bold', fontSize: '30px' }}>
-                                &times;
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                            {/* Formulario de edición */}
-                            <form>
-                                <div className="form-group">
-                                    <label htmlFor="product_name">Product Name</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        id="product_name"
-                                        name="product_name"
-                                        value={editedProduct.product_name}
-                                        onChange={handleEditFormChange}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="product_description">Product Description</label>
-                                    <textarea
-                                        className="form-control"
-                                        id="product_description"
-                                        name="product_description"
-                                        value={editedProduct.product_description}
-                                        onChange={handleEditFormChange}
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label htmlFor="image_url">Image URL</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        id="image_url"
-                                        name="image_url"
-                                        value={editedProduct.image_url}
-                                        onChange={handleEditFormChange}
-                                    />
-                                </div>
-                            </form>
-                        </div>
-                        <div className="modal-footer text-center justify-content-center">
-                            <button className="btn btn-primary" onClick={saveChanges}>
-                                <FontAwesomeIcon icon={faSave} style={{ marginRight: '5px' }} />
-                                Save Changes
-                            </button>
-                        </div>
-                    </>
-                )}
-            </Popup>
         </div>
     );
 };

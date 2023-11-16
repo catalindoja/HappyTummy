@@ -3,10 +3,12 @@ import {
   RouterProvider,
   Outlet
 } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Counter from './components/Counter';
+import { AuthContext } from "./pages/AuthContext";
 
 import Home from './pages/Home';
 import Login from './pages/Login';
