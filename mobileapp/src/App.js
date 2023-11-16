@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Counter from './components/Counter';
 import BarcodeScanner from './pages/Scanner';
@@ -8,6 +7,17 @@ import Home from './pages/Home';
 import Menu from './components/Menu';
 import Register from './pages/Register'
 import Login from './pages/Login'
+import Scanner from './pages/Scanner';
+import Init from './pages/Init';
+import Login from './pages/Login';
+import Register1 from './pages/Register1';
+import Home from './pages/Home';
+import Profile from './pages/Profile';
+import SearchProduct from './pages/SearchProduct';
+import Test from './pages/Test';
+import Porfile from './pages/Profile';
+import SingleProduct from './pages/SingleProduct';
+
 import {
   createBrowserRouter,
   RouterProvider,
@@ -17,7 +27,6 @@ import {
 const Layout = () => {
   return (
     <>
-
       <Outlet />
       
       <Menu />
@@ -32,13 +41,41 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
+        element: <Test />
+      },
+      {
+        path: "/home",
         element: <Splash />
-      }
+      },
+      {
+        path: "/profile",
+        element: <Porfile />
+      },
+      {
+        path: "/searchproduct",
+        element: <SearchProduct />
+      },
+      {
+        path: "/products/:id",
+        element: <SingleProduct />
+      },
+      {
+        path: "/scanner",
+        element: <Scanner />
+      },
     ]
   },
   {
-    path: "/scanner",
-    element: <BarcodeScanner />
+    path: "/init",
+    element: <Init />
+  },
+  {
+    path: "/login",
+    element: <Login />
+  },
+  {
+    path: "/register1",
+    element: <Register1 />
   },
   {
     path: "/home",
