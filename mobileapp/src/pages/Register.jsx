@@ -137,7 +137,7 @@ const Register = () => {
   return (
     <div className="auth" style={{ backgroundImage: `url(${BackgroundImg})` }}>
       <button id="jqrytest" onClick={handleEmailStep}>Test Jquery</button>
-      <div id="registerForm">
+      <div id="register-form">
         <form>
           <h1>Register</h1>
           <input
