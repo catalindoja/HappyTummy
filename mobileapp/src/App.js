@@ -2,7 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Counter from './components/Counter';
-import BarcodeScanner from './pages/Scanner';
+import Scanner from './pages/Scanner';
 import Home from './pages/Home';
 import Menu from './components/Menu';
 import {
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/scanner",
-    element: <BarcodeScanner />
+    element: <Scanner />
   }
 ]);
 
