@@ -331,21 +331,3 @@ const SingleProduct = () => {
 
 // Export the component to be used on other pages
 export default SingleProduct;
-
-
-// import React from "react";
-// import Teal from "../img/teal.png";
-// import './Home.css';
-// import backgroundImage from "../img/clearbackground.png";
-// import Card from "../components/ProductCard";
-
-// function singleproduct() {
-
-//     return (
-//         <div>single product</div>
-        
-//     );
-
-// }
-
-// export default singleproduct;

@@ -6,8 +6,6 @@ import Card from "../components/ProductCard";
 
 function Home() {
 
-
-
     const cardsinfo = [
         {
         },

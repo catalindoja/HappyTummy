@@ -5,13 +5,13 @@ import Menu from './components/Menu';
 import Scanner from './pages/Scanner';
 import Init from './pages/Init';
 import Login from './pages/Login';
-import Register1 from './pages/Register1';
 import Home from './pages/Home';
-import Profile from './pages/Profile';
-import SearchProduct from './pages/SearchProduct';
-import Test from './pages/Test';
+import Search from './pages/Search';
+import SingleRecipe from './pages/SingleRecipe';
 import Porfile from './pages/Profile';
 import SingleProduct from './pages/SingleProduct';
+import PostProduct from './pages/PostProduct';
+import PostRecipe from './pages/PostRecipe';
 
 import {
   createBrowserRouter,
@@ -34,10 +34,6 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/",
-        element: <Test />
-      },
-      {
         path: "/home",
         element: <Home />
       },
@@ -46,16 +42,28 @@ const router = createBrowserRouter([
         element: <Porfile />
       },
       {
-        path: "/searchproduct",
-        element: <SearchProduct />
+        path: "/search",
+        element: <Search />
       },
       {
         path: "/products/:id",
         element: <SingleProduct />
       },
       {
+        path: "/recipes/:id",
+        element: <SingleRecipe />
+      },
+      {
         path: "/scanner",
         element: <Scanner />
+      },
+      {
+        path: "/postproduct",
+        element: <PostProduct />
+      },
+      {
+        path: "/postrecipe",
+        element: <PostRecipe />
       },
     ]
   },
@@ -66,10 +74,6 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />
-  },
-  {
-    path: "/register1",
-    element: <Register1 />
   }
 ]);
 

@@ -16,19 +16,24 @@ function ProductCard(props) {
     // Interpret descriptions
     const getText = (html) => {
         const doc = new DOMParser().parseFromString(html, "text/html");
-        return doc.body.textContent;
+        return doc.body.textContent; 
     };
 
     return (
-        <div className="card mb-2 d-flex" style={{ width: "18rem;" }}>
-            <img src={props.image} className="card-img-top" alt={props.title} />
+        <div className="card mb-2 d-flex card-border" style={{ width: "15rem;" }}>
+            <img
+                src={props.image}
+                className="card-img-top"
+                alt={props.title}
+                style={{ objectFit: "cover", height: "200px", borderRadius: "8px" }}
+            />
             <div className="card-body">
                 <div className="card-header">
-                    <h5 className="card-title afw-bold">{props.title}</h5>
+                    <h5 className="afw-bold card-title">{props.title}</h5>
                     <img src={heart} className="heart-icon" alt="Heart" />
                 </div>
-                <p className="card-text">{limitText(getText(props.desc), 130)}</p>
-                <a href={`/products/${props.id}`} className="btn btn-primary">Read more</a>
+                <p className="card-text">{limitText(getText(props.desc), 100)}</p>
+                <a href={`/products/${props.id}`} className="btn btn-primary blue-button">Read more</a>
             </div>
         </div>
     );

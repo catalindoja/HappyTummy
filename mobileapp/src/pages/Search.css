@@ -1,0 +1,38 @@
+.searchcontent {
+    padding: 20px;
+  }
+  
+  .section-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    background-color: #87CEEB; /* Azul celeste */
+    color: #fff; /* Letras blancas */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px !important;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button.active {
+    background-color: #00a2ff; /* Azul más fuerte para el botón activo */
+    border-radius: 5%;
+  }
+  
+  .boxes {
+    margin-bottom: 20px;
+  }
+  
+  .search {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+  }
