@@ -27,7 +27,7 @@ const Menu = () => {
             <Link to="/home">
               <img className="p-2" src={HomeIcon} alt="d4" style={{ width: '65px', height: '65px' }}/>
             </Link>
-            <Link to="/post">
+            <Link to="/postproduct">
               <img className="p-2" src={PostIcon} alt="d3" style={{ width: '63px', height: '63px' }}/>
             </Link>
             <Link to="/search">

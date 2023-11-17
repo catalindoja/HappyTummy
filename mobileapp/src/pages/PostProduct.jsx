@@ -60,6 +60,20 @@ const Write = () => {
     fetchData();
   }, []);
 
+  // Obtains the list of categories from the backend
+  const [supermarkets, setSupermarkets] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`/markets`);
+        setSupermarkets(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, []);
+
   // Function to handle the toggle of the checkboxes
   const handleAllergyToggle = (allergyId) => {
     if (selectedAllergies.includes(allergyId)) {
@@ -69,24 +83,18 @@ const Write = () => {
     }
   };
 
+  // Function to handle the toggle of the checkboxes
+  const handleSupermarketToggle = (supermarketId) => {
+    if (selectedSupermarkets.includes(supermarketId)) {
+        setSelectedSupermarkets(selectedSupermarkets.filter((id) => id !== supermarketId));
+    } else {
+        setSelectedSupermarkets([...selectedSupermarkets, supermarketId]);
+    }
+  };
+
   // Obtains the current user from the context
   const { currentUser } = useContext(AuthContext);
   const iduser = currentUser.id;
-
-  // Obtains the name of the market from the backend
-  const [marketuser, setMarketNameUser] = useState("");
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`/markets/${currentUser.idsupermarket}`);
-        const data = response.data;
-        setMarketNameUser(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
-  }, [currentUser.idsupermarket]);
 
   // Bar code number combination
   const [combinedBarcode, setCombinedBarcode] = useState(state?.barcode || "");
@@ -137,6 +145,7 @@ const Write = () => {
   const [idbrand, setidbrand] = useState(state?.idbrand || "");
   const [idcategory, setidcategory] = useState(state?.idcategory || "");
   const [selectedAllergies, setSelectedAllergies] = useState([]);
+  const [selectedSupermarkets, setSelectedSupermarkets] = useState([]);
   const [measurement, setSelectedMeasurement] = useState(state?.measurement || "");
   const [image_url, setImageUrl] = useState(state?.image_url || "");
   const [value, setValue] = useState(state?.product_description || "");
@@ -160,8 +169,8 @@ const Write = () => {
     }
 
     if (!price || price.trim() === "") {
-      setError("Price of the product required");
-      return;
+       setError("Price of the product required");
+       return;
     }
 
     if (!quantity || quantity.trim() === "") {
@@ -194,19 +203,19 @@ const Write = () => {
       if (!state) {
         // Post
         const productResponse = await axios.post(`/products/`, {
-          product_name,
-          product_description: value,
-          image: file ? imgUrl : "",
-          date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-          idcategory,
-          iduser,
-          idbrand,
-          barcode: combinedBarcode,
-          price,
-          quantity,
-          measurement,
-          likes,
-          image_url,
+           product_name,
+           product_description: value,
+           image: file ? imgUrl : "",
+           date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+           idcategory,
+           iduser,
+           idbrand,
+           barcode: combinedBarcode,
+           price,
+           quantity,
+           measurement,
+           likes,
+           image_url,
         });
 
         // Obtain the ID of the created product
@@ -221,13 +230,20 @@ const Write = () => {
         });
 
         // Post in intermediate table 'stock'
-        await axios.post(`/stock/`, {
-          idsupermarket: marketuser.id,
-          idproduct: productId,
-          available: 1
-        })
+        // await axios.post(`/stock/`, {
+        //   idsupermarket: marketuser.id,
+        //   idproduct: productId,
+        //   available: 1
+        // })
+        selectedSupermarkets.forEach(async (idsupermarkets) => {
+            await axios.post(`/stock/`, {
+              idsupermarket: idsupermarkets,
+              idproduct: productId,
+              available: 1
+            })
+          });
 
-        navigate("/products");
+        navigate("/home");
       } else {
         // Patch
         const productResponse = await axios.patch(`/products/${state.id}`, {
@@ -256,13 +272,20 @@ const Write = () => {
         });
 
         // Put in intermediate table 'stock'
-        await axios.put(`/stock/`, {
-          idsupermarket: marketuser.id,
-          idproduct: productId,
-          available: 1
-        })
+        // await axios.put(`/stock/`, {
+        //   idsupermarket: marketuser.id,
+        //   idproduct: productId,
+        //   available: 1
+        // })
+        selectedSupermarkets.forEach(async (idsupermarkets) => {
+            await axios.post(`/productallergies/`, {
+              idsupermarket: idsupermarkets,
+              idproduct: productId,
+              available: 1
+            })
+          });
 
-        navigate("/products");
+        navigate("/home");
       }
     } catch (err) {
       console.log(err);
@@ -275,13 +298,6 @@ const Write = () => {
       <h1 className="supertitle-write">Post a new product ❤</h1>
       <div className="add-write">
         <div className="content-write">
-  
-          <div className="market-write">
-            <h3>Supermarket</h3>
-            <div className="market-container-write">
-              {marketuser.name}
-            </div>
-          </div>
   
           <input
             type="text"
@@ -299,11 +315,11 @@ const Write = () => {
             />
           </div>
   
-          {/* <input
+          <input
             type="number"
             placeholder="Price"
             onChange={(e) => setPrice(e.target.value)}
-          /> */}
+          />
   
           <div className="measurement-container-write">
             <div className="quantity-input-write">
@@ -380,7 +396,23 @@ const Write = () => {
               ))}
             </fieldset>
           </div>
-  
+
+          <div className="boxes-write">
+            <fieldset>
+              <legend>Supermarkets</legend>
+              <span>It can be found in...</span>
+              {supermarkets.map((market) => (
+                <div key={market.id}>
+                  <input type="checkbox" id={market.name} name="markets[]"
+                    checked={selectedSupermarkets.includes(market.id)}
+                    onChange={() => handleSupermarketToggle(market.id)}
+                    className="custom-checkbox-write" />
+                  <label htmlFor={market.name}>{market.name}</label>
+                </div>
+              ))}
+            </fieldset>
+          </div>
+
           <div className="boxes-write">
             <fieldset>
               <legend>Brand</legend>
@@ -405,6 +437,7 @@ const Write = () => {
             </fieldset>
           </div>
   
+          <h3 className="picture-title">Update a picture 📸</h3>
           <input
             type="text"
             placeholder="Image url"

@@ -1,0 +1,176 @@
+/* Estilos generales */
+   body {
+    background-color: #f0fffe; /* Azul pastel de fondo */
+    color: #333; /* Color de texto principal */
+  }
+  
+  /* Estilos para la sección principal */
+  .add-write {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff; /* Fondo blanco para resaltar */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sutil sombra */
+  }
+  
+  /* Estilos para el título principal */
+  .supertitle-write {
+    color: teal; /* Azul más oscuro para el título */
+    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+  
+  /* Estilos para la sección del mercado */
+  .market-write {
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  
+  .market-container-write {
+    font-weight: bold;
+    color: teal; /* Azul más oscuro para el contenido del mercado */
+  }
+  
+  /* Estilos para los campos de entrada de texto */
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Estilos para el editor de texto */
+  .editorContainer-write {
+    margin-bottom: 20px;
+  }
+  
+  .editor-write {
+    width: 100%;
+    min-height: 150px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Estilos para la sección de códigos de barras */
+  .super-bar-code-write {
+    margin-bottom: 20px;
+  }
+  
+  .super-bar-code-write h3 {
+    font-size: 16px;
+    margin-top: -3px;
+    margin-bottom: -15px;
+  }
+  
+  .super-bar-code-write input {
+    width: calc(33.33% - 10px);
+    margin-right: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .measurement-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .measurement-input {
+    margin-top: 0px;
+    display: flex;
+    align-items: center;
+  }
+
+  .measurement-input-write select {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
+  
+
+  .measurement-input-write select:hover {
+    border-color: #b3b3b3;
+  }
+
+  .quantity-input-write {
+    flex: 1;
+    margin-right: 10px;
+  }
+
+  .measurement-input-write input {
+    width: 98%;
+  }
+
+  .measurement-container-write {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Estilos para las casillas de verificación */
+  .custom-checkbox-write {
+    margin-right: 5px;
+  }
+
+  .boxes-write{
+    border-color: #007bff;
+  }
+
+    .boxes-write legend {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .boxes-write input[type="radio"] {
+        margin-right: 5px; /* Ajusta el valor según la separación deseada */
+      }
+      
+      .boxes-write label {
+        margin-right: 10px; /* Ajusta el valor según la separación deseada */
+      }
+  
+  /* Estilos para las imágenes */
+  .image-write {
+    margin-bottom: 20px;
+  }
+  
+  .image-container-write {
+    position: relative;
+  }
+  
+  /* Estilos para el botón */
+  .buttons-write button {
+    background-color: teal; /* Azul más oscuro para el botón */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Estilos para los mensajes de error */
+  .error-message-write {
+    color: #ff0000; /* Rojo para mensajes de error */
+  }
+
+  .picture-title{
+    margin-top: 18px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+
+  

@@ -25,6 +25,8 @@
   /* Estilos para la sección del mercado */
   .market-write {
     margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: bold;
   }
   
   .market-container-write {
@@ -155,6 +157,12 @@
   /* Estilos para los mensajes de error */
   .error-message-write {
     color: #ff0000; /* Rojo para mensajes de error */
+  }
+
+  .picture-title{
+    margin-top: 18px;
+    font-size: 20px;
+    font-weight: bold;
   }
 
 
