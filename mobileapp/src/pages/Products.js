@@ -46,7 +46,9 @@ const Products = () => {
             console.log(deletedProduct.product_description);
             console.log(deletedProduct.image_url);
             // Eliminar el producto
+            //alert("h");
             await axios.delete(`/products/${productId}`);
+            
             // Actualizar la interfaz de usuario eliminando el producto de la lista
             setProducts(products.filter(product => product.id !== productId));
         } catch (error) {

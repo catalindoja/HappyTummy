@@ -1,10 +1,5 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Outlet
-} from "react-router-dom";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
 import Counter from './components/Counter';
@@ -18,56 +13,24 @@ import MyShoppingList from "./pages/MyShoppingList";
 import EditPerfil from "./pages/EditPerfil";
 import Allergies from "./pages/Allergies";
 
-const Layout = () => {
-  return (
-    <>
-      <Outlet />
-    </>
-  );
-};
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [               // NAVBAR
-      {
-        path: "/",
-        element: <Home />    
-      },
-      {
-        path: "/products",            
-        element: <Products />
-      },
-      {
-        path: "/myshoppinglist",
-        element: <MyShoppingList />              
-      },
-      {
-        path: "/allergies",
-        element: <Allergies />
-      }
-    ]
-  },                          // NO NAVBAR
-  {
-    path: "/login",
-    element: <Login />
-  },
-  {
-    path: "/publishnewproduct",
-    element: <PublishNewProduct />
-  },
-  {
-    path: "/editperfil",
-    element: <EditPerfil />
-  }
-]);
-
-function App() {
+const App = () => {
   return (
     <div className="app">
       <div className="container">
-        <RouterProvider router={router} />
+        <Router>
+          <Routes>
+            {/* NAVBAR */}
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/myshoppinglist" element={<MyShoppingList />} />
+            <Route path="/allergies" element={<Allergies />} />
+
+            {/* NO NAVBAR */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/publishnewproduct" element={<PublishNewProduct />} />
+            <Route path="/editperfil/:id" element={<EditPerfil />} />
+          </Routes>
+        </Router>
       </div>
     </div>
   );
