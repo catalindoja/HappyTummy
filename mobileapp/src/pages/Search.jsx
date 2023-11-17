@@ -134,7 +134,7 @@ function Search() {
                     <div>
                         <div className="card-container">
                             {filteredRecipes.map(post => (
-                                <ProductCard
+                                <RecipeCard
                                     image={post.image_url}
                                     title={post.title}
                                     desc={post.description}

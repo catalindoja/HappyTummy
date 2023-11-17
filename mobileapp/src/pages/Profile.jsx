@@ -62,7 +62,6 @@ function Profile() {
                     Go premium!
                 </div>
                 <img className="edit" src={Edit} alt="" />
-                <img className="adjust" src={Edit} alt="" />
             </div>
 
             <h4 className="maintitles">My products 🛒</h4>
