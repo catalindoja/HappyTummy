@@ -12,6 +12,7 @@ import PublishNewProduct from "./pages/PublishNewProduct";
 import MyShoppingList from "./pages/MyShoppingList";
 import EditPerfil from "./pages/EditPerfil";
 import Allergies from "./pages/Allergies";
+import Translation from './pages/Translation';
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/publishnewproduct" element={<PublishNewProduct />} />
             <Route path="/editperfil/:id" element={<EditPerfil />} />
+            <Route path="translation" element={<Translation />} />
           </Routes>
         </Router>
       </div>
