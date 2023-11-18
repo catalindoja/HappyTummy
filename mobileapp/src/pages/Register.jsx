@@ -5,8 +5,12 @@ import axios from "axios";
 import $ from "jquery";
 import { useNavigate } from "react-router-dom";
 import { countries } from 'countries-list';
+import { useTranslation } from 'react-i18next';
+import Configration from "../components/Configration";
+import i18n from "../components/i18n";
 
 const Register = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const [step, setStep] = useState(1);
