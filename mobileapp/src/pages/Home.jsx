@@ -2,10 +2,10 @@ import React from "react";
 import Homeimage from "../img/homeimage.jpg";
 import Logo from "../img/logo.png";
 import FoodContent from "../img/foodcontent.jpeg";
-import { useTranslation } from 'react-i18next';
+//import { useTranslation } from 'react-i18next';
 
 const Home = () => {
-    const { t } = useTranslation();
+    //const { t } = useTranslation();
     return (
         <div className="Welcome">
                 <h1 className="title1">Welcome To Happy Tummy</h1>

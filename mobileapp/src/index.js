@@ -7,7 +7,6 @@ import ReactDOM from 'react-dom';
 import { AuthProvider } from "./pages/AuthContext";
 import './index.css';
 import App from './App';
-import Translation from "./pages/Translation";
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
