@@ -24,16 +24,16 @@ const Menu = () => {
               border: '1px solid #acf9f9', // Borde azul más fuerte
             }}
           >
-            <Link to="/home">
+            <Link to="/app/home">
               <img className="p-2" src={HomeIcon} alt="d4" style={{ width: '65px', height: '65px' }}/>
             </Link>
-            <Link to="/postproduct">
+            <Link to="/app/postproduct">
               <img className="p-2" src={PostIcon} alt="d3" style={{ width: '63px', height: '63px' }}/>
             </Link>
-            <Link to="/search">
+            <Link to="/app/search">
               <img className="p-2" src={SearchIcon} alt="dr2" style={{ width: '65px', height: '65px' }}/>
             </Link>
-            <Link to="/profile">
+            <Link to="/app/profile">
               <img className="p-2" src={ProfileIcon} alt="dr1" style={{ width: '65px', height: '65px' }}/>
             </Link>
           </div>

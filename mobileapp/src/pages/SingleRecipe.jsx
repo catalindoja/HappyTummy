@@ -75,6 +75,7 @@ const SingleRecipe = () => {
             try {
                 // Recepie
                 const res = await axios.get(`/recipes/${postId}`);
+                console.log(res)
                 setPosts(res.data);
 
                 // Ownwer
@@ -98,7 +99,7 @@ const SingleRecipe = () => {
     const handleDelete = async () => {
         try {
             const productResponse = await axios.delete(`/recipes/${post.id}`);
-            navigate("/")
+            navigate("/app/home")
         } catch (err) {
             if (err.response) {
                 console.log("Respuesta del servidor con estado de error:", err.response.status);

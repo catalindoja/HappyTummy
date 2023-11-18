@@ -33,7 +33,7 @@ function ProductCard(props) {
                     <img src={heart} className="heart-icon" alt="Heart" />
                 </div>
                 <p className="card-text">{limitText(getText(props.desc), 100)}</p>
-                <a href={`/products/${props.id}`} className="btn btn-primary blue-button">Read more</a>
+                <a href={`/app/products/${props.id}`} className="btn btn-primary blue-button">Read more</a>
             </div>
         </div>
     );

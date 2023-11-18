@@ -8,8 +8,6 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import Scanner from './pages/Scanner';
 import Init from './pages/Init';
-import Login from './pages/Login';
-import Register1 from './pages/Register1';
 import Home from './pages/Home';
 import Search from './pages/Search';
 import SingleRecipe from './pages/SingleRecipe';
@@ -28,7 +26,6 @@ const Layout = () => {
   return (
     <>
       <Outlet />
-      
       <Menu />
     </>
   );
@@ -37,48 +34,6 @@ const Layout = () => {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
-    children: [
-      {
-        path: "/home",
-        element: <Home />
-      },
-      {
-        path: "/splash",
-        element: <Splash />
-      },
-      {
-        path: "/profile",
-        element: <Porfile />
-      },
-      {
-        path: "/search",
-        element: <Search />
-      },
-      {
-        path: "/products/:id",
-        element: <SingleProduct />
-      },
-      {
-        path: "/recipes/:id",
-        element: <SingleRecipe />
-      },
-      {
-        path: "/scanner",
-        element: <Scanner />
-      },
-      {
-        path: "/postproduct",
-        element: <PostProduct />
-      },
-      {
-        path: "/postrecipe",
-        element: <PostRecipe />
-      },
-    ]
-  },
-  {
-    path: "/init",
     element: <Init />
   },
   {
@@ -88,6 +43,48 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />
+  },
+  {
+    path: "/app",
+    element: <Layout />,
+    children: [
+      {
+        path: "home",
+        element: <Home />
+      },
+      {
+        path: "splash",
+        element: <Splash />
+      },
+      {
+        path: "profile",
+        element: <Porfile />
+      },
+      {
+        path: "search",
+        element: <Search />
+      },
+      {
+        path: "products/:id",
+        element: <SingleProduct />
+      },
+      {
+        path: "recipes/:id",
+        element: <SingleRecipe />
+      },
+      {
+        path: "scanner",
+        element: <Scanner />
+      },
+      {
+        path: "postproduct",
+        element: <PostProduct />
+      },
+      {
+        path: "postrecipe",
+        element: <PostRecipe />
+      },
+    ]
   }
 ]);
 

@@ -248,7 +248,7 @@ const Register = () => {
     switch (step) {
       case 1:
         return (
-          <div>
+          <div className="container" style={{ backgroundImage: `url(${backgroundImage})` }}>
             <h1>Step 1: Email</h1>
             <form onSubmit={handleNextStep}>
               <div className="form-group">

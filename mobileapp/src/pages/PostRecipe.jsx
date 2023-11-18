@@ -112,7 +112,7 @@ const Write = () => {
                   image_url,
               });
           }
-          navigate("/home");
+          navigate("/app/home");
       } catch (err) {
           console.log(err);
       }

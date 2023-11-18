@@ -160,7 +160,7 @@ const SingleProduct = () => {
   const handleDelete = async () => {
     try {
       const productResponse = await axios.delete(`/products/${post.id}`);
-      navigate("/")
+      navigate("/app/home")
     } catch (err) {
       if (err.response) {
         console.log("Respuesta del servidor con estado de error:", err.response.status);

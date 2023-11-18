@@ -28,7 +28,7 @@ function RecipeCard(props) {
                     <img src={heart} className="heart-icon" alt="Heart" />
                 </div>
                 <p className="card-text">{limitText(getText(props.desc), 100)}</p>
-                <a href={`/recipes/${props.id}`} className="btn btn-primary blue-button">Read more</a>
+                <a href={`/app/recipes/${props.id}`} className="btn btn-primary blue-button">Read more</a>
             </div>
         </div>
     );

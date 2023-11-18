@@ -243,7 +243,7 @@ const Write = () => {
             })
           });
 
-        navigate("/home");
+        navigate("/app/home");
       } else {
         // Patch
         const productResponse = await axios.patch(`/products/${state.id}`, {
@@ -285,7 +285,7 @@ const Write = () => {
             })
           });
 
-        navigate("/home");
+        navigate("/app/home");
       }
     } catch (err) {
       console.log(err);

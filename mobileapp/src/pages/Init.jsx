@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "../img/logo2.png";
 import './Init.css';
 import backgroundImage from "../img/clearbackground.png";
+import { Link } from 'react-router-dom';
 
 function Init() {
 
@@ -19,8 +20,12 @@ function Init() {
       </div>
 
       <div className="login_buttons">
-        <button type="button" className="btn btn-primary btn-sm">LOG IN</button>
-        <button type="button" className="btn btn-secondary btn-sm">REGISTER</button>
+        <Link to={"/login"}>
+          <button type="button" className="btn btn-primary btn-sm">LOG IN</button>
+        </Link>
+        <Link to={"/register"}>
+          <button type="button" className="btn btn-secondary btn-sm">REGISTER</button>
+        </Link>
       </div>
 
     </div>
