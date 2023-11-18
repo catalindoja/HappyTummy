@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/HappyTummy/static/css/main.ac01800a.css",
-    "main.js": "/HappyTummy/static/js/main.59202ced.js",
+    "main.js": "/HappyTummy/static/js/main.f93c80b7.js",
     "static/js/787.5a7b0756.chunk.js": "/HappyTummy/static/js/787.5a7b0756.chunk.js",
     "static/media/milk.jpeg": "/HappyTummy/static/media/milk.da67005f382b65373681.jpeg",
     "static/media/background.png": "/HappyTummy/static/media/background.ef19a64e6861f30279ec.png",
@@ -18,11 +18,11 @@
     "static/media/post.png": "/HappyTummy/static/media/post.6e1fb265bca1ea208b56.png",
     "index.html": "/HappyTummy/index.html",
     "main.ac01800a.css.map": "/HappyTummy/static/css/main.ac01800a.css.map",
-    "main.59202ced.js.map": "/HappyTummy/static/js/main.59202ced.js.map",
+    "main.f93c80b7.js.map": "/HappyTummy/static/js/main.f93c80b7.js.map",
     "787.5a7b0756.chunk.js.map": "/HappyTummy/static/js/787.5a7b0756.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ac01800a.css",
-    "static/js/main.59202ced.js"
+    "static/js/main.f93c80b7.js"
   ]
 }
