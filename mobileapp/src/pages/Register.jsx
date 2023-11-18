@@ -4,9 +4,9 @@ import './Register.css';
 import axios from "axios";
 import $ from "jquery";
 import { useNavigate } from "react-router-dom";
+import { countries } from 'countries-list';
 
 const Register = () => {
-
   const navigate = useNavigate();
 
   const [step, setStep] = useState(1);
@@ -21,9 +21,8 @@ const Register = () => {
     realname: '',
     realsurname: '',
     country: ''
-    // Add other form fields for different steps
   });
-  
+
   const [passwords, setPasswords] = useState({
     password: '',
     confirmPassword: ''
@@ -31,7 +30,6 @@ const Register = () => {
 
   const [iduser, setIdUser] = useState({
     iduser: ''
-  
   });
 
   const [markets, setMarkets] = useState([]);
@@ -39,7 +37,6 @@ const Register = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`/markets`);
-        // console.log(res.data)
         setMarkets(res.data);
       } catch (err) {
         console.log(err);
@@ -53,7 +50,6 @@ const Register = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`/allergies`);
-        // console.log(res.data)
         setAllergies(res.data);
       } catch (err) {
         console.log(err);
@@ -67,7 +63,6 @@ const Register = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(`/brands`);
-        // console.log(res.data)
         setBrands(res.data);
       } catch (err) {
         console.log(err);
@@ -136,23 +131,21 @@ const Register = () => {
       if (!validateEmail(formData.email)) {
         setError("Please enter a valid email address");
         return;
-      }else{
+      } else {
         const json = {
           email: formData.email
-        }
-        console.log(json)
-        try{
+        };
+        console.log(json);
+        try {
           let response = await axios.post("/userexists", json);
-          console.log(response)
+          console.log(response);
           setStep(step + 1);
-        } catch (err){
+        } catch (err) {
           $("#errorMail").toggleClass("invisible", "visible");
         }
       }
     } else if (step === 2) {
-      // Validation for step 2, if needed
       if (formData.username.trim() === "") {
-        //$("#username").attr("placeholder", "Please introduce a user!")
         alert("Please introduce an username!");
       }
 
@@ -178,35 +171,29 @@ const Register = () => {
 
       if (passwords.password !== passwords.confirmPassword) {
         alert("Passwords do not match!");
-      }else{
-        formData.password = passwords.password
-        console.log(formData.password)
-        
-        try{
+      } else {
+        formData.password = passwords.password;
+        console.log(formData.password);
+
+        try {
           let response = await axios.post("/register", formData);
-          console.log(response.data.id)
-          iduser.iduser = response.data.id
-          console.log("user id is: "+iduser)
+          console.log(response.data.id);
+          iduser.iduser = response.data.id;
+          console.log("user id is: " + iduser);
           setStep(step + 1);
-        } catch (err){
+        } catch (err) {
           $("#errorMail").toggleClass("invisible", "visible");
         }
       }
-
-    } else if (step === 3){
+    } else if (step === 3) {
       const idUser = iduser;
-      console.log(step)
-      // Validation for step 3, if needed
-      try{
-        console.log(selectedMarkets)
-        console.log(selectedAllergies)
-        console.log(selectedBrands)
+      try {
         for (const idmarket of selectedMarkets) {
           const favoriteMarketData = {
             iduser: iduser.iduser,
             idmarket,
           };
-          console.log(favoriteMarketData)
+          console.log(favoriteMarketData);
           await axios.post('/favmarkets', favoriteMarketData);
         }
 
@@ -228,11 +215,9 @@ const Register = () => {
 
         navigate("/login");
       } catch (err) {
-        console.log(error)
+        console.log(error);
       }
     }
-
-    
   };
 
   const validateEmail = (email) => {
@@ -241,8 +226,8 @@ const Register = () => {
   };
 
   const print = () => {
-    console.log(formData.email)
-  }
+    console.log(formData.email);
+  };
 
   const renderStep = () => {
     switch (step) {
@@ -254,198 +239,190 @@ const Register = () => {
               <div className="form-group">
                 <label htmlFor="exampleInputEmail1">Email address</label>
                 <input name="email" type="email" value={formData.email} onChange={handleChange} className="form-control"
-                  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"/>
-                  <label id="errorMail" htmlFor="ErrorMail" className='invisible text-danger'>This user already exists in our database! Register with another email.</label>
-                </div>
+                  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+                <label id="errorMail" htmlFor="ErrorMail" className='invisible text-danger'>This user already exists in our database! Register with another email.</label>
+              </div>
               {error && <p className="error-msg">{error}</p>}
               <button onClick={print} type="submit" className="btn btn-primary">Next</button>
             </form>
           </div>
         );
       case 2:
-        const countries = [
-          "Select a country",
-          "Spain",
-          "France",
-          "Italy",
-          "Germany"
-          // Add your list of countries here
-        ];
+        const countryOptions = ["Select a country", ...Object.values(countries).map(country => country.name)];
 
         return (
           <div>
-          <h1>Step 2: User Information</h1>
-          <form onSubmit={handleNextStep}>
-            <div className="form-group">
-              <label htmlFor="realname">Name</label>
-              <input
-                name="realname"
-                type="text"
-                value={formData.realname}
-                onChange={handleChange}
-                className="form-control"
-                id="realname"
-                placeholder="Enter your name"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="realsurname">Surname</label>
-              <input
-                name="realsurname"
-                type="text"
-                value={formData.realsurname}
-                onChange={handleChange}
-                className="form-control"
-                id="realsurname"
-                placeholder="Enter your surname"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="username">Username</label>
-              <input
-                name="username"
-                type="text"
-                value={formData.username}
-                onChange={handleChange}
-                className="form-control"
-                id="username"
-                placeholder="Enter your username"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                name="password"
-                type="password"
-                value={passwords.password}
-                onChange={handlePasswords}
-                className="form-control"
-                id="password"
-                placeholder="Enter your password"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="confirmPassword">Confirm Password</label>
-              <input
-                name="confirmPassword"
-                type="password"
-                value={passwords.confirmPassword}
-                onChange={handlePasswords}
-                className="form-control"
-                id="confirmPassword"
-                placeholder="Confirm your password"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="age">Age</label>
-              <input
-                name="age"
-                type="number"
-                value={formData.age}
-                onChange={handleChange}
-                className="form-control"
-                id="age"
-                placeholder="Enter your age"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="gender">Gender</label>
-              <select
-                name="gender"
-                value={formData.gender}
-                onChange={handleChange}
-                className="form-control"
-                id="gender">
-                <option>select your geneder</option>
-                <option value="m">Male</option>
-                <option value="f">Female</option>
-              </select>
-            </div>
-            <div className="form-group">
-              <label htmlFor="country">Country</label>
-              <select
-                name="country"
-                value={formData.country}
-                onChange={handleChange}
-                className="form-control"
-                id="country"
-              >
-                {countries.map((country, index) => (
-                  <option key={index} value={country}>
-                    {country}
-                  </option>
-                ))}
-              </select>
-            </div>
-            {/* Add other form fields for step 2 */}
-            <button type="submit" className="btn btn-primary">Next</button>
-          </form>
-        </div>
+            <h1>Step 2: User Information</h1>
+            <form onSubmit={handleNextStep}>
+              <div className="form-group">
+                <label htmlFor="realname">Name</label>
+                <input
+                  name="realname"
+                  type="text"
+                  value={formData.realname}
+                  onChange={handleChange}
+                  className="form-control"
+                  id="realname"
+                  placeholder="Enter your name"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="realsurname">Surname</label>
+                <input
+                  name="realsurname"
+                  type="text"
+                  value={formData.realsurname}
+                  onChange={handleChange}
+                  className="form-control"
+                  id="realsurname"
+                  placeholder="Enter your surname"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="username">Username</label>
+                <input
+                  name="username"
+                  type="text"
+                  value={formData.username}
+                  onChange={handleChange}
+                  className="form-control"
+                  id="username"
+                  placeholder="Enter your username"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  name="password"
+                  type="password"
+                  value={passwords.password}
+                  onChange={handlePasswords}
+                  className="form-control"
+                  id="password"
+                  placeholder="Enter your password"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="confirmPassword">Confirm Password</label>
+                <input
+                  name="confirmPassword"
+                  type="password"
+                  value={passwords.confirmPassword}
+                  onChange={handlePasswords}
+                  className="form-control"
+                  id="confirmPassword"
+                  placeholder="Confirm your password"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="age">Age</label>
+                <input
+                  name="age"
+                  type="number"
+                  value={formData.age}
+                  onChange={handleChange}
+                  className="form-control"
+                  id="age"
+                  placeholder="Enter your age"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="gender">Gender</label>
+                <select
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleChange}
+                  className="form-control"
+                  id="gender">
+                  <option>select your geneder</option>
+                  <option value="m">Male</option>
+                  <option value="f">Female</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="country">Country</label>
+                <select
+                  name="country"
+                  value={formData.country}
+                  onChange={handleChange}
+                  className="form-control"
+                  id="country"
+                >
+                  {countryOptions.map((country, index) => (
+                    <option key={index} value={country}>
+                      {country}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <button type="submit" className="btn btn-primary">Next</button>
+            </form>
+          </div>
         );
       case 3:
         return (
           <div className="container">
             <div className="form-container">
-            <h1>Step 3: Select Favorite Markets, Allergies, and Brands</h1>
-            <form onSubmit={handleNextStep}>
-              <div className="form-group">
-                <h3>Markets</h3>
-                {markets.map((market) => (
-                  <div key={`market-${market.id}`} className="form-check">
-                    <input
-                      type="checkbox"
-                      id={`market-${market.id}`}
-                      name="market"
-                      value={market.id}
-                      onChange={handleCheckboxes}
-                      className="form-check-input"
-                    />
-                    <label htmlFor={`market-${market.id}`} className="form-check-label">
-                      {market.name}
-                    </label>
-                  </div>
-                ))}
-              </div>
-              <div className="form-group">
-                <h3>Allergies</h3>
-                {allergies.map((allergy) => (
-                  <div key={`allergy-${allergy.id}`} className="form-check">
-                    <input
-                      type="checkbox"
-                      id={`allergy-${allergy.id}`}
-                      name="allergy"
-                      value={allergy.id}
-                      onChange={handleCheckboxes}
-                      className="form-check-input"
-                    />
-                    <label htmlFor={`allergy-${allergy.id}`} className="form-check-label">
-                      {allergy.allergy_name}
-                    </label>
-                  </div>
-                ))}
-              </div>
-              <div className="form-group">
-                <h3>Brands</h3>
-                {brands.map((brand) => (
-                  <div key={`brand-${brand.id}`} className="form-check">
-                    <input
-                      type="checkbox"
-                      id={`brand-${brand.id}`}
-                      name="brand"
-                      value={brand.id}
-                      onChange={handleCheckboxes}
-                      className="form-check-input"
-                    />
-                    <label htmlFor={`brand-${brand.id}`} className="form-check-label">
-                      {brand.name}
-                    </label>
-                  </div>
-                ))}
-              </div>
-              <button type="submit" className="btn btn-primary">
-                Next
-              </button>
-            </form>
+              <h1>Step 3: Select Favorite Markets, Allergies, and Brands</h1>
+              <form onSubmit={handleNextStep}>
+                <div className="form-group">
+                  <h3>Markets</h3>
+                  {markets.map((market) => (
+                    <div key={`market-${market.id}`} className="form-check">
+                      <input
+                        type="checkbox"
+                        id={`market-${market.id}`}
+                        name="market"
+                        value={market.id}
+                        onChange={handleCheckboxes}
+                        className="form-check-input"
+                      />
+                      <label htmlFor={`market-${market.id}`} className="form-check-label">
+                        {market.name}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+                <div className="form-group">
+                  <h3>Allergies</h3>
+                  {allergies.map((allergy) => (
+                    <div key={`allergy-${allergy.id}`} className="form-check">
+                      <input
+                        type="checkbox"
+                        id={`allergy-${allergy.id}`}
+                        name="allergy"
+                        value={allergy.id}
+                        onChange={handleCheckboxes}
+                        className="form-check-input"
+                      />
+                      <label htmlFor={`allergy-${allergy.id}`} className="form-check-label">
+                        {allergy.allergy_name}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+                <div className="form-group">
+                  <h3>Brands</h3>
+                  {brands.map((brand) => (
+                    <div key={`brand-${brand.id}`} className="form-check">
+                      <input
+                        type="checkbox"
+                        id={`brand-${brand.id}`}
+                        name="brand"
+                        value={brand.id}
+                        onChange={handleCheckboxes}
+                        className="form-check-input"
+                      />
+                      <label htmlFor={`brand-${brand.id}`} className="form-check-label">
+                        {brand.name}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+                <button type="submit" className="btn btn-primary">
+                  Next
+                </button>
+              </form>
             </div>
           </div>
         );

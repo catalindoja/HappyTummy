@@ -3,15 +3,17 @@ import Logo from "../img/logo2.png";
 import './Init.css';
 import backgroundImage from "../img/clearbackground.png";
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import Configration from "../components/Configration";
+import i18n from "../components/i18n";
 
 function Init() {
 
-
-
-
   return (
+    
     <div className="login_content" style={{ backgroundImage: `url(${backgroundImage})` }}>
 
+      <Configration />
       <h1 className="display-2">Happy Tummy</h1>
       <p>Your partner in allergy-free shopping ♥ </p>
 
