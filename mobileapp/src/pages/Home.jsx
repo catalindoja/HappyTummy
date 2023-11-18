@@ -6,6 +6,7 @@ import Card from "../components/ProductCard";
 import { useTranslation } from 'react-i18next';
 import Configration from "../components/Configration";
 import i18n from "../components/i18n";
+import axios from "axios";
 
 function Home() {
     const { t } = useTranslation();
@@ -51,7 +52,7 @@ function Home() {
 
             <h4 className="maintitles">Recipes just for you ♥</h4>
 
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div className="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>

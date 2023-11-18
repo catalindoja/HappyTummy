@@ -1,4 +1,7 @@
 {
     "greeting": "Bienvenido a Happy Tummy",
-    "paragraph_home1": "Descobreix les teves al·lèrgies alimentàries. Explora un món de coneixement culinari i descobreix possibles al·lèrgens. La nostra plataforma ofereix informació sobre aliments i les seves al·lèrgies associades, ajudant-te a prendre decisions informades per a una experiència culinària més saludable i segura."
+    "paragraph_home1": "Descobreix les teves al·lèrgies alimentàries. Explora un món de coneixement culinari i descobreix possibles al·lèrgens. La nostra plataforma ofereix informació sobre aliments i les seves al·lèrgies associades, ajudant-te a prendre decisions informades per a una experiència culinària més saludable i segura.",
+    "paragraph_init1": "El teu company en compres lliures d'al·lèrgies",
+    "login" : "iniciar Sessió",
+    "register": "Registra't"
 }
