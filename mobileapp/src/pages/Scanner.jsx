@@ -18,17 +18,16 @@ const Scanner = () => {
     try {
       // Make an API call to the specified endpoint
       const response = await axios.get(`/products/frombarcode/${searchQuery}`);
-      console.log('Response:', typeof(response));
-      const response_json = await response.json();
+      console.log(response);
 
       // Assuming the response contains an 'id' field
-      const productId = response_json.data.id;
+      const productId = response.data[0].id;
       setProductId(productId);
 
       console.log('Product ID:', productId);
 
       // Redirect to the "/product/{id}" route
-      window.location.href = `/product/${productId}`;
+      window.location.href = `/app/products/${productId}`;
     } catch (error) {
       console.error('Error fetching product data:', error);
     }
