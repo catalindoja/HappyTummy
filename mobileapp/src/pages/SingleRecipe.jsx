@@ -17,7 +17,7 @@ const SingleRecipe = () => {
 
     const location = useLocation();
     const navigate = useNavigate();
-    const postId = location.pathname.split("/")[2];
+    const postId = location.pathname.split("/")[3];
     const [post, setPosts] = useState([]);
 
     // Current user
