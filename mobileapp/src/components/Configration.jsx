@@ -17,7 +17,6 @@ const Configration = () => {
                 onChange={(e) => changeLanguage(e.target.value)}
                 value={i18n.language}
             >
-                <option value="select">Select Language</option>
                 <option value="en">English</option>
                 <option value="es">Español</option>
                 <option value="ca">Catalan</option>

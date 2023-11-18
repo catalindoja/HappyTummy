@@ -26,6 +26,8 @@
     "male": "Hombre",
     "female": "Mujer",
     "country": "País",
-    "select_country": "Selecciona un país"
+    "select_country": "Selecciona un país",
+    "go_back": "Volver",
+    "send": "Enviar"
     
 }

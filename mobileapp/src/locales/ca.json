@@ -26,5 +26,7 @@
     "male": "Home",
     "female": "Dona",
     "country": "País",
-    "select_country": "Seleccioneu un país"
+    "select_country": "Seleccioneu un país",
+    "go_back": "Tornar",
+    "send": "Enviar"
 }
