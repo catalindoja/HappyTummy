@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import BarcodeScanner from '../components/BarcodeScanner';
 
-const App = () => {
+const Scanner = () => {
   const [scannedCode, setScannedCode] = useState(null);
 
   const handleScan = (code) => {
@@ -20,4 +20,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Scanner;

@@ -1,10 +1,15 @@
 import React from 'react';
 import './App.css';
-
+import Counter from './components/Counter';
+import BarcodeScanner from './pages/Scanner';
+import Splash from './pages/Splash';
 import Menu from './components/Menu';
+import Register from './pages/Register'
+import Login from './pages/Login'
 import Scanner from './pages/Scanner';
 import Init from './pages/Init';
 import Login from './pages/Login';
+import Register1 from './pages/Register1';
 import Home from './pages/Home';
 import Search from './pages/Search';
 import SingleRecipe from './pages/SingleRecipe';
@@ -23,6 +28,7 @@ const Layout = () => {
   return (
     <>
       <Outlet />
+      
       <Menu />
     </>
   );
@@ -36,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/home",
         element: <Home />
+      },
+      {
+        path: "/splash",
+        element: <Splash />
       },
       {
         path: "/profile",
@@ -74,6 +84,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />
+  },
+  {
+    path: "/register",
+    element: <Register />
   }
 ]);
 

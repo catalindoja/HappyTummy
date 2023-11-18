@@ -45,17 +45,17 @@ export const getProduct = async (req, res) => {
  */
 export const createProduct = async (req, res) => {
     try {
-        const {iduser, idcategory, idproduct, barcode, product_name, quantity, measurement, idbrand, product_description, price, likes, image, image_url} = req.body
+        const {iduser, idcategory, idallergy, barcode, product_name, quantity, measurement, idbrand, product_description, price, likes, image, image_url} = req.body
 
         const [rows] = await pool.query(
-            'INSERT INTO product (iduser, idcategory, idproduct, barcode, product_name, quantity, measurement, idbrand, product_description, price, likes, image, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-            [iduser, idcategory, idproduct, barcode, product_name, quantity, measurement, idbrand, product_description, price, likes, image, image_url])
+            'INSERT INTO product (iduser, idcategory, idallergy, barcode, product_name, quantity, measurement, idbrand, product_description, price, likes, image, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [iduser, idcategory, idallergy, barcode, product_name, quantity, measurement, idbrand, product_description, price, likes, image, image_url])
         
         res.send({
             id: rows.insertId,
             iduser,
             idcategory,
-            idproduct,
+            idallergy,
             barcode,
             product_name,
             quantity,
@@ -106,11 +106,11 @@ export const deleteProduct = async (req, res) => {
 export const updateProduct = async (req, res) => {
     try {
         const {id} = req.params
-        const {iduser, idcategory, idproduct, barcode, product_name, quantity, measurement, idbrand, product_description, price, likes, image, image_url} = req.body
+        const {iduser, idcategory, idallergy, barcode, product_name, quantity, measurement, idbrand, product_description, price, likes, image, image_url} = req.body
 
         const [result] = await pool.query(
-            'UPDATE product SET iduser = IFNULL(?, iduser), idcategory = IFNULL(?, idcategory), idproduct = IFNULL(?, idproduct), barcode = IFNULL(?, barcode), product_name = IFNULL(?, product_name), quantity = IFNULL(?, quantity), measurement = IFNULL(?, measurement), idbrand = IFNULL(?, idbrand), product_description = IFNULL(?, product_description), price = IFNULL(?, price), likes = IFNULL(?, likes), image = IFNULL(?, image), image_url = IFNULL(?, image_url) WHERE id = ?',
-            [iduser, idcategory, idproduct, barcode, product_name, quantity, measurement, idbrand, product_description, price, likes, image, image_url, id])
+            'UPDATE product SET iduser = IFNULL(?, iduser), idcategory = IFNULL(?, idcategory), idallergy = IFNULL(?, idallergy), barcode = IFNULL(?, barcode), product_name = IFNULL(?, product_name), quantity = IFNULL(?, quantity), measurement = IFNULL(?, measurement), idbrand = IFNULL(?, idbrand), product_description = IFNULL(?, product_description), price = IFNULL(?, price), likes = IFNULL(?, likes), image = IFNULL(?, image), image_url = IFNULL(?, image_url) WHERE id = ?',
+            [iduser, idcategory, idallergy, barcode, product_name, quantity, measurement, idbrand, product_description, price, likes, image, image_url, id])
         
         if(result.affectedRows === 0) return res.status(404).json({
             message: 'Product not found'

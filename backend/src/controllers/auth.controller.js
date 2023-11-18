@@ -41,7 +41,7 @@ export const register = (req, res) => {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(req.body.password, salt);
 
-    const q = "INSERT INTO user(`idsupermarket`,`username`,`email`,`password`,`role`,`premium`) VALUES (?)";
+    const q = "INSERT INTO user(`idsupermarket`,`username`,`email`,`password`,`role`,`premium`,) VALUES (?)";
     const values = [req.body.idsupermarket, req.body.username, req.body.email, hash, req.body.role, req.body.premium];
 
     db.query(q, [values], (err, data) => {
@@ -60,22 +60,27 @@ export const register = (req, res) => {
  */
 export const registerAsync = async (req, res) => {
   try{
-    const { username, email, password, role, premium } = req.body;
+    const { username, email, password, role, premium, age, gender, realname, realsurname, country } = req.body;
     const [checkExistingUser] = await pool.query('SELECT * FROM user WHERE email = ? OR username = ?', [email, username])
     if(checkExistingUser.length) return res.status(409).json('User already exists!')
 
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
 
-    const [result] = await pool.query( 'INSERT INTO user (username, email, password, role, premium) VALUES (?, ?, ?, ?, ?)', 
-    [username, email, hash, role, premium])
+    const [result] = await pool.query( 'INSERT INTO user (username, email, password, role, premium, age, gender, realname, realsurname, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+    [username, email, hash, role, premium, age, gender, realname, realsurname, country])
 
     res.send({
         id: result.insertId,
         username,
         email,
         role,
-        premium
+        premium,
+        age,
+        gender,
+        realname,
+        realsurname,
+        country
     })
   } catch(error){
     return res.status(500).json({
@@ -167,3 +172,15 @@ export const logout = (req, res) => {
     secure:true
   }).status(200).json("User has been logged out.")
 };
+
+export const checkExistingUserByMail = async (req, res) => {
+  try{
+    const [rows] = await pool.query('SELECT * FROM user WHERE email = ?', [req.body.email])
+    if(rows.length) return res.status(409).json('User already exists!')
+    else return res.status(200).json('User does not exist')
+  } catch(error){
+    return res.status(500).json({
+      message: 'Something went wrong while retrieving the users'
+    })
+  } 
+}
