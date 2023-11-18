@@ -12,7 +12,7 @@ import PublishNewProduct from "./pages/PublishNewProduct";
 import MyShoppingList from "./pages/MyShoppingList";
 import EditPerfil from "./pages/EditPerfil";
 import Allergies from "./pages/Allergies";
-import Configation from './pages/Configration';
+import i18n from './components/i18n';
 
 const App = () => {
   return (
@@ -30,7 +30,6 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/publishnewproduct" element={<PublishNewProduct />} />
             <Route path="/editperfil/:id" element={<EditPerfil />} />
-            <Route path="/configation" element={<Configation />} />
           </Routes>
         </Router>
       </div>
