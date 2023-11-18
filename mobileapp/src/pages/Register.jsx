@@ -10,6 +10,7 @@ import Configration from "../components/Configration";
 import i18n from "../components/i18n";
 
 const Register = () => {
+  <Configration />
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -133,7 +134,7 @@ const Register = () => {
     e.preventDefault();
     if (step === 1) {
       if (!validateEmail(formData.email)) {
-        setError("Please enter a valid email address");
+        setError(t('valid_email'));
         return;
       } else {
         const json = {
@@ -230,7 +231,7 @@ const Register = () => {
   };
 
   const print = () => {
-    console.log(formData.email);
+    //console.log(formData.email);
   };
 
   const renderStep = () => {
@@ -238,118 +239,128 @@ const Register = () => {
       case 1:
         return (
           <div className="container" style={{ backgroundImage: `url(${backgroundImage})` }}>
-            <h1>Step 1: Email</h1>
+            <Configration />
             <form onSubmit={handleNextStep}>
-              <div className="form-group">
-                <label htmlFor="exampleInputEmail1">Email address</label>
-                <input name="email" type="email" value={formData.email} onChange={handleChange} className="form-control"
-                  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
-                <label id="errorMail" htmlFor="ErrorMail" className='invisible text-danger'>This user already exists in our database! Register with another email.</label>
+              <div className="form-group my-3">
+                <label className='label1' htmlFor="exampleInputEmail1">{t("label_email")}</label>
+                <br />
+                <input name="email" type="email" value={formData.email} onChange={handleChange}
+                  className="form-control my-2" id="exampleInputEmail1" aria-describedby="emailHelp"
+                  placeholder={t("placeholder_text_email")} />
+                <label id="errorMail" htmlFor="ErrorMail" className='invisible text-danger'>{t('email_existed')}</label>
               </div>
               {error && <p className="error-msg">{error}</p>}
-              <button onClick={print} type="submit" className="btn btn-primary">Next</button>
+              <button
+                onClick={print}
+                type="submit"
+                className="btn btn-primary"
+                style={{ marginTop: '-445px', marginLeft: '105px' }}
+              >
+                {t("next")}
+              </button>
+
             </form>
           </div>
         );
       case 2:
-        const countryOptions = ["Select a country", ...Object.values(countries).map(country => country.name)];
-
+        const countryOptions = [t('select_country'), ...Object.values(countries).map(country => country.name)];
         return (
           <div>
-            <h1>Step 2: User Information</h1>
+            <Configration />
+            <h1 className='my-2 text-success'>{t('step2')}</h1>
             <form onSubmit={handleNextStep}>
               <div className="form-group">
-                <label htmlFor="realname">Name</label>
+                <label htmlFor="realname">{t('name')}</label>
                 <input
                   name="realname"
                   type="text"
                   value={formData.realname}
                   onChange={handleChange}
-                  className="form-control"
+                  className="form-control my-1"
                   id="realname"
-                  placeholder="Enter your name"
+                  placeholder={t('placeholder_name')}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="realsurname">Surname</label>
+                <label htmlFor="realsurname">{t('surname')}</label>
                 <input
                   name="realsurname"
                   type="text"
                   value={formData.realsurname}
                   onChange={handleChange}
-                  className="form-control"
+                  className="form-control my-1" 
                   id="realsurname"
-                  placeholder="Enter your surname"
+                  placeholder={t('placeholder_surname')}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="username">Username</label>
+                <label htmlFor="username">{t('username')}</label>
                 <input
                   name="username"
                   type="text"
                   value={formData.username}
                   onChange={handleChange}
-                  className="form-control"
+                  className="form-control my-1"
                   id="username"
-                  placeholder="Enter your username"
+                  placeholder={t('placeholder_username')}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">{t('password')}</label>
                 <input
                   name="password"
                   type="password"
                   value={passwords.password}
                   onChange={handlePasswords}
-                  className="form-control"
+                  className="form-control my-1"
                   id="password"
-                  placeholder="Enter your password"
+                  placeholder={t('placeholder_password')}
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="confirmPassword">Confirm Password</label>
+              <div className="form-group my-2">
+                <label htmlFor="confirmPassword">{t('confirm_password')}</label>
                 <input
                   name="confirmPassword"
                   type="password"
                   value={passwords.confirmPassword}
                   onChange={handlePasswords}
-                  className="form-control"
+                  className="form-control my-1"
                   id="confirmPassword"
-                  placeholder="Confirm your password"
+                  placeholder={t('placeholder_confirm_password')}
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="age">Age</label>
+                <label htmlFor="age">{t('age')}</label>
                 <input
                   name="age"
                   type="number"
                   value={formData.age}
                   onChange={handleChange}
-                  className="form-control"
+                  className="form-control my-1"
                   id="age"
                   placeholder="Enter your age"
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="gender">Gender</label>
+                <label htmlFor="gender">{t('gender')}</label>
                 <select
                   name="gender"
                   value={formData.gender}
                   onChange={handleChange}
-                  className="form-control"
+                  className="form-control my-1"
                   id="gender">
-                  <option>select your geneder</option>
-                  <option value="m">Male</option>
-                  <option value="f">Female</option>
+                  <option>{t('placeholder_gender')}</option>
+                  <option value="m">{t('male')}</option>
+                  <option value="f">{t('female')}</option>
                 </select>
               </div>
               <div className="form-group">
-                <label htmlFor="country">Country</label>
+                <label htmlFor="country">{t('country')}</label>
                 <select
                   name="country"
                   value={formData.country}
                   onChange={handleChange}
-                  className="form-control"
+                  className="form-control my-1"
                   id="country"
                 >
                   {countryOptions.map((country, index) => (
@@ -423,9 +434,11 @@ const Register = () => {
                     </div>
                   ))}
                 </div>
-                <button type="submit" className="btn btn-primary">
-                  Next
-                </button>
+                <div className='btn1 text-center mt-4'>
+                  <button type="submit" className="btn btn-primary">
+                    Next
+                  </button>
+                </div>
               </form>
             </div>
           </div>
@@ -436,9 +449,11 @@ const Register = () => {
   };
 
   return (
-    <div className="login-form" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <div className='container'>
       {renderStep()}
+      
     </div>
+    
   );
 };
 
