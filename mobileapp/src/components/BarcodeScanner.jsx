@@ -9,6 +9,9 @@ const BarcodeScanner = ({ onScan }) => {
           name: 'Live',
           type: 'LiveStream',
           target: document.querySelector('#barcode-scanner'), // The container for the video element
+          constraints: {
+            width: 344
+          }
         },
         decoder: {
           readers: ['ean_reader'], // Specify the barcode format you want to decode (EAN-13 in this example)

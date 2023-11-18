@@ -93,6 +93,10 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <Products />
+      },
+      {
+        path: "/scanner",
+        element: <Scanner />
       }
     ]
   }

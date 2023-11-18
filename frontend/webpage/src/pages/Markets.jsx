@@ -7,7 +7,7 @@ import axios from "axios";
 const Markets = () => {
 
   // Set up the state variable 'posts'
-  // - posts: an array that represents the list of posts fetched from the backend
+  // - posts: an array that represenSts the list of posts fetched from the backend
   //          (default value is an empty array)
   // - currentUser: an object that represents the current user
   const [posts, setPosts] = useState([]);

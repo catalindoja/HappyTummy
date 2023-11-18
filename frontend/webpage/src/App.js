@@ -90,6 +90,18 @@ const router = createBrowserRouter([
         path: "/profile",
         element: <Profile />
       },
+      {
+        path: "/markets",
+        element: <Markets/>
+      },
+      {
+        path: "/markets/:id",
+        element: <SingleMarket/>
+      },
+      {
+        path: "/postmarket",
+        element: <PostMarket/>
+      },
     ]
   },
   {
