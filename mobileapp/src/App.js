@@ -88,7 +88,7 @@ const router = createBrowserRouter([
   }
 ]);
 
-function App() {
+const App = () => {
   return (
     <div className="app">
       <div className="w-100">

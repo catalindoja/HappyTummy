@@ -1,0 +1,42 @@
+.tbl{
+    border:  1px solid #fff !important;
+    border-radius: 5px !important;
+    margin-top: -15px !important;
+}
+thead {
+    color: #fff !important;
+}
+
+.head1 {
+    background-color: #080 !important;
+    color: #fff !important; 
+}
+
+.history_icon {
+    color: #000 !important;
+    margin-left: 15px !important;
+}
+
+.edit {
+    color: #080af5 !important;
+    margin-left: 5px !important;
+}
+
+.box_arrow {
+    width: 45% !important;
+    margin-bottom: -40px !important;
+    
+}
+
+.arrow , .go_back{
+    font-size: 17px !important;
+    color :#fff;
+}
+.btn1 {
+    border: 1px solid #000 !important;
+    border-radius: 5px !important;
+}
+
+.arrow {
+    margin-left: 10px !important;
+}
