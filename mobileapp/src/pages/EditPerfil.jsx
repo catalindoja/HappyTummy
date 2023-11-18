@@ -30,6 +30,7 @@ const EditPerfil = () => {
     };
 
     const fetchUserDataFromServer = async (userId) => {
+        console.log(userId)
         try {
             const response = await fetch(`/users/${userId}`);
             if (!response.ok) {
