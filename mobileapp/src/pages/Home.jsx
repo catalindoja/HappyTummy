@@ -20,7 +20,7 @@ function Home() {
 
             <Configration />
 
-            <h4 className="maintitles">Recommended products ♥</h4>
+            <h4 className="maintitles">Recommended products <span className="text-danger">♥</span></h4>
 
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
