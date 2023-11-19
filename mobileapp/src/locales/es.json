@@ -52,6 +52,11 @@
     "molluscs": "Moluscos",
     "Mustard": "Mostaza",
     "sesame": "Sésamo",
-    "sulphites": "Sulfitos"
-    
+    "sulphites": "Sulfitos",
+    "supermarkets": "supermercados",
+    "brand": "Marca",
+    "category": "Categoría",
+    "update": "Actualizar una imagen",
+    "upload":"Subir imagen (png o jpg)",
+    "publish": "Publicar"
 }

@@ -153,6 +153,7 @@ const Write = () => {
   const [value, setValue] = useState(state?.product_description || "");
   const [product_name, setProductName] = useState(state?.product_name || "");
   const [file, setFile] = useState(null);
+  
 
   // Set up the function that handles the form submission
   // - handleClick: a function that posts the product when the user clicks the 'Publish' button
@@ -387,7 +388,7 @@ const Write = () => {
           <div className="boxes-write">
             <fieldset>
               <legend>{t('allergies')}</legend>
-              <span>It contains...</span>
+              <span>{t('it_contains')}</span>
               {allergies.map((allergy) => (
                 <div key={allergy.id}>
                   <input type="checkbox" id={allergy.allergy_name} name="alergies[]"
@@ -402,8 +403,8 @@ const Write = () => {
 
           <div className="boxes-write">
             <fieldset>
-              <legend>Supermarkets</legend>
-              <span>It can be found in...</span>
+              <legend>{t('supermarkets')}</legend>
+              <span>{t('found')}</span>
               {supermarkets.map((market) => (
                 <div key={market.id}>
                   <input type="checkbox" id={market.name} name="markets[]"
@@ -418,7 +419,7 @@ const Write = () => {
 
           <div className="boxes-write">
             <fieldset>
-              <legend>Brand</legend>
+              <legend>{t('brand')}</legend>
               {brands.map((brand) => (
                 <div key={brand.id}>
                   <input type="radio" id={brand.name} name="idbrand" value={brand.id} onChange={() => setidbrand(brand.id)} />
@@ -430,7 +431,7 @@ const Write = () => {
   
           <div className="boxes-write">
             <fieldset>
-              <legend>Category</legend>
+              <legend>{t('category')}</legend>
               {categories.map((category) => (
                 <div key={category.id}>
                   <input type="radio" id={category.category_name} name="iccategory" value={category.id} onChange={() => setidcategory(category.id)} />
@@ -440,7 +441,7 @@ const Write = () => {
             </fieldset>
           </div>
   
-          <h3 className="picture-title">Update a picture 📸</h3>
+          <h3 className="picture-title">{t('update')} 📸</h3>
           <input
             type="text"
             placeholder="Image url"
@@ -457,7 +458,7 @@ const Write = () => {
                 onChange={(e) => setFile(e.target.files[0])}
               />
               <label className="file-write" htmlFor="file">
-                Upload Image (png or jpg)
+                {t('upload')}
               </label>
   
             </div>
@@ -465,7 +466,7 @@ const Write = () => {
   
           {error && <p className="error-message-write">{error}</p>}
           <div className="buttons-write">
-            <button onClick={handleClick}>Publish</button>
+            <button onClick={handleClick}>{t('publish')}</button>
           </div>
   
         </div>

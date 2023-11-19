@@ -39,7 +39,7 @@
     "unit": "Unit",
     "barcode":"Bar code number EAN-13 / GTIN-13",
     "allergies":"Allergies and IntolerancesIt",
-    "it_contains" : "Contiene...",
+    "it_contains" : "It contains...",
     "gluten":"Gluten",
     "lactose":"Lactose",
     "fish":"Fish",
@@ -52,6 +52,12 @@
     "molluscs":"Molluscs",
     "Mustard":"Mustard",
     "sesame":"Sesame",
-    "sulphites":"Sulphites"
+    "sulphites":"Sulphites",
+    "supermarkets": "Supermarkets",
+    "brand": "Brand",
+    "category":"Category",
+    "update" :"Update a picture",
+    "upload":"Upload Image (png or jpg)",
+    "publish":"Publish"
     
 }

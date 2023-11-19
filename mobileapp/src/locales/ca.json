@@ -52,5 +52,12 @@
     "molluscs": "Mol·luscs",
     "Mustard": "Mòstassa",
     "sesame": "Sèsam",
-    "sulphites": "Sulfits"
+    "sulphites": "Sulfits",
+    "supermarkets":"Supermercats",
+    "found": "Es pot trobar a...",
+    "brand": "Marca",
+    "category": "Categoria",
+    "update":"Actualitzar una imatge",
+    "upload":"Carregar la imatge (png o jpg)",
+    "publish": "Publicar"
 }
