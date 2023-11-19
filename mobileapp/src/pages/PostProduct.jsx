@@ -7,10 +7,12 @@ import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import moment from "moment";
 import "./PostProduct.css";
+import { useTranslation } from 'react-i18next';
+import Configration from "../components/Configration";
 
 // Create the Write component
 const Write = () => {
-
+  const { t } = useTranslation();
   // Obtains the state from the location
   const state = useLocation().state;
   const navigate = useNavigate();
@@ -294,20 +296,21 @@ const Write = () => {
 
   // Return the JSX elements
   return (
-    <div>
-      <h1 className="supertitle-write">Post a new product ❤</h1>
+    <div className="container">
+      <Configration />
+      <h2 className="supertitle-write">{t('post')} <span className="text-danger">❤</span></h2>
       <div className="add-write">
         <div className="content-write">
   
           <input
             type="text"
-            placeholder="Name of the product"
+            placeholder={t('name_product')}
             onChange={(e) => setProductName(e.target.value)}
           />
   
           <div className="editorContainer-write">
             <ReactQuill
-              placeholder="Description of the product"
+              placeholder={t('product_description')}
               className="editor-write"
               theme="snow"
               value={value}
@@ -317,7 +320,7 @@ const Write = () => {
   
           <input
             type="number"
-            placeholder="Price"
+            placeholder={t('price')}
             onChange={(e) => setPrice(e.target.value)}
           />
   
@@ -325,7 +328,7 @@ const Write = () => {
             <div className="quantity-input-write">
               <input
                 type="number"
-                placeholder="Quantity per unit"
+                placeholder={t("quantity")}
                 onChange={(e) => setQuantity(e.target.value)}
               />
             </div>
@@ -334,19 +337,19 @@ const Write = () => {
                 value={measurement}
                 onChange={(e) => setSelectedMeasurement(e.target.value)}
               >
-                <option value="">Unit</option>
+                <option value="">{t('unit')}</option>
                 <option value="g">g</option>
                 <option value="kg">kg</option>
                 <option value="mg">mg</option>
                 <option value="l">l</option>
                 <option value="ml">ml</option>
-                <option value="unidad">unidad</option>
+                <option value="unidad">{t('unit')}</option>
               </select>
             </div>
           </div>
   
           <div className="super-bar-code-write">
-            <h3>Bar code number EAN-13 / GTIN-13</h3>
+            <h3>{t('barcode')}</h3>
           </div>
   
           <div className="super-bar-code-write">
@@ -383,7 +386,7 @@ const Write = () => {
   
           <div className="boxes-write">
             <fieldset>
-              <legend>Allergies and Intolerances</legend>
+              <legend>{t('allergies')}</legend>
               <span>It contains...</span>
               {allergies.map((allergy) => (
                 <div key={allergy.id}>
