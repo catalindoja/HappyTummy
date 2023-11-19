@@ -1,0 +1,8 @@
+.d-flex.justify-content-around.w-100.bg-dark {
+    background-color: #4444a0 !important;
+}
+
+svg.svg-inline--fa.fa-user.p-2.icon1 , svg.svg-inline--fa.fa-magnifying-glass.p-2.icon1,
+svg.svg-inline--fa.fa-plus.p-2.icon1 , svg.svg-inline--fa.fa-plus.p-2.icon1 {
+    color: #fff !important;
+}

@@ -9,7 +9,7 @@
 }
 
 select#language-select {
-    background-color: #080;
+    background-color: #4444a0 !important;
     color: #fff;
     border: 1px solid #fff !important;
     padding: 5px;
