@@ -28,5 +28,7 @@
     "country": "País",
     "select_country": "Seleccioneu un país",
     "go_back": "Tornar",
-    "send": "Enviar"
+    "send": "Enviar",
+    "my_products": "Els meus productes",
+    "my_recipes" : "Les meves receptes"
 }

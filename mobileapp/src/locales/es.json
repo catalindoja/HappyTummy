@@ -28,6 +28,8 @@
     "country": "País",
     "select_country": "Selecciona un país",
     "go_back": "Volver",
-    "send": "Enviar"
+    "send": "Enviar",
+    "my_products" :"Mis productos",
+    "my_recipes": "Mis recetas"
     
 }

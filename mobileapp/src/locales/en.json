@@ -28,5 +28,7 @@
     "country": "Country",
     "select_country": "Select a country",
     "go_back" : "Go Back",
-    "send":"Send"
+    "send":"Send",
+    "my_products": "My products",
+    "my_recipes": "My recipes"
 }

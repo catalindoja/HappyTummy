@@ -63,6 +63,7 @@ function Profile() {
 
     return (
         <div className="profile_content">
+            <Configration />
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
 
             <div className="profile_card">
@@ -74,7 +75,7 @@ function Profile() {
                 <img className="edit" src={Edit} onClick={handleEditProfile} alt="" />
             </div>
 
-            <span className="maintitles">My products <span className="icon2">🛒</span></span>
+            <span className="maintitles">{t('my_products')} <span className="icon2">🛒</span></span>
             <div>
                 <div className="card-container">
                     {myproducts.map(post => (
@@ -88,7 +89,7 @@ function Profile() {
                 </div>
             </div>
 
-            <span className="maintitles">My recipes <span className="icon2">🥧</span></span>
+            <span className="maintitles">{t('my_recipes')} <span className="icon2">🥧</span></span>
             <div>
                 <div className="card-container">
                     {myrecipes.map(post => (
