@@ -8,6 +8,7 @@ import SearchIcon from "../img/search.png";
 import ProfileIcon from "../img/profilemenu.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faPlus, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
+import "./Menu.css";
 
 
 //a menu like the one in instagram with 4 buttons
@@ -17,12 +18,9 @@ import { faHome, faPlus, faSearch, faUser } from '@fortawesome/free-solid-svg-ic
 const Menu = () => {
   return (
     <div className="w-100 sticky-bottom">
-      <Link to="/">
-        <img src="../img/logo2.png" alt="" className="logo" />
-      </Link>
       <div
-        className="d-flex justify-content-around w-100"
-        style={{
+        className="d-flex justify-content-around w-100 bg-dark"
+        /*style={{
           backgroundColor: "#4444a0"
         }}
         /*style={{
