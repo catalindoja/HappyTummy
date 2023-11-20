@@ -7,6 +7,12 @@ import { useTranslation } from 'react-i18next';
 import Configration from "../components/Configration";
 import i18n from "../components/i18n";
 import axios from "axios";
+import Imagehome1 from "../img/imagehome1.jpeg";
+import Imagehome2 from "../img/imagehome2.jpeg";
+import Imagehome3 from "../img/imagehome3.jpeg";
+import Imagehome4 from "../img/imagehome4.jpeg";
+import Imagehome5 from "../img/imagehome5.jpeg";
+import Imagehome6 from "../img/imagehome6.jpeg";
 
 function Home() {
     const { t } = useTranslation();
@@ -21,7 +27,7 @@ function Home() {
 
             <Configration />
 
-            <h4 className="maintitles">Recommended products <span className="text-danger">♥</span></h4>
+            <h4 className="maintitles mb-4">Recommended products <span className="text-danger">♥</span></h4>
 
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -31,13 +37,13 @@ function Home() {
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src={Teal} alt="First slide" />
+                        <img class="d-block w-100" src={Imagehome1} alt="First slide" />
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src={Teal} alt="Second slide" />
+                        <img class="d-block w-100" src={Imagehome2} alt="Second slide" />
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src={Teal} alt="Third slide" />
+                        <img class="d-block w-100" src={Imagehome3} alt="Third slide" />
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -50,7 +56,7 @@ function Home() {
                 </a>
             </div>
 
-            <h4 className="maintitles">Recipes just for you ♥</h4>
+            <h4 className="maintitles my-4">Recipes just for you <span className="text-danger">♥</span></h4>
 
             <div className="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -60,13 +66,13 @@ function Home() {
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src={Teal} alt="First slide" />
+                        <img class="d-block w-100" src={Imagehome4} alt="First slide" />
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src={Teal} alt="Second slide" />
+                        <img class="d-block w-100" src={Imagehome5} alt="Second slide" />
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src={Teal} alt="Third slide" />
+                        <img class="d-block w-100" src={Imagehome6} alt="Third slide" />
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -79,7 +85,7 @@ function Home() {
                 </a>
             </div>
 
-            <h4 className="maintitles">New posts ✨</h4>
+            <h4 className="maintitles my-4">New posts <span className="text-danger">✨</span></h4>
             <div>
                 <div className="card-container">
                     {cardsinfo.map(card => (
