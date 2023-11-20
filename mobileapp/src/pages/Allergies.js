@@ -14,26 +14,28 @@ import Sulfitos from "../img/sulfitos.png";
 import Sesamo from "../img/sesamo.png";
 import Altramuces from "../img/altramuces.png";
 import "./Allergies.css";
+import { useTranslation } from 'react-i18next';
 
 // Create the Allergies component
 // This component displays the list of allergens that are identified in this service
 function Allergies() {
+    const { t } = useTranslation();
     return (
         <div className='container'>
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"></link>
 
             <div className="allergies-intro">
-                <h1 className="text-center text-danger">Allergens info 🌾</h1>
-                <p>The main objective of Happy Tummy is to make the list of allergens in supermarket products easily accessible to everyone. These are the allergens that are identified in this service. ❤</p>
+                <h1 className="text-center text-danger">{t('allergens_info')} 🌾</h1>
+                <p>{t('paragraph_allergens_info')} ❤</p>
                 <div className="allergies-container">
                     <hr />
                     <div className="allergies-icon">
                         <img src={Gluten} alt="Icono de alergia" />
                     </div>
                     <div className="allergies-content">
-                        <h2>Gluten</h2>
+                        <h2>{t('gluten')}</h2>
                         <p>
-                            Gluten is a composite protein naturally present in certain cereal grains, such as wheat, barley, and rye. It plays a crucial role in food processing, particularly in the context of baking, as it provides elasticity and helps dough maintain its shape. Gluten consists of two main proteins, glutenin and gliadin, which, when combined with water, create a sticky, stretchy network. While it's responsible for the texture and structure of bread and other baked goods, it can also be problematic for individuals with gluten-related disorders, such as celiac disease or non-celiac gluten sensitivity, as it triggers adverse reactions in their bodies when consumed.
+                            {t('gluten_para')}
                         </p>
                     </div>
                 </div>
@@ -44,9 +46,9 @@ function Allergies() {
                         <img src={Leche} alt="Icono de alergia" />
                     </div>
                     <div className="allergies-content">
-                        <h2>Lactose</h2>
+                        <h2>{t('lactose')}</h2>
                         <p>
-                            Lactose is a description that refers to lactose, a natural sugar found in milk and dairy products, which can be digested without difficulty by individuals. In contrast to individuals with lactose intolerance, who have difficulty digesting lactose, people who are described as having "easy lactose" are typically able to digest lactose without experiencing digestive discomfort.
+                            {t('lactose_para')}
                         </p>
                     </div>
                 </div>
@@ -57,9 +59,9 @@ function Allergies() {
                         <img src={Huevo} alt="Icono de alergia" />
                     </div>
                     <div className="allergies-content">
-                        <h2>Eggs</h2>
+                        <h2>{t('eggs')}</h2>
                         <p>
-                            Eggs are versatile and nutritious food. They are a source of protein and healthy fats. They can be prepared in various ways, such as boiled, fried, scrambled, or poached, and are used in a variety of recipes, from omelets to cakes. Eggs are a staple in cooking and are valued for their flavor and their ability to bind ingredients in many culinary preparations.
+                            {t('eggs_para')}
                         </p>
                     </div>
                 </div>

@@ -4,7 +4,6 @@ import './Home.css';
 import backgroundImage from "../img/clearbackground.png";
 import Card from "../components/ProductCard";
 import { useTranslation } from 'react-i18next';
-import Configration from "../components/Configration";
 import i18n from "../components/i18n";
 import axios from "axios";
 import Imagehome1 from "../img/imagehome1.jpeg";
@@ -24,8 +23,6 @@ function Home() {
     return (
         <div className="home_content">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
-
-            <Configration />
 
             <h4 className="maintitles mb-4">Recommended products <span className="text-danger">♥</span></h4>
 

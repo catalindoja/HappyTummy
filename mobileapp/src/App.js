@@ -18,6 +18,9 @@ import PostRecipe from './pages/PostRecipe';
 import EditPerfil from './pages/EditPerfil';
 import Products from './pages/Products';
 import { i18n } from 'i18next';
+import Allergies from './pages/Allergies';
+import Configration from './components/Configration';
+
 
 import {
   createBrowserRouter,
@@ -28,6 +31,7 @@ import {
 const Layout = () => {
   return (
     <>
+      <Configration />
       <Outlet />
       <Menu />
     </>
@@ -98,6 +102,10 @@ const router = createBrowserRouter([
       {
         path: "scanner",
         element: <Scanner />
+      },
+      {
+        path: "allergies",
+        element: <Allergies />
       }
     ]
   }
