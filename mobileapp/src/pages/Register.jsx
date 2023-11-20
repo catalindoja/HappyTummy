@@ -8,6 +8,7 @@ import { countries } from 'countries-list';
 import { useTranslation } from 'react-i18next';
 import Configration from "../components/Configration";
 import i18n from "../components/i18n";
+import { BACKEND_API_URL } from '../config/proxy.js';
 
 const Register = () => {
   <Configration />
@@ -41,7 +42,7 @@ const Register = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/markets`);
+        const res = await axios.get(`${BACKEND_API_URL}/markets`);
         setMarkets(res.data);
       } catch (err) {
         console.log(err);
@@ -54,7 +55,7 @@ const Register = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/allergies`);
+        const res = await axios.get(`${BACKEND_API_URL}/allergies`);
         setAllergies(res.data);
       } catch (err) {
         console.log(err);
@@ -67,7 +68,7 @@ const Register = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/brands`);
+        const res = await axios.get(`${BACKEND_API_URL}/brands`);
         setBrands(res.data);
       } catch (err) {
         console.log(err);
@@ -142,7 +143,7 @@ const Register = () => {
         };
         console.log(json);
         try {
-          let response = await axios.post("/userexists", json);
+          let response = await axios.post(`${BACKEND_API_URL}/userexists`, json);
           console.log(response);
           setStep(step + 1);
         } catch (err) {
@@ -181,7 +182,7 @@ const Register = () => {
         console.log(formData.password);
 
         try {
-          let response = await axios.post("/register", formData);
+          let response = await axios.post(`${BACKEND_API_URL}/register`, formData);
           console.log(response.data.id);
           iduser.iduser = response.data.id;
           console.log("user id is: " + iduser);
@@ -199,7 +200,7 @@ const Register = () => {
             idmarket,
           };
           console.log(favoriteMarketData);
-          await axios.post('/favmarkets', favoriteMarketData);
+          await axios.post(`${BACKEND_API_URL}/favmarkets`, favoriteMarketData);
         }
 
         for (const idallergy of selectedAllergies) {
@@ -207,7 +208,7 @@ const Register = () => {
             iduser: iduser.iduser,
             idallergy,
           };
-          await axios.post('/userallergies', allergyData);
+          await axios.post(`${BACKEND_API_URL}/userallergies`, allergyData);
         }
 
         for (const idbrand of selectedBrands) {
@@ -215,7 +216,7 @@ const Register = () => {
             iduser: iduser.iduser,
             idbrand,
           };
-          await axios.post('/favbrands', brandData);
+          await axios.post(`${BACKEND_API_URL}/favbrands`, brandData);
         }
 
         navigate("/login");

@@ -11,6 +11,7 @@ import axios from "axios";
 import DOMPurify from "dompurify";
 import ReactQuill from 'react-quill';
 import "./SingleRecipe.css";
+import { BACKEND_API_URL } from '../config/proxy.js';
 
 // Create the SingleRecipe component
 const SingleRecipe = () => {
@@ -43,12 +44,12 @@ const SingleRecipe = () => {
 
             try {
                 // Obtain comments
-                const res = await axios.get(`/commentrecipes/`);
+                const res = await axios.get(`${BACKEND_API_URL}/commentrecipes/`);
                 const filteredComments = res.data.filter((comment) => comment.idrecipe == postId);
                 setComments(filteredComments);
 
                 // Obtain users who wrote the comments
-                const userPromises = filteredComments.map((comment) => axios.get(`/users/${comment.iduser}`));
+                const userPromises = filteredComments.map((comment) => axios.get(`${BACKEND_API_URL}/users/${comment.iduser}`));
                 const userResponses = await Promise.all(userPromises);
 
                 // Create an object that contains the details of the users who wrote the comments
@@ -74,12 +75,12 @@ const SingleRecipe = () => {
         const fetchData = async () => {
             try {
                 // Recepie
-                const res = await axios.get(`/recipes/${postId}`);
+                const res = await axios.get(`${BACKEND_API_URL}/recipes/${postId}`);
                 console.log(res)
                 setPosts(res.data);
 
                 // Ownwer
-                const response = await axios.get(`/users/${idOwner}`);
+                const response = await axios.get(`${BACKEND_API_URL}/users/${idOwner}`);
                 setOwner(response.data);
 
             } catch (err) {
@@ -98,7 +99,7 @@ const SingleRecipe = () => {
     // Delete the recipe
     const handleDelete = async () => {
         try {
-            const productResponse = await axios.delete(`/recipes/${post.id}`);
+            const productResponse = await axios.delete(`${BACKEND_API_URL}/recipes/${post.id}`);
             navigate("/app/home")
         } catch (err) {
             if (err.response) {

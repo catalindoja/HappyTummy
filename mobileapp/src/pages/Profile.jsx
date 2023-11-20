@@ -12,6 +12,7 @@ import { AuthContext } from "../context/authContext";
 import Logo2 from "../img/logo2.png";
 import { useTranslation } from 'react-i18next';
 import Configration from "../components/Configration";
+import { BACKEND_API_URL } from '../config/proxy.js';
 
 function Profile() {
     const { t } = useTranslation();
@@ -30,7 +31,7 @@ function Profile() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`/products`);
+                const res = await axios.get(`${BACKEND_API_URL}/products`);
                 console.log(res.data);
                 setMyproducts(res.data);
 
@@ -48,7 +49,7 @@ function Profile() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`/recipes`);
+                const res = await axios.get(`${BACKEND_API_URL}/recipes`);
                 console.log(res.data);
                 setMyrecipes(res.data);
 

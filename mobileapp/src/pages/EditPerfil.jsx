@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Configration from "../components/Configration";
 import i18n from "../components/i18n";
+import { BACKEND_API_URL } from '../config/proxy.js';
 
 const EditPerfil = () => {
     const { t } = useTranslation();
@@ -36,7 +37,7 @@ const EditPerfil = () => {
     const fetchUserDataFromServer = async (userId) => {
         console.log(userId)
         try {
-            const response = await fetch(`/users/${userId}`);
+            const response = await fetch(`${BACKEND_API_URL}/users/${userId}`);
             if (!response.ok) {
                 throw new Error("Error al obtener datos del usuario");
             }
@@ -58,7 +59,7 @@ const EditPerfil = () => {
         e.preventDefault();
         const id = iduser.iduser;
         console.log(id);
-        let response1 = await axios.patch(`/users/${id}`, userData);
+        let response1 = await axios.patch(`${BACKEND_API_URL}/users/${id}`, userData);
         //console.log(userData);
         console.log(response1)
         // Lógica para enviar los datos actualizados al servidor

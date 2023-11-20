@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import backgroundImage from "../img/background.png";
+import { BACKEND_API_URL } from '../config/proxy.js';
 
 // Create the Login component
 const Login = () => {

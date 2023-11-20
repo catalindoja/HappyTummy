@@ -8,6 +8,7 @@ import RecipeCard from "../components/RecipeCard";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBarcode } from '@fortawesome/free-solid-svg-icons';
 import Scanner from "./Scanner";
+import { BACKEND_API_URL } from '../config/proxy.js';
 
 import './Search.css';
 
@@ -23,7 +24,7 @@ function Search() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`/products`);
+                const res = await axios.get(`${BACKEND_API_URL}/products`);
                 console.log(res.data);
                 setProducts(res.data);
 
@@ -46,7 +47,7 @@ function Search() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`/recipes`);
+                const res = await axios.get(`${BACKEND_API_URL}/recipes`);
                 console.log(res.data);
                 setRecipes(res.data);
 

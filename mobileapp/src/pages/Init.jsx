@@ -27,9 +27,6 @@ function Init() {
         <Link to={"/register"}>
           <button type="button" className="btn btn-success btn-sm">{t("register")}</button>
         </Link>
-        <Link to={"/app/scanner"}>
-        <button type="button" className="btn btn-secondary btn-sm">SCANNER</button>
-        </Link>
       </div>
     </div>
   );

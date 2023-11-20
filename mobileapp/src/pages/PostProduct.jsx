@@ -9,6 +9,7 @@ import moment from "moment";
 import "./PostProduct.css";
 import { useTranslation } from 'react-i18next';
 import Configration from "../components/Configration";
+import { BACKEND_API_URL } from '../config/proxy.js';
 
 // Create the Write component
 const Write = () => {
@@ -22,7 +23,7 @@ const Write = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/brands`);
+        const res = await axios.get(`${BACKEND_API_URL}/brands`);
         console.log(res.data)
         setBrands(res.data);
       } catch (err) {
@@ -37,7 +38,7 @@ const Write = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/allergies`);
+        const res = await axios.get(`${BACKEND_API_URL}/allergies`);
         console.log(res.data)
         setAllergies(res.data);
       } catch (err) {
@@ -52,7 +53,7 @@ const Write = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/categories`);
+        const res = await axios.get(`${BACKEND_API_URL}/categories`);
         console.log(res.data)
         setCategories(res.data);
       } catch (err) {
@@ -67,7 +68,7 @@ const Write = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/markets`);
+        const res = await axios.get(`${BACKEND_API_URL}/markets`);
         setSupermarkets(res.data);
       } catch (err) {
         console.log(err);
@@ -119,7 +120,7 @@ const Write = () => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await axios.post("/upload", formData);
+      const res = await axios.post(`${BACKEND_API_URL}/upload`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -205,7 +206,7 @@ const Write = () => {
     try {
       if (!state) {
         // Post
-        const productResponse = await axios.post(`/products/`, {
+        const productResponse = await axios.post(`${BACKEND_API_URL}/products/`, {
            product_name,
            product_description: value,
            image: file ? imgUrl : "",
@@ -226,7 +227,7 @@ const Write = () => {
 
         // Post in intermediate table 'productallergies'
         selectedAllergies.forEach(async (idallergies) => {
-          await axios.post(`/productallergies/`, {
+          await axios.post(`${BACKEND_API_URL}/productallergies/`, {
             idallergies: idallergies,
             idproduct: productId
           })
@@ -239,7 +240,7 @@ const Write = () => {
         //   available: 1
         // })
         selectedSupermarkets.forEach(async (idsupermarkets) => {
-            await axios.post(`/stock/`, {
+            await axios.post(`${BACKEND_API_URL}/stock/`, {
               idsupermarket: idsupermarkets,
               idproduct: productId,
               available: 1
@@ -249,7 +250,7 @@ const Write = () => {
         navigate("/app/home");
       } else {
         // Patch
-        const productResponse = await axios.patch(`/products/${state.id}`, {
+        const productResponse = await axios.patch(`${BACKEND_API_URL}/products/${state.id}`, {
           product_name,
           product_description: value,
           image: file ? imgUrl : "",
@@ -268,7 +269,7 @@ const Write = () => {
 
         // Put in intermediate table 'productallergies'
         selectedAllergies.forEach(async (idallergies) => {
-          await axios.put(`/productallergies/`, {
+          await axios.put(`${BACKEND_API_URL}/productallergies/`, {
             idallergies: idallergies,
             idproduct: productId
           })
@@ -281,7 +282,7 @@ const Write = () => {
         //   available: 1
         // })
         selectedSupermarkets.forEach(async (idsupermarkets) => {
-            await axios.post(`/productallergies/`, {
+            await axios.post(`${BACKEND_API_URL}/productallergies/`, {
               idsupermarket: idsupermarkets,
               idproduct: productId,
               available: 1

@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import Configration from "../components/Configration";
 import i18n from "../components/i18n";
 import axios from "axios";
+import { BACKEND_API_URL } from '../config/proxy.js';
 
 function Home() {
     const { t } = useTranslation();

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import { BACKEND_API_URL } from '../config/proxy.js';
 
 export const AuthContext = createContext();
 
@@ -9,14 +10,14 @@ export const AuthProvider = ({ children }) => {
   );
 
   const login = async (inputs) => {
-    const res = await axios.post("/login", inputs);
+    const res = await axios.post(`${BACKEND_API_URL}/login`, inputs);
     setCurrentUser(res.data);
   };
 
   const logout = async (inputs) => {
-    await axios.post("/logout");
+    await axios.post(`${BACKEND_API_URL}/logout`);
     setCurrentUser(null);
-    window.location.href = "/login";
+    window.location.href = "/app/login";
   };
 
   useEffect(() => {
