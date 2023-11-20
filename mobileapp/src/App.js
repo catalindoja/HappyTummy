@@ -16,7 +16,8 @@ import SingleProduct from './pages/SingleProduct';
 import PostProduct from './pages/PostProduct';
 import PostRecipe from './pages/PostRecipe';
 import EditPerfil from './pages/EditPerfil';
-import Products from './pages/Products'
+import Products from './pages/Products';
+import { i18n } from 'i18next';
 
 import {
   createBrowserRouter,

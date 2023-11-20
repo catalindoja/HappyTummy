@@ -2,8 +2,25 @@
     width: 100px;
     border: 1px solid #e6e6e6;
     border-radius: 50%;
-    margin-top: 50px;
+    margin-top: 15px;
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.btn1 {
+    padding: 4px !important;
+    border: 1px solid #080 !important;
+    border-radius: 15px !important;
+}
+
+.box_arrow {
+    margin-top: -60px !important;
+}
+
+option {
+    background-color: #00cdf6;
+}
+option:hover {
+    color: #080;
 }

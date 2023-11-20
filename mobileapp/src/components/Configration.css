@@ -1,0 +1,18 @@
+.configration-container {
+    margin-left: auto;
+    margin-right: 10px;
+    text-align: right;
+}
+
+.font-size-18 {
+    font-size: 18px;
+}
+
+select#language-select {
+    background-color: #4444a0 !important;
+    color: #fff;
+    border: 1px solid #fff !important;
+    padding: 5px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}

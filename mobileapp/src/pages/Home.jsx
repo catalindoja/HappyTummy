@@ -3,9 +3,13 @@ import Teal from "../img/teal.png";
 import './Home.css';
 import backgroundImage from "../img/clearbackground.png";
 import Card from "../components/ProductCard";
+import { useTranslation } from 'react-i18next';
+import Configration from "../components/Configration";
+import i18n from "../components/i18n";
+import axios from "axios";
 
 function Home() {
-
+    const { t } = useTranslation();
     const cardsinfo = [
         {
         },
@@ -15,7 +19,9 @@ function Home() {
         <div className="home_content">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
 
-            <h4 className="maintitles">Recommended products ♥</h4>
+            <Configration />
+
+            <h4 className="maintitles">Recommended products <span className="text-danger">♥</span></h4>
 
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -46,7 +52,7 @@ function Home() {
 
             <h4 className="maintitles">Recipes just for you ♥</h4>
 
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div className="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                 <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>

@@ -1,9 +1,14 @@
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import React, { useState, useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
 import RecipeCard from "../components/RecipeCard";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBarcode } from '@fortawesome/free-solid-svg-icons';
+import Scanner from "./Scanner";
+
 import './Search.css';
 
 import { AuthContext } from "../context/authContext";
@@ -83,17 +88,21 @@ function Search() {
 
             {activeSection === "products" && (
             <div className="searchproduct">
-                <div className="boxes">
-                    <fieldset>
-                        <input
-                            type="text"
-                            className="search"
-                            value={searchTermProduct}
-                            placeholder="What are you looking for?"
-                            onChange={(e) => setSearchTermProduct(e.target.value)}
-                        />
-                    </fieldset>
-                </div>
+                    <div className="boxes">
+                        <fieldset className="search-fieldset">
+                            <input
+                                type="text"
+                                className="search"
+                                value={searchTermProduct}
+                                placeholder="What are you looking for?"
+                                onChange={(e) => setSearchTermProduct(e.target.value)}
+                            />
+                        </fieldset>
+                        <Link to="/app/scanner">
+                            <FontAwesomeIcon icon={faBarcode} className="barcode-icon" />
+                        </Link>
+                        
+                    </div>
 
                 {filteredProducts.length === 0 ? (
                     <h3>Sorry, there are no products matching your search 😕</h3>

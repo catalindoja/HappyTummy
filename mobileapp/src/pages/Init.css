@@ -52,6 +52,10 @@
     height: auto;
 }
 
+h1.display-2 {
+    color: #080;
+}
+
 /*
 .login_buttons {
 
