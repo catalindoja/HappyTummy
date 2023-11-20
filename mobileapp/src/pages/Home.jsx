@@ -26,60 +26,21 @@ function Home() {
 
             <h4 className="maintitles mb-4">Recommended products <span className="text-danger">♥</span></h4>
 
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src={Imagehome1} alt="First slide" />
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src={Imagehome2} alt="Second slide" />
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src={Imagehome3} alt="Third slide" />
-                    </div>
+            <div className="products" >
+                <div>
+                    <img className="img1" src={Imagehome1} />
+                    <img className="img1" src={Imagehome2} />
+                    <img className="img1"  src={Imagehome3} />
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+                
             </div>
 
             <h4 className="maintitles my-4">Recipes just for you <span className="text-danger">♥</span></h4>
 
-            <div className="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                </ol>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src={Imagehome4} alt="First slide" />
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src={Imagehome5} alt="Second slide" />
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src={Imagehome6} alt="Third slide" />
-                    </div>
-                </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+            <div>
+                <img className="img1" src={Imagehome4} />
+                <img className="img1" src={Imagehome5} />
+                <img className="img1" src={Imagehome6} />
             </div>
 
         </div>

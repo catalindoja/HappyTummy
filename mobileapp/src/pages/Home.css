@@ -11,10 +11,18 @@ padding: 20px;
   margin-bottom: 20px !important;
 }
 
-img.d-block.w-100 {
+img{
   height: 200px !important;
+  width: 200px !important;
 } 
 
 .home_content {
   margin-bottom: 304px !important;
+}
+
+.img1 {
+  width: 100% !important;
+  height: 200px !important;
+  padding: 5px !important;
+  border-radius: 15px !important;
 }

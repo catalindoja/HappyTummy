@@ -18,9 +18,9 @@ import "./Menu.css";
 const Menu = () => {
   return (
     
-    <div className="w-100 sticky-bottom">
+    <div className="w-100 sticky-bottom ">
       <div
-        className="d-flex justify-content-around w-100 bg-dark"
+        className="d-flex justify-content-around w-100 bg-dark my-5"
       >
         <Link to="/app/home">
           <FontAwesomeIcon icon={faHome} className="p-2" style={{ color: 'white' }} />

@@ -53,3 +53,7 @@ img.card-img-top {
     margin: 16px auto;
     border-radius: 20px;
 }
+
+.w-100.sticky-bottom {
+    margin-top: 75px !important;
+}
