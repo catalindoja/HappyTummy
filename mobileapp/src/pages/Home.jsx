@@ -82,21 +82,6 @@ function Home() {
                 </a>
             </div>
 
-            <h4 className="maintitles my-4">New posts <span className="text-danger">✨</span></h4>
-            <div>
-                <div className="card-container">
-                    {cardsinfo.map(card => (
-                        <Card
-                            image={card.image}
-                            alt={card.alt}
-                            title={card.title}
-                            text={card.text}
-                            link={card.link}
-                        />
-                    ))}
-                </div>
-            </div>
-
         </div>
     );
 }

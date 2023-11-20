@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import Logo2 from "../img/logo2.png";
 import { useTranslation } from 'react-i18next';
-import Configration from "../components/Configration";
 
 function Profile() {
     const { t } = useTranslation();
@@ -63,7 +62,6 @@ function Profile() {
 
     return (
         <div className="profile_content">
-            <Configration />
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
 
             <div className="profile_card">

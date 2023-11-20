@@ -21,13 +21,6 @@ const Menu = () => {
     <div className="w-100 sticky-bottom">
       <div
         className="d-flex justify-content-around w-100 bg-dark"
-        /*style={{
-          backgroundColor: "#4444a0"
-        }}
-        /*style={{
-          backgroundColor: '#C9FFFF',
-          border: '1px solid #acf9f9',
-        }}*/
       >
         <Link to="/app/home">
           <FontAwesomeIcon icon={faHome} className="p-2" style={{ color: 'white' }} />
