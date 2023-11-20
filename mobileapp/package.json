@@ -1,5 +1,4 @@
 {
-  "homepage": "http://catalindoja.github.io/HappyTummy",
   "name": "mobileapp",
   "version": "0.1.0",
   "private": true,
@@ -46,8 +45,6 @@
   },
   "scripts": {
     "start": "serve build -s -n -L -p $PORT",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
