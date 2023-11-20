@@ -22,27 +22,23 @@ function Home() {
 
     return (
         <div className="home_content">
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"></link>
 
-            <h4 className="maintitles mb-4">Recommended products <span className="text-danger">♥</span></h4>
+            <h5 className="maintitles mb-4">{t('recommended')} <span className="text-danger heart">♥</span></h5>
 
             <div className="products" >
                 <div>
                     <img className="img1" src={Imagehome1} />
                     <img className="img1" src={Imagehome2} />
                     <img className="img1"  src={Imagehome3} />
-                </div>
-                
+                </div>      
             </div>
-
-            <h4 className="maintitles my-4">Recipes just for you <span className="text-danger">♥</span></h4>
-
+            <h5 className="maintitles my-4">{t('recipes')}<span className="text-danger heart">♥</span></h5>
             <div>
                 <img className="img1" src={Imagehome4} />
                 <img className="img1" src={Imagehome5} />
                 <img className="img1" src={Imagehome6} />
             </div>
-
         </div>
     );
 }

@@ -67,5 +67,7 @@
     "lactose_para":"Lactosa es una descripción que hace referencia a la lactosa, un azúcar natural que se encuentra en la leche y los productos lácteos, que los individuos pueden digerir sin dificultad. A diferencia de las personas con intolerancia a la lactosa, que tienen dificultades para digerir la lactosa, las personas que se describe que tienen lactosa fácil generalmente pueden digerir la lactosa sin experimentar molestias digestivas.",
     "login": "Iniciar sessión",
     "account": "¿No tienes una cuenta?",
-    "password" :"Contraseña"
+    "password" :"Contraseña",
+    "recipes":"Recetas solo para ti",
+    "recommended":"Productos Recomendados "
 }

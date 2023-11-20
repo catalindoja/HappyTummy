@@ -68,5 +68,7 @@
     "eggs_para":"Els ous són aliments versàtils i nutritius. Són una font de proteïnes i greixos saludables. Es poden preparar de diverses maneres, com ara bullits, fregits, remenats o escalfats, i s'utilitzen en una varietat de receptes, des de truites fins a pastissos. Els ous són un element bàsic a la cuina i es valoren pel seu sabor i la seva capacitat d'unir ingredients en moltes preparacions culinàries.",
     "login":"Iniciar sessió",
     "account":"No tens un compte?",
-    "password":"Contrasenya"
+    "password":"Contrasenya",
+    "recipes": "Receptes només per a tu",
+    "recommended": "Productes recomanats "
 }

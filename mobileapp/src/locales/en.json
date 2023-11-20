@@ -67,5 +67,7 @@
     "eggs_para":"Eggs are versatile and nutritious food. They are a source of protein and healthy fats. They can be prepared in various ways, such as boiled, fried, scrambled, or poached, and are used in a variety of recipes, from omelets to cakes. Eggs are a staple in cooking and are valued for their flavor and their ability to bind ingredients in many culinary preparations",
     "login": "Login",
     "account": "Don't you have an account?",
-    "password":"Password"
+    "password":"Password",
+    "recipes":"Recipes just for you ",
+    "recommended":"Recommended products "
 }
