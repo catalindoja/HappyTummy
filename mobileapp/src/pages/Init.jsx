@@ -16,7 +16,7 @@ function Init() {
 
       
       <div className="login_logo">
-        <img src={Logo} alt="" />
+        <img className="img11" src={Logo} alt="" />
       </div>
 
       <div className="login_buttons">

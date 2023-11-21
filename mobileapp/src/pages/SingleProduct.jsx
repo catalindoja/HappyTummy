@@ -241,7 +241,7 @@ const SingleProduct = () => {
           )} */}
         </div>
 
-        <h1 className="product-name">{post.product_name}</h1>
+        <h1 className="product-name my-3">{post.product_name}</h1>
 
         <div className="contains">
           <h3 className="contains-heading">Contains</h3>
