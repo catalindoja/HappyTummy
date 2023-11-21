@@ -44,9 +44,8 @@ const Login = () => {
 
   return (
     <div className="auth" style={{ backgroundImage: `url(${backgroundImage})` }}>
-      <Configration />
       <form>
-        <h2 className="text-danger my-3 text-center">{t('login')}</h2>
+        <h2 className="text-danger my-3 login-title">{t('login')}</h2>
         <input
           required
           type="text"
@@ -61,7 +60,7 @@ const Login = () => {
           name="password"
           onChange={handleChange}
         />
-        <button style={{ fontSize: '16px' }} onClick={handleSubmit} className="my-3 bg-success">{t('login')}</button>
+        <button style={{ fontSize: '18px' }} onClick={handleSubmit} className="my-3 bg-success">{t('login')}</button>
         {err && <p>{err}</p>}
         <div className="infotex">
           {t('account')} <Link to="/register"><span className="text-center text-primary">{t('register')}</span></Link>

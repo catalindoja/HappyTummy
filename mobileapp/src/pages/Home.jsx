@@ -25,7 +25,7 @@ function Home() {
         <div className="home_content">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"></link>
 
-            <h5 className="maintitles mb-4">{t('recommended')} <span className="text-danger heart">♥</span></h5>
+            <h5 className="maintitles mb-4 recommended-title">{t('recommended')} <span className="text-danger heart">♥</span></h5>
 
             <div className="products" >
                 <div>

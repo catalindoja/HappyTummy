@@ -12,7 +12,7 @@ function Init() {
     <div className="login_content" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <Configration />
       <h1 className="display-2">Happy Tummy</h1>
-      <p>{t('paragraph_init1')} <span className="text-danger" style={{ fontSize: '30px' }}>♥</span></p>
+      <p className="welcome-text">{t('paragraph_init1')} <span className="text-danger" style={{ fontSize: '30px' }}>♥</span></p>
 
       
       <div className="login_logo">
@@ -21,10 +21,10 @@ function Init() {
 
       <div className="login_buttons">
         <Link to={"/login"}>
-          <button type="button" className="btn btn-primary btn-sm">{t("login")}</button>
+          <button type="button" className="btn btn-primary btn-sm button-login">{t("login")}</button>
         </Link>
         <Link to={"/register"}>
-          <button type="button" className="btn btn-success btn-sm">{t("register")}</button>
+          <button type="button" className="btn btn-success btn-sm button-reg">{t("register")}</button>
         </Link>
       </div>
     </div>

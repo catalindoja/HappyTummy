@@ -25,7 +25,7 @@ const Menu = () => {
     
     <div className="w-100 sticky-bottom ">
       {showPopup && (
-        <div className="popup d-flex justify-content-center me-2">
+        <div className="popup d-flex justify-content-center me-2 popupbuttons">
           <Link to="/app/postproduct"><button>Post Product</button></Link>
           <Link to="/app/postrecipe"><button>Post Recipe</button></Link>
         </div>

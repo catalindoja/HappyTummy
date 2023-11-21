@@ -1,8 +1,9 @@
 .configration-container {
-    margin-left: auto;
+    margin-left: 290px;
     margin-right: 10px;
     text-align: right;
     top: 8px;
+    
 }
 
 .font-size-18 {
@@ -10,10 +11,17 @@
 }
 
 select#language-select {
-    background-color: #4444a0 !important;
+    margin-top: 10px !important;
+    background-color: teal !important;
     color: #fff;
     border: 1px solid #fff !important;
     padding: 4px;
     border-radius: 15px;
     margin-bottom: 10px;
 }
+
+#language-select option {
+    background-color: teal; /* Cambia el color de fondo de cada opción */
+    color: #fff; /* Cambia el color del texto de cada opción */
+    font-size: 12px; /* Cambia el tamaño del texto de cada opción */
+  }

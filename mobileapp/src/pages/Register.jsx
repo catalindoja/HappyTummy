@@ -240,7 +240,6 @@ const Register = () => {
       case 1:
         return (
           <div className="container" style={{ backgroundImage: `url(${backgroundImage})` }}>
-            <Configration />
             <form onSubmit={handleNextStep}>
               <div className="form-group my-3">
                 <label className='label1' htmlFor="exampleInputEmail1">{t("label_email")}</label>
@@ -255,7 +254,6 @@ const Register = () => {
                 onClick={print}
                 type="submit"
                 className="btn btn-primary"
-                style={{ marginTop: '-930px', marginLeft: '105px' }}
               >
                 {t("next")}
               </button>
@@ -267,7 +265,6 @@ const Register = () => {
         const countryOptions = [t('select_country'), ...Object.values(countries).map(country => country.name)];
         return (
           <div>
-            <Configration />
             <h1 className='my-2 text-success'>{t('step2')}</h1>
             <form onSubmit={handleNextStep}>
               <div className="form-group">
