@@ -57,3 +57,13 @@ img.card-img-top {
 .w-100.sticky-bottom {
     margin-top: 75px !important;
 }
+
+h5.card-title.afw-bold {
+    font-size: 16px !important;
+}
+
+
+img.heart-icon {
+    width: 30px !important;
+    height: 30px !important;
+}

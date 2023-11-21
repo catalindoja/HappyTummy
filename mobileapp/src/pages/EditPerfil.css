@@ -1,5 +1,6 @@
 .img_user {
-    width: 100px;
+    width: 120px !important;
+    height: 120px !important;
     border: 1px solid #e6e6e6;
     border-radius: 50%;
     margin-top: 15px;
@@ -27,4 +28,8 @@ option:hover {
 button.btn.btn-success {
     border-radius: 20px !important;
     padding: 5px 30px;
+}
+
+.form1 {
+    margin-top: -190px !important;
 }

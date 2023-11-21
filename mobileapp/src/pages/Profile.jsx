@@ -73,7 +73,7 @@ function Profile() {
                 <img className="edit" src={Edit} onClick={handleEditProfile} alt="" />
             </div>
 
-            <span className="maintitles">{t('my_products')} <span className="icon2">🛒</span></span>
+            <h5 className="maintitles">{t('my_products')} <span className="icon2">🛒</span></h5>
             <div>
                 <div className="card-container">
                     {myproducts.map(post => (
@@ -87,7 +87,7 @@ function Profile() {
                 </div>
             </div>
 
-            <span className="maintitles">{t('my_recipes')} <span className="icon2">🥧</span></span>
+            <h5 className="maintitles">{t('my_recipes')} <span className="icon2">🥧</span></h5>
             <div>
                 <div className="card-container">
                     {myrecipes.map(post => (

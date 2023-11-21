@@ -5,7 +5,6 @@ import backgroundImage from "../img/clearbackground.png";
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Configration from "../components/Configration";
-import i18n from "../components/i18n";
 
 function Init() {
   const { t } = useTranslation();
