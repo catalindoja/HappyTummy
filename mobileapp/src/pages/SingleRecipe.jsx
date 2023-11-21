@@ -62,7 +62,7 @@ const SingleRecipe = () => {
                 setUserComments(userCommentsData);
 
             } catch (err) {
-                console.log(err);
+                //console.log(err);
             }
         };
 
@@ -151,7 +151,7 @@ const SingleRecipe = () => {
                             </div>
                         )} */}
                     </div>
-                    <h1 className="recipe-name">{post.title}</h1>
+                    <h4 className="recipe-name">{post.title}</h4>
                     <h3 className="specifications-heading">Specifications</h3>
                     <div className="more-data-container">
                         <div className="more-data-item">
@@ -169,7 +169,7 @@ const SingleRecipe = () => {
                             __html: DOMPurify.sanitize(post.description),
                         }}
                     ></p>
-                    <h3 className="steps-heading">Steps</h3>
+                    <h3 className="steps-heading mb-3">Steps</h3>
                     <p className="description"
                         dangerouslySetInnerHTML={{
                             __html: DOMPurify.sanitize(post.steps),
