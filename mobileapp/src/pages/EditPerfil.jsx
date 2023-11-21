@@ -6,8 +6,6 @@ import "./EditPerfil.css";
 import User from "../img/user.jpeg";
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import Configration from "../components/Configration";
-import i18n from "../components/i18n";
 import { BACKEND_API_URL } from '../config/proxy.js';
 
 const EditPerfil = () => {
@@ -68,7 +66,6 @@ const EditPerfil = () => {
 
     return (
         <div className="container my-5">
-            <Configration />
             <div className="box_arrow">
                 <button className="btn1 bg-dark">
                     <span className="go_back px-2">{t('go_back')}</span>

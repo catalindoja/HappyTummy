@@ -2,18 +2,15 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
-import backgroundImage from "../img/background.png";
 import { BACKEND_API_URL } from '../config/proxy.js';
+import backgroundImage from "../img/clearbackground.png";
+import "./Login.css";
+import Configration from "../components/Configration";
+import { useTranslation } from 'react-i18next';
 
 // Create the Login component
 const Login = () => {
-
-  // Set up the state variables
-  // - inputs: an object that represents the input fields in the form
-  // - err: a string that represents the error message if the user does not fill in the input fields
-  //        (default value is null)
-  // - navigate: a function that redirects the user to the Products page when the user clicks the 'Login' button
-  // - login: a function that logs in the user when the user clicks the 'Login' button
+  const { t } = useTranslation();
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
@@ -21,11 +18,6 @@ const Login = () => {
   const [err, setError] = useState(null);
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
-
-  // Set up the functions that handle the input fields and the form submission
-  // - handleChange: a function that updates the state variable 'inputs' when the user types in the input fields
-  // - handleSubmit: a function that logs in the user when the user clicks the 'Login' button
-  //                (if the user does not fill in the input fields, the function will set the error message)
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
@@ -50,30 +42,30 @@ const Login = () => {
     }
   };
 
-  // Return the JSX elements
   return (
     <div className="auth" style={{ backgroundImage: `url(${backgroundImage})` }}>
+      <Configration />
       <form>
-        <h1>Login</h1>
+        <h2 className="text-danger my-3 text-center">{t('login')}</h2>
         <input
           required
           type="text"
-          placeholder="Username"
+          placeholder={t('username')}
           name="username"
           onChange={handleChange}
         />
         <input
           required
           type="password"
-          placeholder="Password"
+          placeholder={t('password')}
           name="password"
           onChange={handleChange}
         />
-        <button style={{ fontSize: '16px' }} onClick={handleSubmit}>Login</button>
+        <button style={{ fontSize: '16px' }} onClick={handleSubmit} className="my-3 bg-success">{t('login')}</button>
         {err && <p>{err}</p>}
-        <span className="infotext">
-          Don't you have an account? <Link to="/register">Register</Link>
-        </span>
+        <div className="infotex">
+          {t('account')} <Link to="/register"><span className="text-center text-primary">{t('register')}</span></Link>
+        </div>
       </form>
     </div>
   );

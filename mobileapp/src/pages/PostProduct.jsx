@@ -299,7 +299,6 @@ const Write = () => {
   // Return the JSX elements
   return (
     <div className="container">
-      <Configration />
       <h2 className="supertitle-write">{t('post')} <span className="text-danger">❤</span></h2>
       <div className="add-write">
         <div className="content-write">

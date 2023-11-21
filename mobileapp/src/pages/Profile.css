@@ -25,7 +25,6 @@ img {
 
 .maintitles {
     margin-top: 40px;
-    font-weight: bold;
     margin: 30px;
     background-color: #b9e7e7;
     padding: 10px;
@@ -40,7 +39,7 @@ img {
     align-items: center;
     gap: 4px;
     font-size: 14px;
-    margin-bottom: 120px !important;
+    margin-bottom: 30px !important;
 }
 
 span.icon2 {
@@ -53,4 +52,18 @@ img.card-img-top {
     height: 200px !important;
     margin: 16px auto;
     border-radius: 20px;
+}
+
+.w-100.sticky-bottom {
+    margin-top: 75px !important;
+}
+
+h5.card-title.afw-bold {
+    font-size: 16px !important;
+}
+
+
+img.heart-icon {
+    width: 30px !important;
+    height: 30px !important;
 }

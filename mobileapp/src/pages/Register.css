@@ -1,17 +1,13 @@
 .register-form {
     background-size: cover;
-    /* Hace que la imagen ocupe toda la pantalla */
     background-repeat: repeat;
     height: 100% !important;
-    /* Ocupa el 100% de la altura de la pantalla */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
 }
-
- /* Style the form */
  #regForm {
     background-color: #ffffff;
     margin: 100px auto;
@@ -104,5 +100,14 @@ p.error-msg {
 
 label#errorMail {
   margin-bottom: 29px !important;
-  margin-top: 145px !important;
+  margin-top: 403px !important;
+}
+
+.container {
+  padding: 0px !important;
+}
+
+form {
+  margin-left: 10px !important;
+  width: 90% !important;
 }

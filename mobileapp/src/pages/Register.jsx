@@ -255,7 +255,7 @@ const Register = () => {
                 onClick={print}
                 type="submit"
                 className="btn btn-primary"
-                style={{ marginTop: '-445px', marginLeft: '105px' }}
+                style={{ marginTop: '-930px', marginLeft: '105px' }}
               >
                 {t("next")}
               </button>

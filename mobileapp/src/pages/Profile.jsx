@@ -11,7 +11,6 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import Logo2 from "../img/logo2.png";
 import { useTranslation } from 'react-i18next';
-import Configration from "../components/Configration";
 import { BACKEND_API_URL } from '../config/proxy.js';
 
 function Profile() {
@@ -64,7 +63,6 @@ function Profile() {
 
     return (
         <div className="profile_content">
-            <Configration />
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
 
             <div className="profile_card">
@@ -76,7 +74,7 @@ function Profile() {
                 <img className="edit" src={Edit} onClick={handleEditProfile} alt="" />
             </div>
 
-            <span className="maintitles">{t('my_products')} <span className="icon2">🛒</span></span>
+            <h5 className="maintitles">{t('my_products')} <span className="icon2">🛒</span></h5>
             <div>
                 <div className="card-container">
                     {myproducts.map(post => (
@@ -90,7 +88,7 @@ function Profile() {
                 </div>
             </div>
 
-            <span className="maintitles">{t('my_recipes')} <span className="icon2">🥧</span></span>
+            <h5 className="maintitles">{t('my_recipes')} <span className="icon2">🥧</span></h5>
             <div>
                 <div className="card-container">
                     {myrecipes.map(post => (
@@ -103,7 +101,6 @@ function Profile() {
                     ))}
                 </div>
             </div>
-
         </div>
     );
 }
