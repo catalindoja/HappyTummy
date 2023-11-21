@@ -16,18 +16,33 @@ import "./Menu.css";
 //the buttons will be images with links to the respective pages
 
 const Menu = () => {
+  const [showPopup, setShowPopup] = useState(false);
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
+
+  const hidePopup = () => {
+    setShowPopup(false);
+  };
+
   return (
     
     <div className="w-100 sticky-bottom ">
-      <div
-        className="d-flex justify-content-around w-100 bg-dark my-5"
-      >
+      {showPopup && (
+        <div className="popup d-flex justify-content-center me-2">
+          <Link to="/app/postproduct"><button>Post Product</button></Link>
+          <Link to="/app/postrecipe"><button>Post Recipe</button></Link>
+        </div>
+      )}
+
+      <div className="d-flex justify-content-around w-100 bg-dark my-5">
         <Link to="/app/home">
           <FontAwesomeIcon icon={faHome} className="p-2" style={{ color: 'white' }} />
         </Link>
-        <Link to="/app/postproduct">
+        <div onClick={togglePopup}>
           <FontAwesomeIcon icon={faPlus} className="p-2" style={{ color: 'white' }} />
-        </Link>
+        </div>
         <Link to="/app/search">
           <FontAwesomeIcon icon={faSearch} className="p-2" style={{ color: 'white' }} />
         </Link>
