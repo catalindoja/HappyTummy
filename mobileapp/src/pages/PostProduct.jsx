@@ -7,10 +7,13 @@ import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import moment from "moment";
 import "./PostProduct.css";
+import { useTranslation } from 'react-i18next';
+import Configration from "../components/Configration";
+import { BACKEND_API_URL } from '../config/proxy.js';
 
 // Create the Write component
 const Write = () => {
-
+  const { t } = useTranslation();
   // Obtains the state from the location
   const state = useLocation().state;
   const navigate = useNavigate();
@@ -20,7 +23,7 @@ const Write = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/brands`);
+        const res = await axios.get(`${BACKEND_API_URL}/brands`);
         console.log(res.data)
         setBrands(res.data);
       } catch (err) {
@@ -35,7 +38,7 @@ const Write = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/allergies`);
+        const res = await axios.get(`${BACKEND_API_URL}/allergies`);
         console.log(res.data)
         setAllergies(res.data);
       } catch (err) {
@@ -50,7 +53,7 @@ const Write = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/categories`);
+        const res = await axios.get(`${BACKEND_API_URL}/categories`);
         console.log(res.data)
         setCategories(res.data);
       } catch (err) {
@@ -65,7 +68,7 @@ const Write = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/markets`);
+        const res = await axios.get(`${BACKEND_API_URL}/markets`);
         setSupermarkets(res.data);
       } catch (err) {
         console.log(err);
@@ -117,7 +120,7 @@ const Write = () => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await axios.post("/upload", formData);
+      const res = await axios.post(`${BACKEND_API_URL}/upload`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -151,6 +154,7 @@ const Write = () => {
   const [value, setValue] = useState(state?.product_description || "");
   const [product_name, setProductName] = useState(state?.product_name || "");
   const [file, setFile] = useState(null);
+  
 
   // Set up the function that handles the form submission
   // - handleClick: a function that posts the product when the user clicks the 'Publish' button
@@ -202,7 +206,7 @@ const Write = () => {
     try {
       if (!state) {
         // Post
-        const productResponse = await axios.post(`/products/`, {
+        const productResponse = await axios.post(`${BACKEND_API_URL}/products/`, {
            product_name,
            product_description: value,
            image: file ? imgUrl : "",
@@ -223,7 +227,7 @@ const Write = () => {
 
         // Post in intermediate table 'productallergies'
         selectedAllergies.forEach(async (idallergies) => {
-          await axios.post(`/productallergies/`, {
+          await axios.post(`${BACKEND_API_URL}/productallergies/`, {
             idallergies: idallergies,
             idproduct: productId
           })
@@ -236,7 +240,7 @@ const Write = () => {
         //   available: 1
         // })
         selectedSupermarkets.forEach(async (idsupermarkets) => {
-            await axios.post(`/stock/`, {
+            await axios.post(`${BACKEND_API_URL}/stock/`, {
               idsupermarket: idsupermarkets,
               idproduct: productId,
               available: 1
@@ -246,7 +250,7 @@ const Write = () => {
         navigate("/app/home");
       } else {
         // Patch
-        const productResponse = await axios.patch(`/products/${state.id}`, {
+        const productResponse = await axios.patch(`${BACKEND_API_URL}/products/${state.id}`, {
           product_name,
           product_description: value,
           image: file ? imgUrl : "",
@@ -265,7 +269,7 @@ const Write = () => {
 
         // Put in intermediate table 'productallergies'
         selectedAllergies.forEach(async (idallergies) => {
-          await axios.put(`/productallergies/`, {
+          await axios.put(`${BACKEND_API_URL}/productallergies/`, {
             idallergies: idallergies,
             idproduct: productId
           })
@@ -278,7 +282,7 @@ const Write = () => {
         //   available: 1
         // })
         selectedSupermarkets.forEach(async (idsupermarkets) => {
-            await axios.post(`/productallergies/`, {
+            await axios.post(`${BACKEND_API_URL}/productallergies/`, {
               idsupermarket: idsupermarkets,
               idproduct: productId,
               available: 1
@@ -294,20 +298,20 @@ const Write = () => {
 
   // Return the JSX elements
   return (
-    <div>
-      <h1 className="supertitle-write">Post a new product ❤</h1>
+    <div className="container">
+      <h2 className="supertitle-write">{t('post')} <span className="text-danger">❤</span></h2>
       <div className="add-write">
         <div className="content-write">
   
           <input
             type="text"
-            placeholder="Name of the product"
+            placeholder={t('name_product')}
             onChange={(e) => setProductName(e.target.value)}
           />
   
           <div className="editorContainer-write">
             <ReactQuill
-              placeholder="Description of the product"
+              placeholder={t('product_description')}
               className="editor-write"
               theme="snow"
               value={value}
@@ -317,7 +321,7 @@ const Write = () => {
   
           <input
             type="number"
-            placeholder="Price"
+            placeholder={t('price')}
             onChange={(e) => setPrice(e.target.value)}
           />
   
@@ -325,7 +329,7 @@ const Write = () => {
             <div className="quantity-input-write">
               <input
                 type="number"
-                placeholder="Quantity per unit"
+                placeholder={t("quantity")}
                 onChange={(e) => setQuantity(e.target.value)}
               />
             </div>
@@ -334,19 +338,19 @@ const Write = () => {
                 value={measurement}
                 onChange={(e) => setSelectedMeasurement(e.target.value)}
               >
-                <option value="">Unit</option>
+                <option value="">{t('unit')}</option>
                 <option value="g">g</option>
                 <option value="kg">kg</option>
                 <option value="mg">mg</option>
                 <option value="l">l</option>
                 <option value="ml">ml</option>
-                <option value="unidad">unidad</option>
+                <option value="unidad">{t('unit')}</option>
               </select>
             </div>
           </div>
   
           <div className="super-bar-code-write">
-            <h3>Bar code number EAN-13 / GTIN-13</h3>
+            <h3>{t('barcode')}</h3>
           </div>
   
           <div className="super-bar-code-write">
@@ -383,8 +387,8 @@ const Write = () => {
   
           <div className="boxes-write">
             <fieldset>
-              <legend>Allergies and Intolerances</legend>
-              <span>It contains...</span>
+              <legend>{t('allergies')}</legend>
+              <span>{t('it_contains')}</span>
               {allergies.map((allergy) => (
                 <div key={allergy.id}>
                   <input type="checkbox" id={allergy.allergy_name} name="alergies[]"
@@ -399,8 +403,8 @@ const Write = () => {
 
           <div className="boxes-write">
             <fieldset>
-              <legend>Supermarkets</legend>
-              <span>It can be found in...</span>
+              <legend>{t('supermarkets')}</legend>
+              <span>{t('found')}</span>
               {supermarkets.map((market) => (
                 <div key={market.id}>
                   <input type="checkbox" id={market.name} name="markets[]"
@@ -415,7 +419,7 @@ const Write = () => {
 
           <div className="boxes-write">
             <fieldset>
-              <legend>Brand</legend>
+              <legend>{t('brand')}</legend>
               {brands.map((brand) => (
                 <div key={brand.id}>
                   <input type="radio" id={brand.name} name="idbrand" value={brand.id} onChange={() => setidbrand(brand.id)} />
@@ -427,7 +431,7 @@ const Write = () => {
   
           <div className="boxes-write">
             <fieldset>
-              <legend>Category</legend>
+              <legend>{t('category')}</legend>
               {categories.map((category) => (
                 <div key={category.id}>
                   <input type="radio" id={category.category_name} name="iccategory" value={category.id} onChange={() => setidcategory(category.id)} />
@@ -437,7 +441,7 @@ const Write = () => {
             </fieldset>
           </div>
   
-          <h3 className="picture-title">Update a picture 📸</h3>
+          <h3 className="picture-title">{t('update')} 📸</h3>
           <input
             type="text"
             placeholder="Image url"
@@ -454,7 +458,7 @@ const Write = () => {
                 onChange={(e) => setFile(e.target.files[0])}
               />
               <label className="file-write" htmlFor="file">
-                Upload Image (png or jpg)
+                {t('upload')}
               </label>
   
             </div>
@@ -462,7 +466,7 @@ const Write = () => {
   
           {error && <p className="error-message-write">{error}</p>}
           <div className="buttons-write">
-            <button onClick={handleClick}>Publish</button>
+            <button onClick={handleClick}>{t('publish')}</button>
           </div>
   
         </div>

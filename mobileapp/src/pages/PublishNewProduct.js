@@ -6,6 +6,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import moment from "moment";
+import { BACKEND_API_URL } from '../config/proxy.js';
 
 // Create the Write component
 const PublishNewProduct = () => {
@@ -19,7 +20,7 @@ const PublishNewProduct = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`/brands`);
+                const res = await axios.get(`${BACKEND_API_URL}/brands`);
                 console.log(res.data)
                 setBrands(res.data);
             } catch (err) {
@@ -34,7 +35,7 @@ const PublishNewProduct = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`/allergies`);
+                const res = await axios.get(`${BACKEND_API_URL}/allergies`);
                 console.log(res.data)
                 setAllergies(res.data);
             } catch (err) {
@@ -49,7 +50,7 @@ const PublishNewProduct = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`/categories`);
+                const res = await axios.get(`${BACKEND_API_URL}/categories`);
                 console.log(res.data)
                 setCategories(res.data);
             } catch (err) {
@@ -77,7 +78,7 @@ const PublishNewProduct = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`/markets/${currentUser.idsupermarket}`);
+                const response = await axios.get(`${BACKEND_API_URL}/markets/${currentUser.idsupermarket}`);
                 const data = response.data;
                 setMarketNameUser(data);
             } catch (err) {
@@ -108,7 +109,7 @@ const PublishNewProduct = () => {
         try {
             const formData = new FormData();
             formData.append("file", file);
-            const res = await axios.post("/upload", formData);
+            const res = await axios.post(`${BACKEND_API_URL}/upload`, formData);
             return res.data;
         } catch (err) {
             console.log(err);
@@ -192,7 +193,7 @@ const PublishNewProduct = () => {
         try {
             if (!state) {
                 // Post
-                const productResponse = await axios.post(`/products/`, {
+                const productResponse = await axios.post(`${BACKEND_API_URL}/products/`, {
                     product_name,
                     product_description: value,
                     image: file ? imgUrl : "",
@@ -213,14 +214,14 @@ const PublishNewProduct = () => {
 
                 // Post in intermediate table 'productallergies'
                 selectedAllergies.forEach(async (idallergies) => {
-                    await axios.post(`/productallergies/`, {
+                    await axios.post(`${BACKEND_API_URL}/productallergies/`, {
                         idallergies: idallergies,
                         idproduct: productId
                     })
                 });
 
                 // Post in intermediate table 'stock'
-                await axios.post(`/stock/`, {
+                await axios.post(`${BACKEND_API_URL}/stock/`, {
                     idsupermarket: marketuser.id,
                     idproduct: productId,
                     available: 1
@@ -229,7 +230,7 @@ const PublishNewProduct = () => {
                 navigate("/products");
             } else {
                 // Patch
-                const productResponse = await axios.patch(`/products/${state.id}`, {
+                const productResponse = await axios.patch(`${BACKEND_API_URL}/products/${state.id}`, {
                     product_name,
                     product_description: value,
                     image: file ? imgUrl : "",
@@ -248,14 +249,14 @@ const PublishNewProduct = () => {
 
                 // Put in intermediate table 'productallergies'
                 selectedAllergies.forEach(async (idallergies) => {
-                    await axios.put(`/productallergies/`, {
+                    await axios.put(`${BACKEND_API_URL}/productallergies/`, {
                         idallergies: idallergies,
                         idproduct: productId
                     })
                 });
 
                 // Put in intermediate table 'stock'
-                await axios.put(`/stock/`, {
+                await axios.put(`${BACKEND_API_URL}/stock/`, {
                     idsupermarket: marketuser.id,
                     idproduct: productId,
                     available: 1

@@ -1,18 +1,13 @@
 .login_content {
     background-size: cover;
-    /* Hace que la imagen ocupe toda la pantalla */
     background-position: center;
     background-repeat: no-repeat;
     height: 100vh;
-    /* Ocupa el 100% de la altura de la pantalla */
-
-    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     font-family: 'Lato', sans-serif;
-
     background-color: #b9e7e7;
 }
 
@@ -32,7 +27,6 @@
 }
 
 .login_buttons {
-    margin: 0 5px;
     /* Separación horizontal entre los botones */
     position: fixed;
     bottom: 0;
@@ -52,11 +46,17 @@
     height: auto;
 }
 
-/*
-.login_buttons {
-
-    .btn {
-        background-color: #FF5733;
-    }
+h1.display-2 {
+    color: #080;
+    margin-top: 180px !important;
 }
-*/
+
+.img11 {
+    width: 70px !important;
+    height: 70px !important;
+}
+
+button.btn.btn-primary.btn-sm {
+    border-radius: 15px !important;
+    padding: 5px 10px !important;
+}

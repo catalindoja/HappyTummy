@@ -1,46 +1,74 @@
-/* Estilos para el componente Home */
+.w-100.sticky-bottom {
+    margin-top: 324px !important;
+}
 
-/* Se aplica a todo el contenido de Home */
-.profile_content {
-    padding: 20px;
-    /* Ajustar el relleno para el contenido */
+.w-100 {
+    background-color: #f0fffe;
+}
 
-    .profile_card {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        font-size: 14px;
+img {
+    width: 40px !important;
+    height: 40px !important;
+}
 
-        .profilepic{
-            margin-left: -15px;
-            margin-right: -8px;
-            width: 78px;
-            height: 60px;
-            object-fit: cover;
-        }
+.alert.alert-warning {
+    background-color: #ff0000 !important;
+    border: 1px solid #ff0000 !important;
+    color: #fff !important;
+    width: 35% !important;
+    border-radius: 15px !important;
+    margin-left: 10px;
+    font-size: 1rem;
+    padding: 5px;
+    margin: 10px;
+}
 
-        .username{
-            font-weight: bold;
-            font-size: 18px;
-        }
+.maintitles {
+    margin-top: 40px;
+    margin: 30px;
+    background-color: #b9e7e7;
+    padding: 10px;
+    padding: 8px;
+    border-radius: 10px;
+    display: block;
+    text-align: center;
+    margin: 30px !important;
+}
 
-        .alert-warning{
-            margin-left: 10px;
-            font-size: 1rem; /* Ajustar el tamaño del texto */
-            padding: 5px; /* Ajustar el relleno del rectángulo */
-            margin: 10px; /* Ajustar el margen del rectángulo */
-        }
-    }
+.profile_card {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 14px;
+    margin-bottom: 30px !important;
+}
 
-    .maintitles {
-        margin-top: 20px;
-        font-weight: bold;
-        margin-top: 15px;
-        background-color: #b9e7e7;
-        padding: 10px;
-        padding: 8px;
-        border-radius: 10px;
-        display: inline-block;
-    }
+span.icon2 {
+    margin-left: 10px;
+    font-size: 20px;
+}
 
+img.card-img-top {
+    width: 200px !important;
+    height: 200px !important;
+    margin: 16px auto;
+    border-radius: 20px;
+}
+
+.w-100.sticky-bottom {
+    margin-top: 75px !important;
+}
+
+h5.card-title.afw-bold {
+    font-size: 16px !important;
+}
+
+
+img.heart-icon {
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.card.mb-2.d-flex.card-border {
+    margin: 30px !important;
 }

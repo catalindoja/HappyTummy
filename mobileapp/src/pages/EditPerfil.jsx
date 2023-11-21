@@ -5,8 +5,11 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import "./EditPerfil.css";
 import User from "../img/user.jpeg";
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { BACKEND_API_URL } from '../config/proxy.js';
 
 const EditPerfil = () => {
+    const { t } = useTranslation();
     const { id } = useParams();
     const [iduser, setIdUser] = useState({
         iduser: ''
@@ -16,7 +19,7 @@ const EditPerfil = () => {
         username: "",
         email: "",
         realname: "",
-        realusername :"",
+        realusurname :"",
         password: "",
         image: null, // Imagen predeterminada
     });
@@ -32,7 +35,7 @@ const EditPerfil = () => {
     const fetchUserDataFromServer = async (userId) => {
         console.log(userId)
         try {
-            const response = await fetch(`/users/${userId}`);
+            const response = await fetch(`${BACKEND_API_URL}/users/${userId}`);
             if (!response.ok) {
                 throw new Error("Error al obtener datos del usuario");
             }
@@ -54,7 +57,7 @@ const EditPerfil = () => {
         e.preventDefault();
         const id = iduser.iduser;
         console.log(id);
-        let response1 = await axios.patch(`/users/${id}`, userData);
+        let response1 = await axios.patch(`${BACKEND_API_URL}/users/${id}`, userData);
         //console.log(userData);
         console.log(response1)
         // Lógica para enviar los datos actualizados al servidor
@@ -65,7 +68,7 @@ const EditPerfil = () => {
         <div className="container my-5">
             <div className="box_arrow">
                 <button className="btn1 bg-dark">
-                    <span className="go_back">Go Back</span>
+                    <span className="go_back px-2">{t('go_back')}</span>
                     <span className="arrow"><FontAwesomeIcon icon={faArrowLeft} /></span>
                 </button>
             </div>
@@ -74,62 +77,67 @@ const EditPerfil = () => {
             </div>
             <div className="form1">
                 <form onSubmit={handleSubmit}>
-                    <div className="form-group mb-3">
-                        <label htmlFor="username">Username</label>
+                    <div className="form-group mb-2">
+                        <label htmlFor="username" className="my-1">{t('username')}</label>
                         <input
                             type="text"
                             className="form-control"
                             id="username"
-                            placeholder="Enter Your Username"
+                            autoComplete="off"
+                            placeholder={t('placeholder_username')}
                             value={userData.username}
                             onChange={handleInputChange}
                         />
                     </div>
-                    <div className="form-group mb-3">
-                        <label htmlFor="email">Email Address</label>
+                    <div className="form-group mb-2">
+                        <label className="my-1"  htmlFor="email">{t('label_email')}</label>
                         <input
                             type="email"
                             className="form-control"
                             id="email"
-                            placeholder="Enter Your Email Address"
+                            autoComplete="off"
+                            placeholder={t('placeholder_text_email')}
                             value={userData.email}
                             onChange={handleInputChange}
                         />
                     </div>
-                    <div className="form-group mb-3">
-                        <label htmlFor="realname">Name</label>
+                    <div className="form-group mb-2">
+                        <label className="my-1" htmlFor="realname">{t('name')}</label>
                         <input
                             type="text"
                             className="form-control"
                             id="realname"
-                            placeholder="Enter Your Name"
+                            autoComplete="off"
+                            placeholder={t('placeholder_name')}
                             value={userData.realname}
                             onChange={handleInputChange}
                         />
                     </div>
                     <div className="form-group mb-3">
-                        <label htmlFor="realsurname">Surname</label>
+                        <label className="my-1" htmlFor="realsurname">{t('surname')}</label>
                         <input
                             type="text"
                             className="form-control"
                             id="realsurname"
-                            placeholder="Enter Your surName"
-                            value={userData.realsurname}
+                            autoComplete="off"
+                            placeholder={t('placeholder_surname')}
+                            value={userData.realusurname}
                             onChange={handleInputChange}
                         />
                     </div>
                     <div className="form-group mb-3">
-                        <label htmlFor="password">Password</label>
+                        <label className="my-1" htmlFor="password">{t('password')}</label>
                         <input
                             type="password"
                             className="form-control"
                             id="password"
-                            placeholder="Enter Your Password"
+                            autoComplete="off"
+                            placeholder={t('placeholder_password')}
                             value={userData.password}
                             onChange={handleInputChange}
                         />
                     </div>
-                    <button onSubmit={handleSubmit} type="submit" className="btn btn-success">Send</button>
+                    <button onSubmit={handleSubmit} type="submit" className="btn btn-success">{t('send')}</button>
                 </form>
             </div>
         </div>

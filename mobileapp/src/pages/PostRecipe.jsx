@@ -7,6 +7,7 @@ import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import moment from "moment";
 import "./PostRecipe.css";
+import { BACKEND_API_URL } from '../config/proxy.js';
 
 // Create the Write component
 const Write = () => {
@@ -24,7 +25,7 @@ const Write = () => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await axios.post("/upload", formData);
+      const res = await axios.post(`${BACKEND_API_URL}/upload`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -83,7 +84,7 @@ const Write = () => {
       try {
           if (!state) {
               // Post
-              const recipeResponse = await axios.post(`/recipes/`, {
+              const recipeResponse = await axios.post(`${BACKEND_API_URL}/recipes/`, {
                   iduser,
                   title,
                   time,
@@ -98,7 +99,7 @@ const Write = () => {
               });
           } else {
               // Patch
-              const recipeResponse = await axios.patch(`/recipes/`, {
+              const recipeResponse = await axios.patch(`${BACKEND_API_URL}/recipes/`, {
                   iduser,
                   title,
                   time,

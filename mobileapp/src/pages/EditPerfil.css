@@ -1,9 +1,35 @@
 .img_user {
-    width: 100px;
+    width: 120px !important;
+    height: 120px !important;
     border: 1px solid #e6e6e6;
     border-radius: 50%;
-    margin-top: 50px;
+    margin-top: 15px;
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.btn1 {
+    padding: 4px !important;
+    border-radius: 15px !important;
+}
+
+.box_arrow {
+    margin-top: -90px !important;
+}
+
+option {
+    background-color: #00cdf6;
+}
+option:hover {
+    color: #080;
+}
+
+button.btn.btn-success {
+    border-radius: 20px !important;
+    padding: 5px 30px;
+}
+
+.form1 {
+    margin-top: -190px !important;
 }

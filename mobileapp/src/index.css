@@ -19,3 +19,7 @@ code {
 .ht-bg-color {
   background-color: #cdfefe !important;
 }
+
+.w-100 {
+  margin-top: 240px !important;
+}

@@ -9,17 +9,22 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #fff; /* Fondo blanco para resaltar */
+    background-color: #fff; 
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sutil sombra */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
   }
   
   /* Estilos para el título principal */
   .supertitle-write {
-    color: teal; /* Azul más oscuro para el título */
+    /*color: teal; /* Azul más oscuro para el título */
     margin-bottom: 20px;
-    margin-top: 20px;
+    margin-top: 15px;
     margin-left: 20px;
+    color: #000 !important;
+  }
+
+  .w-100.sticky-bottom {
+    margin-top: 5px !important;
   }
   
   /* Estilos para la sección del mercado */
