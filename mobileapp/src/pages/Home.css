@@ -37,3 +37,9 @@ padding: 20px;
 .configration-container.my-3 {
   margin-top: 0px !important;
 }
+
+h5.maintitles.mb-4 {
+  width: 90% !important;
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+}

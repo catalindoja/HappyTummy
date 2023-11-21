@@ -23,15 +23,6 @@
     cursor: pointer;
   }
   
-  .super-image {
-    width: 100%;
-    max-height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-top: 20px;
-    border: 5px solid #b9e7e7; /* Borde azul celeste */
-  }
-  
   .user {
     display: flex;
     align-items: center;
@@ -211,21 +202,22 @@
     margin-top: 20px;
   }
   
-  .editorContainer {
-    height: 250px;
-    overflow: scroll;
-    font-size: 20px;
+.editorContainer {
+  height: 250px;
+  overflow: scroll;
+  font-size: 20px;
 
-    .editor {
-      height: 30%;
-      border: none;
-    }
-  }
-  
   .editor {
-    /* Agrega estilos para el editor según sea necesario */
+    height: 30%;
+    border: none;
   }
-  
-  /* Agrega más estilos según sea necesario */
-  
-  
+}
+
+.super-image {
+  width: 120px !important;
+  height: 120px !important;
+  border-radius: 15px !important;
+  margin: auto 30px !important;
+  border: 1px solid #fff;
+  border-radius: 25px !important;
+}
