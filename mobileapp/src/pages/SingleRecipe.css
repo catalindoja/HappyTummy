@@ -237,10 +237,9 @@
     }
   }
   
-  .editor {
-    /* Agrega estilos para el editor según sea necesario */
+
+  h1.recipe-name {
+    margin-top: 20px !important;
   }
-  
-  /* Agrega más estilos según sea necesario */
   
   

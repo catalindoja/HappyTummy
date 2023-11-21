@@ -50,3 +50,13 @@ h1.display-2 {
     color: #080;
     margin-top: 180px !important;
 }
+
+.img11 {
+    width: 70px !important;
+    height: 70px !important;
+}
+
+button.btn.btn-primary.btn-sm {
+    border-radius: 15px !important;
+    padding: 5px 10px !important;
+}

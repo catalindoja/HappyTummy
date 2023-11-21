@@ -32,6 +32,7 @@ img {
     border-radius: 10px;
     display: block;
     text-align: center;
+    margin: 30px !important;
 }
 
 .profile_card {
@@ -66,4 +67,8 @@ h5.card-title.afw-bold {
 img.heart-icon {
     width: 30px !important;
     height: 30px !important;
+}
+
+.card.mb-2.d-flex.card-border {
+    margin: 30px !important;
 }

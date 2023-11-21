@@ -10,11 +10,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faPlus, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import "./Menu.css";
 
-
-//a menu like the one in instagram with 4 buttons
-//the buttons will be home, post, search and profile
-//the buttons will be images with links to the respective pages
-
 const Menu = () => {
   return (
     
