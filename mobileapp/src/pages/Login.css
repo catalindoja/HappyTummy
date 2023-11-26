@@ -1,92 +1,54 @@
-/* Login.css */
 
-body {
-    margin: 0;
-    padding: 0;
-    background-color: #f2f2f2; /* Color de fondo para el cuerpo de la página */
-  }
-  
-  .auth {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-size: cover;
-  }
-  
-  form {
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente para el formulario */
-    border-radius: 10px;
-    padding: 20px;
-    width: 300px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-  }
-  
-  h2 {
-    color: teal;
-  }
-  
-  input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  button {
-    width: 100%;
-    padding: 10px;
-    color: white;
-    background-color: teal;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #008080; /* Color teal más oscuro al pasar el ratón sobre el botón */
-  }
-  
-  p {
-    color: red;
-  }
-  
-  .infotex {
-    margin-top: 10px;
-    font-size: 14px;
-  }
-  
-  .text-primary {
-    color: teal;
-  }
-  
-  /* Configration.css */
-  
-  .configration-container {
-    margin-bottom: 20px;
-  }
-  
-  #language-select {
-    background-color: #f2f2f2;
-    color: teal;
-    font-size: 16px;
-  }
-  
-  #language-select option {
-    background-color: #fff;
-    color: teal;
-    font-size: 14px;
-  }
-  
-  .login-title{
-    color: teal !important;
-  }
-  
-  .bg-success{
-    background-color: teal !important;
-  }
-  
+.auth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-size: cover;
+}
+
+.login-username{
+  height: 45px;
+}
+
+.login-password {
+  height: 45px;
+}
+
+.login-but {
+  margin-top: 10px;
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  color: white;
+  background-color: teal;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-err {
+  margin-top: 20px;
+  color: red;
+  text-align: center;
+  font-size: 16px;
+}
+
+.infotex {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.text-primary {
+  color: teal;
+}
+
+.login-title {
+  text-align: center;
+  font-size: 25px;
+  color: teal;
+  margin-top: 15px;
+  font-weight: bold;
+}

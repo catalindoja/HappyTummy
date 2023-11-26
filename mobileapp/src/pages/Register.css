@@ -1,9 +1,8 @@
-/* Register.css */
 
+/* GLOBAL */
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Arial', sans-serif;
   background-color: #f2f2f2;
 }
 
@@ -20,12 +19,113 @@ form {
   border-radius: 10px;
   padding: 20px;
   width: 300px;
-  text-align: left !important;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1 {
+.next-but{
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  color: white;
+  background-color: teal;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.error-msg {
+  color: red;
+  text-align: center;
+}
+
+/* STEP 1 */
+.email-form{
+  text-align: center !important;
+}
+
+.email-title{
+  text-align: center !important;
+  font-size: 25px;
   color: teal;
+  margin-top: -15px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.form-email{
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.invisible {
+  display: none;
+}
+
+/* STEP 2 */
+.step2-title{
+  text-align: center !important;
+  font-size: 25px;
+  color: teal;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.step2-form{
+  margin-bottom: 6px;
+}
+
+#gender option {
+  background-color: teal;
+  color: #fff;
+  font-size: 13px;
+}
+
+#country option {
+  background-color: teal;
+  color: #fff;
+  font-size: 13px;
+}
+
+/* STEP 3 */
+.step3-title{
+  text-align: center !important;
+  font-size: 25px;
+  color: teal;
+  margin-top: 0px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.step3-subtitle{
+  font-size: 20px;
+  color: rgb(73, 73, 73);
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.form-check {
+  margin-bottom: 7px;
+}
+
+.form-check-input:checked {
+  background-color: teal;
+  border-color: teal;
+}
+
+.form-check-label {
+  margin-left: 5px;
 }
 
 input,
@@ -36,45 +136,4 @@ select {
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 5px;
-}
-
-.checkbox-group {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.checkbox-group label {
-  margin-bottom: 5px;
-}
-
-.btn-primary {
-  width: 100%;
-  padding: 10px;
-  color: white;
-  background-color: teal;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn-primary:hover {
-  background-color: #008080;
-}
-
-.error-msg {
-  color: red;
-}
-
-.invisible {
-  display: none;
-}
-
-.text-success{
-  color: teal !important;
-  font-size: 27px;
-}
-
-.checkbox-group label {
-  margin-left: 10px !important; /* Ajusta la distancia entre checkboxes y etiquetas */
 }

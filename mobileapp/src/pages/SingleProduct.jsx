@@ -24,16 +24,15 @@ const SingleProduct = () => {
   const navigate = useNavigate();
   const postId = location.pathname.split("/")[3];
 
-    
   // - post: an object that contains the details of the post
   const [post, setPost] = useState({});
 
   // - currentUser: an object that contains the details of the current user
   // - idCurrent: a string that represents the ID of the current user
   // - usernameCurrent: a string that represents the username of the current user
-//   const { currentUser } = useContext(AuthContext);
-//   const idCurrent = currentUser.id;
-//   const usernameCurrent = currentUser.username;
+  const { currentUser } = useContext(AuthContext);
+  const idCurrent = currentUser.id;
+  const usernameCurrent = currentUser.username;
 
   // - likes: a number that represents the number of likes of the post
   const likes = 0;
@@ -181,25 +180,25 @@ const SingleProduct = () => {
   // Write new comment
   const state = useLocation().state;
   const [value, setValue] = useState(state?.newComment || "");
-  
+
   // Post comment
-//   const handleClick = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const productResponse = await axios.post(`/comments/`, {
-//         iduser: idCurrent,
-//         idproduct: postId,
-//         content: value,
-//         likes,
-//         date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-//       });
+  const handleClick = async (e) => {
+    e.preventDefault();
+    try {
+      const productResponse = await axios.post(`/comments/`, {
+        iduser: idCurrent,
+        idproduct: postId,
+        content: value,
+        likes,
+        date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+      });
 
-//       window.location.reload();
+      window.location.reload();
 
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   // Like button
   const handleLikeClick = async (commentId) => {
@@ -213,7 +212,7 @@ const SingleProduct = () => {
   // Return the JSX that renders the SingleProduct page
   return (
     <div className="single">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
       <div className="content">
         <Link to="#" onClick={() => window.history.back()}>
           <img className="arrow-img" src={Arrow} alt="" />
@@ -325,9 +324,9 @@ const SingleProduct = () => {
           />
         </div>
 
-        {/* <div className="buttons">
+        <div className="buttons">
           <button onClick={handleClick}> Publish</button>
-        </div> */}
+        </div>
       </div>
 
       {/* MENU HERE */}

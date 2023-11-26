@@ -1,8 +1,6 @@
 import React from 'react';
 import './App.css';
-import Counter from './components/Counter';
 import BarcodeScanner from './pages/Scanner';
-import Splash from './pages/Splash';
 import Menu from './components/Menu';
 import Register from './pages/Register'
 import Login from './pages/Login'
@@ -16,11 +14,9 @@ import SingleProduct from './pages/SingleProduct';
 import PostProduct from './pages/PostProduct';
 import PostRecipe from './pages/PostRecipe';
 import EditPerfil from './pages/EditPerfil';
-import Products from './pages/Products';
 import { i18n } from 'i18next';
 import Allergies from './pages/Allergies';
-import Configration from './components/Configration';
-
+import Configuration from './components/Configration';
 
 import {
   createBrowserRouter,
@@ -31,7 +27,6 @@ import {
 const Layout = () => {
   return (
     <>
-      <Configration />
       <Outlet />
       <Menu />
     </>
@@ -58,10 +53,6 @@ const router = createBrowserRouter([
       {
         path: "home",
         element: <Home />
-      },
-      {
-        path: "splash",
-        element: <Splash />
       },
       {
         path: "profile",
@@ -94,10 +85,6 @@ const router = createBrowserRouter([
       {
         path: "editprofile/:id",
         element: <EditPerfil />
-      },
-      {
-        path: "products",
-        element: <Products />
       },
       {
         path: "scanner",

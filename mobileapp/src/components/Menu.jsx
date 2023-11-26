@@ -11,6 +11,7 @@ import { faHome, faPlus, faSearch, faUser } from '@fortawesome/free-solid-svg-ic
 import "./Menu.css";
 
 const Menu = () => {
+
   const [showPopup, setShowPopup] = useState(false);
 
   const togglePopup = () => {
@@ -22,8 +23,8 @@ const Menu = () => {
   };
 
   return (
-    
-    <div className="w-100 sticky-bottom ">
+
+    <div className="w-100 sticky-bottom">
       {showPopup && (
         <div className="popup d-flex justify-content-center me-2 popupbuttons">
           <Link to="/app/postproduct"><button>Post Product</button></Link>
@@ -31,18 +32,24 @@ const Menu = () => {
         </div>
       )}
 
-      <div className="d-flex justify-content-around w-100 bg-dark my-5">
+      <div
+        className="d-flex justify-content-around w-100"
+        style={{
+          backgroundColor: '#C9FFFF',
+          border: '1px solid #acf9f9', // Borde azul más fuerte
+        }}
+      >
         <Link to="/app/home">
-          <FontAwesomeIcon icon={faHome} className="p-2" style={{ color: 'white' }} />
+          <FontAwesomeIcon icon={faHome} className="p-2" style={{ color: '#555', width: '26px', height: '26px' }} />
         </Link>
         <div onClick={togglePopup}>
-          <FontAwesomeIcon icon={faPlus} className="p-2" style={{ color: 'white' }} />
+          <FontAwesomeIcon icon={faPlus} className="p-2" style={{ color: '#555', width: '26px', height: '26px' }} />
         </div>
         <Link to="/app/search">
-          <FontAwesomeIcon icon={faSearch} className="p-2" style={{ color: 'white' }} />
+          <FontAwesomeIcon icon={faSearch} className="p-2" style={{ color: '#555', width: '26px', height: '26px' }} />
         </Link>
         <Link to="/app/profile">
-          <FontAwesomeIcon icon={faUser} className="p-2" style={{ color: 'white' }} />
+          <FontAwesomeIcon icon={faUser} className="p-2" style={{ color: '#555', width: '26px', height: '26px' }} />
         </Link>
       </div>
     </div>

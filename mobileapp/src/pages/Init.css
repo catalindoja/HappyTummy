@@ -1,4 +1,4 @@
-.login_content {
+.init_content {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -10,59 +10,58 @@
     background-color: #b9e7e7;
 }
 
-.display-2 {
+.init-title {
     margin-top: 0px;
     color: #505050;
     font-weight: bold;
+    background-color: #b9e7e7;
+    padding: 10px;
+    padding: 8px;
+    border-radius: 10px;
+    display: inline-block;
+    color: teal;
+    margin-top: 180px !important;
 }
 
-.login_logo img {
+.init_logo img {
     border-radius: 50%;
     width: 250px !important;
     height: auto !important;
 }
 
-.login_buttons button {
-    margin: 0 10px;
-    /* Separación horizontal entre los botones */
-}
-
-.login_buttons {
-    /* Separación horizontal entre los botones */
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: #fff;
-    /* Puedes ajustar el color de fondo si es necesario */
-    text-align: center;
-    border: 1px solid #ccc;
-    /* Borde alrededor del rectángulo */
-    padding: 25px 20px;
-    /* Espaciado interno */
-    background-color: #b9e7e7;
-}
-
-.welcome-text{
+.welcome-text {
     font-size: 18px;
     font-weight: bold;
     color: #505050;
 }
 
-h1.display-2 {
-    color: teal;
-    margin-top: 180px !important;
+.init_buttons {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #fff;
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 25px 20px;
+    background-color: #b9e7e7;
+}
+
+.button-login,
+.button-reg {
+    margin: 0 10px; /* Ajusta el margen entre los botones */
+    width: calc(50% - 20px); /* Calcula el ancho para que haya espacio entre los botones y el margen interior */
 }
 
 .button-login {
-    background-color: rgb(0, 97, 97) !important;
-    color: white !important;
-    border: none !important;
-    width: 100px !important;
-  }
-  
-  .button-reg {
-    background-color: white !important;
-    color: rgb(0, 97, 97) !important;
-    border: 1px solid rgb(0, 97, 97) !important;
-    width: 100px !important;
-  }
+    background-color: rgb(0, 97, 97);
+    color: white;
+    border: none;
+    font-size: 18px; /* Ajusta el tamaño del texto */
+}
+
+.button-reg {
+    background-color: white;
+    color: rgb(0, 97, 97);
+    border: 1px solid rgb(0, 97, 97);
+    font-size: 18px; /* Ajusta el tamaño del texto */
+}

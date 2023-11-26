@@ -7,11 +7,9 @@ svg.svg-inline--fa.fa-plus.p-2.icon1 , svg.svg-inline--fa.fa-plus.p-2.icon1 {
     margin-top: -15px !important;
 }
 
-/* Agrega estos estilos al final de tu archivo CSS */
-
 .popupbuttons {
     display: flex;
-    gap: 10px; /* Espacio entre los botones */
+    gap: 10px; 
     margin-top: 10px !important;
   }
   
@@ -22,12 +20,10 @@ svg.svg-inline--fa.fa-plus.p-2.icon1 , svg.svg-inline--fa.fa-plus.p-2.icon1 {
     padding: 10px !important;
     border-radius: 5px !important;
     cursor: pointer !important;
-    transition: background-color 0.3s ease !important; /* Efecto de transición al pasar el ratón */
-  
-    /* Otros estilos según sea necesario */
+    transition: background-color 0.3s ease !important;
   }
   
   .popupbuttons button:hover {
-    background-color: #008080 !important; /* Color de fondo al pasar el ratón */
+    background-color: #008080 !important; 
   }
   

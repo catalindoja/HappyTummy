@@ -7,8 +7,8 @@ import backgroundImage from "../img/clearbackground.png";
 import "./Login.css";
 import Configration from "../components/Configration";
 import { useTranslation } from 'react-i18next';
+import BackArrow from "../components/BackArrow";
 
-// Create the Login component
 const Login = () => {
   const { t } = useTranslation();
   const [inputs, setInputs] = useState({
@@ -18,9 +18,11 @@ const Login = () => {
   const [err, setError] = useState(null);
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
+
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -44,9 +46,11 @@ const Login = () => {
 
   return (
     <div className="auth" style={{ backgroundImage: `url(${backgroundImage})` }}>
+      <BackArrow />
       <form>
-        <h2 className="text-danger my-3 login-title">{t('login')}</h2>
+        <h2 className="login-title">{t('login')}</h2>
         <input
+          className="login-username"
           required
           type="text"
           placeholder={t('username')}
@@ -54,14 +58,15 @@ const Login = () => {
           onChange={handleChange}
         />
         <input
+          className="login-password"
           required
           type="password"
           placeholder={t('password')}
           name="password"
           onChange={handleChange}
         />
-        <button style={{ fontSize: '18px' }} onClick={handleSubmit} className="my-3 bg-success">{t('login')}</button>
-        {err && <p>{err}</p>}
+        <button onClick={handleSubmit} className="login-but">{t('login')}</button>
+        {err && <p className="login-err">{err}</p>}
         <div className="infotex">
           {t('account')} <Link to="/register"><span className="text-center text-primary">{t('register')}</span></Link>
         </div>
