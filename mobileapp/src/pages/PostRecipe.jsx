@@ -121,7 +121,7 @@ const Write = () => {
   // Return the JSX elements
   return (
     <div>
-      <h1 className="supertitle-write">Post a new recipe ❤</h1>
+      <h1 className="supertitle-write">Post a new recipe <span className="text-danger">❤</span></h1>
       <div className="add-write">
         <div className="content-write">
 

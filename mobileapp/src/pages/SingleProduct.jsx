@@ -157,6 +157,7 @@ const SingleProduct = () => {
     return doc.body.textContent
   }
 
+
   // Delete post
   const handleDelete = async () => {
     try {
@@ -214,6 +215,7 @@ const SingleProduct = () => {
           <img className="arrow-img" src={Arrow} alt="" />
         </Link>
         <img className="super-image" src={post.image_url} alt="" />
+        <img className="edit" src={Edit} alt="" />
         <div className="user">
           <img src={ProfilePicture} />
           <div className="info">

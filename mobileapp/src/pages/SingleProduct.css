@@ -221,3 +221,7 @@
   border: 1px solid #fff;
   border-radius: 25px !important;
 }
+
+img.edit {
+  position: absolute;
+}

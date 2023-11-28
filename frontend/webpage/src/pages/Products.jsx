@@ -53,10 +53,10 @@ const Products = () => {
 };
 
 export default Products;
-*/
-
 
 /////////////////////////////////////////////////
+/*
+
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
@@ -171,7 +171,7 @@ const Products = () => {
           filteredPosts.map((post) => (
             <div className="post" key={post.id}>
               <div className="img">
-                <img src={`../upload/${post.product_image}`} alt="" /> {/* Ajusta la ruta según sea necesario */}
+                <img src={`../upload/${post.product_image}`} alt="" /> 
               </div>
               <div className="content">
                 <Link className="link" to={`/products/${post.id}`}>
@@ -210,3 +210,4 @@ const Products = () => {
 
 // Export the Products component
 export default Products;
+*/
