@@ -62,19 +62,19 @@ function Profile() {
     myrecipes = myrecipes.filter((post) => currentUser && post.iduser === currentUser.id)
 
     return (
-        <div className="profile_content">
+        <div className="profile-content">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
 
-            <div className="profile_card">
-                <img className="profilepic" src={Profilepic} alt="" />
-                <h6 className="username">{currentUser.username}</h6>
-                <div class="alert alert-warning" role="alert">
+            <div className="profile-header">
+                <img className="profile-profilepic" src={Profilepic} alt="" />
+                <h6 className="profile-username">{currentUser.username}</h6>
+                <div class="profile-premium" role="alert">
                     Go premium!
                 </div>
-                <img className="edit" src={Edit} onClick={handleEditProfile} alt="" />
+                <img className="profile-edit" src={Edit} onClick={handleEditProfile} alt="" />
             </div>
 
-            <h5 className="maintitles">{t('my_products')} <span className="icon2">🛒</span></h5>
+            <h5 className="profile-maintitles">{t('my_products')} <span className="icon2">🛒</span></h5>
             <div>
                 <div className="card-container">
                     {myproducts.map(post => (
@@ -88,7 +88,7 @@ function Profile() {
                 </div>
             </div>
 
-            <h5 className="maintitles">{t('my_recipes')} <span className="icon2">🥧</span></h5>
+            <h5 className="profile-maintitles">{t('my_recipes')} <span className="icon2">🥧</span></h5>
             <div>
                 <div className="card-container">
                     {myrecipes.map(post => (

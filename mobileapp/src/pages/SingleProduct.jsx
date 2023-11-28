@@ -13,6 +13,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import "./SingleProduct.css";
 import { BACKEND_API_URL } from '../config/proxy.js';
+import BackArrow from "../components/BackArrow.jsx";
 
 // Create the SingleProduct component
 const SingleProduct = () => {
@@ -217,13 +218,12 @@ const SingleProduct = () => {
         <Link to="#" onClick={() => window.history.back()}>
           <img className="arrow-img" src={Arrow} alt="" />
         </Link>
-        <img className="super-image" src={post.image_url} alt="" />
         <div className="user">
           <img src={ProfilePicture} />
           <div className="info">
             <span className="username">{userOwner.username}</span>
           </div>
-          {/* {currentUser.username === userOwner.username ? (
+          {currentUser.username === userOwner.username ? (
             <><div className="edit">
               <Link to={`/editpost`} state={post}>
                 <img className="editimg" src={Edit} alt="" />
@@ -231,16 +231,19 @@ const SingleProduct = () => {
               <img className="delete" onClick={handleDelete} src={Delete} alt="" />
             </div> </>
           ) : (
-            <div className="like">
-              <button onClick={handleLikeClick}>
-                <img src={Heart} alt="Heart Icon" className="heart-icon" />
-                <span className="likes-count">{post.likes}</span>
-              </button>
-            </div>
-          )} */}
+            <></>
+          )}
         </div>
-
-        <h1 className="product-name my-3">{post.product_name}</h1>
+        <div class="super-image-container">
+          <img className="product-image" src={post.image_url} alt="" />
+        </div>
+        <div className="single-header">
+          <h1 className="product-name my-3">{post.product_name}</h1>
+          <div className="like">
+            <img src={Heart} alt="Heart Icon" className="heart-icon" />
+            <div className="likes-count">{post.likes}</div>
+          </div>
+        </div>
 
         <div className="contains">
           <h3 className="contains-heading">Contains</h3>
@@ -295,18 +298,16 @@ const SingleProduct = () => {
                     <span className="username">
                       {userComments[comment.id] ? userComments[comment.id].username : "Unknown"}
                     </span>
+                    <div className="comment-likes">
+                      <img src={Heart} alt="Heart Icon" className="heart-icon" />
+                      <div className="likes-count">{comment.likes}</div>
+                    </div>
                   </div>
                   <p
                     dangerouslySetInnerHTML={{
                       __html: DOMPurify.sanitize(comment.content)
                     }}
                   ></p>
-                </div>
-                <div className="comment-likes">
-                  <button className="comment-likes-button" onClick={handleLikeClick}>
-                    <img src={Heart} alt="Heart Icon" className="heart-icon" />
-                  </button>
-                  <span className="likes-count">{comment.likes}</span>
                 </div>
               </li>
             )
@@ -324,8 +325,8 @@ const SingleProduct = () => {
           />
         </div>
 
-        <div className="buttons">
-          <button onClick={handleClick}> Publish</button>
+        <div className="comment-button">
+          <button className="publishcomment-button" onClick={handleClick}> Publish</button>
         </div>
       </div>
 

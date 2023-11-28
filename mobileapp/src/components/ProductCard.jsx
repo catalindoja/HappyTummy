@@ -20,20 +20,20 @@ function ProductCard(props) {
     };
 
     return (
-        <div className="card mb-2 d-flex card-border" style={{ width: "15rem;" }}>
+        <div className="card mb-2 d-flex card-general">
             <img
                 src={props.image}
-                className="card-img-top"
+                className="card-img-top card-image"
                 alt={props.title}
-                style={{ objectFit: "cover", height: "200px", borderRadius: "8px" }}
+                // style={{ objectFit: "cover", height: "200px", borderRadius: "8px" }}
             />
             <div className="card-body">
-                <div className="card-header">
+                <div className="card-miniheader">
                     <h5 className="afw-bold card-title">{props.title}</h5>
-                    <img src={heart} className="heart-icon" alt="Heart" />
+                    <img src={heart} className="card-heart-icon" alt="Heart" />
                 </div>
                 <p className="card-text">{limitText(getText(props.desc), 100)}</p>
-                <a href={`/app/products/${props.id}`} className="btn btn-primary blue-button">Read more</a>
+                <a href={`/app/products/${props.id}`} className="btn btn-primary card-button">Read more</a>
             </div>
         </div>
     );
