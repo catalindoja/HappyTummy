@@ -69,3 +69,76 @@
 .card-container{
     padding: 12px;
 }
+
+/* MODAL */
+
+button {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Estilos para el modal */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(49, 49, 49, 0.5); /* Fondo semitransparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* Estilos para el texto dentro del modal */
+  .premium-description {
+    font-size: 18px;
+    margin-bottom: 20px;
+    display: block;
+  }
+  
+  /* Estilos para el botón dentro del modal */
+  .premium-button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: rgb(255, 225, 0); /* Color de fondo del botón */
+    color: rgb(88, 88, 88); /* Color del texto del botón */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Estilos para cerrar el modal haciendo clic en cualquier lugar fuera de él */
+  .ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+  }
+  
+  .ReactModal__Overlay--after-open {
+    opacity: 1;
+  }
+  
+  .ReactModal__Overlay--before-close {
+    opacity: 0;
+  }
+
+  .close-icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 30px; /* Ajusta el tamaño según tus preferencias */
+    height: 30px; /* Ajusta el tamaño según tus preferencias */
+    cursor: pointer;
+  }
+  
+  

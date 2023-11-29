@@ -25,7 +25,6 @@ function ProductCard(props) {
                 src={props.image}
                 className="card-img-top card-image"
                 alt={props.title}
-                // style={{ objectFit: "cover", height: "200px", borderRadius: "8px" }}
             />
             <div className="card-body">
                 <div className="card-miniheader">

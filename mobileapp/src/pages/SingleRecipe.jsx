@@ -10,6 +10,7 @@ import Arrow from "../img/arrow.png";
 import axios from "axios";
 import DOMPurify from "dompurify";
 import ReactQuill from 'react-quill';
+import moment from "moment";
 import "./SingleRecipe.css";
 import { BACKEND_API_URL } from '../config/proxy.js';
 
@@ -22,9 +23,9 @@ const SingleRecipe = () => {
     const [post, setPosts] = useState([]);
 
     // Current user
-    // const { currentUser } = useContext(AuthContext);
-    // const idCurrent = currentUser.id;
-    // const usernameCurrent = currentUser.username;
+    const { currentUser } = useContext(AuthContext);
+    const idCurrent = currentUser.id;
+    const usernameCurrent = currentUser.username;
 
     // Owner of the post
     const idOwner = post.iduser;
@@ -38,6 +39,26 @@ const SingleRecipe = () => {
     // Write new comment
     const state = useLocation().state;
     const [value, setValue] = useState(state?.newComment || "");
+
+    const likes = 0;
+    // Post comment
+    const handleClick = async (e) => {
+        e.preventDefault();
+        try {
+            const productResponse = await axios.post(`/commentrecipes/`, {
+                iduser: idCurrent,
+                idrecipe: postId,
+                content: value,
+                likes,
+                date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+            });
+
+            window.location.reload();
+
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -125,18 +146,18 @@ const SingleRecipe = () => {
     // Render the SingleRecipe component
     return (
         <div>
-            <div className="single">
+            <div className="single-recipe">
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
                 <div className="content">
                     <Link to="#" onClick={() => window.history.back()}>
                         <img className="arrow-img" src={Arrow} alt="" />
                     </Link>
-                    <img className="super-image" src={post.image_url} alt="" />
                     <div className="user">
                         <img src={ProfilePicture} />
                         <div className="info">
                             <span className="username">{userOwner.username}</span>
                         </div>
-                        {/* {currentUser.username === userOwner.username ? (
+                        {currentUser.username === userOwner.username ? (
                             <><div className="edit">
                                 <Link to={`/editpost`} state={post}>
                                     <img className="editimg" src={Edit} alt="" />
@@ -144,15 +165,19 @@ const SingleRecipe = () => {
                                 <img className="delete" onClick={handleDelete} src={Delete} alt="" />
                             </div> </>
                         ) : (
-                            <div className="like">
-                                <button onClick={handleLikeClick}>
-                                    <img src={Heart} alt="Heart Icon" className="heart-icon" />
-                                    <span className="likes-count">{post.likes}</span>
-                                </button>
-                            </div>
-                        )} */}
+                            <></>
+                        )}
                     </div>
-                    <h4 className="recipe-name">{post.title}</h4>
+                    <div class="super-image-container">
+                        <img className="recipe-image" src={post.image_url} alt="" />
+                    </div>
+                    <div className="single-header">
+                        <h1 className="product-name my-3">{post.title}</h1>
+                        <div className="like">
+                            <img src={Heart} alt="Heart Icon" className="heart-icon" />
+                            <div className="likes-count">{post.likes}</div>
+                        </div>
+                    </div>
                     <h3 className="specifications-heading">Specifications</h3>
                     <div className="more-data-container">
                         <div className="more-data-item">
@@ -221,7 +246,10 @@ const SingleRecipe = () => {
                     </div>
                 </div>
 
-                {/* MENU HERE */}
+                <div className="comment-button">
+                    <button className="publishcomment-button" onClick={handleClick}> Publish</button>
+                </div>
+
             </div>
         </div>
     );

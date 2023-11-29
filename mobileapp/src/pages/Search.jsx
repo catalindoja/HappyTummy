@@ -9,15 +9,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBarcode } from '@fortawesome/free-solid-svg-icons';
 import Scanner from "./Scanner";
 import { BACKEND_API_URL } from '../config/proxy.js';
-
 import './Search.css';
-
 import { AuthContext } from "../context/authContext";
 
 function Search() {
 
     // Obtaining the current user
-    // const { currentUser } = useContext(AuthContext);
+    const { currentUser } = useContext(AuthContext);
 
     // Obtain products
     let [products, setProducts] = useState([]);
@@ -106,7 +104,7 @@ function Search() {
                     </div>
 
                 {filteredProducts.length === 0 ? (
-                    <h3>Sorry, there are no products matching your search 😕</h3>
+                    <h3 className="sorry-text">Sorry, there are no products matching your search 😕</h3>
                 ) : (
                     <div>
                         <div className="card-container">
@@ -139,7 +137,7 @@ function Search() {
                 </div>
 
                 {filteredRecipes.length === 0 ? (
-                    <h3>Sorry, there are no recipes matching your search 😕</h3>
+                    <h3 className="sorry-text">Sorry, there are no recipes matching your search 😕</h3>
                 ) : (
                     <div>
                         <div className="card-container">
@@ -164,43 +162,3 @@ function Search() {
 };
 
 export default Search;
-
-
-
-
-    // <div>
-    //     search product here! 
-
-    //     <div className="container-fluid d-flex align-items-center justify-content-center">
-    //         <div className="text-center">
-    //             <Popup
-    //                 trigger={<button className="btn btn-success">Publish a Product</button>}
-    //                 modal
-    //             >
-    //                 {(close) => (
-    //                     <>
-    //                         <div className="modal-header">
-    //                             <h5 className="modal-title text-center">Publish a New Post</h5>
-    //                             <button className="close" onClick={close} style={{ border: 'none', fontWeight: 'bold', fontSize: '30px' }}>
-    //                                 &times;
-    //                             </button>
-
-    //                         </div>
-    //                         <div className="modal-body">
-    //                             <publishNewProduct />
-    //                         </div>
-    //                         <div className="modal-footer text-center justify-content-center">
-    //                             <button className="btn btn-success" onClick={publishNewProduct}>
-    //                                 Product
-    //                             </button>
-
-    //                             <button className="btn btn-danger" onClick={publishNewProduct}>
-    //                                 Receipe
-    //                             </button> 
-    //                         </div>
-    //                     </>
-    //                 )}
-    //             </Popup>
-    //         </div>
-    //     </div>
-    // </div>

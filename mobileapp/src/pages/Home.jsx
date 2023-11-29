@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import Teal from "../img/teal.png";
 import './Home.css';
 import backgroundImage from "../img/clearbackground.png";
@@ -13,6 +13,7 @@ import Imagehome3 from "../img/imagehome3.jpeg";
 import Imagehome4 from "../img/imagehome4.jpeg";
 import Imagehome5 from "../img/imagehome5.jpeg";
 import Imagehome6 from "../img/imagehome6.jpeg";
+import Modal from 'react-modal';
 
 function Home() {
     const { t } = useTranslation();
@@ -30,7 +31,7 @@ function Home() {
             <div className="products" >
                 <div>
                     <img className="img1" src={Imagehome2} />
-                </div>      
+                </div>
             </div>
             <h5 className="maintitles my-4">{t('recipes')}<span className="text-danger heart">♥</span></h5>
             <div>
@@ -39,5 +40,38 @@ function Home() {
         </div>
     );
 }
+
+const App = () => {
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const openModal = () => {
+        setModalIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalIsOpen(false);
+    };
+
+    return (
+        <div>
+            <button onClick={openModal}>Mostrar Popup</button>
+
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                shouldCloseOnOverlayClick={true}
+                shouldCloseOnEsc={true}
+                className="modal-content"
+                overlayClassName="modal-overlay"
+            >
+                <div>
+                    <span>Hola!</span>
+                    <button onClick={closeModal}>Salir</button>
+                </div>
+            </Modal>
+        </div>
+    );
+};
+
 
 export default Home;

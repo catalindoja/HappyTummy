@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import BarcodeScanner from '../components/BarcodeScanner';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import './Scanner.css';
 
 const Scanner = () => {
   const proxy = "https://happytummy-backend-production.up.railway.app"
@@ -18,8 +19,7 @@ const Scanner = () => {
     console.log(code);
     barcode.barcode = code
     console.log(barcode.barcode)
-    //alert(code)
-    //alert(barcode.barcode)
+
     try {
       axios.get(proxy + "/products/frombarcode/" + barcode.barcode)
         .then(response => {
@@ -69,27 +69,35 @@ const Scanner = () => {
     }
   };
   
-
   return (
-    <div className="container text-center mt-5">
-      <h1>Barcode Scanner App</h1>
-      {scannedCode && <p>Scanned Code: {scannedCode}</p>}
-      {productId && <p>Product ID: {productId}</p>}
-      <BarcodeScanner onScan={handleScan} />
+    <div className="barcode-scanner-app-container">
 
-      {/* Text input and search button */}
-      <div className="row mt-3 justify-content-center">
-        <div className="col-md-6 mb-2">
+      <h1 className="barcode-title">Find your product!</h1>
+      <p className="barcode-text">Use the barcode scanner to find your product in our page.</p>
+
+      {scannedCode && <p className="scan-info">Scanned Code: {scannedCode}</p>}
+      {productId && <p className="product-info">Product ID: {productId}</p>}
+  
+      <div className="scanner-wrapper">
+        <BarcodeScanner onScan={handleScan} />
+      </div>
+  
+      <h5 className="barcode-minititle">Unable to use the barscanner?</h5>
+      <p className="barcode-text">Enter the barcode manually</p>
+
+      <div className="search-bar-container">
+        <div className="search-input">
           <input
             type="text"
-            className="form-control"
+            className="form-control search-query-input"
             placeholder="Enter search query"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
-        <div className="col-md-2 mb-2">
-          <button className="btn btn-primary btn-block" onClick={handleSearch}>
+
+        <div className="search-button">
+          <button className="btn btn-primary search-btn" onClick={handleSearch}>
             Search
           </button>
         </div>

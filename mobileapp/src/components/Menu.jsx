@@ -36,7 +36,7 @@ const Menu = () => {
         className="d-flex justify-content-around w-100"
         style={{
           backgroundColor: '#C9FFFF',
-          border: '1px solid #acf9f9', // Borde azul más fuerte
+          border: '1px solid #acf9f9', 
         }}
       >
         <Link to="/app/home">

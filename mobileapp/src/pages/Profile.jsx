@@ -12,6 +12,8 @@ import { AuthContext } from "../context/authContext";
 import Logo2 from "../img/logo2.png";
 import { useTranslation } from 'react-i18next';
 import { BACKEND_API_URL } from '../config/proxy.js';
+import Modal from 'react-modal';
+import arrowImage from "../img/arrow.png";
 
 function Profile() {
     const { t } = useTranslation();
@@ -22,7 +24,7 @@ function Profile() {
     const handleEditProfile = () => {
         const user = JSON.parse(localStorage.getItem("user"))
         console.log(user.id)
-        navigate("/app/editprofile/"+user.id);
+        navigate("/app/editprofile/" + user.id);
     }
 
     // Obtain products
@@ -61,6 +63,21 @@ function Profile() {
     }, []);
     myrecipes = myrecipes.filter((post) => currentUser && post.iduser === currentUser.id)
 
+    // Modal pop-up
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const openModal = () => {
+        setModalIsOpen(true);
+    };
+    const closeModal = () => {
+        setModalIsOpen(false);
+    };
+    
+    const goPremium = () => {
+        setModalIsOpen(false);
+        window.location.reload();
+        // GO PREMIUM HERE
+    };
+
     return (
         <div className="profile-content">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
@@ -68,8 +85,32 @@ function Profile() {
             <div className="profile-header">
                 <img className="profile-profilepic" src={Profilepic} alt="" />
                 <h6 className="profile-username">{currentUser.username}</h6>
-                <div class="profile-premium" role="alert">
-                    Go premium!
+                <div>
+                    <div onClick={openModal} class="profile-premium" role="alert">
+                        Go premium!
+                    </div>
+
+                    <Modal
+                        isOpen={modalIsOpen}
+                        onRequestClose={closeModal}
+                        shouldCloseOnOverlayClick={true}
+                        shouldCloseOnEsc={true}
+                        className="modal-content"
+                        overlayClassName="modal-overlay"
+                    >
+                        <div>
+                            <span className="premium-description">Premium description</span>
+                            <button className="premium-button" onClick={goPremium}>
+                                Make me premium
+                            </button>
+                            <img
+                                src={arrowImage}
+                                alt="Close"
+                                className="close-icon"
+                                onClick={closeModal}
+                            />
+                        </div>
+                    </Modal>
                 </div>
                 <img className="profile-edit" src={Edit} onClick={handleEditProfile} alt="" />
             </div>

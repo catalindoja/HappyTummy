@@ -26,10 +26,10 @@ import {
 
 const Layout = () => {
   return (
-    <>
+    <div className="layout-container">
       <Outlet />
       <Menu />
-    </>
+    </div>
   );
 };
 

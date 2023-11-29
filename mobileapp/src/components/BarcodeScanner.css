@@ -1,0 +1,18 @@
+#barcode-scanner {
+    width: 400px; /* Ajusta el ancho según sea necesario */
+    height: 400px; /* Ajusta la altura según sea necesario */
+    border: 2px solid #87CEEB; /* Color de borde azul celeste */
+  }
+  
+  /* Estilo adicional para el video dentro del contenedor */
+  #barcode-scanner video {
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Si necesitas ajustar el tamaño de la lectura del código de barras */
+  .quagga-camera {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  

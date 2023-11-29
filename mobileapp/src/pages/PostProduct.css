@@ -133,11 +133,11 @@
     }
 
     .boxes-write input[type="radio"] {
-        margin-right: 5px; /* Ajusta el valor según la separación deseada */
+        margin-right: 5px;
       }
       
       .boxes-write label {
-        margin-right: 10px; /* Ajusta el valor según la separación deseada */
+        margin-right: 10px;
       }
   
   /* Estilos para las imágenes */
