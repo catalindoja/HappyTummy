@@ -60,6 +60,7 @@
     "update" :"Update a picture",
     "upload":"Upload Image (png or jpg)",
     "publish":"Publish",
+    "update":"Update",
     "allergens_info" : "Allergens info",
     "paragraph_allergens_info":"The main objective of Happy Tummy is to make the list of allergens in supermarket products easily accessible to everyone. These are the allergens that are identified in this service.",
     "gluten_para":"Gluten is a composite protein naturally present in certain cereal grains, such as wheat, barley, and rye. It plays a crucial role in food processing, particularly in the context of baking, as it provides elasticity and helps dough maintain its shape. Gluten consists of two main proteins, glutenin and gliadin, which, when combined with water, create a sticky, stretchy network. While it's responsible for the texture and structure of bread and other baked goods, it can also be problematic for individuals with gluten-related disorders, such as celiac disease or non-celiac gluten sensitivity, as it triggers adverse reactions in their bodies when consumed.",
@@ -69,5 +70,6 @@
     "account": "Don't you have an account?",
     "password":"Password",
     "recipes":"Recipes just for you ",
-    "recommended":"Recommended products "
+    "recommended":"Recommended products ",
+    "edit_product" :"Edit Product"
 }

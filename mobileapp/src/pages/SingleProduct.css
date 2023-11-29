@@ -225,3 +225,11 @@
 img.edit {
   position: absolute;
 }
+
+span.fancy-allergy {
+  margin-bottom: 10px !important;
+}
+
+img.heart-icon {
+  padding-right: 5px !important;
+}

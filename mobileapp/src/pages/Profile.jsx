@@ -2,14 +2,12 @@ import Teal from "../img/teal.png";
 import Profilepic from "../img/profile.png";
 import Edit from "../img/edit.png";
 import './Profile.css';
-import backgroundImage from "../img/clearbackground.png";
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
 import RecipeCard from "../components/RecipeCard";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
-import Logo2 from "../img/logo2.png";
 import { useTranslation } from 'react-i18next';
 
 function Profile() {

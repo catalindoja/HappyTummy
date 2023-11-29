@@ -166,10 +166,10 @@ const Write = () => {
       return;
     }
 
-    if (!value || value.trim() === "") {
+    /*if (!value || value.trim() === "") {
       setError("Description of the product required");
       return;
-    }
+    }*/
 
     if (!price || price.trim() === "") {
        setError("Price of the product required");
@@ -312,7 +312,7 @@ const Write = () => {
             <ReactQuill
               placeholder={t('product_description')}
               className="editor-write"
-              theme="snow"
+              
               value={value}
               onChange={setValue}
             />
@@ -463,7 +463,7 @@ const Write = () => {
             </div>
           </div>
   
-          {error && <p className="error-message-write">{error}</p>}
+          
           <div className="buttons-write">
             <button onClick={handleClick}>{t('publish')}</button>
           </div>
