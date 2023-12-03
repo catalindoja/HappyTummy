@@ -10,6 +10,7 @@ import Configration from "../components/Configration";
 import i18n from "../components/i18n";
 import { BACKEND_API_URL } from '../config/proxy.js';
 import BackArrow from "../components/BackArrow";
+import Help from '../img/helpicon.png';
 
 const Register = () => {
   <Configration />
@@ -395,25 +396,12 @@ const Register = () => {
             <div className="form-container">
               <form onSubmit={handleNextStep}>
                 <h1 className='step3-title'>Last details</h1>
-                <h1 className='step3-subtitle'>Markets</h1>
-                <div className="form-group">
-                  {markets.map((market) => (
-                    <div key={`market-${market.id}`} className="form-check">
-                      <input
-                        type="checkbox"
-                        id={`market-${market.id}`}
-                        name="market"
-                        value={market.id}
-                        onChange={handleCheckboxes}
-                        className="form-check-input"
-                      />
-                      <label htmlFor={`market-${market.id}`} className="form-check-label">
-                        {market.name}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-                <h1 className='step3-subtitle'>Allergies</h1>
+
+                <h1 className='step3-subtitle'>Your intolerances
+                  <Link to={`/app/allergies`}>
+                    <img src={Help} alt="Help" className="help-icon" />
+                  </Link>
+                </h1>
                 <div className="form-group">
                   {allergies.map((allergy) => (
                     <div key={`allergy-${allergy.id}`} className="form-check">
@@ -431,7 +419,27 @@ const Register = () => {
                     </div>
                   ))}
                 </div>
-                <h1 className='step3-subtitle'>Brands</h1>
+
+                <h1 className='step3-subtitle'>Favourite markets</h1>
+                <div className="form-group">
+                  {markets.map((market) => (
+                    <div key={`market-${market.id}`} className="form-check">
+                      <input
+                        type="checkbox"
+                        id={`market-${market.id}`}
+                        name="market"
+                        value={market.id}
+                        onChange={handleCheckboxes}
+                        className="form-check-input"
+                      />
+                      <label htmlFor={`market-${market.id}`} className="form-check-label">
+                        {market.name}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+
+                <h1 className='step3-subtitle'>Favourite brands</h1>
                 <div className="form-group">
                   {brands.map((brand) => (
                     <div key={`brand-${brand.id}`} className="form-check">

@@ -3,6 +3,7 @@ import BarcodeScanner from '../components/BarcodeScanner';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import './Scanner.css';
+import BackArrow from "../components/BackArrow";
 
 const Scanner = () => {
   const proxy = "https://happytummy-backend-production.up.railway.app"
@@ -43,45 +44,47 @@ const Scanner = () => {
 
   const handleSearch = async () => {
     console.log('Searching for:', searchQuery);
-  
+
     try {
       // Make an API call to the specified endpoint
-      const response = await axios.get(proxy+`/products/frombarcode/${searchQuery}`);
+      const response = await axios.get(proxy + `/products/frombarcode/${searchQuery}`);
       console.log(response);
-  
+
       // Assuming the response contains an 'id' field
       const productId = response.data[0].id;
       setProductId(productId);
-  
+
       console.log('Product ID:', productId);
-  
+
       // Show notification
       if ('Notification' in window && Notification.permission === 'granted') {
         new Notification(`Product ID: ${productId}`, {
           body: 'Redirecting to product page...',
         });
       }
-  
+
       // Redirect to the "/product/{id}" route
       window.location.href = `/app/products/${productId}`;
     } catch (error) {
       console.error('Error fetching product data:', error);
     }
   };
-  
+
   return (
     <div className="barcode-scanner-app-container">
+
+      <BackArrow />
 
       <h1 className="barcode-title">Find your product!</h1>
       <p className="barcode-text">Use the barcode scanner to find your product in our page.</p>
 
       {scannedCode && <p className="scan-info">Scanned Code: {scannedCode}</p>}
       {productId && <p className="product-info">Product ID: {productId}</p>}
-  
+
       <div className="scanner-wrapper">
         <BarcodeScanner onScan={handleScan} />
       </div>
-  
+
       <h5 className="barcode-minititle">Unable to use the barscanner?</h5>
       <p className="barcode-text">Enter the barcode manually</p>
 
@@ -90,7 +93,7 @@ const Scanner = () => {
           <input
             type="text"
             className="form-control search-query-input"
-            placeholder="Enter search query"
+            placeholder="Enter barcode"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />

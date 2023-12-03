@@ -121,16 +121,10 @@ const Write = () => {
 
   // Return the JSX elements
   return (
-    <div>
-      <h1 className="supertitle-write">Post a new recipe ❤</h1>
       <div className="add-write">
-        <div className="content-write">
+      <h1 className="supertitle-write">Post a new recipe <span className="text-danger">❤</span></h1>
 
-          {/* <input
-            type="text"
-            placeholder="Name of the product"
-            onChange={(e) => setProductName(e.target.value)}
-          /> */}
+        <div className="content-write">
 
           <input
             type="text"
@@ -210,13 +204,13 @@ const Write = () => {
           </div>
 
           {error && <p className="error-message-write">{error}</p>}
-          <div className="buttons-write">
+          
+          <div className="buttons-write-recipe">
             <button onClick={handleClick}>Publish</button>
           </div>
 
         </div>
       </div>
-    </div>
   );
 
 };

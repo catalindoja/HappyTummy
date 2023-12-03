@@ -22,7 +22,7 @@ option {
     background-color: #00cdf6;
 }
 option:hover {
-    color: #080;
+    color: rgb(165, 214, 165);
 }
 
 button.btn.btn-success {
@@ -32,4 +32,15 @@ button.btn.btn-success {
 
 .form1 {
     margin-top: -190px !important;
+}
+
+.editprofile-minititle{
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.editprofile-button{
+    background-color: teal;
+    border: none;
+    text-align: center;
 }

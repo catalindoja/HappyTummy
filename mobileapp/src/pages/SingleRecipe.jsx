@@ -216,6 +216,10 @@ const SingleRecipe = () => {
                                             <span className="username">
                                                 {userComments[comment.id] ? userComments[comment.id].username : "Unknown"}
                                             </span>
+                                            <div className="comment-likes">
+                                                <img src={Heart} alt="Heart Icon" className="heart-icon" />
+                                                <div className="likes-count">{comment.likes}</div>
+                                            </div>
                                         </div>
                                         <p
                                             dangerouslySetInnerHTML={{
@@ -223,12 +227,7 @@ const SingleRecipe = () => {
                                             }}
                                         ></p>
                                     </div>
-                                    <div className="comment-likes">
-                                        <button className="comment-likes-button" onClick={handleLikeClick}>
-                                            <img src={Heart} alt="Heart Icon" className="heart-icon" />
-                                        </button>
-                                        <span className="likes-count">{comment.likes}</span>
-                                    </div>
+
                                 </li>
                             )
                             ))}
@@ -244,10 +243,11 @@ const SingleRecipe = () => {
                             onChange={setValue}
                         />
                     </div>
-                </div>
 
-                <div className="comment-button">
-                    <button className="publishcomment-button" onClick={handleClick}> Publish</button>
+                    <div className="comment-button">
+                        <button className="publishcomment-button" onClick={handleClick}> Publish</button>
+                    </div>
+
                 </div>
 
             </div>

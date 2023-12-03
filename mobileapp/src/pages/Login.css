@@ -10,10 +10,12 @@
 
 .login-username{
   height: 45px;
+  width: 100%;
 }
 
 .login-password {
   height: 45px;
+  width: 100%;
 }
 
 .login-but {

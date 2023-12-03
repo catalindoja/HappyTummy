@@ -18,6 +18,7 @@ import arrowImage from "../img/arrow.png";
 function Profile() {
     const { t } = useTranslation();
     const navigate = useNavigate();
+    
     // Obtaining the current user
     const { currentUser } = useContext(AuthContext);
 

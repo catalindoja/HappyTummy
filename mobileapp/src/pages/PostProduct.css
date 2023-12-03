@@ -1,4 +1,5 @@
-/* Estilos generales */
+
+
    body {
     background-color: #f0fffe; /* Azul pastel de fondo */
     color: #333; /* Color de texto principal */
@@ -8,7 +9,6 @@
   .add-write {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
     background-color: #fff; 
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
@@ -150,7 +150,7 @@
   }
   
   /* Estilos para el botón */
-  .buttons-write button {
+  .buttons-write-product button {
     background-color: teal; /* Azul más oscuro para el botón */
     color: #fff;
     padding: 10px 20px;

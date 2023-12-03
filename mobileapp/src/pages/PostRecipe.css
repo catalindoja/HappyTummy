@@ -20,6 +20,7 @@
     margin-bottom: 20px;
     margin-top: 20px;
     margin-left: 20px;
+    text-align: center;
   }
   
   /* Estilos para la sección del mercado */
@@ -152,13 +153,15 @@
   }
   
   /* Estilos para el botón */
-  .buttons-write button {
+  .buttons-write-recipe button {
     background-color: teal; /* Azul más oscuro para el botón */
     color: #fff;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-bottom: 180px;
+    text-align: center;
   }
   
   /* Estilos para los mensajes de error */

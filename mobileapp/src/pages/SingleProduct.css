@@ -41,9 +41,21 @@
   margin-top: 20px;
 }
 
+.contains-main-heading{
+  display: flex;
+}
+
 .contains-heading {
   font-size: 20px;
   font-weight: bold;
+}
+
+.help-icon{
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  margin-left: -5px;
+  margin-top: -9px;
 }
 
 .description-heading {

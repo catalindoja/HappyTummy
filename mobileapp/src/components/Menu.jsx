@@ -1,17 +1,11 @@
 import React, { useState } from 'react';
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { Link } from "react-router-dom";
 import { Modal, Button } from 'react-bootstrap';
-import HomeIcon from "../img/home.png";
-import PostIcon from "../img/post.png";
-import SearchIcon from "../img/search.png";
-import ProfileIcon from "../img/profilemenu.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faPlus, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import "./Menu.css";
 
 const Menu = () => {
-
   const [showPopup, setShowPopup] = useState(false);
 
   const togglePopup = () => {
@@ -23,22 +17,8 @@ const Menu = () => {
   };
 
   return (
-
     <div className="w-100 sticky-bottom">
-      {showPopup && (
-        <div className="popup d-flex justify-content-center me-2 popupbuttons">
-          <Link to="/app/postproduct"><button>Post Product</button></Link>
-          <Link to="/app/postrecipe"><button>Post Recipe</button></Link>
-        </div>
-      )}
-
-      <div
-        className="d-flex justify-content-around w-100"
-        style={{
-          backgroundColor: '#C9FFFF',
-          border: '1px solid #acf9f9', 
-        }}
-      >
+      <div className="d-flex justify-content-around w-100" style={{ backgroundColor: '#C9FFFF', border: '1px solid #acf9f9' }}>
         <Link to="/app/home">
           <FontAwesomeIcon icon={faHome} className="p-2" style={{ color: '#555', width: '26px', height: '26px' }} />
         </Link>
@@ -52,8 +32,27 @@ const Menu = () => {
           <FontAwesomeIcon icon={faUser} className="p-2" style={{ color: '#555', width: '26px', height: '26px' }} />
         </Link>
       </div>
+
+      <Modal show={showPopup} onHide={hidePopup} centered animation="slide-up">
+        <Modal.Header closeButton>
+          <h4 style={{ marginBottom: '-10px', marginLeft: '30px', marginTop: '10px', textAlign: 'center', fontSize: '30px' }}
+              classname="post-popup-text">What do you want to post?</h4>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="d-flex justify-content-around">
+            <Link to="/app/postproduct">
+              <Button style={{ padding: '15px 15px', fontSize: '20px', backgroundColor: 'teal', color: 'white', border: 'none' }}
+                      variant="primary" onClick={hidePopup}>New product</Button>
+            </Link>
+            <Link to="/app/postrecipe">
+              <Button style={{ padding: '15px 15px', fontSize: '20px', backgroundColor: 'teal', color: 'white', border: 'none' }}
+                      variant="primary" onClick={hidePopup}>New recipe</Button>
+            </Link>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
-}
+};
 
 export default Menu;

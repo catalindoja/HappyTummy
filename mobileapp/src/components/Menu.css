@@ -6,29 +6,3 @@ svg.svg-inline--fa.fa-plus.p-2.icon1 , svg.svg-inline--fa.fa-plus.p-2.icon1 {
 .w-100 {
     margin-top: -15px !important;
 }
-
-.popupbuttons {
-    display: flex;
-    gap: 10px; 
-    margin-top: 10px !important;
-  }
-  
-  .popupbuttons button {
-    background-color: teal !important;
-    color: white !important;
-    border: none !important;
-    padding: 10px !important;
-    border-radius: 5px !important;
-    cursor: pointer !important;
-    transition: background-color 0.3s ease !important;
-  }
-  
-  .popupbuttons button:hover {
-    background-color: #008080 !important; 
-  }
-  
-  .sticky-bottom{
-    margin-bottom: 900px !important;
-  }
-
-  

@@ -14,9 +14,47 @@ import 'react-quill/dist/quill.snow.css';
 import "./SingleProduct.css";
 import { BACKEND_API_URL } from '../config/proxy.js';
 import BackArrow from "../components/BackArrow.jsx";
+import Help from '../img/helpicon.png';
+
+import Gluten from "../img/allergens/gluten.png";
+import Lactose from "../img/allergens/leche.png";
+import Eggs from "../img/allergens/huevo.png";
+import Fish from "../img/allergens/pescado.png";
+import Peanuts from "../img/allergens/cacahuetes.png";
+import Soy from "../img/allergens/soja.png";
+import Nuts from "../img/allergens/frutossecos.png";
+import Seafood from "../img/allergens/marisco.png";
+import Molluscs from "../img/allergens/moluscos.png";
+import Mustard from "../img/allergens/mostaza.png";
+import Celery from "../img/allergens/apio.png";
+import Sulphites from "../img/allergens/sulfitos.png";
+import Sesame from "../img/allergens/sesamo.png";
+import Lupins from "../img/allergens/altramuces.png";
 
 // Create the SingleProduct component
 const SingleProduct = () => {
+
+  // Every allergne has an icon and a name
+  const allergenIcons = {
+    Gluten,
+    Lactose,
+    Eggs,
+    Fish,
+    Peanuts,
+    Soy,
+    Nuts,
+    Seafood,
+    Molluscs,
+    Mustard,
+    Celery,
+    Sulphites,
+    Sesame,
+    Lupins,
+  };
+
+  // - myallergens: an array that contains the details of the allergies of the current user
+  const [myallergens, setMyallergens] = useState([]);
+
   // Set up state variables
   // - location: an object that contains the details of the current URL
   // - navigate: a function that redirects the user to another page
@@ -68,6 +106,9 @@ const SingleProduct = () => {
   const idCategory = post.idcategory;
   const [categoryProduct, setCategory] = useState("");
 
+  // Nuevo estado para manejar si el usuario puede comer el producto o no
+  const [canUserEatProduct, setCanUserEatProduct] = useState(null);
+
   // fetchData: a function that fetches 
   // - data of the post
   // - owner of the post
@@ -83,9 +124,14 @@ const SingleProduct = () => {
     const fetchData = async () => {
 
       try {
+
+        // Obtains allergies of the current user
+        const everyallergen = await axios.get(`${BACKEND_API_URL}/userallergies/`);
+        const myallergens = everyallergen.data.filter((userallergies) => userallergies.iduser == idCurrent);
+        setMyallergens(myallergens);
+
         // Obtain comments
         const res = await axios.get(`${BACKEND_API_URL}/comments/`);
-        console.log(res)
         const filteredComments = res.data.filter((comment) => comment.idproduct == postId);
         setComments(filteredComments);
 
@@ -155,6 +201,16 @@ const SingleProduct = () => {
 
     fetchData();
   }, [postId, idOwner, idBrand, idCategory]);
+
+  // Lógica para verificar si el usuario puede comer el producto
+  const canUserEat = () => {
+    const userAllergyIds = myallergens.map((userAllergen) => userAllergen.idallergy);
+    const productAllergyIds = allergies.map((allergy) => allergy.id);
+
+    const canEat = productAllergyIds.every((allergyId) => !userAllergyIds.includes(allergyId));
+
+    return canEat;
+  };
 
   // Obtener texto
   const getText = (html) => {
@@ -245,14 +301,36 @@ const SingleProduct = () => {
           </div>
         </div>
 
-        <div className="contains">
+        {canUserEat() ? (
+          <div class="alert alert-success" role="alert">
+            You can consume this product 😄
+          </div>
+        ) : (
+          <div class="alert alert-danger" role="alert">
+            This product may be harmful for you 😥
+          </div>
+        )}
+
+        <div className="contains-main-heading">
           <h3 className="contains-heading">Contains</h3>
+          <Link to={`/app/allergies`} state={post}>
+            <img src={Help} alt="Help" className="help-icon" />
+          </Link>
+        </div>
+
+        <div className="allergens-contains">
           {allergies.length === 0 ? (
             <p>This product is safe for all allergies and intolerances ❤</p>
           ) : (
             allergies.map((allergy, index) => (
-              <span className="fancy-allergy" key={index}>{allergy.allergy_name}</span>
-            )))}
+              <img
+                className="fancy-allergy-icon"
+                key={index}
+                src={allergenIcons[allergy.allergy_name]}
+                alt={allergy.allergy_name}
+              />
+            ))
+          )}
         </div>
 
         <h3 className="description-heading">Description</h3>
