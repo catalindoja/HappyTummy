@@ -206,6 +206,10 @@ const SingleProduct = () => {
     }
   };
 
+  const handleEditClick = () => {
+    navigate(`/app/edit/${post.id}`, { state: post });
+  };
+
   // Return the JSX that renders the SingleProduct page
   return (
     <div className="single">
@@ -215,9 +219,9 @@ const SingleProduct = () => {
           <img className="arrow-img" src={Arrow} alt="" />
         </Link>
         <img className="super-image" src={post.image_url} alt="" />
-        <Link to="/app/editproduct">
-          <img className="edit" src={Edit} alt="" />
-        </Link>
+        <Link to={`/app/editproduct/${post.id}`}>
+        <img className="edit" src={Edit} alt="" onClick={handleEditClick} />
+      </Link>
         <div className="user">
           <img src={ProfilePicture} />
           <div className="info">

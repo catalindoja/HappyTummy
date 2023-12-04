@@ -109,7 +109,7 @@ const router = createBrowserRouter([
         element: <Allergies />
       },
       {
-        path: "editproduct",
+        path: "editProduct/:id",
         element: <EditProduct />
       }
     ]

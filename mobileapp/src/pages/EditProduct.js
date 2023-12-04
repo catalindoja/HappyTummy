@@ -1,5 +1,4 @@
-import React, { useState, useContext } from "react";
-import { useEffect } from "react";  
+import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/authContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
@@ -12,9 +11,12 @@ import { useTranslation } from 'react-i18next';
 // Create the Write component
 const EditProduct = () => {
     const { t } = useTranslation();
+
     // Obtains the state from the location
-    const state = useLocation().state;
+    const location = useLocation();
+    const state = location.state;
     const navigate = useNavigate();
+    const postId = location.pathname.split("/")[3];
 
     // Obtains the list of brands from the backend
     const [brands, setBrands] = useState([]);
@@ -151,15 +153,23 @@ const EditProduct = () => {
     const [image_url, setImageUrl] = useState(state?.image_url || "");
     const [value, setValue] = useState(state?.product_description || "");
     const [product_name, setProductName] = useState(state?.product_name || "");
+    const [product_description, setProductDescription] = useState(state?.product_description || "");
     const [file, setFile] = useState(null);
 
+
+    const handleImageUrlChange = (e) => {
+        setImageUrl(e.target.value);
+        setFile(null); // Reset file in case there was a previous file
+    };
 
     // Set up the function that handles the form submission
     // - handleClick: a function that posts the product when the user clicks the 'Publish' button
     //                (if the user does not fill in the input fields, the function will set the error message)
     const handleClick = async (e) => {
         e.preventDefault();
+        //console.log("gggg");
 
+        /*
         if (!product_name || product_name.trim() === "") {
             setError("Name of the product required");
             return;
@@ -201,13 +211,16 @@ const EditProduct = () => {
         }
 
         const imgUrl = await upload();
+        */
         try {
-            if (!state) {
+            //console.log("yyyyy");
+            //if (!state) {
                 // Post
-                const productResponse = await axios.post(`/products/`, {
+                const productResponse = await axios.patch(`/products/${postId}`, {
                     product_name,
-                    product_description: value,
-                    image: file ? imgUrl : "",
+                    product_description,
+                    image: image_url,
+                    /*
                     date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
                     idcategory,
                     iduser,
@@ -218,10 +231,11 @@ const EditProduct = () => {
                     measurement,
                     likes,
                     image_url,
+                    */
                 });
 
                 // Obtain the ID of the created product
-                const productId = productResponse.data.id;
+                /*const productId = productResponse.data.id;
 
                 // Post in intermediate table 'productallergies'
                 selectedAllergies.forEach(async (idallergies) => {
@@ -244,54 +258,16 @@ const EditProduct = () => {
                         available: 1
                     })
                 });
+                */
 
-                navigate("/app/home");
-            } else {
-                // Patch
-                const productResponse = await axios.patch(`/products/${state.id}`, {
-                    product_name,
-                    product_description: value,
-                    image: file ? imgUrl : "",
-                    idcategory,
-                    iduser,
-                    idbrand,
-                    barcode: combinedBarcode,
-                    price,
-                    quantity,
-                    measurement,
-                    image_url,
-                });
-
-                // Obtain the ID of the created product
-                const productId = productResponse.data.id;
-
-                // Put in intermediate table 'productallergies'
-                selectedAllergies.forEach(async (idallergies) => {
-                    await axios.put(`/productallergies/`, {
-                        idallergies: idallergies,
-                        idproduct: productId
-                    })
-                });
-
-                // Put in intermediate table 'stock'
-                // await axios.put(`/stock/`, {
-                //   idsupermarket: marketuser.id,
-                //   idproduct: productId,
-                //   available: 1
-                // })
-                selectedSupermarkets.forEach(async (idsupermarkets) => {
-                    await axios.post(`/productallergies/`, {
-                        idsupermarket: idsupermarkets,
-                        idproduct: productId,
-                        available: 1
-                    })
-                });
-
-                navigate("/app/home");
-            }
+            navigate(`/app/products/${postId}`);
+            alert("Product updated successfully");
+            //} 
+            
         } catch (err) {
             console.log(err);
         }
+        
     };
 
     // Return the JSX elements
@@ -300,7 +276,6 @@ const EditProduct = () => {
             <h2 className="supertitle-write">{t('edit_product')} <span className="text-danger">❤</span></h2>
             <div className="add-write">
                 <div className="content-write">
-
                     <input
                         type="text"
                         placeholder={t('name_product')}
@@ -312,11 +287,11 @@ const EditProduct = () => {
                             placeholder={t('product_description')}
                             className="editor-write"
                             theme="snow"
-                            value={value}
-                            onChange={setValue}
+                            value={product_description}
+                            onChange={(value) => setProductDescription(value)}
                         />
                     </div>
-
+                    {/*
                     <input
                         type="number"
                         placeholder={t('price')}
@@ -442,8 +417,9 @@ const EditProduct = () => {
                     <h3 className="picture-title">{t('update')} 📸</h3>
                     <input
                         type="text"
-                        placeholder="Image url"
-                        onChange={(e) => setImageUrl(e.target.value)}
+                        placeholder="Image URL"
+                        value={image_url}
+                        onChange={handleImageUrlChange} 
                     />
 
                     <div className="image-write">
@@ -461,6 +437,7 @@ const EditProduct = () => {
 
                         </div>
                     </div>
+                */}
 
                     {error && <p className="error-message-write">{error}</p>}
                     <div className="buttons-write">
