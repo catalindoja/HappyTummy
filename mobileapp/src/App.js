@@ -14,6 +14,7 @@ import SingleProduct from './pages/SingleProduct';
 import PostProduct from './pages/PostProduct';
 import PostRecipe from './pages/PostRecipe';
 import EditPerfil from './pages/EditPerfil';
+import User from './pages/User';
 import { i18n } from 'i18next';
 import Allergies from './pages/Allergies';
 import Configuration from './components/Configration';
@@ -85,6 +86,10 @@ const router = createBrowserRouter([
       {
         path: "editprofile/:id",
         element: <EditPerfil />
+      },
+      {
+        path: "user/:id",
+        element: <User />
       },
       {
         path: "scanner",

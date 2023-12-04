@@ -14,11 +14,12 @@ import { useTranslation } from 'react-i18next';
 import { BACKEND_API_URL } from '../config/proxy.js';
 import Modal from 'react-modal';
 import arrowImage from "../img/arrow.png";
+import DOMPurify from "dompurify";
 
 function Profile() {
     const { t } = useTranslation();
     const navigate = useNavigate();
-    
+
     // Obtaining the current user
     const { currentUser } = useContext(AuthContext);
 
@@ -72,12 +73,34 @@ function Profile() {
     const closeModal = () => {
         setModalIsOpen(false);
     };
-    
-    const goPremium = () => {
+
+    // Make the user premium
+    const goPremium = async () => {
         setModalIsOpen(false);
-        window.location.reload();
-        // GO PREMIUM HERE
+        try {
+            const update = await axios.patch(`${BACKEND_API_URL}/users/${currentUser.id}`, {
+                premium: 1,
+            });
+            window.location.reload();
+        } catch (err) {
+            console.log(err);
+        }
     };
+
+    const premiumDescription =
+        '<p><strong>Unlock every Premium Benefits!</strong></p>'
+        + '<p>With a Premium account, you will be able to:</p>'
+        + '<ul>'
+        + '<li>UNLOCK post recipes</li>'
+        + '<li>Post UNLIMITED products</li>'
+        + '<li>Post UNLIMITED comments</li>'
+        + '<li>Give UNLIMITED likes</li>'
+
+        + '</ul>'
+        + '<p>And much more!</p>'
+        + '<p>Update your account for only <strong>€4.99</strong> per month!</p>'
+        + '<p><strong>Enjoy your Premium account NOW!</strong></p>'
+        ;
 
     return (
         <div className="profile-content">
@@ -87,9 +110,11 @@ function Profile() {
                 <img className="profile-profilepic" src={Profilepic} alt="" />
                 <h6 className="profile-username">{currentUser.username}</h6>
                 <div>
-                    <div onClick={openModal} class="profile-premium" role="alert">
-                        Go premium!
-                    </div>
+                    {currentUser.premium == 0 && (
+                        <div onClick={openModal} className="profile-premium" role="alert">
+                            Go premium!
+                        </div>
+                    )}
 
                     <Modal
                         isOpen={modalIsOpen}
@@ -100,7 +125,13 @@ function Profile() {
                         overlayClassName="modal-overlay"
                     >
                         <div>
-                            <span className="premium-description">Premium description</span>
+                            <span className="premium-description">
+                                <p className="premium-text"
+                                    dangerouslySetInnerHTML={{
+                                        __html: DOMPurify.sanitize(premiumDescription)
+                                    }}
+                                ></p>
+                            </span>
                             <button className="premium-button" onClick={goPremium}>
                                 Make me premium
                             </button>

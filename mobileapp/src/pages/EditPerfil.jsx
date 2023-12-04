@@ -10,6 +10,7 @@ import { BACKEND_API_URL } from '../config/proxy.js';
 import BackArrow from "../components/BackArrow";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
+import Configration from "../components/Configration";
 
 const EditPerfil = () => {
 
@@ -75,7 +76,7 @@ const EditPerfil = () => {
 
     return (
         <div className="container my-5">
-            <BackArrow />
+            <BackArrow /> 
             <div className="form1">
                 <form onSubmit={handleSubmit}>
                     <div className="form-group mb-2">

@@ -276,9 +276,9 @@ const SingleProduct = () => {
         </Link>
         <div className="user">
           <img src={ProfilePicture} />
-          <div className="info">
+          <Link to={`/app/user/${userOwner.id}`} className="info">
             <span className="username">{userOwner.username}</span>
-          </div>
+          </Link>
           {currentUser.username === userOwner.username ? (
             <><div className="edit">
               <Link to={`/editpost`} state={post}>
@@ -373,9 +373,9 @@ const SingleProduct = () => {
                 <div className="comment-content">
                   <div className="user-info">
                     <img src={ProfilePicture} alt="Profile Picture" className="user-image" />
-                    <span className="username">
+                    <Link to={`/app/user/${userComments[comment.id] ? userComments[comment.id].id : "Unknown"}`} className="username">
                       {userComments[comment.id] ? userComments[comment.id].username : "Unknown"}
-                    </span>
+                    </Link>
                     <div className="comment-likes">
                       <img src={Heart} alt="Heart Icon" className="heart-icon" />
                       <div className="likes-count">{comment.likes}</div>
