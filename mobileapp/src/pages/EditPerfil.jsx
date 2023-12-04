@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -9,8 +9,12 @@ import { useTranslation } from 'react-i18next';
 import { BACKEND_API_URL } from '../config/proxy.js';
 import BackArrow from "../components/BackArrow";
 import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/authContext";
 
 const EditPerfil = () => {
+
+    // Log out
+    const { currentUser, logout } = useContext(AuthContext);
 
     // Obtains the state from the location
     const state = useLocation().state;
@@ -136,8 +140,12 @@ const EditPerfil = () => {
                     </div>
                     <button onSubmit={handleSubmit} type="submit" className="btn btn-success editprofile-button">{t('send')}</button>
                 </form>
+
+                </div>
+
+                <button onClick={logout} className="btn btn-success logout-button">Log out</button>
+
             </div>
-        </div>
     );
 };
 
