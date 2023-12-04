@@ -1,14 +1,21 @@
 
-.card-general{
-    border: 5px solid #b9e7e7 !important;
-    margin: 6px auto;
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Opcional: Ajusta el espacio entre las tarjetas */
 }
 
+.card-general {
+  flex-basis: calc(50% - 5px); /* Ajusta el tamaño de cada tarjeta para que haya dos por fila */
+  border: 3.5px solid #b9e7e7 !important;
+  margin: 6px 0;
+}
+  
 .card-image{
-    width: 200px !important;
-    height: 200px !important;
-    margin: 16px auto;
-    border-radius: 20px;
+    width: 130px !important;
+    height: 130px !important;
+    margin: 8px auto;
+    border-radius: 8px;
 }
 
 .card-miniheader {
@@ -20,18 +27,19 @@
 
 .card-title{
     font-weight: bold;
-    font-size: 23px;
+    font-size: 18px;
     margin: 8px;
 }
 
 .card-text{
     text-align: justify;
-    font-size: 20px;
+    font-size: 14px;
+    line-height: 1.2;
 }
 
 .card-heart-icon {
-    width: 25px;
-    height: 25px;
+    width: 15px;
+    height: 15px;
     margin-right: 10px;
     margin-top: 12px;
 }
@@ -48,9 +56,20 @@
   }
   
   .fancy-allergy-icon {
-    width: 40px; 
-    height: 40px;
+    margin-top: 3px;
+    width: 28px; 
+    height: 28px;
     border-radius: 50%;
-    margin-right: 5px;
+    margin-right: 2px;
+  }
+
+.card-body{
+    margin-top: -20px;
+}
+
+.card-link {
+    display: block !important;
+    text-decoration: none !important;
+    color: inherit !important;
   }
   

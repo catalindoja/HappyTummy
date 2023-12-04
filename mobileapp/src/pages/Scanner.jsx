@@ -76,10 +76,10 @@ const Scanner = () => {
       <BackArrow />
 
       <h1 className="barcode-title">Find your product!</h1>
-      <p className="barcode-text">Use the barcode scanner to find your product in our page.</p>
+      <p className="barcode-text"> Use the barcode scanner to find your product.</p>
 
-      {scannedCode && <p className="scan-info">Scanned Code: {scannedCode}</p>}
-      {productId && <p className="product-info">Product ID: {productId}</p>}
+      {/* {scannedCode && <p className="scan-info">Scanned Code: {scannedCode}</p>}
+      {productId && <p className="product-info">Product ID: {productId}</p>} */}
 
       <div className="scanner-wrapper">
         <BarcodeScanner onScan={handleScan} />

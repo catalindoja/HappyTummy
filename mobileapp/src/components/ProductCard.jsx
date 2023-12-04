@@ -85,7 +85,7 @@ function ProductCard(props) {
     }, [props.id]);
 
     return (
-        <div className="card mb-2 d-flex card-general">
+        <Link to={`/app/products/${props.id}`}  className="card mb-2 d-flex card-general">
             <img
                 src={props.image}
                 className="card-img-top card-image"
@@ -102,7 +102,7 @@ function ProductCard(props) {
 
                 <div className="allergens-contains">
                     {allergies.length === 0 ? (
-                        <p>This product is safe for all allergies and intolerances ❤</p>
+                        <p className="card-text">This product is safe for all allergies and intolerances ❤</p>
                     ) : (
                         allergies.map((allergy, index) => (
                             <img
@@ -115,11 +115,9 @@ function ProductCard(props) {
                     )}
                 </div>
 
-                <p className="card-text">{ }</p>
-
-                <a href={`/app/products/${props.id}`} className="btn btn-primary card-button">Read more</a>
+                {/* <a href={`/app/products/${props.id}`} className="btn btn-primary card-button">Read more</a> */}
             </div>
-        </div>
+        </Link>
     );
 };
 

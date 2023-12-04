@@ -10,6 +10,9 @@
 .username {
   font-weight: bold;
   font-size: 18px;
+  background-color: #b9e7e792;
+  padding: 5px;
+  border-radius: 10px;
 }
 
 .single-header {
@@ -71,6 +74,14 @@
   background-color: #ff9999;
   border-radius: 5px;
   font-weight: bold;
+}
+
+.fancy-allergy-icon{
+  margin-top: 3px;
+  width: 28px; 
+  height: 28px;
+  border-radius: 50%;
+  margin-right: 2px;
 }
 
 .more-data-heading {

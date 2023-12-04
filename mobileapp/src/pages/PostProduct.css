@@ -16,11 +16,13 @@
   
   /* Estilos para el título principal */
   .supertitle-write {
-    /*color: teal; /* Azul más oscuro para el título */
     margin-bottom: 20px;
-    margin-top: 15px;
-    margin-left: 20px;
-    color: #000 !important;
+    color: #4d4d4d !important;
+    font-weight: bold;
+    background-color: #b9e7e7;
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 25px;
   }
 
   .w-100.sticky-bottom {

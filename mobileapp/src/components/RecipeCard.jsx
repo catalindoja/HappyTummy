@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import heart from '../img/heart.png';
 import './RecipeCard.css';
 
@@ -20,7 +21,7 @@ function RecipeCard(props) {
     };
 
     return (
-        <div className="card mb-2 d-flex card-general">
+        <Link to={`/app/recipes/${props.id}`} className="card mb-2 d-flex card-general">
             <img
                 src={props.image}
                 className="card-img-top card-image"
@@ -32,10 +33,12 @@ function RecipeCard(props) {
                     <h5 className="afw-bold card-title">{props.title}</h5>
                     <img src={heart} className="card-heart-icon" alt="Heart" />
                 </div>
-                <p className="card-text">{limitText(getText(props.desc), 100)}</p>
-                <a href={`/app/recipes/${props.id}`} className="btn btn-primary card-button">Read more</a>
+                <p className="card-text">{limitText(getText(props.desc), 90)}</p>
+
+                {/* <a href={`/app/recipes/${props.id}`} className="btn btn-primary card-button">Read more</a> */}
+
             </div>
-        </div>
+        </Link>
     );
 };
 

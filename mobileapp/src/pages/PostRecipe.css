@@ -104,13 +104,13 @@
     border-color: #b3b3b3;
   }
 
-  .quantity-input-write {
+  .quantity-input {
     flex: 1;
     margin-right: 10px;
   }
 
-  .measurement-input-write input {
-    width: 98%;
+  .measurement-input input {
+    width: 90%;
   }
 
   .measurement-container-write {
