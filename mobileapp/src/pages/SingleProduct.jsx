@@ -207,7 +207,7 @@ const SingleProduct = () => {
   };
 
   const handleEditClick = () => {
-    navigate(`/app/edit/${post.id}`, { state: post });
+    navigate(`/app/editproduct/${post.id}`, { state: post });
   };
 
   // Return the JSX that renders the SingleProduct page

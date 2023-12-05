@@ -1,22 +1,67 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/authContext";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import moment from "moment";
 import "./PostProduct.css";
-import { useTranslation } from 'react-i18next';
 
-// Create the Write component
 const EditProduct = () => {
-    const { t } = useTranslation();
-
-    // Obtains the state from the location
     const location = useLocation();
-    const state = location.state;
+    const state = location.state || {}; 
+
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const postId = location.pathname.split("/")[3];
+
+    const [productData, setProductData] = useState({
+        product_name: "",
+        product_description: "",
+        // Add other fields as needed
+    });
+
+    const handleInputChange = (field, value) => {
+        setProductData((prevProductData) => ({
+            ...prevProductData,
+            [field]: value,
+        }));
+    };
+
+    const fetchProductDataFromServer = async () => {
+        try {
+            //console.log("hello");
+            console.log("postId:", postId);
+            const response = await axios.get(`/products/${postId}`);
+            const productData = response.data;
+            setProductData(productData);
+            //console.log(productData);
+            //console.log(productData.product_name);
+            //console.log(productData.product_description);
+        } catch (error) {
+            console.error("Error:", error.message);
+        }
+    };
+
+    useEffect(() => {
+        fetchProductDataFromServer();
+    }, [postId]);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.patch(`/products/${postId}`, {
+                product_name: productData.product_name,
+                product_description: productData.product_description,
+                // Add other fields as needed
+            });
+            alert("Product updated successfully");
+            navigate(`/app/products/${postId}`);
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     // Obtains the list of brands from the backend
     const [brands, setBrands] = useState([]);
@@ -24,10 +69,10 @@ const EditProduct = () => {
         const fetchData = async () => {
             try {
                 const res = await axios.get(`/brands`);
-                console.log(res.data)
+                //console.log(res.data)
                 setBrands(res.data);
             } catch (err) {
-                console.log(err);
+                //console.log(err);
             }
         };
         fetchData();
@@ -39,10 +84,10 @@ const EditProduct = () => {
         const fetchData = async () => {
             try {
                 const res = await axios.get(`/allergies`);
-                console.log(res.data)
+                //console.log(res.data)
                 setAllergies(res.data);
             } catch (err) {
-                console.log(err);
+                //console.log(err);
             }
         };
         fetchData();
@@ -54,10 +99,10 @@ const EditProduct = () => {
         const fetchData = async () => {
             try {
                 const res = await axios.get(`/categories`);
-                console.log(res.data)
+                //console.log(res.data)
                 setCategories(res.data);
             } catch (err) {
-                console.log(err);
+                //console.log(err);
             }
         };
         fetchData();
@@ -71,7 +116,7 @@ const EditProduct = () => {
                 const res = await axios.get(`/markets`);
                 setSupermarkets(res.data);
             } catch (err) {
-                console.log(err);
+                //console.log(err);
             }
         };
         fetchData();
@@ -279,16 +324,18 @@ const EditProduct = () => {
                     <input
                         type="text"
                         placeholder={t('name_product')}
-                        onChange={(e) => setProductName(e.target.value)}
+                        value={productData.product_name}
+                        onChange={(e) => handleInputChange("product_name", e.target.value)}
                     />
+
 
                     <div className="editorContainer-write">
                         <ReactQuill
                             placeholder={t('product_description')}
                             className="editor-write"
                             theme="snow"
-                            value={product_description}
-                            onChange={(value) => setProductDescription(value)}
+                            value={productData.product_description}
+                            onChange={(value) => handleInputChange("product_description", value)}
                         />
                     </div>
                     {/*
@@ -441,7 +488,7 @@ const EditProduct = () => {
 
                     {error && <p className="error-message-write">{error}</p>}
                     <div className="buttons-write">
-                        <button onClick={handleClick}>{t('update')}</button>
+                        <button onClick={handleSubmit}>{t("update")}</button>
                     </div>
 
                 </div>
