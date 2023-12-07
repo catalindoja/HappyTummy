@@ -21,6 +21,7 @@ const EditProduct = () => {
         product_description: "",
         // Add other fields as needed
     });
+    
 
     const handleInputChange = (field, value) => {
         setProductData((prevProductData) => ({
@@ -207,6 +208,7 @@ const EditProduct = () => {
         setFile(null); // Reset file in case there was a previous file
     };
 
+
     // Set up the function that handles the form submission
     // - handleClick: a function that posts the product when the user clicks the 'Publish' button
     //                (if the user does not fill in the input fields, the function will set the error message)
@@ -280,13 +282,14 @@ const EditProduct = () => {
                 });
 
                 // Obtain the ID of the created product
-                /*const productId = productResponse.data.id;
+                const productId = productResponse.data.id;
 
                 // Post in intermediate table 'productallergies'
                 selectedAllergies.forEach(async (idallergies) => {
                     await axios.post(`/productallergies/`, {
                         idallergies: idallergies,
                         idproduct: productId
+                
                     })
                 });
 
@@ -295,7 +298,8 @@ const EditProduct = () => {
                 //   idsupermarket: marketuser.id,
                 //   idproduct: productId,
                 //   available: 1
-                // })
+            // })
+                
                 selectedSupermarkets.forEach(async (idsupermarkets) => {
                     await axios.post(`/stock/`, {
                         idsupermarket: idsupermarkets,
@@ -303,7 +307,7 @@ const EditProduct = () => {
                         available: 1
                     })
                 });
-                */
+                
 
             navigate(`/app/products/${postId}`);
             alert("Product updated successfully");
@@ -327,7 +331,6 @@ const EditProduct = () => {
                         value={productData.product_name}
                         onChange={(e) => handleInputChange("product_name", e.target.value)}
                     />
-
 
                     <div className="editorContainer-write">
                         <ReactQuill
@@ -404,8 +407,9 @@ const EditProduct = () => {
                             onChange={handleBarcodeChange}
                         />
                     </div>
-
-                    <div className="boxes-write">
+                    */
+                        
+                    <div className="boxes-write my-3">
                         <fieldset>
                             <legend>{t('allergies')}</legend>
                             <span>{t('it_contains')}</span>
@@ -420,7 +424,8 @@ const EditProduct = () => {
                             ))}
                         </fieldset>
                     </div>
-
+                        
+                    /*
                     <div className="boxes-write">
                         <fieldset>
                             <legend>{t('supermarkets')}</legend>
