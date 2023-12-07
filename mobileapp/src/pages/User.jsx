@@ -19,7 +19,7 @@ import BackArrow from "../components/BackArrow";
 function Profile() {
     const { t } = useTranslation();
     const navigate = useNavigate();
-    
+
     // Obtaining the current user
     const { currentUser } = useContext(AuthContext);
 
@@ -81,27 +81,38 @@ function Profile() {
         <div className="profile-content">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
             <BackArrow />
-            
+
             <div className="user-header">
                 <img className="profile-profilepic" src={Profilepic} alt="" />
-                <h6 className="profile-username">{user.username}</h6>
+                {user.premium == 0 ? (
+                    <h6 className="profile-username">{user.username}</h6>
+                ) : (
+                    <h6 className="profile-username-premium">{user.username + " ⭐"}</h6>
+                )}
             </div>
 
             <h5 className="profile-maintitles"> Products <span className="icon2">🛒</span></h5>
-            <div>
-                <div className="card-container">
-                    {hisproducts.map(post => (
-                        <ProductCard
-                            image={post.image_url}
-                            title={post.product_name}
-                            desc={post.product_description}
-                            id={post.id}
-                        />
-                    ))}
+            {hisproducts.length === 0 ? (
+                <h4 className="no-post-prod">No products yet 👻</h4>
+            ) : (
+                <div>
+                    <div className="card-container">
+                        {hisproducts.map(post => (
+                            <ProductCard
+                                image={post.image_url}
+                                title={post.product_name}
+                                desc={post.product_description}
+                                id={post.id}
+                            />
+                        ))}
+                    </div>
                 </div>
-            </div>
+            )}
 
             <h5 className="profile-maintitles"> Recipes <span className="icon2">🥧</span></h5>
+            {hisrecipes.length === 0 ? (
+                <h4 className="no-post-rec">No recipes yet 👻</h4>
+            ) : (
             <div>
                 <div className="card-container">
                     {hisrecipes.map(post => (
@@ -114,6 +125,7 @@ function Profile() {
                     ))}
                 </div>
             </div>
+            )}
         </div>
     );
 }

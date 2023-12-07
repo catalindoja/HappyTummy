@@ -11,6 +11,9 @@ import BackArrow from "../components/BackArrow";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import Configration from "../components/Configration";
+import Modal from 'react-modal';
+import arrowImage from "../img/arrow.png";
+import DOMPurify from "dompurify";
 
 const EditPerfil = () => {
 
@@ -74,9 +77,18 @@ const EditPerfil = () => {
         navigate("/app/profile");
     };
 
+    // Modal pop-up
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const openModal = () => {
+        setModalIsOpen(true);
+    };
+    const closeModal = () => {
+        setModalIsOpen(false);
+    };
+
     return (
         <div className="container my-5">
-            <BackArrow /> 
+            <BackArrow />
             <div className="form1">
                 <form onSubmit={handleSubmit}>
                     <div className="form-group mb-2">
@@ -139,14 +151,48 @@ const EditPerfil = () => {
                             onChange={handleInputChange}
                         />
                     </div>
-                    <button onSubmit={handleSubmit} type="submit" className="btn btn-success editprofile-button">{t('send')}</button>
+                    <button onSubmit={handleSubmit} type="submit" className="btn btn-success editprofile-button">{t('save')}</button>
                 </form>
 
-                </div>
-
-                <button onClick={logout} className="btn btn-success logout-button">Log out</button>
-
             </div>
+
+            <button onClick={openModal} className="btn btn-success logout-button">Log out</button>
+            <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                shouldCloseOnOverlayClick={true}
+                shouldCloseOnEsc={true}
+                className="modal-content"
+                overlayClassName="modal-overlay"
+            >
+                <div>
+                    <span className="premium-description">
+                        <p className="premium-text"
+                            dangerouslySetInnerHTML={{
+                                __html: DOMPurify.sanitize("Are you sure you want to log out?")
+                            }}
+                        ></p>
+                    </span>
+                    <div className="popup-confirm-buttons">
+                        <button className="cancel-button" onClick={closeModal}>
+                            Cancel
+                        </button>
+                        <button className="confirm-button" onClick={logout}>
+                            Confirm
+                        </button>
+                    </div>
+                    <img
+                        src={arrowImage}
+                        alt="Close"
+                        className="close-icon"
+                        onClick={closeModal}
+                    />
+                </div>
+            </Modal>
+
+            {/* <button onClick={logout} className="btn btn-success logout-button">Log out</button> */}
+
+        </div>
     );
 };
 

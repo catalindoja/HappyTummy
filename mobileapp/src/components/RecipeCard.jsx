@@ -26,12 +26,11 @@ function RecipeCard(props) {
                 src={props.image}
                 className="card-img-top card-image"
                 alt={props.title}
-                
             />
             <div className="card-body">
                 <div className="card-miniheader">
                     <h5 className="afw-bold card-title">{props.title}</h5>
-                    <img src={heart} className="card-heart-icon" alt="Heart" />
+                    {/* <img src={heart} className="card-heart-icon" alt="Heart" /> */}
                 </div>
                 <p className="card-text">{limitText(getText(props.desc), 90)}</p>
 

@@ -13,8 +13,9 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import "./SingleProduct.css";
 import { BACKEND_API_URL } from '../config/proxy.js';
-import BackArrow from "../components/BackArrow.jsx";
 import Help from '../img/helpicon.png';
+import Modal from 'react-modal';
+import arrowImage from "../img/arrow.png";
 
 import Gluten from "../img/allergens/gluten.png";
 import Lactose from "../img/allergens/leche.png";
@@ -222,7 +223,7 @@ const SingleProduct = () => {
   const handleDelete = async () => {
     try {
       const productResponse = await axios.delete(`${BACKEND_API_URL}/products/${post.id}`);
-      navigate("/app/home")
+      navigate("/app/profile")
     } catch (err) {
       if (err.response) {
         console.log("Respuesta del servidor con estado de error:", err.response.status);
@@ -266,6 +267,15 @@ const SingleProduct = () => {
     }
   };
 
+  // Modal pop-up
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   // Return the JSX that renders the SingleProduct page
   return (
     <div className="single-product">
@@ -284,7 +294,41 @@ const SingleProduct = () => {
               <Link to={`/editpost`} state={post}>
                 <img className="editimg" src={Edit} alt="" />
               </Link>
-              <img className="delete" onClick={handleDelete} src={Delete} alt="" />
+
+              <img className="delete" onClick={openModal} src={Delete} alt="" />
+              <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                shouldCloseOnOverlayClick={true}
+                shouldCloseOnEsc={true}
+                className="modal-content"
+                overlayClassName="modal-overlay"
+            >
+                <div>
+                    <span className="premium-description">
+                        <p className="premium-text"
+                            dangerouslySetInnerHTML={{
+                                __html: DOMPurify.sanitize("Are you sure you want to delete this post?")
+                            }}
+                        ></p>
+                    </span>
+                    <div className="popup-confirm-buttons">
+                        <button className="cancel-button" onClick={closeModal}>
+                            Cancel
+                        </button>
+                        <button className="confirm-button" onClick={handleDelete}>
+                            Confirm
+                        </button>
+                    </div>
+                    <img
+                        src={arrowImage}
+                        alt="Close"
+                        className="close-icon"
+                        onClick={closeModal}
+                    />
+                </div>
+            </Modal>
+
             </div> </>
           ) : (
             <></>

@@ -13,9 +13,23 @@
   width: 100%;
 }
 
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .login-password {
+  flex: 1;
+  padding: 10px;
   height: 45px;
   width: 100%;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
 }
 
 .login-but {

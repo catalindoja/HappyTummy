@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import './Scanner.css';
 import BackArrow from "../components/BackArrow";
+import ProductCard from "../components/ProductCard";
 
 const Scanner = () => {
   const proxy = "https://happytummy-backend-production.up.railway.app"
@@ -11,34 +12,24 @@ const Scanner = () => {
   const [scannedCode, setScannedCode] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [productId, setProductId] = useState(null);
+  const [productData, setProductData] = useState(null);
 
   const [barcode, setIdUser] = useState({
     barcode: ''
   });
 
   const handleScan = async (code) => {
-    console.log(code);
-    barcode.barcode = code
-    console.log(barcode.barcode)
-
     try {
-      axios.get(proxy + "/products/frombarcode/" + barcode.barcode)
-        .then(response => {
-          if (response && response.data && response.data.length > 0) {
-            const productId = response.data[0].id;
-            navigate("/app/products/" + productId);
-          } else {
-            console.log("No data found for the barcode");
-            // Handle the case when response is empty or data doesn't exist
-          }
-        })
-        .catch(error => {
-          console.error("Error fetching data:", error);
-          // Handle errors, like network issues or server problems
-        });
+      const response = await axios.get(proxy + "/products/frombarcode/" + code);
+
+      if (response && response.data && response.data.length > 0) {
+        setProductData(response.data[0]);
+      } else {
+        console.log("No data found for the barcode");
+        setProductData(null);  // Asegúrate de restablecer productData si no se encuentra ningún producto
+      }
     } catch (error) {
-      console.error("Error occurred:", error);
-      // Handle any synchronous errors
+      console.error("Error fetching data:", error);
     }
   };
 
@@ -64,8 +55,10 @@ const Scanner = () => {
       }
 
       // Redirect to the "/product/{id}" route
-      window.location.href = `/app/products/${productId}`;
+      // window.location.href = `/app/products/${productId}`;
+      setProductData(response.data[0]);
     } catch (error) {
+      setProductData(null);
       console.error('Error fetching product data:', error);
     }
   };
@@ -100,11 +93,26 @@ const Scanner = () => {
         </div>
 
         <div className="search-button">
-          <button className="btn btn-primary search-btn" onClick={handleSearch}>
+          <button className="" onClick={handleSearch}>
             Search
           </button>
         </div>
       </div>
+
+      {productData ? (
+        <div className="product-card-container-2">
+          <ProductCard
+            image={productData.image_url}
+            title={productData.product_name}
+            desc={productData.product_description}
+            id={productData.id}
+            likes={productData.likes}
+          />
+          <div className="just-white"></div>
+        </div>
+      ) : (
+      <div className="just-white">Product not found 😥</div>)}
+
     </div>
   );
 };

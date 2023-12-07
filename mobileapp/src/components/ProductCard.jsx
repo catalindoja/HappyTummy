@@ -59,9 +59,11 @@ function ProductCard(props) {
     // Obtain the post ID from the URL
     const location = useLocation();
 
-    // - productallergies: an array that contains the details of the productallergies of the post
     // - allergies: an array that contains the details of the allergies of the post
     const [allergies, setAllergies] = useState([]);
+
+    // - likes: an integer that contains the number of likes of the post
+    const [likes, setLikes] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -77,6 +79,7 @@ function ProductCard(props) {
                 console.log(res4)
                 const filteredAllergies = res4.data.filter((allergy) => allergyIds.includes(allergy.id));
                 setAllergies(filteredAllergies);
+
             } catch (err) {
                 console.log(err);
             }
@@ -85,7 +88,7 @@ function ProductCard(props) {
     }, [props.id]);
 
     return (
-        <Link to={`/app/products/${props.id}`}  className="card mb-2 d-flex card-general">
+        <Link to={`/app/products/${props.id}`} className="card mb-2 d-flex card-general">
             <img
                 src={props.image}
                 className="card-img-top card-image"
@@ -94,7 +97,8 @@ function ProductCard(props) {
             <div className="card-body">
                 <div className="card-miniheader">
                     <h5 className="afw-bold card-title">{props.title}</h5>
-                    <img src={heart} className="card-heart-icon" alt="Heart" />
+                    {/* <img src={heart} className="card-heart-icon" alt="Heart" />
+                    <div className="likes-count">{props.likes}</div> */}
                 </div>
 
                 {/* Description of the product */}

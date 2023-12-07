@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from 'react';
+import { Link, useLocation } from "react-router-dom";
 import { Modal, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faPlus, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
+import { AuthContext } from "../context/authContext";
 import "./Menu.css";
 
 const Menu = () => {
+  const { currentUser } = useContext(AuthContext);
+  const location = useLocation();
   const [showPopup, setShowPopup] = useState(false);
 
   const togglePopup = () => {
@@ -18,18 +21,18 @@ const Menu = () => {
 
   return (
     <div className="w-100 sticky-bottom">
-      <div className="d-flex justify-content-around w-100" style={{ backgroundColor: '#C9FFFF', border: '1px solid #acf9f9' }}>
-        <Link to="/app/home">
-          <FontAwesomeIcon icon={faHome} className="p-2" style={{ color: '#555', width: '26px', height: '26px' }} />
+      <div className="d-flex justify-content-around w-100" style={{ backgroundColor: '#C9FFFF', border: '3.5px solid #acf9f9' }}>
+        <Link to="/app/home" style={{ color: location.pathname === '/app/home' ? 'black' : '#555' }}>
+          <FontAwesomeIcon icon={faHome} className="p-2" style={{ width: '26px', height: '26px' }} />
         </Link>
         <div onClick={togglePopup}>
-          <FontAwesomeIcon icon={faPlus} className="p-2" style={{ color: '#555', width: '26px', height: '26px' }} />
+        <FontAwesomeIcon icon={faPlus} className="p-2" style={{ color: (location.pathname === '/app/postproduct' || location.pathname === '/app/postrecipe') ? 'black' : '#555', width: '26px', height: '26px' }} />
         </div>
-        <Link to="/app/search">
-          <FontAwesomeIcon icon={faSearch} className="p-2" style={{ color: '#555', width: '26px', height: '26px' }} />
+        <Link to="/app/search" style={{ color: location.pathname === '/app/search' ? 'black' : '#555' }}>
+          <FontAwesomeIcon icon={faSearch} className="p-2" style={{ width: '26px', height: '26px' }} />
         </Link>
-        <Link to="/app/profile">
-          <FontAwesomeIcon icon={faUser} className="p-2" style={{ color: '#555', width: '26px', height: '26px' }} />
+        <Link to="/app/profile" style={{ color: location.pathname === '/app/profile' ? 'black' : '#555' }}>
+          <FontAwesomeIcon icon={faUser} className="p-2" style={{ width: '26px', height: '26px' }} />
         </Link>
       </div>
 
@@ -44,10 +47,18 @@ const Menu = () => {
               <Button style={{ padding: '15px 15px', fontSize: '20px', backgroundColor: 'teal', color: 'white', border: 'none' }}
                       variant="primary" onClick={hidePopup}>New product</Button>
             </Link>
-            <Link to="/app/postrecipe">
-              <Button style={{ padding: '15px 15px', fontSize: '20px', backgroundColor: 'teal', color: 'white', border: 'none' }}
-                      variant="primary" onClick={hidePopup}>New recipe</Button>
-            </Link>
+            {currentUser && currentUser.premium === 1 ? (
+              <Link to="/app/postrecipe">
+                <Button style={{ padding: '15px 15px', fontSize: '20px', backgroundColor: 'teal', color: 'white', border: 'none' }}
+                        variant="primary" onClick={hidePopup}>New recipe</Button>
+              </Link>
+            ) : (
+              <div>
+                <Button style={{ padding: '15px 15px', fontSize: '20px', backgroundColor: 'lightgray', color: 'white', border: 'none' }}
+                        variant="primary" disabled>New recipe</Button>
+                <p style={{ textAlign: 'center', fontSize: '16px', color: 'red', marginTop: '5px' }}>Requires Premium account</p>
+              </div>
+            )}
           </div>
         </Modal.Body>
       </Modal>

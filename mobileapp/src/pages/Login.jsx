@@ -8,6 +8,8 @@ import "./Login.css";
 import Configration from "../components/Configration";
 import { useTranslation } from 'react-i18next';
 import BackArrow from "../components/BackArrow";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Login = () => {
   const { t } = useTranslation();
@@ -44,6 +46,12 @@ const Login = () => {
     }
   };
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="auth" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <BackArrow />
@@ -57,14 +65,21 @@ const Login = () => {
           name="username"
           onChange={handleChange}
         />
-        <input
-          className="login-password"
-          required
-          type="password"
-          placeholder={t('password')}
-          name="password"
-          onChange={handleChange}
-        />
+        <div className="password-container">
+          <input
+            className="login-password"
+            required
+            type={showPassword ? 'text' : 'password'}
+            placeholder={t('password')}
+            name="password"
+            onChange={handleChange}
+          />
+          <FontAwesomeIcon
+            icon={showPassword ? faEyeSlash : faEye}
+            className="password-toggle"
+            onClick={togglePasswordVisibility}
+          />
+        </div>
         <button onClick={handleSubmit} className="login-but">{t('login')}</button>
         {err && <p className="login-err">{err}</p>}
         <div className="infotex">

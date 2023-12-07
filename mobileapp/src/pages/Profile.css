@@ -26,7 +26,7 @@
 
 .profile-username {
     margin-top: 10px;
-    margin-left: -5px;
+    margin-left: 5px;
     font-size: 24px;
     font-weight: bold;
     color: #585858;
@@ -51,6 +51,24 @@
 
 .profile-edit:hover {
     opacity: 0.8;
+}
+
+.premium-star{
+  font-size: 30px;
+  margin-right: 100px;
+}
+
+.profile-username-premium{
+  margin-top: 10px;
+  margin-left: 5px;
+  font-size: 24px;
+  font-weight: bold;
+  color: rgb(246, 234, 4);
+  text-shadow:
+  -1px -1px 0 #585858,
+   1px -1px 0 #585858,
+  -1px  1px 0 #585858,
+   1px  1px 0 #585858
 }
 
 
@@ -141,5 +159,25 @@ button {
     height: 30px; /* Ajusta el tamaño según tus preferencias */
     cursor: pointer;
   }
+
+  .no-post-prod{
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-bottom: 100px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #585858;
+  }
+
+  .no-post-rec{
+    margin-top: 20px;
+    margin-left: 10px;
+    margin-bottom: 400px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #585858;
+  }
+
+
   
   

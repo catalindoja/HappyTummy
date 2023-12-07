@@ -11,6 +11,8 @@ import i18n from "../components/i18n";
 import { BACKEND_API_URL } from '../config/proxy.js';
 import BackArrow from "../components/BackArrow";
 import Help from '../img/helpicon.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Register = () => {
   <Configration />
@@ -179,8 +181,7 @@ const Register = () => {
       }
 
       if (formData.age.trim() === "") {
-        setError("Please introduce an age");
-        return;
+        formData.age = 0;
       }
 
       if (passwords.password !== passwords.confirmPassword) {
@@ -244,6 +245,9 @@ const Register = () => {
     //console.log(formData.email);
   };
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const renderStep = () => {
     switch (step) {
       case 1:
@@ -266,6 +270,10 @@ const Register = () => {
               >
                 {t("next")}
               </button>
+
+              <div className="infotex">
+                {"Do you have an account?"} <Link to="/login"><span className="text-center text-primary">{"Login"}</span></Link>
+              </div>
 
               {error && <p className="error-msg">{error}</p>}
               <label id="errorMail" htmlFor="ErrorMail" className='invisible text-danger'>{t('email_existed')}</label>
@@ -317,29 +325,44 @@ const Register = () => {
                 />
               </div>
               <div className="form-group step2-form">
-                <label htmlFor="password">{t('password')}</label>
-                <input
-                  name="password"
-                  type="password"
-                  value={passwords.password}
-                  onChange={handlePasswords}
-                  className="form-control my-1"
-                  id="password"
-                  placeholder={t('placeholder_password')}
-                />
+                <label htmlFor="password">Password</label>
+                <div className="password-container">
+                  <input
+                    name="password"
+                    type={showPassword ? 'text' : 'password'}
+                    value={passwords.password}
+                    onChange={handlePasswords}
+                    className="form-control my-1"
+                    id="password"
+                    placeholder="Enter your password"
+                  />
+                  <FontAwesomeIcon
+                    icon={showPassword ? faEye : faEyeSlash}
+                    className="password-toggle"
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                </div>
               </div>
               <div className="form-group step2-form">
-                <label htmlFor="confirmPassword">{t('confirm_password')}</label>
-                <input
-                  name="confirmPassword"
-                  type="password"
-                  value={passwords.confirmPassword}
-                  onChange={handlePasswords}
-                  className="form-control my-1"
-                  id="confirmPassword"
-                  placeholder={t('placeholder_confirm_password')}
-                />
+                <label htmlFor="confirmPassword">Confirm Password</label>
+                <div className="password-container">
+                  <input
+                    name="confirmPassword"
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    value={passwords.confirmPassword}
+                    onChange={handlePasswords}
+                    className="form-control my-1"
+                    id="confirmPassword"
+                    placeholder="Confirm your password"
+                  />
+                  <FontAwesomeIcon
+                    icon={showConfirmPassword ? faEye : faEyeSlash}
+                    className="password-toggle"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  />
+                </div>
               </div>
+              <label style={{ fontSize: '17.5px', marginTop: '10px' }}>{"Optional fields:"}</label>
               <div className="form-group step2-form">
                 <label htmlFor="age">{t('age')}</label>
                 <input

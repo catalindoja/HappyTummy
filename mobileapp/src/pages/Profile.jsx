@@ -17,11 +17,12 @@ import arrowImage from "../img/arrow.png";
 import DOMPurify from "dompurify";
 
 function Profile() {
+
     const { t } = useTranslation();
     const navigate = useNavigate();
 
     // Obtaining the current user
-    const { currentUser } = useContext(AuthContext);
+    const { currentUser, setCurrentUser, logout, login, updatePremium } = useContext(AuthContext);
 
     const handleEditProfile = () => {
         const user = JSON.parse(localStorage.getItem("user"))
@@ -78,9 +79,7 @@ function Profile() {
     const goPremium = async () => {
         setModalIsOpen(false);
         try {
-            const update = await axios.patch(`${BACKEND_API_URL}/users/${currentUser.id}`, {
-                premium: 1,
-            });
+            await updatePremium();
             window.location.reload();
         } catch (err) {
             console.log(err);
@@ -89,16 +88,24 @@ function Profile() {
 
     const premiumDescription =
         '<p><strong>Unlock every Premium Benefits!</strong></p>'
-        + '<p>With a Premium account, you will be able to:</p>'
         + '<ul>'
-        + '<li>UNLOCK post recipes</li>'
-        + '<li>Post UNLIMITED products</li>'
-        + '<li>Post UNLIMITED comments</li>'
-        + '<li>Give UNLIMITED likes</li>'
-
+        + '🥇 Get an <strong>EXCLUSIVE</strong> Premium Badge'
         + '</ul>'
+        + '<ul>'
+        + '🥧 <strong>UNLOCK</strong> post recipes'
+        + '</ul>'
+        + '<ul>'
+        + '🛒 Post <strong>UNLIMITED</strong> products'
+        + '</ul>'
+        + '<ul>'
+        + '✏ Post <strong>UNLIMITED</strong> comments'
+        + '</ul>'
+        + '<ul>'
+        + '❤ Give <strong>UNLIMITED</strong> likes'
+        + '</ul>'
+
         + '<p>And much more!</p>'
-        + '<p>Update your account for only <strong>€4.99</strong> per month!</p>'
+        + '<p>Update your account for <strong>€4.99</strong> per month</p>'
         + '<p><strong>Enjoy your Premium account NOW!</strong></p>'
         ;
 
@@ -108,14 +115,23 @@ function Profile() {
 
             <div className="profile-header">
                 <img className="profile-profilepic" src={Profilepic} alt="" />
-                <h6 className="profile-username">{currentUser.username}</h6>
+                {currentUser.premium == 0 ? (
+                    <h6 className="profile-username">{currentUser.username}</h6>
+                ) : (
+                    <h6 className="profile-username-premium">{currentUser.username}</h6>
+                )}
                 <div>
-                    {currentUser.premium == 0 && (
-                        <div onClick={openModal} className="profile-premium" role="alert">
-                            Go premium!
+                    {currentUser.premium == 0 ? (
+                        <div>
+                            <div onClick={openModal} className="profile-premium" role="alert">
+                                Go premium!
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="premium-star">
+                            ⭐
                         </div>
                     )}
-
                     <Modal
                         isOpen={modalIsOpen}
                         onRequestClose={closeModal}
@@ -148,32 +164,40 @@ function Profile() {
             </div>
 
             <h5 className="profile-maintitles">{t('my_products')} <span className="icon2">🛒</span></h5>
-            <div>
-                <div className="card-container">
-                    {myproducts.map(post => (
-                        <ProductCard
-                            image={post.image_url}
-                            title={post.product_name}
-                            desc={post.product_description}
-                            id={post.id}
-                        />
-                    ))}
+            {myproducts.length === 0 ? (
+                <h4 className="no-post-prod">No products yet 👻</h4>
+            ) : (
+                <div>
+                    <div className="card-container">
+                        {myproducts.map(post => (
+                            <ProductCard
+                                image={post.image_url}
+                                title={post.product_name}
+                                desc={post.product_description}
+                                id={post.id}
+                            />
+                        ))}
+                    </div>
                 </div>
-            </div>
+            )}
 
             <h5 className="profile-maintitles">{t('my_recipes')} <span className="icon2">🥧</span></h5>
-            <div>
-                <div className="card-container">
-                    {myrecipes.map(post => (
-                        <RecipeCard
-                            image={post.image_url}
-                            title={post.title}
-                            desc={post.description}
-                            id={post.id}
-                        />
-                    ))}
+            {myrecipes.length === 0 ? (
+                <h4 className="no-post-rec">No recipes yet 👻</h4>
+            ) : (
+                <div>
+                    <div className="card-container">
+                        {myrecipes.map(post => (
+                            <RecipeCard
+                                image={post.image_url}
+                                title={post.title}
+                                desc={post.description}
+                                id={post.id}
+                            />
+                        ))}
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 }

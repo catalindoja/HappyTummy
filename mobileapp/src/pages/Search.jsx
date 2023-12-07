@@ -125,6 +125,7 @@ function Search() {
                                         title={post.product_name}
                                         desc={post.product_description}
                                         id={post.id}
+                                        likes={post.likes}
                                     />
                                 ))}
                             </div>
@@ -178,8 +179,6 @@ function Search() {
                     )}
                 </div>
             )}
-
-
         </div>
     );
 
