@@ -258,11 +258,29 @@ const SingleProduct = () => {
   }
 
   // Like button
-  const handleLikeClick = async (commentId) => {
-    console.log("Like button clicked");
+  const handleLikeClick = async (postId) => {
     try {
+      const productResponse = await axios.patch(`/products/${postId}`, {
+        likes: post.likes + 1,
+      });
+
+      window.location.reload();
+
     } catch (err) {
-      console.error(err);
+      console.log(err);
+    }
+  };
+
+  const handleCommentLikeClick = async (commentId, commentLikes) => {
+    try {
+      const commentResponse = await axios.patch(`/comments/${commentId}`, {
+        likes: commentLikes + 1,
+      });
+
+      window.location.reload();
+
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -295,10 +313,10 @@ const SingleProduct = () => {
         </div>
         <div className="single-header">
           <h1 className="product-name my-3">{post.product_name}</h1>
-          <div className="like">
+          <button className="like" onClick={() => handleLikeClick(postId)}>
             <img src={Heart} alt="Heart Icon" className="heart-icon" />
             <div className="likes-count">{post.likes}</div>
-          </div>
+          </button>
         </div>
 
         {canUserEat() ? (
@@ -376,10 +394,10 @@ const SingleProduct = () => {
                     <span className="username">
                       {userComments[comment.id] ? userComments[comment.id].username : "Unknown"}
                     </span>
-                    <div className="comment-likes">
+                    <button className="comment-likes" onClick={() => handleCommentLikeClick(comment.id, comment.likes)}>
                       <img src={Heart} alt="Heart Icon" className="heart-icon" />
                       <div className="likes-count">{comment.likes}</div>
-                    </div>
+                    </button>
                   </div>
                   <p
                     dangerouslySetInnerHTML={{

@@ -134,14 +134,32 @@ const SingleRecipe = () => {
     }
 
     // Like button
-    const handleLikeClick = async (commentId) => {
-        console.log("Like button clicked");
-        try {
+  const handleLikeClick = async (postId) => {
+    console.log("Like button clicked");
+    try {
+      const productResponse = await axios.patch(`/recipes/${postId}`, {
+        likes: post.likes + 1,
+      });
 
-        } catch (err) {
-            console.error(err);
-        }
-    };
+      window.location.reload();
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleCommentLikeClick = async (commentId, commentLikes) => {
+    try {
+      const commentResponse = await axios.patch(`/commentrecipes/${commentId}`, {
+        likes: commentLikes + 1,
+      });
+
+      window.location.reload();
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
     // Render the SingleRecipe component
     return (
@@ -173,10 +191,10 @@ const SingleRecipe = () => {
                     </div>
                     <div className="single-header">
                         <h1 className="product-name my-3">{post.title}</h1>
-                        <div className="like">
+                        <button className="like" onClick={() => handleLikeClick(postId)}>
                             <img src={Heart} alt="Heart Icon" className="heart-icon" />
                             <div className="likes-count">{post.likes}</div>
-                        </div>
+                        </button>
                     </div>
                     <h3 className="specifications-heading">Specifications</h3>
                     <div className="more-data-container">
@@ -216,10 +234,10 @@ const SingleRecipe = () => {
                                             <span className="username">
                                                 {userComments[comment.id] ? userComments[comment.id].username : "Unknown"}
                                             </span>
-                                            <div className="comment-likes">
+                                                <button className="comment-likes" onClick={() => handleCommentLikeClick(comment.id, comment.likes)}>
                                                 <img src={Heart} alt="Heart Icon" className="heart-icon" />
                                                 <div className="likes-count">{comment.likes}</div>
-                                            </div>
+                                                </button>
                                         </div>
                                         <p
                                             dangerouslySetInnerHTML={{

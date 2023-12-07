@@ -150,6 +150,7 @@
 .like {
   display: flex;
   align-items: center;
+  background-color: rgba(255, 255, 255, 0.0);
 }
 
 .likes-count {
@@ -171,6 +172,7 @@
   display: flex;
   align-items: center;
   margin-left: 150px;
+  background-color: rgba(255, 255, 255, 0.0);
 }
 
 .comment-likes-button {

@@ -186,6 +186,11 @@
   align-items: center;
 }
 
+.like {
+  display: flex;
+  align-items: center;
+}
+
 .likes-count {
   color: rgb(255, 0, 0);
   font-weight: bold;
@@ -201,6 +206,13 @@
   margin-right: -7px;
   margin-bottom: -7px;
   margin-top: -4px;
+}
+
+.comment-likes {
+  display: flex;
+  align-items: center;
+  margin-left: 150px;
+  background-color: rgba(255, 255, 255, 0.0);
 }
 
 .comment-likes-button {
