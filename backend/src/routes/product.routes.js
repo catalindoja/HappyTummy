@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import { getProducts, getProduct, createProduct, updateProduct, deleteProduct, getProductByUserId, getProductByBrandId, getProductByCategoryId, getProductBySupermarketId } from '../controllers/product.controller.js'
+import { getProducts, getProduct, createProduct, updateProduct, deleteProduct, getProductByUserId, getProductByBrandId, getProductByCategoryId, getProductBySupermarketId, getProductByBarcode } from '../controllers/product.controller.js'
 
 
 const router = Router()
@@ -25,6 +25,8 @@ router.post('/products', createProduct)
 router.patch('/products/:id', updateProduct)
 
 router.delete('/products/:id', deleteProduct)
+
+router.get('/products/frombarcode/:barcode', getProductByBarcode)
 
 
 export default router

@@ -60,18 +60,19 @@ export const register = (req, res) => {
  */
 export const registerAsync = async (req, res) => {
   try{
-    const { username, email, password, role, premium, age, gender, realname, realsurname, country } = req.body;
+    const {idsupermarket, username, email, password, role, premium, age, gender, realname, realsurname, country } = req.body;
     const [checkExistingUser] = await pool.query('SELECT * FROM user WHERE email = ? OR username = ?', [email, username])
     if(checkExistingUser.length) return res.status(409).json('User already exists!')
 
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
 
-    const [result] = await pool.query( 'INSERT INTO user (username, email, password, role, premium, age, gender, realname, realsurname, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
-    [username, email, hash, role, premium, age, gender, realname, realsurname, country])
+    const [result] = await pool.query( 'INSERT INTO user (idsupermarket, username, email, password, role, premium, age, gender, realname, realsurname, country) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+    [idsupermarket, username, email, hash, role, premium, age, gender, realname, realsurname, country])
 
     res.send({
         id: result.insertId,
+        idsupermarket,
         username,
         email,
         role,
@@ -181,6 +182,20 @@ export const checkExistingUserByMail = async (req, res) => {
   } catch(error){
     return res.status(500).json({
       message: 'Something went wrong while retrieving the users'
+    })
+  } 
+}
+
+
+export const getUserEncryptedPassword = async (req, res) => {
+
+  try{
+    const salt = bcrypt.genSaltSync(10);
+    const hash = req.body.password = bcrypt.hashSync(req.body.password, salt);
+    return res.status(200).json(hash)
+  } catch(error){
+    return res.status(500).json({
+      message: 'Something went wrong while retrieving the encrypted password'
     })
   } 
 }

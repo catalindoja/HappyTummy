@@ -104,10 +104,10 @@ export const deleteUser = async (req, res) => {
 export const updateUser = async (req, res) => {
     try {
         const {id} = req.params
-        const {password, email, premium, image, image_url, age, gender, realname, realsurname, country} = req.body
+        const {username, password, email, premium, image, image_url, age, gender, realname, realsurname, country} = req.body
         const [result] = 
-            await pool.query('UPDATE user SET password = IFNULL(?, password), email = IFNULL(?, email), premium = IFNULL(?, premium), image = IFNULL(?, image), image_url = IFNULL(?, image_url), age = IFNULL(?, age), gender = IFNULL(?, gender), realname = IFNULL(?, realname), realsurname = IFNULL(?, realsurname), country = IFNULL(?, country) WHERE id = ?',
-            [password, email, premium, image, image_url, age, gender, realname, realsurname, country, id])
+            await pool.query('UPDATE user SET username = IFNULL(?, username), password = IFNULL(?, password), email = IFNULL(?, email), premium = IFNULL(?, premium), image = IFNULL(?, image), image_url = IFNULL(?, image_url), age = IFNULL(?, age), gender = IFNULL(?, gender), realname = IFNULL(?, realname), realsurname = IFNULL(?, realsurname), country = IFNULL(?, country) WHERE id = ?',
+            [username, password, email, premium, image, image_url, age, gender, realname, realsurname, country, id])
 
         if(result.affectedRows === 0) return res.status(404).json({
             message: 'User not found'

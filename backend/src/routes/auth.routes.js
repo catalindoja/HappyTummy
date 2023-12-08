@@ -1,5 +1,5 @@
 import express from "express";
-import { registerAsync, loginAsync, logout, justinfo, checkExistingUserByMail,  } from "../controllers/auth.controller.js";
+import { registerAsync, loginAsync, logout, justinfo, checkExistingUserByMail, getUserEncryptedPassword } from "../controllers/auth.controller.js";
 
 const router = express.Router();
 
@@ -11,5 +11,6 @@ router.post("/register", registerAsync);
 router.post("/login", loginAsync);
 router.post("/logout", logout);
 router.post("/userexists", checkExistingUserByMail)
+router.post("/encryptpassword", getUserEncryptedPassword)
 
 export default router;

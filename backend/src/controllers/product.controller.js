@@ -197,3 +197,21 @@ export const getProductBySupermarketId = async (req, res) => {
         })
     }
 }
+
+/**
+ * Recovers the products from a specific barcode from the database
+ * @async
+ * @param {Request} req 
+ * @param {Response} res 
+ * @returns {JSON} JSON containg the recovered data
+ */
+export const getProductByBarcode = async (req, res) => {
+    try {
+        const [rows] = await pool.query('SELECT * FROM product WHERE barcode = ?', [req.params.barcode])
+        res.json(rows)
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Something went wrong while retrieving the product'
+        })
+    }
+}
