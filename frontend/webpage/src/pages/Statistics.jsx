@@ -8,6 +8,8 @@ const App = () => {
 
     // Current user 
     const { currentUser } = useContext(AuthContext);
+    let userLikes = 0;
+    let userComments = 0;
 
     // Supermarket
     const [marketuser, setMarketNameUser] = useState("");
@@ -23,6 +25,115 @@ const App = () => {
         };
         fetchData();
     }, [currentUser.idsupermarket]);
+
+
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const res = await axios.get(`/products`);
+                setProducts(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        fetchProducts();
+    }, []);
+
+    const [recipes, setRecipes] = useState([]);
+    useEffect(() => {
+        const fetchRecipes = async () => {
+            try {
+                const res = await axios.get(`/recipes`)
+                setRecipes(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        fetchRecipes();
+    }, []);
+
+    const [comments, setComments] = useState([]);
+    useEffect(() => {
+        const fetchComments = async () => {
+            try {
+                const res = await axios.get(`/comments`)
+                setComments(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        fetchComments();
+    }, []);
+
+    const [commentRecipes, setCommentRecipes] = useState([]);
+    useEffect(() => {
+        const fetchCommentRecipes = async () => {
+            try {
+                const res = await axios.get(`/commentRecipes`)
+                setCommentRecipes(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        fetchCommentRecipes();
+    }, []);
+
+    // useEffect to handle data when all are fetched
+    useEffect(() => {
+        const handleFetches = () => {
+            // Check if all data is available
+            if (recipes.length > 0 && products.length > 0 && comments.length > 0 && commentRecipes.length > 0) {
+                // Do something with the data
+                console.log("All data fetched:", recipes, products, comments, commentRecipes);
+                // Call your custom logic or function here
+                handleData();
+            }
+        };
+        handleFetches();
+    }, [recipes, products, comments, commentRecipes]);
+
+
+    /*
+        El problema es que, user tiene likes y comments, pero también tiene productos y recetas.
+        Entonces claro una cosa es el numero de productos del usuario, el numero de recetas del usuario.
+        Pero luego también tiene likes y comentarios. Los likes es simplemente sumar todos los likes de los productos, recetas y comentarios.
+        Y los comentarios es sumar todos los comentarios de los comentarios y del los commentRecipe. Esto impluca otro fetch para commentRecipe.
+    */
+
+
+    const handleData = () => {
+        for (let i = 0; i < products.length; i++) {
+            if (products[i].iduser === currentUser.id) {
+                userLikes += products[i].likes;
+                userComments += 1;
+            }
+        }
+    
+        for (let i = 0; i < recipes.length; i++) {
+            if (recipes[i].iduser === currentUser.id) {
+                userLikes += recipes[i].likes;
+                userComments += 1;
+            }
+        }
+
+        for (let i = 0; i < comments.length; i++) {
+            if (comments[i].iduser === currentUser.id) {
+                userLikes += comments[i].likes;
+                userComments += 1;
+            }
+        }
+
+        for (let i = 0; i < commentRecipes.length; i++) {
+            if (commentRecipes[i].iduser === currentUser.id) {
+                userLikes += commentRecipes[i].likes;
+                userComments += 1;
+            }
+        }
+    
+        console.log(userLikes)
+        console.log(userComments)
+    }
 
     const options1 = {
         chart: {
@@ -56,7 +167,7 @@ const App = () => {
         },
         legend: {
             position: "top",
-            horizontalAlign: "right",
+            horizontalAlign: "left",
             fontSize: "16px",
             markers: {
                 radius: 12,
@@ -83,14 +194,6 @@ const App = () => {
             data: [220, 120, 250, 650, 100, 450],
         },
         {
-            name: "Views",
-            data: [460, 340, 300, 890, 430, 600],
-        },
-        {
-            name: "Researches",
-            data: [250, 320, 180, 270, 400, 300],
-        },
-        {
             name: "Products",
             data: [220, 420, 350, 550, 300, 460],
         },
@@ -108,14 +211,6 @@ const App = () => {
         {
             name: "Comments",
             data: [30, 20, 50, 65, 10, 45],
-        },
-        {
-            name: "Views",
-            data: [60, 40, 30, 30, 43, 60],
-        },
-        {
-            name: "Researches",
-            data: [25, 32, 18, 27, 40, 30],
         },
         {
             name: "Products",
