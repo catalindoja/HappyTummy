@@ -10,6 +10,17 @@ const App = () => {
     const { currentUser } = useContext(AuthContext);
     let userLikes = 0;
     let userComments = 0;
+    let userProducts = 0;
+    let userRecipes = 0;
+    let supermarketLikes = 0;
+    let supermarketComments = 0;
+    let supermarketProducts = 0;
+    let supermarketRecipes = 0;
+
+
+    const [options1, setOptions1] = useState({});
+    const [series1, setSeries1] = useState([]);
+    const [series2, setSeries2] = useState([]);
 
     // Supermarket
     const [marketuser, setMarketNameUser] = useState("");
@@ -79,11 +90,24 @@ const App = () => {
         fetchCommentRecipes();
     }, []);
 
+    const [users, setUsers] = useState([]);
+    useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const res = await axios.get(`/users`)
+                setUsers(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        fetchUsers();
+    }, []);
+
     // useEffect to handle data when all are fetched
     useEffect(() => {
         const handleFetches = () => {
             // Check if all data is available
-            if (recipes.length > 0 && products.length > 0 && comments.length > 0 && commentRecipes.length > 0) {
+            if (recipes.length > 0 && products.length > 0 && comments.length > 0 && commentRecipes.length > 0 && users.length > 0) {
                 // Do something with the data
                 console.log("All data fetched:", recipes, products, comments, commentRecipes);
                 // Call your custom logic or function here
@@ -91,7 +115,7 @@ const App = () => {
             }
         };
         handleFetches();
-    }, [recipes, products, comments, commentRecipes]);
+    }, [recipes, products, comments, commentRecipes, users]);
 
 
     /*
@@ -103,10 +127,12 @@ const App = () => {
 
 
     const handleData = () => {
+        // user side of the statistics
         for (let i = 0; i < products.length; i++) {
             if (products[i].iduser === currentUser.id) {
                 userLikes += products[i].likes;
                 userComments += 1;
+                userProducts += 1;
             }
         }
     
@@ -114,6 +140,7 @@ const App = () => {
             if (recipes[i].iduser === currentUser.id) {
                 userLikes += recipes[i].likes;
                 userComments += 1;
+                userRecipes += 1;
             }
         }
 
@@ -130,97 +157,133 @@ const App = () => {
                 userComments += 1;
             }
         }
-    
-        console.log(userLikes)
-        console.log(userComments)
+
+        // supermarket side of the statistics
+        for(let i = 0; i < users.length; i++) {
+            if(users[i].idsupermarket === currentUser.idsupermarket) {
+                for(let j = 0; j < products.length; j++) {
+                    if(products[j].iduser === users[i].id) {
+                        supermarketLikes += products[j].likes;
+                        supermarketComments += 1;
+                        supermarketProducts += 1;
+                    }
+                }
+                for(let j = 0; j < recipes.length; j++) {
+                    if(recipes[j].iduser === users[i].id) {
+                        supermarketLikes += recipes[j].likes;
+                        supermarketComments += 1;
+                        supermarketRecipes += 1;
+                    }
+                }
+                for(let j = 0; j < comments.length; j++) {
+                    if(comments[j].iduser === users[i].id) {
+                        supermarketLikes += comments[j].likes;
+                        supermarketComments += 1;
+                    }
+                }
+                for(let j = 0; j < commentRecipes.length; j++) {
+                    if(commentRecipes[j].iduser === users[i].id) {
+                        supermarketLikes += commentRecipes[j].likes;
+                        supermarketComments += 1;
+                    }
+                }
+            }
+        }
+        setChartsData();
     }
 
-    const options1 = {
-        chart: {
-            stacked: false,
-            animations: {
-                enabled: true,
-                easing: "easeinout",
-                speed: 1000,
-            },
-        },
-        xaxis: {
-            categories: ["2017", "2018", "2019", "2020", "2022", "2023"],
-            labels: {
-                style: {
-                    colors: ["#333"],
-                    fontSize: "14px",
+    const setChartsData = async () => {
+        const updatedOptions1 = {
+            chart: {
+                stacked: false,
+                animations: {
+                    enabled: true,
+                    easing: "easeinout",
+                    speed: 1000,
                 },
             },
-        },
-        yaxis: {
-            title: {
-                text: "Counts",
-                style: {
-                    color: "#333",
+            xaxis: {
+                categories: ["2023"],
+                labels: {
+                    style: {
+                        colors: ["#333"],
+                        fontSize: "14px",
+                    },
                 },
             },
-        },
-        colors: ["#008FFB", "#00E396", "#FEB019", "#FF4560"],
-        fill: {
-            opacity: 0.7,
-        },
-        legend: {
-            position: "top",
-            horizontalAlign: "left",
-            fontSize: "16px",
-            markers: {
-                radius: 12,
-                width: 30,
-                height: 12,
+            yaxis: {
+                title: {
+                    text: "Counts",
+                    style: {
+                        color: "#333",
+                    },
+                },
             },
-        },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: "50%",
-                endingShape: "rounded",
+            colors: ["#008FFB", "#00E396", "#FEB019", "#FF4560"],
+            fill: {
+                opacity: 0.7,
             },
-        },
-    };
+            legend: {
+                position: "top",
+                horizontalAlign: "left",
+                fontSize: "16px",
+                markers: {
+                    radius: 12,
+                    width: 30,
+                    height: 12,
+                },
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: "50%",
+                    endingShape: "rounded",
+                },
+            },
+        };
 
-    const series1 = [
-        {
-            name: "Likes",
-            data: [340, 500, 250, 680, 450, 700],
-        },
-        {
-            name: "Comments",
-            data: [220, 120, 250, 650, 100, 450],
-        },
-        {
-            name: "Products",
-            data: [220, 420, 350, 550, 300, 460],
-        },
-        {
-            name: "Recepies",
-            data: [120, 20, 450, 350, 180, 260],
-        },
-    ];
+        const updatedSeries1 = [
+            {
+                name: "Likes",
+                data: [supermarketLikes],
+            },
+            {
+                name: "Comments",
+                data: [supermarketComments],
+            },
+            {
+                name: "Products",
+                data: [supermarketProducts],
+            },
+            {
+                name: "Recepies",
+                data: [supermarketRecipes],
+            },
+        ];
 
-    const series2 = [
-        {
-            name: "Likes",
-            data: [50, 80, 30, 70, 45, 60],
-        },
-        {
-            name: "Comments",
-            data: [30, 20, 50, 65, 10, 45],
-        },
-        {
-            name: "Products",
-            data: [22, 42, 35, 55, 30, 46],
-        },
-        {
-            name: "Recepies",
-            data: [12, 32, 65, 75, 10, 12],
-        },
-    ];
+        const updatedSeries2 = [
+            {
+                name: "Likes",
+                data: [userLikes],
+            },
+            {
+                name: "Comments",
+                data: [userComments],
+            },
+            {
+                name: "Products",
+                data: [userProducts],
+            },
+            {
+                name: "Recepies",
+                data: [userRecipes],
+            },
+        ];
+
+        setOptions1(updatedOptions1);
+        setSeries1(updatedSeries1);
+        setSeries2(updatedSeries2);
+    }
 
     return (
         <div className="statistics-intro">
@@ -230,7 +293,7 @@ const App = () => {
             <h2>Personal profile</h2>
             <span>{currentUser.username}</span>
             <div>
-                <Chart options={options1} series={series2} type="line" height={450} />
+                <Chart options={options1} series={series2} type="bar" height={450} />
             </div>
 
             <h2>Supermarket</h2>
