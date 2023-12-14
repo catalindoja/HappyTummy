@@ -1,5 +1,5 @@
 .home_content {
-  padding: 20px; 
+  padding: 20px;
 }
 
 .home-header {
@@ -9,14 +9,14 @@
 }
 
 .home-header-logo {
-  width: 75px; 
-  height: 75px; 
-  border-radius: 100%; 
-  margin-right: 10px; 
+  width: 75px;
+  height: 75px;
+  border-radius: 100%;
+  margin-right: 10px;
 }
 
 .home-header-text {
-  margin: 0; 
+  margin: 0;
   font-size: 30px;
   margin-left: 17px;
   margin-bottom: 8px;
@@ -42,7 +42,7 @@
   padding: 10px !important;
   border-radius: 15px !important;
   border: 1px solid #ccc;
-} 
+}
 
 .w-100.sticky-bottom {
   margin-bottom: -50px !important;
@@ -50,7 +50,7 @@
 }
 
 .w-100 {
-   margin-top: 0px !important; 
+  margin-top: 0px !important;
 }
 
 .heart {
@@ -67,14 +67,14 @@ h5.maintitles.mb-4 {
   margin-right: 5px !important;
 }
 
-.recommended-title{
+.recommended-title {
   margin-top: -100px !important;
 }
 
-.home-products{
+.home-products {
   margin-bottom: 60px;
 }
 
-.home-recipes{
+.home-recipes {
   margin-bottom: 40px;
 }

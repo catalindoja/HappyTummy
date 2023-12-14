@@ -32,12 +32,11 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // Agrega `updatePremium` al objeto de contexto
   const contextValue = {
     currentUser,
     login,
     logout,
-    updatePremium, // Asegúrate de que esta línea esté presente
+    updatePremium,
   };
 
   useEffect(() => {

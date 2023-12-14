@@ -14,10 +14,12 @@ const Scanner = () => {
   const [productId, setProductId] = useState(null);
   const [productData, setProductData] = useState(null);
 
+  // Barcode scanner event handler
   const [barcode, setIdUser] = useState({
     barcode: ''
   });
 
+  // Set the barcode value
   const handleScan = async (code) => {
     try {
       const response = await axios.get(proxy + "/products/frombarcode/" + code);
@@ -26,7 +28,7 @@ const Scanner = () => {
         setProductData(response.data[0]);
       } else {
         console.log("No data found for the barcode");
-        setProductData(null);  // Asegúrate de restablecer productData si no se encuentra ningún producto
+        setProductData(null);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -35,7 +37,6 @@ const Scanner = () => {
 
   const handleSearch = async () => {
     console.log('Searching for:', searchQuery);
-
     try {
       // Make an API call to the specified endpoint
       const response = await axios.get(proxy + `/products/frombarcode/${searchQuery}`);
@@ -44,8 +45,6 @@ const Scanner = () => {
       // Assuming the response contains an 'id' field
       const productId = response.data[0].id;
       setProductId(productId);
-
-      console.log('Product ID:', productId);
 
       // Show notification
       if ('Notification' in window && Notification.permission === 'granted') {
@@ -111,10 +110,11 @@ const Scanner = () => {
           <div className="just-white"></div>
         </div>
       ) : (
-      <div className="just-white">Product not found 😥</div>)}
+        <div className="just-white">Product not found 😥</div>)}
 
     </div>
   );
 };
 
+// Export the Scanner component
 export default Scanner;

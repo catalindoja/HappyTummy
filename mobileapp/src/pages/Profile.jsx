@@ -1,15 +1,15 @@
-import Teal from "../img/teal.png";
 import Profilepic from "../img/profile.png";
 import Edit from "../img/edit.png";
 import './Profile.css';
 import backgroundImage from "../img/clearbackground.png";
+import Logo2 from "../img/logo2.png";
+import Teal from "../img/teal.png";
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
 import RecipeCard from "../components/RecipeCard";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
-import Logo2 from "../img/logo2.png";
 import { useTranslation } from 'react-i18next';
 import { BACKEND_API_URL } from '../config/proxy.js';
 import Modal from 'react-modal';
@@ -51,12 +51,13 @@ function Profile() {
         Lupins,
     };
 
-    const { t } = useTranslation();
+    const { t } = useTranslation(); 
     const navigate = useNavigate();
 
     // Obtaining the current user
     const { currentUser, setCurrentUser, logout, login, updatePremium } = useContext(AuthContext);
 
+    // Edit profile route
     const handleEditProfile = () => {
         const user = JSON.parse(localStorage.getItem("user"))
         console.log(user.id)
@@ -119,6 +120,7 @@ function Profile() {
         }
     };
 
+    // Premium description
     const premiumDescription =
         '<p><strong>Unlock every Premium Benefits!</strong></p>'
         + '<ul>'
@@ -142,18 +144,16 @@ function Profile() {
         + '<p><strong>Enjoy your Premium account NOW!</strong></p>'
         ;
 
+    // Obtain allergies of the current user
     const [myallergies, setMyallergens] = useState([]);
-
     useEffect(() => {
         const fetchData = async () => {
 
-        // Obtains allergies of the current user
-        const everyallergen = await axios.get(`${BACKEND_API_URL}/userallergies/`);
-        const myallergens = everyallergen.data.filter((userallergies) => userallergies.iduser == currentUser.id);
-        setMyallergens(myallergens);
-
+            // Obtains allergies of the current user
+            const everyallergen = await axios.get(`${BACKEND_API_URL}/userallergies/`);
+            const myallergens = everyallergen.data.filter((userallergies) => userallergies.iduser == currentUser.id);
+            setMyallergens(myallergens);
         };
-
         fetchData();
     }, []);
 
@@ -268,4 +268,5 @@ function Profile() {
     );
 }
 
+// Exporting Profile component
 export default Profile;

@@ -1,12 +1,9 @@
-// i18n.js
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-// i18n.js
 import enTranslation from '../locales/en.json';
 import esTranslation from '../locales/es.json';
 import caTranslation from '../locales/ca.json';
 import arTranslation from '../locales/ar.json';
-
 
 const resources = {
     en: {

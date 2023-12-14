@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import heart from '../img/heart.png';
 import './RecipeCard.css';
 
+// RecipeCard component
 function RecipeCard(props) {
 
     // Limit description text
@@ -41,5 +42,5 @@ function RecipeCard(props) {
     );
 };
 
-
+// Exporting RecipeCard component
 export default RecipeCard;

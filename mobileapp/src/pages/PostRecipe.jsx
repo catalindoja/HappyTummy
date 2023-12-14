@@ -2,17 +2,17 @@ import React, { useState, useContext } from "react";
 import { useEffect } from "react";
 import { AuthContext } from "../context/authContext";
 import { useLocation, useNavigate } from "react-router-dom";
+import { BACKEND_API_URL } from '../config/proxy.js';
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import moment from "moment";
 import "./PostRecipe.css";
-import { BACKEND_API_URL } from '../config/proxy.js';
 
-// Create the Write component
+// Write component
 const Write = () => {
 
-  // Obtains the state from the location
+  // Obtains the state from the location and the navigation
   const state = useLocation().state;
   const navigate = useNavigate();
 
@@ -33,9 +33,8 @@ const Write = () => {
   };
 
   const [error, setError] = useState(null);
-  const likes = 0;
 
-  // FOR RECIPES
+  const likes = 0;
   const [title, setRecipeTitle] = useState(state?.title || "");
   const [time, setTime] = useState(state?.time || "");
   const [unit, setSelectedTimeMeasurement] = useState(state?.unit || "");
@@ -119,7 +118,6 @@ const Write = () => {
     }
   };
 
-  // Return the JSX elements
   return (
     <div className="add-write">
       <h1 className="supertitle-write">Post a new recipe <span className="text-danger">❤</span></h1>
@@ -170,12 +168,11 @@ const Write = () => {
             modules={{
               toolbar: {
                 container: [
-                  // Puedes personalizar los botones de la barra de herramientas aquí según tus necesidades
-                  ["bold", "italic", "underline"], // Ejemplo de algunos botones de formato de texto
+                  ["bold", "italic", "underline"],
                 ],
               },
-              clipboard: { matchVisual: false }, // Desactiva las operaciones de copiar y pegar con formato
-              mention: false, // Desactiva las menciones de texto
+              clipboard: { matchVisual: false },
+              mention: false,
             }}
           />
         </div>
@@ -190,12 +187,11 @@ const Write = () => {
             modules={{
               toolbar: {
                 container: [
-                  // Puedes personalizar los botones de la barra de herramientas aquí según tus necesidades
-                  ["bold", "italic", "underline"], // Ejemplo de algunos botones de formato de texto
+                  ["bold", "italic", "underline"],
                 ],
               },
-              clipboard: { matchVisual: false }, // Desactiva las operaciones de copiar y pegar con formato
-              mention: false, // Desactiva las menciones de texto
+              clipboard: { matchVisual: false },
+              mention: false,
             }}
           />
         </div>
@@ -235,5 +231,5 @@ const Write = () => {
 
 };
 
-// Export the Write component so that it can be used in other files.
+// Exporting Write component
 export default Write;

@@ -1,183 +1,170 @@
-
 .profile-content {
-    padding: 15px;
-    margin: 0 auto;
-    margin-bottom: 100px;
+  padding: 15px;
+  margin: 0 auto;
+  margin-bottom: 100px;
 }
 
 /* HEADER */
-
 .profile-header {
-    background-color: rgba(94, 255, 236, 0.333);
-    padding: 20px;
-    border-radius: 8px;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
+  background-color: rgba(94, 255, 236, 0.333);
+  padding: 20px;
+  border-radius: 8px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
 }
 
 .profile-profilepic {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
 }
 
 .profile-username {
-    margin-top: 10px;
-    margin-left: 5px;
-    font-size: 24px;
-    font-weight: bold;
-    color: #585858;
+  margin-top: 10px;
+  margin-left: 5px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #585858;
 }
 
 .profile-premium {
-    background-color: rgb(251, 249, 122);
-    color: teal;
-    padding: 10px;
-    margin-top: 3px;
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: 19px;
+  background-color: rgb(251, 249, 122);
+  color: teal;
+  padding: 10px;
+  margin-top: 3px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 19px;
 }
 
 .profile-edit {
-    width: 45px;
-    height: 45px;
-    margin-top: 5px;
-    cursor: pointer;
+  width: 45px;
+  height: 45px;
+  margin-top: 5px;
+  cursor: pointer;
 }
 
 .profile-edit:hover {
-    opacity: 0.8;
+  opacity: 0.8;
 }
 
-.premium-star{
+.premium-star {
   font-size: 30px;
   margin-right: 100px;
 }
 
-.profile-username-premium{
+.profile-username-premium {
   margin-top: 10px;
   margin-left: 5px;
   font-size: 24px;
   font-weight: bold;
   color: rgb(246, 234, 4);
   text-shadow:
-  -1px -1px 0 #585858,
-   1px -1px 0 #585858,
-  -1px  1px 0 #585858,
-   1px  1px 0 #585858
+    -1px -1px 0 #585858,
+    1px -1px 0 #585858,
+    -1px 1px 0 #585858,
+    1px 1px 0 #585858
 }
-
 
 /* CONTENT */
-
 .profile-maintitles {
-    font-weight: bold;
-    margin-top: 15px;
-    background-color: #b9e7e7;
-    padding: 10px;
-    padding: 8px;
-    border-radius: 10px;
-    display: inline-block;
-    font-size: 25px;
+  font-weight: bold;
+  margin-top: 15px;
+  background-color: #b9e7e7;
+  padding: 10px;
+  padding: 8px;
+  border-radius: 10px;
+  display: inline-block;
+  font-size: 25px;
 }
 
-.card-container{
-    padding: 12px;
+.card-container {
+  padding: 12px;
 }
 
 /* MODAL */
-
 button {
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  /* Estilos para el modal */
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(49, 49, 49, 0.5); /* Fondo semitransparente */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .modal-content {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 400px;
-    width: 100%;
-    text-align: center;
-  }
-  
-  /* Estilos para el texto dentro del modal */
-  .premium-description {
-    font-size: 18px;
-    margin-bottom: 20px;
-    display: block;
-  }
-  
-  /* Estilos para el botón dentro del modal */
-  .premium-button {
-    padding: 10px;
-    font-size: 16px;
-    background-color: rgb(255, 225, 0); /* Color de fondo del botón */
-    color: rgb(88, 88, 88); /* Color del texto del botón */
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  /* Estilos para cerrar el modal haciendo clic en cualquier lugar fuera de él */
-  .ReactModal__Overlay {
-    opacity: 0;
-    transition: opacity 200ms ease-in-out;
-  }
-  
-  .ReactModal__Overlay--after-open {
-    opacity: 1;
-  }
-  
-  .ReactModal__Overlay--before-close {
-    opacity: 0;
-  }
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
 
-  .close-icon {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 30px; /* Ajusta el tamaño según tus preferencias */
-    height: 30px; /* Ajusta el tamaño según tus preferencias */
-    cursor: pointer;
-  }
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(49, 49, 49, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .no-post-prod{
-    margin-top: 20px;
-    margin-left: 10px;
-    margin-bottom: 100px;
-    font-size: 25px;
-    font-weight: bold;
-    color: #585858;
-  }
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
 
-  .no-post-rec{
-    margin-top: 20px;
-    margin-left: 10px;
-    margin-bottom: 400px;
-    font-size: 25px;
-    font-weight: bold;
-    color: #585858;
-  }
+.premium-description {
+  font-size: 18px;
+  margin-bottom: 20px;
+  display: block;
+}
 
+.premium-button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: rgb(255, 225, 0);
+  color: rgb(88, 88, 88);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 
-  
-  
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.close-icon {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.no-post-prod {
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-bottom: 100px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #585858;
+}
+
+.no-post-rec {
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-bottom: 400px;
+  font-size: 25px;
+  font-weight: bold;
+  color: #585858;
+}

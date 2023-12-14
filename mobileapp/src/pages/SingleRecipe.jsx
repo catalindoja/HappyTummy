@@ -16,11 +16,14 @@ import { BACKEND_API_URL } from '../config/proxy.js';
 import Modal from 'react-modal';
 import arrowImage from "../img/arrow.png";
 
-// Create the SingleRecipe component
+// SingleRecipe component
 const SingleRecipe = () => {
 
+    // Location and navigation
     const location = useLocation();
     const navigate = useNavigate();
+
+    // Post id
     const postId = location.pathname.split("/")[3];
     const [post, setPosts] = useState([]);
 
@@ -139,30 +142,30 @@ const SingleRecipe = () => {
     const handleLikeClick = async (postId) => {
         console.log("Like button clicked");
         try {
-          const productResponse = await axios.patch(`/recipes/${postId}`, {
-            likes: post.likes + 1,
-          });
-    
-          window.location.reload();
-    
+            const productResponse = await axios.patch(`/recipes/${postId}`, {
+                likes: post.likes + 1,
+            });
+
+            window.location.reload();
+
         } catch (err) {
-          console.log(err);
+            console.log(err);
         }
     };
 
     // Comments like button
     const handleCommentLikeClick = async (commentId, commentLikes) => {
         try {
-          const commentResponse = await axios.patch(`/commentrecipes/${commentId}`, {
-            likes: commentLikes + 1,
-          });
-    
-          window.location.reload();
-    
+            const commentResponse = await axios.patch(`/commentrecipes/${commentId}`, {
+                likes: commentLikes + 1,
+            });
+
+            window.location.reload();
+
         } catch (err) {
-          console.log(err);
+            console.log(err);
         }
-      };
+    };
 
     // Modal pop-up
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -306,14 +309,13 @@ const SingleRecipe = () => {
                             onChange={setValue}
                             modules={{
                                 toolbar: {
-                                  container: [
-                                    // Puedes personalizar los botones de la barra de herramientas aquí según tus necesidades
-                                    ["bold", "italic", "underline"], // Ejemplo de algunos botones de formato de texto
-                                  ],
+                                    container: [
+                                        ["bold", "italic", "underline"],
+                                    ],
                                 },
-                                clipboard: { matchVisual: false }, // Desactiva las operaciones de copiar y pegar con formato
-                                mention: false, // Desactiva las menciones de texto
-                              }}
+                                clipboard: { matchVisual: false },
+                                mention: false,
+                            }}
                         />
                     </div>
 

@@ -1,5 +1,4 @@
-
-.single-product{
+.single-product {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,7 +45,7 @@
   margin-top: 20px;
 }
 
-.contains-main-heading{
+.contains-main-heading {
   display: flex;
 }
 
@@ -55,7 +54,7 @@
   font-weight: bold;
 }
 
-.help-icon{
+.help-icon {
   border-radius: 50%;
   width: 45px;
   height: 45px;
@@ -78,9 +77,9 @@
   font-weight: bold;
 }
 
-.fancy-allergy-icon{
+.fancy-allergy-icon {
   margin-top: 3px;
-  width: 28px; 
+  width: 28px;
   height: 28px;
   border-radius: 50%;
   margin-right: 2px;

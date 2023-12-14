@@ -3,28 +3,40 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import { BACKEND_API_URL } from '../config/proxy.js';
-import backgroundImage from "../img/clearbackground.png";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import "./Login.css";
 import Configration from "../components/Configration";
 import { useTranslation } from 'react-i18next';
+import backgroundImage from "../img/clearbackground.png";
 import BackArrow from "../components/BackArrow";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
+// Login component
 const Login = () => {
+
+  // Log in
+  const { login } = useContext(AuthContext);
+
+  // Translation
   const { t } = useTranslation();
+
+  // Treats the login
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
   });
+
+  // Error message
   const [err, setError] = useState(null);
+
+  // Navigation
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
 
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  // Handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -46,8 +58,8 @@ const Login = () => {
     }
   };
 
+  // Password visibility
   const [showPassword, setShowPassword] = useState(false);
-
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -90,5 +102,5 @@ const Login = () => {
   );
 };
 
-// Export the Login component so that it can be used in other files.
+// Exporting Login component
 export default Login;

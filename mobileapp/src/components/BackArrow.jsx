@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import arrowImage from "../img/arrow.png";
 import './BackArrow.css';
 
+// BackArrow component
 const BackArrow = () => {
     return (
         <button className="back-arrow-button" onClick={() => window.history.back()}>
@@ -12,4 +13,5 @@ const BackArrow = () => {
     )
 }
 
+// Exporting BackArrow component
 export default BackArrow;

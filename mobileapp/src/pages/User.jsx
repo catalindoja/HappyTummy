@@ -3,6 +3,8 @@ import Profilepic from "../img/profile.png";
 import Edit from "../img/edit.png";
 import './User.css';
 import backgroundImage from "../img/clearbackground.png";
+import arrowImage from "../img/arrow.png";
+import BackArrow from "../components/BackArrow";
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import ProductCard from "../components/ProductCard.jsx";
@@ -13,11 +15,14 @@ import Logo2 from "../img/logo2.png";
 import { useTranslation } from 'react-i18next';
 import { BACKEND_API_URL } from '../config/proxy.js';
 import Modal from 'react-modal';
-import arrowImage from "../img/arrow.png";
-import BackArrow from "../components/BackArrow";
 
-function Profile() {
+// User profile page
+function User() {
+
+    // Translation
     const { t } = useTranslation();
+
+    // Navigation
     const navigate = useNavigate();
 
     // Obtaining the current user
@@ -77,17 +82,14 @@ function Profile() {
     }, []);
     hisrecipes = hisrecipes.filter((post) => post.iduser === user.id)
 
-    // Estado para controlar si el usuario está siguiendo al perfil actual
+    // Check if the current user is following the profile user
     const [isFollowing, setIsFollowing] = useState(false);
 
-    // Verificar si el usuario actual ya sigue al perfil actual
+    // Check if the current user is following the profile user
     useEffect(() => {
         const checkIfFollowing = async () => {
             try {
                 const followCheckResponse = await axios.get(`${BACKEND_API_URL}/followers/${user.id}/${currentUser.id}`);
-                console.log("xd")
-                console.log(followCheckResponse.data.length);
-                // Verificar si el array tiene al menos un elemento
                 setIsFollowing(followCheckResponse.data.length > 0);
             } catch (err) {
                 console.log(err);
@@ -96,12 +98,11 @@ function Profile() {
         checkIfFollowing();
     }, [currentUser.id, user.id])
 
-    // Función para seguir o dejar de seguir al usuario
+    // Function to toggle the follow button
     const toggleFollow = async (e) => {
         e.preventDefault();
         try {
             if (!isFollowing) {
-                // Si no está siguiendo, realiza la operación de seguir
                 const followResponse = await axios.post(`${BACKEND_API_URL}/followers/`, {
                     idFollower: currentUser.id,
                     idFollowed: user.id
@@ -109,7 +110,6 @@ function Profile() {
                 console.log(followResponse);
                 setIsFollowing(true);
             } else {
-                // Si ya está siguiendo, realiza la operación de dejar de seguir
                 const unfollowResponse = await axios.delete(`${BACKEND_API_URL}/followers/${user.id}/${currentUser.id}`);
                 console.log(unfollowResponse);
                 setIsFollowing(false);
@@ -177,4 +177,5 @@ function Profile() {
     );
 }
 
-export default Profile;
+// Exporting the component
+export default User;

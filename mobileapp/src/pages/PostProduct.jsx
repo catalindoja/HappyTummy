@@ -3,19 +3,20 @@ import { useEffect } from "react";
 import { AuthContext } from "../context/authContext";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import moment from "moment";
+import "react-quill/dist/quill.snow.css";
 import "./PostProduct.css";
 import { useTranslation } from 'react-i18next';
 import Configration from "../components/Configration";
 import { BACKEND_API_URL } from '../config/proxy.js';
 import Help from '../img/helpicon.png';
 
-
-// Create the Write component
+// Write component
 const Write = () => {
+  // Translation
   const { t } = useTranslation();
+
   // Obtains the state from the location
   const state = useLocation().state;
   const navigate = useNavigate();
@@ -157,7 +158,6 @@ const Write = () => {
   const [product_name, setProductName] = useState(state?.product_name || "");
   const [file, setFile] = useState(null);
 
-
   // Set up the function that handles the form submission
   // - handleClick: a function that posts the product when the user clicks the 'Publish' button
   //                (if the user does not fill in the input fields, the function will set the error message)
@@ -241,6 +241,7 @@ const Write = () => {
         //   idproduct: productId,
         //   available: 1
         // })
+
         selectedSupermarkets.forEach(async (idsupermarkets) => {
           await axios.post(`${BACKEND_API_URL}/stock/`, {
             idsupermarket: idsupermarkets,
@@ -283,6 +284,7 @@ const Write = () => {
         //   idproduct: productId,
         //   available: 1
         // })
+
         selectedSupermarkets.forEach(async (idsupermarkets) => {
           await axios.post(`${BACKEND_API_URL}/productallergies/`, {
             idsupermarket: idsupermarkets,
@@ -298,7 +300,6 @@ const Write = () => {
     }
   };
 
-  // Return the JSX elements
   return (
     <div className="add-write">
 
@@ -317,19 +318,17 @@ const Write = () => {
         <div className="editorContainer-write">
           <ReactQuill
             placeholder={t('product_description')}
-            // className="editor-write"
             theme="snow"
             value={value}
             onChange={setValue}
             modules={{
               toolbar: {
                 container: [
-                  // Puedes personalizar los botones de la barra de herramientas aquí según tus necesidades
-                  ["bold", "italic", "underline"], // Ejemplo de algunos botones de formato de texto
+                  ["bold", "italic", "underline"],
                 ],
               },
-              clipboard: { matchVisual: false }, // Desactiva las operaciones de copiar y pegar con formato
-              mention: false, // Desactiva las menciones de texto
+              clipboard: { matchVisual: false },
+              mention: false,
             }}
           />
         </div>
@@ -531,5 +530,5 @@ const Write = () => {
 
 };
 
-// Export the Write component so that it can be used in other files.
+// Exporting Write component
 export default Write;

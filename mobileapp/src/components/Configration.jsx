@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import i18n from './i18n.js';
 import "./Configration.css";
 
+// Configration component
 const Configration = () => {
     const { i18n } = useTranslation();
 
@@ -26,4 +27,5 @@ const Configration = () => {
     );
 };
 
+// Exporting Configration component
 export default Configration;

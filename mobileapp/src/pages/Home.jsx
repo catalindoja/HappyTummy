@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { BACKEND_API_URL } from '../config/proxy.js';
+import { AuthContext } from "../context/authContext";
 import axios from "axios";
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -11,11 +12,10 @@ import Imagehome3 from "../img/imagehome3.jpeg";
 import Imagehome4 from "../img/imagehome4.jpeg";
 import Imagehome5 from "../img/imagehome5.jpeg";
 import Imagehome6 from "../img/imagehome6.jpeg";
-import './Home.css';
 import backgroundImage from "../img/clearbackground.png";
 import Logo from "../img/logo2.png";
+import './Home.css';
 import Card from "../components/ProductCard";
-import { AuthContext } from "../context/authContext";
 import ProductCard from "../components/ProductCard";
 import RecipeCard from "../components/RecipeCard";
 
@@ -24,6 +24,7 @@ const localImages = [
     require('../img/imagehome2.jpeg'),
 ];
 
+// Home component
 function Home() {
 
     const { t } = useTranslation();
@@ -53,10 +54,7 @@ function Home() {
         const fetchData = async () => {
             try {
                 const res = await axios.get(`${BACKEND_API_URL}/products`);
-
-                // Ensure that res.data is an array before filtering
                 const data = Array.isArray(res.data) ? res.data : [];
-
                 const filteredProducts = data.filter(product => {
                     // Check if product.allergies is defined before calling map
                     const productAllergyIds = (product.allergies || []).map(allergy => allergy.id);
@@ -89,13 +87,10 @@ function Home() {
         fetchData();
     }, []);
 
-
-
     // Limit the number of items to show
     const maxItemsToShow = 3;
     const slicedProducts = products.slice(0, maxItemsToShow);
     const slicedRecipes = recipes.slice(0, maxItemsToShow);
-
     const sliderSettings = {
         dots: true,
         infinite: true,
@@ -103,6 +98,7 @@ function Home() {
         slidesToShow: 1,
         slidesToScroll: 1,
     };
+
     return (
         <div className="home_content">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"></link>
@@ -150,4 +146,6 @@ function Home() {
         </div >
     );
 }
+
+// Exporting Home component
 export default Home;

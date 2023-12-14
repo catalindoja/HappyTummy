@@ -1,20 +1,21 @@
 import React, { useContext, useState, useEffect } from "react";
-import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import "./EditPerfil.css";
-import User from "../img/user.jpeg";
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { BACKEND_API_URL } from '../config/proxy.js';
-import BackArrow from "../components/BackArrow";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
+import axios from "axios";
+import "./EditPerfil.css";
 import Configration from "../components/Configration";
 import Modal from 'react-modal';
-import arrowImage from "../img/arrow.png";
 import DOMPurify from "dompurify";
+import arrowImage from "../img/arrow.png";
+import User from "../img/user.jpeg";
+import BackArrow from "../components/BackArrow";
 
+// EditPerfil component
 const EditPerfil = () => {
 
     // Log out
@@ -24,21 +25,24 @@ const EditPerfil = () => {
     const state = useLocation().state;
     const navigate = useNavigate();
 
+    // Translation
     const { t } = useTranslation();
+
+    // Obtains the id from the url
     const { id } = useParams();
     const [iduser, setIdUser] = useState({
         iduser: ''
     });
     const [userData, setUserData] = useState({
-
         username: "",
         email: "",
         realname: "",
         realusurname: "",
         password: "",
-        image: null, // Imagen predeterminada
+        image: null,
     });
 
+    // Handle input change
     const handleInputChange = (e) => {
         const { id, value } = e.target;
         setUserData((prevUserData) => ({
@@ -47,6 +51,7 @@ const EditPerfil = () => {
         }));
     };
 
+    // Fetch user data from server
     const fetchUserDataFromServer = async (userId) => {
         console.log(userId)
         try {
@@ -63,17 +68,15 @@ const EditPerfil = () => {
             console.error("Error:", error.message);
         }
     };
-
     useEffect(() => {
         fetchUserDataFromServer(id);
     }, [id]);
 
+    // Handle submit changes
     const handleSubmit = async (e) => {
         e.preventDefault();
         const id = iduser.iduser;
-        // console.log(id);
         let response1 = await axios.patch(`${BACKEND_API_URL}/users/${id}`, userData);
-        // console.log(response1)
         navigate("/app/profile");
     };
 
@@ -153,9 +156,7 @@ const EditPerfil = () => {
                     </div>
                     <button onSubmit={handleSubmit} type="submit" className="btn btn-success editprofile-button">{t('save')}</button>
                 </form>
-
             </div>
-
             <button onClick={openModal} className="btn btn-success logout-button">Log out</button>
             <Modal
                 isOpen={modalIsOpen}
@@ -196,4 +197,5 @@ const EditPerfil = () => {
     );
 };
 
+// Exporting EditPerfil component
 export default EditPerfil;

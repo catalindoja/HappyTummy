@@ -6,19 +6,25 @@ import $ from "jquery";
 import { Link, useNavigate } from "react-router-dom";
 import { countries } from 'countries-list';
 import { useTranslation } from 'react-i18next';
-import Configration from "../components/Configration";
-import i18n from "../components/i18n";
 import { BACKEND_API_URL } from '../config/proxy.js';
-import BackArrow from "../components/BackArrow";
-import Help from '../img/helpicon.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import Configration from "../components/Configration";
+import i18n from "../components/i18n";
+import BackArrow from "../components/BackArrow";
+import Help from '../img/helpicon.png';
 
+// Register component
 const Register = () => {
   <Configration />
+
+  // Translation
   const { t } = useTranslation();
+
+  // Navigation
   const navigate = useNavigate();
 
+  // States for the form data
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     email: '',
@@ -33,15 +39,18 @@ const Register = () => {
     country: ''
   });
 
+  // Set password and confirm password
   const [passwords, setPasswords] = useState({
     password: '',
     confirmPassword: ''
   });
 
+  // User id
   const [iduser, setIdUser] = useState({
     iduser: ''
   });
 
+  // Market data
   const [markets, setMarkets] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -55,6 +64,7 @@ const Register = () => {
     fetchData();
   }, []);
 
+  // Allergy data
   const [allergies, setAllergies] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -68,6 +78,7 @@ const Register = () => {
     fetchData();
   }, []);
 
+  // Brand data
   const [brands, setBrands] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -81,10 +92,12 @@ const Register = () => {
     fetchData();
   }, []);
 
+  // Selected markets, allergies and brands
   const [selectedMarkets, setSelectedMarkets] = useState([]);
   const [selectedAllergies, setSelectedAllergies] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
 
+  // Handle passwords
   const handlePasswords = (e) => {
     const { name, value } = e.target;
     setPasswords((prevData) => ({
@@ -95,6 +108,7 @@ const Register = () => {
 
   const [error, setError] = useState(null);
 
+  // Handle change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -495,10 +509,10 @@ const Register = () => {
   return (
     <div className='container'>
       {renderStep()}
-
     </div>
-
   );
+  
 };
 
+// Exporting Register component
 export default Register;

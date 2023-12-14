@@ -124,9 +124,7 @@ const SingleProduct = () => {
   // - allergies of the post
   useEffect(() => {
     const fetchData = async () => {
-
       try {
-
         // Obtains allergies of the current user
         const everyallergen = await axios.get(`${BACKEND_API_URL}/userallergies/`);
         const myallergens = everyallergen.data.filter((userallergies) => userallergies.iduser == idCurrent);
@@ -204,7 +202,7 @@ const SingleProduct = () => {
     fetchData();
   }, [postId, idOwner, idBrand, idCategory]);
 
-  // Lógica para verificar si el usuario puede comer el producto
+  // Logic to check if the user can eat the product
   const canUserEat = () => {
     const userAllergyIds = myallergens.map((userAllergen) => userAllergen.idallergy);
     const productAllergyIds = allergies.map((allergy) => allergy.id);
@@ -214,7 +212,7 @@ const SingleProduct = () => {
     return canEat;
   };
 
-  // Obtener texto
+  // Interpret text as HTML
   const getText = (html) => {
     const doc = new DOMParser().parseFromString(html, "text/html")
     return doc.body.textContent
@@ -305,7 +303,6 @@ const SingleProduct = () => {
     setModalIsOpen2(false);
   };
 
-  // Return the JSX that renders the SingleProduct page
   return (
     <div className="single-product">
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
@@ -385,7 +382,7 @@ const SingleProduct = () => {
                         toolbar: false, // Desactiva la barra de herramientas
                         clipboard: { matchVisual: false }, // Desactiva las operaciones de copiar y pegar con formato
                       }}
-                        />
+                    />
                   </div>
 
                   <div className="popup-confirm-buttons">
@@ -520,12 +517,11 @@ const SingleProduct = () => {
             modules={{
               toolbar: {
                 container: [
-                  // Puedes personalizar los botones de la barra de herramientas aquí según tus necesidades
-                  ["bold", "italic", "underline"], // Ejemplo de algunos botones de formato de texto
+                  ["bold", "italic", "underline"],
                 ],
               },
-              clipboard: { matchVisual: false }, // Desactiva las operaciones de copiar y pegar con formato
-              mention: false, // Desactiva las menciones de texto
+              clipboard: { matchVisual: false },
+              mention: false,
             }}
           />
         </div>
@@ -539,5 +535,5 @@ const SingleProduct = () => {
   );
 };
 
-// Export the component to be used on other pages
+// Exporting SingleProduct component
 export default SingleProduct;

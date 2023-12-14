@@ -19,18 +19,11 @@ import { Collapse } from 'react-bootstrap';
 import { Accordion, Card, Button } from 'react-bootstrap';
 import BackArrow from "../components/BackArrow";
 
-// Create the Allergies component
-// This component displays the list of allergens that are identified in this service
+// Allergies component
 function Allergies() {
     const { t } = useTranslation();
 
     const [openAccordion, setOpenAccordion] = useState(null);
-
-    const allergens = [
-        { icon: Gluten, name: 'gluten', description: t('gluten_para') },
-        { icon: Leche, name: 'lactose', description: t('lactose_para') },
-        // ... (otros alérgenos)
-    ];
 
     const toggleAccordion = (index) => {
         setOpenAccordion(openAccordion === index ? null : index);
@@ -52,7 +45,6 @@ function Allergies() {
     const [open14, setOpen14] = useState(false);
 
     return (
-
         <div className="allergies-page">
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"></link>
 
@@ -402,5 +394,5 @@ function Allergies() {
     );
 }
 
-// Export the Allergies component so that it can be used in other files.
+// Exporting Allergies component
 export default Allergies;

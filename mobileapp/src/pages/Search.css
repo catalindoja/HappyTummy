@@ -13,9 +13,7 @@
 
 button {
   background-color: rgba(0, 128, 128, 0.425);
-  /* Azul celeste */
   color: #fff;
-  /* Letras blancas */
   padding: 10px 15px;
   border: none;
   border-radius: 5px !important;
@@ -27,7 +25,6 @@ button {
 
 button.active {
   background-color: teal;
-  /* Azul más fuerte para el botón activo */
 }
 
 .search {
@@ -46,7 +43,6 @@ button.active {
 
 .search-fieldset {
   margin-right: 10px;
-
 }
 
 .barcode-icon {

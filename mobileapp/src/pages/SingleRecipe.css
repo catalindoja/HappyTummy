@@ -1,5 +1,4 @@
-
-.single-recipe{
+.single-recipe {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,10 +10,8 @@
   max-width: 800px;
   width: 100%;
   background-color: #fff;
-  /* Color de fondo del contenido */
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  /* Sombra */
   padding: 20px;
   margin-top: 20px;
 }
@@ -46,8 +43,6 @@
   font-size: 16px;
 }
 
-/* Agrega estilos para la sección de comentarios, likes, y botones según sea necesario */
-
 .recipe-name {
   margin-top: 15px;
   background-color: #b9e7e7;
@@ -61,9 +56,7 @@
   margin-top: 0px;
   font-size: 16px;
   text-align: justify;
-  /* Agrega otros estilos de texto según sea necesario */
 }
-
 
 .contains {
   margin-top: 20px;
@@ -85,7 +78,6 @@
   margin-right: 10px;
   padding: 5px 10px;
   background-color: #ff9999;
-  /* Color de fondo para alergias */
   border-radius: 5px;
   font-weight: bold;
 }
@@ -231,8 +223,6 @@
 h1.recipe-name {
   margin-top: 20px !important;
 }
-
-
 
 .super-image-container {
   display: flex;

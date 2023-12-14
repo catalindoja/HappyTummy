@@ -1,15 +1,16 @@
-.tbl{
-    border:  1px solid #fff !important;
+.tbl {
+    border: 1px solid #fff !important;
     border-radius: 5px !important;
     margin-top: -15px !important;
 }
+
 thead {
     color: #fff !important;
 }
 
 .head1 {
     background-color: #080 !important;
-    color: #fff !important; 
+    color: #fff !important;
 }
 
 .history_icon {
@@ -25,13 +26,14 @@ thead {
 .box_arrow {
     width: 45% !important;
     margin-bottom: -40px !important;
-    
 }
 
-.arrow , .go_back{
+.arrow,
+.go_back {
     font-size: 17px !important;
-    color :#fff;
+    color: #fff;
 }
+
 .btn1 {
     border: 1px solid #000 !important;
     border-radius: 5px !important;

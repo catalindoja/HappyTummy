@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import heart from '../img/heart.png';
 import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { BACKEND_API_URL } from '../config/proxy.js';
 import './ProductCard.css';
-import Help from '../img/helpicon.png';
-
 import Gluten from "../img/allergens/gluten.png";
 import Lactose from "../img/allergens/leche.png";
 import Eggs from "../img/allergens/huevo.png";
@@ -21,6 +18,7 @@ import Sulphites from "../img/allergens/sulfitos.png";
 import Sesame from "../img/allergens/sesamo.png";
 import Lupins from "../img/allergens/altramuces.png";
 
+// ProductCard component
 function ProductCard(props) {
 
     // Every allergne has an icon and a name
@@ -56,14 +54,8 @@ function ProductCard(props) {
         return doc.body.textContent;
     };
 
-    // Obtain the post ID from the URL
-    const location = useLocation();
-
     // - allergies: an array that contains the details of the allergies of the post
     const [allergies, setAllergies] = useState([]);
-
-    // - likes: an integer that contains the number of likes of the post
-    const [likes, setLikes] = useState(0);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -79,7 +71,6 @@ function ProductCard(props) {
                 console.log(res4)
                 const filteredAllergies = res4.data.filter((allergy) => allergyIds.includes(allergy.id));
                 setAllergies(filteredAllergies);
-
             } catch (err) {
                 console.log(err);
             }
@@ -125,5 +116,5 @@ function ProductCard(props) {
     );
 };
 
-
+// Exporting ProductCard component
 export default ProductCard;

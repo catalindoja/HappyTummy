@@ -16,7 +16,7 @@ select#language-select {
 }
 
 #language-select option {
-    background-color: rgb(0, 148, 148) !important; /* Cambia el color de fondo de cada opción */
-    color: #fff !important; /* Cambia el color del texto de cada opción */
-    font-size: 12px !important; /* Cambia el tamaño del texto de cada opción */
-  }
+    background-color: rgb(0, 148, 148) !important;
+    color: #fff !important;
+    font-size: 12px !important;
+}

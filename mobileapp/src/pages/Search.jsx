@@ -118,16 +118,16 @@ function Search() {
                         <div>
                             <div className="card-container">
                                 {filteredProducts
-                                // .slice(pageNumberProduct * postsPerPageProduct, (pageNumberProduct + 1) * postsPerPageProduct)
-                                .map(post => (
-                                    <ProductCard
-                                        image={post.image_url}
-                                        title={post.product_name}
-                                        desc={post.product_description}
-                                        id={post.id}
-                                        likes={post.likes}
-                                    />
-                                ))}
+                                    // .slice(pageNumberProduct * postsPerPageProduct, (pageNumberProduct + 1) * postsPerPageProduct)
+                                    .map(post => (
+                                        <ProductCard
+                                            image={post.image_url}
+                                            title={post.product_name}
+                                            desc={post.product_description}
+                                            id={post.id}
+                                            likes={post.likes}
+                                        />
+                                    ))}
                             </div>
                         </div>
                     )}
@@ -184,4 +184,5 @@ function Search() {
 
 };
 
+// Exporting the component
 export default Search;
