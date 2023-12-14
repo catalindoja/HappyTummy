@@ -16,6 +16,7 @@ import { BACKEND_API_URL } from '../config/proxy.js';
 import Help from '../img/helpicon.png';
 import Modal from 'react-modal';
 import arrowImage from "../img/arrow.png";
+import warning from "../img/warning.png";
 
 import Gluten from "../img/allergens/gluten.png";
 import Lactose from "../img/allergens/leche.png";
@@ -259,11 +260,30 @@ const SingleProduct = () => {
   }
 
   // Like button
-  const handleLikeClick = async (commentId) => {
-    console.log("Like button clicked");
+  const handleLikeClick = async (postId) => {
     try {
+      const productResponse = await axios.patch(`/products/${postId}`, {
+        likes: post.likes + 1,
+      });
+
+      window.location.reload();
+
     } catch (err) {
-      console.error(err);
+      console.log(err);
+    }
+  };
+
+  // Comment like button
+  const handleCommentLikeClick = async (commentId, commentLikes) => {
+    try {
+      const commentResponse = await axios.patch(`/comments/${commentId}`, {
+        likes: commentLikes + 1,
+      });
+
+      window.location.reload();
+
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -274,6 +294,15 @@ const SingleProduct = () => {
   };
   const closeModal = () => {
     setModalIsOpen(false);
+  };
+
+  // Report error modal
+  const [modalIsOpen2, setModalIsOpen2] = useState(false);
+  const openModal2 = () => {
+    setModalIsOpen2(true);
+  };
+  const closeModal2 = () => {
+    setModalIsOpen2(false);
   };
 
   // Return the JSX that renders the SingleProduct page
@@ -303,35 +332,79 @@ const SingleProduct = () => {
                 shouldCloseOnEsc={true}
                 className="modal-content"
                 overlayClassName="modal-overlay"
-            >
+              >
                 <div>
-                    <span className="premium-description">
-                        <p className="premium-text"
-                            dangerouslySetInnerHTML={{
-                                __html: DOMPurify.sanitize("Are you sure you want to delete this post?")
-                            }}
-                        ></p>
-                    </span>
-                    <div className="popup-confirm-buttons">
-                        <button className="cancel-button" onClick={closeModal}>
-                            Cancel
-                        </button>
-                        <button className="confirm-button" onClick={handleDelete}>
-                            Confirm
-                        </button>
-                    </div>
-                    <img
-                        src={arrowImage}
-                        alt="Close"
-                        className="close-icon"
-                        onClick={closeModal}
-                    />
+                  <span className="premium-description">
+                    <p className="premium-text"
+                      dangerouslySetInnerHTML={{
+                        __html: DOMPurify.sanitize("Are you sure you want to delete this post?")
+                      }}
+                    ></p>
+                  </span>
+                  <div className="popup-confirm-buttons">
+                    <button className="cancel-button" onClick={closeModal}>
+                      Cancel
+                    </button>
+                    <button className="confirm-button" onClick={handleDelete}>
+                      Confirm
+                    </button>
+                  </div>
+                  <img
+                    src={arrowImage}
+                    alt="Close"
+                    className="close-icon"
+                    onClick={closeModal}
+                  />
                 </div>
-            </Modal>
+              </Modal>
 
             </div> </>
           ) : (
-            <></>
+            <div>
+              <img className="delete" onClick={openModal2} src={warning} alt="" />
+              <Modal
+                isOpen={modalIsOpen2}
+                onRequestClose={closeModal2}
+                shouldCloseOnOverlayClick={true}
+                shouldCloseOnEsc={true}
+                className="modal-content"
+                overlayClassName="modal-overlay"
+              >
+                <div>
+                  <span className="premium-description">
+                    <p className="premium-text"
+                      dangerouslySetInnerHTML={{
+                        __html: DOMPurify.sanitize("Report an error in this post ⚠")
+                      }}
+                    ></p>
+                  </span>
+
+                  <div className="editorContainer-write">
+                    <ReactQuill
+                      modules={{
+                        toolbar: false, // Desactiva la barra de herramientas
+                        clipboard: { matchVisual: false }, // Desactiva las operaciones de copiar y pegar con formato
+                      }}
+                        />
+                  </div>
+
+                  <div className="popup-confirm-buttons">
+                    <button className="cancel-button" onClick={closeModal2}>
+                      Cancel
+                    </button>
+                    <button className="confirm-button" onClick={closeModal2}>
+                      Confirm
+                    </button>
+                  </div>
+                  <img
+                    src={arrowImage}
+                    alt="Close"
+                    className="close-icon"
+                    onClick={closeModal2}
+                  />
+                </div>
+              </Modal>
+            </div>
           )}
         </div>
         <div class="super-image-container">
@@ -339,10 +412,10 @@ const SingleProduct = () => {
         </div>
         <div className="single-header">
           <h1 className="product-name my-3">{post.product_name}</h1>
-          <div className="like">
+          <button className="like" onClick={() => handleLikeClick(postId)}>
             <img src={Heart} alt="Heart Icon" className="heart-icon" />
             <div className="likes-count">{post.likes}</div>
-          </div>
+          </button>
         </div>
 
         {canUserEat() ? (
@@ -420,10 +493,10 @@ const SingleProduct = () => {
                     <Link to={`/app/user/${userComments[comment.id] ? userComments[comment.id].id : "Unknown"}`} className="username">
                       {userComments[comment.id] ? userComments[comment.id].username : "Unknown"}
                     </Link>
-                    <div className="comment-likes">
+                    <button className="comment-likes" onClick={() => handleCommentLikeClick(comment.id, comment.likes)}>
                       <img src={Heart} alt="Heart Icon" className="heart-icon" />
                       <div className="likes-count">{comment.likes}</div>
-                    </div>
+                    </button>
                   </div>
                   <p
                     dangerouslySetInnerHTML={{
@@ -444,6 +517,16 @@ const SingleProduct = () => {
             theme="snow"
             value={value}
             onChange={setValue}
+            modules={{
+              toolbar: {
+                container: [
+                  // Puedes personalizar los botones de la barra de herramientas aquí según tus necesidades
+                  ["bold", "italic", "underline"], // Ejemplo de algunos botones de formato de texto
+                ],
+              },
+              clipboard: { matchVisual: false }, // Desactiva las operaciones de copiar y pegar con formato
+              mention: false, // Desactiva las menciones de texto
+            }}
           />
         </div>
 

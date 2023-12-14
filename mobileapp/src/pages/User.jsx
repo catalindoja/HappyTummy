@@ -77,6 +77,48 @@ function Profile() {
     }, []);
     hisrecipes = hisrecipes.filter((post) => post.iduser === user.id)
 
+    // Estado para controlar si el usuario está siguiendo al perfil actual
+    const [isFollowing, setIsFollowing] = useState(false);
+
+    // Verificar si el usuario actual ya sigue al perfil actual
+    useEffect(() => {
+        const checkIfFollowing = async () => {
+            try {
+                const followCheckResponse = await axios.get(`${BACKEND_API_URL}/followers/${user.id}/${currentUser.id}`);
+                console.log("xd")
+                console.log(followCheckResponse.data.length);
+                // Verificar si el array tiene al menos un elemento
+                setIsFollowing(followCheckResponse.data.length > 0);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        checkIfFollowing();
+    }, [currentUser.id, user.id])
+
+    // Función para seguir o dejar de seguir al usuario
+    const toggleFollow = async (e) => {
+        e.preventDefault();
+        try {
+            if (!isFollowing) {
+                // Si no está siguiendo, realiza la operación de seguir
+                const followResponse = await axios.post(`${BACKEND_API_URL}/followers/`, {
+                    idFollower: currentUser.id,
+                    idFollowed: user.id
+                });
+                console.log(followResponse);
+                setIsFollowing(true);
+            } else {
+                // Si ya está siguiendo, realiza la operación de dejar de seguir
+                const unfollowResponse = await axios.delete(`${BACKEND_API_URL}/followers/${user.id}/${currentUser.id}`);
+                console.log(unfollowResponse);
+                setIsFollowing(false);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
     return (
         <div className="profile-content">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
@@ -89,6 +131,11 @@ function Profile() {
                 ) : (
                     <h6 className="profile-username-premium">{user.username + " ⭐"}</h6>
                 )}
+
+                <button className="follow-button" onClick={toggleFollow}>
+                    {isFollowing ? "Following" : "Follow"}
+                </button>
+
             </div>
 
             <h5 className="profile-maintitles"> Products <span className="icon2">🛒</span></h5>
@@ -113,18 +160,18 @@ function Profile() {
             {hisrecipes.length === 0 ? (
                 <h4 className="no-post-rec">No recipes yet 👻</h4>
             ) : (
-            <div>
-                <div className="card-container">
-                    {hisrecipes.map(post => (
-                        <RecipeCard
-                            image={post.image_url}
-                            title={post.title}
-                            desc={post.description}
-                            id={post.id}
-                        />
-                    ))}
+                <div>
+                    <div className="card-container">
+                        {hisrecipes.map(post => (
+                            <RecipeCard
+                                image={post.image_url}
+                                title={post.title}
+                                desc={post.description}
+                                id={post.id}
+                            />
+                        ))}
+                    </div>
                 </div>
-            </div>
             )}
         </div>
     );

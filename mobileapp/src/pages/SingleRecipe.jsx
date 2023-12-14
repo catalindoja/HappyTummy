@@ -136,14 +136,33 @@ const SingleRecipe = () => {
     }
 
     // Like button
-    const handleLikeClick = async (commentId) => {
+    const handleLikeClick = async (postId) => {
         console.log("Like button clicked");
         try {
-
+          const productResponse = await axios.patch(`/recipes/${postId}`, {
+            likes: post.likes + 1,
+          });
+    
+          window.location.reload();
+    
         } catch (err) {
-            console.error(err);
+          console.log(err);
         }
     };
+
+    // Comments like button
+    const handleCommentLikeClick = async (commentId, commentLikes) => {
+        try {
+          const commentResponse = await axios.patch(`/commentrecipes/${commentId}`, {
+            likes: commentLikes + 1,
+          });
+    
+          window.location.reload();
+    
+        } catch (err) {
+          console.log(err);
+        }
+      };
 
     // Modal pop-up
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -218,10 +237,10 @@ const SingleRecipe = () => {
                     </div>
                     <div className="single-header">
                         <h1 className="product-name my-3">{post.title}</h1>
-                        <div className="like">
+                        <button className="like" onClick={() => handleLikeClick(postId)}>
                             <img src={Heart} alt="Heart Icon" className="heart-icon" />
                             <div className="likes-count">{post.likes}</div>
-                        </div>
+                        </button>
                     </div>
                     <h3 className="specifications-heading">Specifications</h3>
                     <div className="more-data-container">
@@ -260,10 +279,10 @@ const SingleRecipe = () => {
                                             <Link to={`/app/user/${userComments[comment.id] ? userComments[comment.id].id : "Unknown"}`} className="username">
                                                 {userComments[comment.id] ? userComments[comment.id].username : "Unknown"}
                                             </Link>
-                                            <div className="comment-likes">
+                                            <button className="comment-likes" onClick={() => handleCommentLikeClick(comment.id, comment.likes)}>
                                                 <img src={Heart} alt="Heart Icon" className="heart-icon" />
                                                 <div className="likes-count">{comment.likes}</div>
-                                            </div>
+                                            </button>
                                         </div>
                                         <p
                                             dangerouslySetInnerHTML={{
@@ -285,6 +304,16 @@ const SingleRecipe = () => {
                             theme="snow"
                             value={value}
                             onChange={setValue}
+                            modules={{
+                                toolbar: {
+                                  container: [
+                                    // Puedes personalizar los botones de la barra de herramientas aquí según tus necesidades
+                                    ["bold", "italic", "underline"], // Ejemplo de algunos botones de formato de texto
+                                  ],
+                                },
+                                clipboard: { matchVisual: false }, // Desactiva las operaciones de copiar y pegar con formato
+                                mention: false, // Desactiva las menciones de texto
+                              }}
                         />
                     </div>
 

@@ -16,7 +16,40 @@ import Modal from 'react-modal';
 import arrowImage from "../img/arrow.png";
 import DOMPurify from "dompurify";
 
+import Gluten from "../img/allergens/gluten.png";
+import Lactose from "../img/allergens/leche.png";
+import Eggs from "../img/allergens/huevo.png";
+import Fish from "../img/allergens/pescado.png";
+import Peanuts from "../img/allergens/cacahuetes.png";
+import Soy from "../img/allergens/soja.png";
+import Nuts from "../img/allergens/frutossecos.png";
+import Seafood from "../img/allergens/marisco.png";
+import Molluscs from "../img/allergens/moluscos.png";
+import Mustard from "../img/allergens/mostaza.png";
+import Celery from "../img/allergens/apio.png";
+import Sulphites from "../img/allergens/sulfitos.png";
+import Sesame from "../img/allergens/sesamo.png";
+import Lupins from "../img/allergens/altramuces.png";
+
 function Profile() {
+
+    // Every allergne has an icon and a name
+    const allergenIcons = {
+        Gluten,
+        Lactose,
+        Eggs,
+        Fish,
+        Peanuts,
+        Soy,
+        Nuts,
+        Seafood,
+        Molluscs,
+        Mustard,
+        Celery,
+        Sulphites,
+        Sesame,
+        Lupins,
+    };
 
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -109,6 +142,21 @@ function Profile() {
         + '<p><strong>Enjoy your Premium account NOW!</strong></p>'
         ;
 
+    const [myallergies, setMyallergens] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+
+        // Obtains allergies of the current user
+        const everyallergen = await axios.get(`${BACKEND_API_URL}/userallergies/`);
+        const myallergens = everyallergen.data.filter((userallergies) => userallergies.iduser == currentUser.id);
+        setMyallergens(myallergens);
+
+        };
+
+        fetchData();
+    }, []);
+
     return (
         <div className="profile-content">
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
@@ -162,6 +210,24 @@ function Profile() {
                 </div>
                 <img className="profile-edit" src={Edit} onClick={handleEditProfile} alt="" />
             </div>
+
+            {/* <div >
+                {myallergies.length === 0 ? (
+                    <p>I have no intolerances 😋</p>
+                ) : (
+                    myallergies.map((allergy, index) => (
+                        <div>
+                            <spam>{allergy.allergy_name}</spam>
+                        <img
+                            className="fancy-allergy-icon"
+                            key={index}
+                            src={allergenIcons[allergy.allergy_name]}
+                            alt={allergy.allergy_name}
+                        />
+                        </div>
+                    ))
+                )}
+            </div> */}
 
             <h5 className="profile-maintitles">{t('my_products')} <span className="icon2">🛒</span></h5>
             {myproducts.length === 0 ? (

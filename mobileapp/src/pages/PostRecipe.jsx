@@ -45,172 +45,192 @@ const Write = () => {
   const [valuesteps, setValuesteps] = useState(state?.steps || "");
   const [file, setFile] = useState(null);
 
-    // Set up the function that handles the form submission
-    // - if the user does not fill in the input fields, the function will set the error message
-    const handleClick = async (e) => {
-      e.preventDefault();
+  // Set up the function that handles the form submission
+  // - if the user does not fill in the input fields, the function will set the error message
+  const handleClick = async (e) => {
+    e.preventDefault();
 
-      if (!title || title.trim() === "") {
-          setError("Tile of the recipe required");
-          return;
-      }
-
-      if (!time || time.trim() === "") {
-          setError("Time of preparation required");
-          return;
-      }
-
-      if (!unit) {
-          setError("Time measure of the preparation required");
-          return;
-      }
-
-      if (!ammountofpeople || ammountofpeople.trim() === "") {
-          setError("For how many people field required");
-          return;
-      }
-
-      if (!valuedes || valuedes.trim() === "") {
-          setError("Description of the recipe required");
-          return;
-      }
-
-      if (!valuesteps || valuesteps.trim() === "") {
-        setError("Steps of the recipe required");
-        return;
+    if (!title || title.trim() === "") {
+      setError("Tile of the recipe required");
+      return;
     }
 
-      const imgUrl = await upload();
-      try {
-          if (!state) {
-              // Post
-              const recipeResponse = await axios.post(`${BACKEND_API_URL}/recipes/`, {
-                  iduser,
-                  title,
-                  time,
-                  unit,
-                  ammountofpeople,
-                  description: valuedes,
-                  steps: valuesteps,
-                  likes,
-                  image: file ? imgUrl : "",
-                  date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-                  image_url,
-              });
-          } else {
-              // Patch
-              const recipeResponse = await axios.patch(`${BACKEND_API_URL}/recipes/`, {
-                  iduser,
-                  title,
-                  time,
-                  unit,
-                  ammountofpeople,
-                  description: valuedes,
-                  steps: valuesteps,
-                  likes,
-                  image: file ? imgUrl : "",
-                  date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-                  image_url,
-              });
-          }
-          navigate("/app/home");
-      } catch (err) {
-          console.log(err);
+    if (!time || time.trim() === "") {
+      setError("Time of preparation required");
+      return;
+    }
+
+    if (!unit) {
+      setError("Time measure of the preparation required");
+      return;
+    }
+
+    if (!ammountofpeople || ammountofpeople.trim() === "") {
+      setError("For how many people field required");
+      return;
+    }
+
+    if (!valuedes || valuedes.trim() === "") {
+      setError("Description of the recipe required");
+      return;
+    }
+
+    if (!valuesteps || valuesteps.trim() === "") {
+      setError("Steps of the recipe required");
+      return;
+    }
+
+    const imgUrl = await upload();
+    try {
+      if (!state) {
+        // Post
+        const recipeResponse = await axios.post(`${BACKEND_API_URL}/recipes/`, {
+          iduser,
+          title,
+          time,
+          unit,
+          ammountofpeople,
+          description: valuedes,
+          steps: valuesteps,
+          likes,
+          image: file ? imgUrl : "",
+          date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+          image_url,
+        });
+      } else {
+        // Patch
+        const recipeResponse = await axios.patch(`${BACKEND_API_URL}/recipes/`, {
+          iduser,
+          title,
+          time,
+          unit,
+          ammountofpeople,
+          description: valuedes,
+          steps: valuesteps,
+          likes,
+          image: file ? imgUrl : "",
+          date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+          image_url,
+        });
       }
+      navigate("/app/home");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   // Return the JSX elements
   return (
-      <div className="add-write">
+    <div className="add-write">
       <h1 className="supertitle-write">Post a new recipe <span className="text-danger">❤</span></h1>
 
-        <div className="content-write">
+      <div className="content-write">
 
-          <input
-            type="text"
-            placeholder="Title of the recipe"
-            onChange={(e) => setRecipeTitle(e.target.value)}
-          />
+        <input
+          type="text"
+          placeholder="Title of the recipe"
+          onChange={(e) => setRecipeTitle(e.target.value)}
+        />
 
-          <div className="measurement-container">
-            <div className="quantity-input">
-              <input
-                type="number"
-                placeholder="Time of preparation"
-                onChange={(e) => setTime(e.target.value)}
-              />
-            </div>
-            <div className="measurement-input-write">
-              <select
-                value={unit}
-                onChange={(e) => setSelectedTimeMeasurement(e.target.value)}
-              >
-                <option value="">Measure</option>
-                <option value="minutes">minutes</option>
-                <option value="hours">hours</option>
-              </select>
-            </div>
-          </div>
-
+        <div className="measurement-container">
           <div className="quantity-input">
             <input
               type="number"
-              placeholder="For how many people"
-              onChange={(e) => setPeople(e.target.value)}
+              placeholder="Time of preparation"
+              onChange={(e) => setTime(e.target.value)}
             />
           </div>
-
-          <div className="editorContainer-write">
-            <ReactQuill
-              placeholder="Description of the recipe"
-              className="editor"
-              theme="snow"
-              value={valuedes}
-              onChange={setValuedes}
-            />
+          <div className="measurement-input-write">
+            <select
+              value={unit}
+              onChange={(e) => setSelectedTimeMeasurement(e.target.value)}
+            >
+              <option value="">Measure</option>
+              <option value="minutes">minutes</option>
+              <option value="hours">hours</option>
+            </select>
           </div>
-
-          <div className="editorContainer-write">
-            <ReactQuill
-              placeholder="Steps to follow"
-              className="editor"
-              theme="snow"
-              value={valuesteps}
-              onChange={setValuesteps}
-            />
-          </div>
-
-          <h3 className="picture-title">Update a picture 📸</h3>
-          <input
-            type="text"
-            placeholder="Image url"
-            onChange={(e) => setImageUrl(e.target.value)}
-          />
-
-          <div className="image-write">
-            <div className="image-container-write">
-              <input
-                style={{ display: "none" }}
-                type="file"
-                id="file"
-                name=""
-                onChange={(e) => setFile(e.target.files[0])}
-              />
-              <label className="file-write" htmlFor="file">
-                Upload Image (png or jpg)
-              </label>
-
-            </div>
-          </div>
-
-          {error && <p className="error-message-write">{error}</p>}
-          
-          <div className="buttons-write-recipe">
-            <button onClick={handleClick}>Publish</button>
-          </div>
-
         </div>
+
+        <div className="quantity-input">
+          <input
+            type="number"
+            placeholder="For how many people"
+            onChange={(e) => setPeople(e.target.value)}
+          />
+        </div>
+
+        <div className="editorContainer-write">
+          <ReactQuill
+            placeholder="Description of the recipe"
+            className="editor"
+            theme="snow"
+            value={valuedes}
+            onChange={setValuedes}
+            modules={{
+              toolbar: {
+                container: [
+                  // Puedes personalizar los botones de la barra de herramientas aquí según tus necesidades
+                  ["bold", "italic", "underline"], // Ejemplo de algunos botones de formato de texto
+                ],
+              },
+              clipboard: { matchVisual: false }, // Desactiva las operaciones de copiar y pegar con formato
+              mention: false, // Desactiva las menciones de texto
+            }}
+          />
+        </div>
+
+        <div className="editorContainer-write">
+          <ReactQuill
+            placeholder="Steps to follow"
+            className="editor"
+            theme="snow"
+            value={valuesteps}
+            onChange={setValuesteps}
+            modules={{
+              toolbar: {
+                container: [
+                  // Puedes personalizar los botones de la barra de herramientas aquí según tus necesidades
+                  ["bold", "italic", "underline"], // Ejemplo de algunos botones de formato de texto
+                ],
+              },
+              clipboard: { matchVisual: false }, // Desactiva las operaciones de copiar y pegar con formato
+              mention: false, // Desactiva las menciones de texto
+            }}
+          />
+        </div>
+
+        <h3 className="picture-title">Update a picture 📸</h3>
+        <input
+          type="text"
+          placeholder="Image url"
+          onChange={(e) => setImageUrl(e.target.value)}
+        />
+
+        <div className="image-write">
+          <div className="image-container-write">
+            <input
+              style={{ display: "none" }}
+              type="file"
+              id="file"
+              name=""
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+            <label className="file-write" htmlFor="file">
+              Upload Image (png or jpg)
+            </label>
+
+          </div>
+        </div>
+
+        {error && <p className="error-message-write">{error}</p>}
+
+        <div className="buttons-write-recipe">
+          <button onClick={handleClick}>Publish</button>
+        </div>
+
       </div>
+    </div>
   );
 
 };

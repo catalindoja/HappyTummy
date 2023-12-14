@@ -147,7 +147,7 @@ const EditPerfil = () => {
                             id="password"
                             autoComplete="off"
                             placeholder={t('placeholder_password')}
-                            value={userData.password}
+                            value={"password"}
                             onChange={handleInputChange}
                         />
                     </div>

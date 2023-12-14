@@ -317,10 +317,20 @@ const Write = () => {
         <div className="editorContainer-write">
           <ReactQuill
             placeholder={t('product_description')}
-            className="editor-write"
+            // className="editor-write"
             theme="snow"
             value={value}
             onChange={setValue}
+            modules={{
+              toolbar: {
+                container: [
+                  // Puedes personalizar los botones de la barra de herramientas aquí según tus necesidades
+                  ["bold", "italic", "underline"], // Ejemplo de algunos botones de formato de texto
+                ],
+              },
+              clipboard: { matchVisual: false }, // Desactiva las operaciones de copiar y pegar con formato
+              mention: false, // Desactiva las menciones de texto
+            }}
           />
         </div>
 
@@ -396,7 +406,7 @@ const Write = () => {
           </Link>
         </legend>
         <span>{t('it_contains')}</span>
-        <div className="form-group">
+        <div className="form-group-post">
           <fieldset>
             {allergies.map((allergy) => (
 
@@ -419,7 +429,7 @@ const Write = () => {
         </div>
 
         <legend>{t('supermarkets')}</legend>
-        <div className="form-group">
+        <div className="form-group-post">
           <fieldset>
             {supermarkets.map((market) => (
 
@@ -442,7 +452,7 @@ const Write = () => {
         </div>
 
         <legend>{t('brand')}</legend>
-        <div className="form-group">
+        <div className="form-group-post">
           <fieldset>
             {brands.map((brand) => (
 
@@ -465,7 +475,7 @@ const Write = () => {
         </div>
 
         <legend>{t('category')}</legend>
-        <div className="form-group">
+        <div className="form-group-post">
           <fieldset>
             {categories.map((category) => (
 

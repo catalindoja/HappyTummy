@@ -172,5 +172,10 @@
     font-weight: bold;
   }
 
-
+ .form-group-post{
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  padding: 6px;
+ }
   

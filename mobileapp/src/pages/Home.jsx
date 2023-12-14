@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
+import { BACKEND_API_URL } from '../config/proxy.js';
+import axios from "axios";
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -14,6 +16,8 @@ import backgroundImage from "../img/clearbackground.png";
 import Logo from "../img/logo2.png";
 import Card from "../components/ProductCard";
 import { AuthContext } from "../context/authContext";
+import ProductCard from "../components/ProductCard";
+import RecipeCard from "../components/RecipeCard";
 
 const localImages = [
     require("../img/imagehome1.jpeg"),
@@ -21,10 +25,76 @@ const localImages = [
 ];
 
 function Home() {
-    // Obtaining the current user
-    const { currentUser } = useContext(AuthContext);
 
     const { t } = useTranslation();
+
+    // Obtaining the current user
+    const { currentUser } = useContext(AuthContext);
+    const idCurrent = currentUser.id;
+
+    // Obtains allergies of the current user
+    const [myallergens, setMyallergens] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const everyallergen = await axios.get(`${BACKEND_API_URL}/userallergies/`);
+                const myallergens = everyallergen.data.filter((userallergies) => userallergies.iduser == idCurrent);
+                setMyallergens(myallergens);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        fetchData();
+    }, []);
+
+    // Obtain products FILTERED DEPENDING OF THE USER ALLEGIES
+    let [products, setProducts] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get(`${BACKEND_API_URL}/products`);
+
+                // Ensure that res.data is an array before filtering
+                const data = Array.isArray(res.data) ? res.data : [];
+
+                const filteredProducts = data.filter(product => {
+                    // Check if product.allergies is defined before calling map
+                    const productAllergyIds = (product.allergies || []).map(allergy => allergy.id);
+                    return !myallergens.some(userAllergy => productAllergyIds.includes(userAllergy.idallergy));
+                });
+
+                setProducts(filteredProducts.slice(0, maxItemsToShow));
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        fetchData();
+    }, [myallergens]);
+
+    // Obtain recipes
+    let [recipes, setRecipes] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get(`${BACKEND_API_URL}/recipes`);
+                console.log(res.data);
+                setRecipes(res.data);
+
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+
+
+    // Limit the number of items to show
+    const maxItemsToShow = 3;
+    const slicedProducts = products.slice(0, maxItemsToShow);
+    const slicedRecipes = recipes.slice(0, maxItemsToShow);
 
     const sliderSettings = {
         dots: true,
@@ -45,30 +115,35 @@ function Home() {
             <div className="home-products">
                 <h5 className="maintitles">{t('recommended')}</h5>
                 <Slider {...sliderSettings}>
-                    <div>
-                        <img className="img1" src={Imagehome1} alt="Product" />
-                    </div>
-                    <div>
-                        <img className="img1" src={Imagehome2} alt="Product" />
-                    </div>
-                    <div>
-                        <img className="img1" src={Imagehome3} alt="Product" />
-                    </div>
+                    {slicedProducts
+                        .map(post => (
+                            <div>
+                                <ProductCard
+                                    image={post.image_url}
+                                    title={post.product_name}
+                                    desc={post.product_description}
+                                    id={post.id}
+                                    likes={post.likes}
+                                />
+                            </div>
+                        ))}
                 </Slider>
             </div>
 
             <div className="home-recipes">
                 <h5 className="maintitles">{t('recipes')}</h5>
                 <Slider {...sliderSettings}>
-                    <div>
-                        <img className="img1" src={Imagehome4} alt="Product" />
-                    </div>
-                    <div>
-                        <img className="img1" src={Imagehome5} alt="Product" />
-                    </div>
-                    <div>
-                        <img className="img1" src={Imagehome6} alt="Product" />
-                    </div>
+                    {slicedRecipes
+                        .map(post => (
+                            <div>
+                                <RecipeCard
+                                    image={post.image_url}
+                                    title={post.title}
+                                    desc={post.description}
+                                    id={post.id}
+                                />
+                            </div>
+                        ))}
                 </Slider>
             </div>
 
