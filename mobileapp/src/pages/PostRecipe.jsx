@@ -49,41 +49,11 @@ const Write = () => {
     const handleClick = async (e) => {
       e.preventDefault();
 
-      if (!title || title.trim() === "") {
-          setError("Tile of the recipe required");
-          return;
-      }
-
-      if (!time || time.trim() === "") {
-          setError("Time of preparation required");
-          return;
-      }
-
-      if (!unit) {
-          setError("Time measure of the preparation required");
-          return;
-      }
-
-      if (!ammountofpeople || ammountofpeople.trim() === "") {
-          setError("For how many people field required");
-          return;
-      }
-
-      if (!valuedes || valuedes.trim() === "") {
-          setError("Description of the recipe required");
-          return;
-      }
-
-      if (!valuesteps || valuesteps.trim() === "") {
-        setError("Steps of the recipe required");
-        return;
-    }
-
       const imgUrl = await upload();
       try {
           if (!state) {
               // Post
-              const recipeResponse = await axios.post(`/recipes/`, {
+              const recipeResponse = await axios.patch(`/recipes/`, {
                   iduser,
                   title,
                   time,
@@ -121,15 +91,9 @@ const Write = () => {
   // Return the JSX elements
   return (
     <div>
-      <h1 className="supertitle-write">Post a new recipe <span className="text-danger">❤</span></h1>
+      <h1 className="supertitle-write">Edit a new recipe <span className="text-danger">❤</span></h1>
       <div className="add-write">
         <div className="content-write">
-
-          {/* <input
-            type="text"
-            placeholder="Name of the product"
-            onChange={(e) => setProductName(e.target.value)}
-          /> */}
 
           <input
             type="text"

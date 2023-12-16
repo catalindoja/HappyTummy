@@ -214,16 +214,18 @@
 }
 
 .super-image {
-  width: 120px !important;
-  height: 120px !important;
+  width: 140px !important;
+  height: 140px !important;
   border-radius: 15px !important;
-  margin: auto 30px !important;
+  margin: auto 55px !important;
   border: 1px solid #fff;
   border-radius: 25px !important;
 }
 
 img.edit {
-  position: absolute;
+  position: absolute !important;
+  top: 170px !important;
+  right: 45px !important;
 }
 
 span.fancy-allergy {

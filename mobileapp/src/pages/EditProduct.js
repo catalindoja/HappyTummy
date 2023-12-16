@@ -262,7 +262,7 @@ const EditProduct = () => {
         try {
             //console.log("yyyyy");
             //if (!state) {
-                // Post
+                // Patch
                 const productResponse = await axios.patch(`/products/${postId}`, {
                     product_name,
                     product_description,

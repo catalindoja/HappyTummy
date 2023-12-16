@@ -220,8 +220,8 @@ const SingleProduct = () => {
         </Link>
         <img className="super-image" src={post.image_url} alt="" />
         <Link to={`/app/editproduct/${post.id}`}>
-        <img className="edit" src={Edit} alt="" onClick={handleEditClick} />
-      </Link>
+          <img className="edit" src={Edit} alt="" onClick={handleEditClick} />
+        </Link>
         <div className="user">
           <img src={ProfilePicture} />
           <div className="info">

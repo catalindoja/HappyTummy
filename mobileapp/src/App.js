@@ -21,7 +21,7 @@ import { i18n } from 'i18next';
 import Allergies from './pages/Allergies';
 import Configration from './components/Configration';
 import EditProduct from './pages/EditProduct';
-
+import EditRecipe from './pages/EditRecipe'; 
 
 import {
   createBrowserRouter,
@@ -106,11 +106,15 @@ const router = createBrowserRouter([
       },
       {
         path: "allergies",
-        element: <Allergies />
-      },
+        element: <Allergies />     
+      },   
       {
         path: "editProduct/:id",
         element: <EditProduct />
+      },
+      {
+        path: "editrecipe/:id",
+        element: <EditRecipe />
       }
     ]
   }

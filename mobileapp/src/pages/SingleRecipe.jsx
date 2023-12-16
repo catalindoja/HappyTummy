@@ -11,6 +11,7 @@ import axios from "axios";
 import DOMPurify from "dompurify";
 import ReactQuill from 'react-quill';
 import "./SingleRecipe.css";
+import "./EditRecipe.css";
 
 // Create the SingleRecipe component
 const SingleRecipe = () => {
@@ -121,6 +122,10 @@ const SingleRecipe = () => {
         }
     };
 
+    const handleEditClick = () => {
+        navigate(`/app/editrecipe/${post.id}`, { state: post });
+    };
+
     // Render the SingleRecipe component
     return (
         <div>
@@ -130,6 +135,9 @@ const SingleRecipe = () => {
                         <img className="arrow-img" src={Arrow} alt="" />
                     </Link>
                     <img className="super-image" src={post.image_url} alt="" />
+                    <Link to={`/app/editrecipe/${post.id}`}>
+                        <img className="edit" src={Edit} alt="" onClick={handleEditClick} />
+                    </Link>
                     <div className="user">
                         <img src={ProfilePicture} />
                         <div className="info">
