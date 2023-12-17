@@ -140,7 +140,7 @@ function Profile() {
         + '</ul>'
 
         + '<p>And much more!</p>'
-        + '<p>Update your account for <strong>€4.99</strong> per month</p>'
+        + '<p>Update your account for <strong>4.99€</strong> per month</p>'
         + '<p><strong>Enjoy your Premium account NOW!</strong></p>'
         ;
 

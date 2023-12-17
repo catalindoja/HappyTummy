@@ -28,6 +28,7 @@ const localImages = [
 function Home() {
 
     const { t } = useTranslation();
+    const ProductIds = [27, 21, 43];
 
     // Obtaining the current user
     const { currentUser } = useContext(AuthContext);
@@ -60,8 +61,8 @@ function Home() {
                     const productAllergyIds = (product.allergies || []).map(allergy => allergy.id);
                     return !myallergens.some(userAllergy => productAllergyIds.includes(userAllergy.idallergy));
                 });
-
-                setProducts(filteredProducts.slice(0, maxItemsToShow));
+                const specificProducts = filteredProducts.filter(product => ProductIds.includes(product.id));
+                setProducts(specificProducts.slice(0, maxItemsToShow));
             } catch (err) {
                 console.log(err);
             }
@@ -100,7 +101,7 @@ function Home() {
     };
 
     return (
-        <div className="home_content">
+        <div className="home_content" style={{ backgroundImage: `url(${backgroundImage})` }}>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"></link>
 
             <div className="home-header">

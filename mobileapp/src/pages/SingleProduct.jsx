@@ -315,9 +315,9 @@ const SingleProduct = () => {
           <Link to={`/app/user/${userOwner.id}`} className="info">
             <span className="username">{userOwner.username}</span>
           </Link>
-          {currentUser.username === userOwner.username ? (
+          {currentUser.username == userOwner.username ? (
             <><div className="edit">
-              <Link to={`/editpost`} state={post}>
+              <Link to={`/app/editproduct/${postId}`} state={post}>
                 <img className="editimg" src={Edit} alt="" />
               </Link>
 
@@ -479,7 +479,7 @@ const SingleProduct = () => {
         </div>
         <h3 className="comments-heading">Comments</h3>
         <ul className="comments-list">
-          {comments.length === 0 ? (
+          {comments.length == 0 ? (
             <p>No comments yet!</p>
           ) : (
             comments.map(comment => (

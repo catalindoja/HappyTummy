@@ -1,29 +1,16 @@
-import Teal from "../img/teal.png";
 import Profilepic from "../img/profile.png";
-import Edit from "../img/edit.png";
 import './User.css';
-import backgroundImage from "../img/clearbackground.png";
-import arrowImage from "../img/arrow.png";
 import BackArrow from "../components/BackArrow";
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import ProductCard from "../components/ProductCard.jsx";
 import RecipeCard from "../components/RecipeCard.jsx";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { AuthContext } from "../context/authContext.js";
-import Logo2 from "../img/logo2.png";
-import { useTranslation } from 'react-i18next';
 import { BACKEND_API_URL } from '../config/proxy.js';
-import Modal from 'react-modal';
 
 // User profile page
 function User() {
-
-    // Translation
-    const { t } = useTranslation();
-
-    // Navigation
-    const navigate = useNavigate();
 
     // Obtaining the current user
     const { currentUser } = useContext(AuthContext);
@@ -44,7 +31,7 @@ function User() {
             }
         };
         fetchData();
-    }, []);
+    }, [userId]);
 
     // Obtain his products
     let [hisproducts, setHisproducts] = useState([]);
@@ -126,7 +113,7 @@ function User() {
 
             <div className="user-header">
                 <img className="profile-profilepic" src={Profilepic} alt="" />
-                {user.premium == 0 ? (
+                {user.premium === 0 ? (
                     <h6 className="profile-username">{user.username}</h6>
                 ) : (
                     <h6 className="profile-username-premium">{user.username + " ⭐"}</h6>

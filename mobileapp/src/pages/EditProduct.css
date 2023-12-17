@@ -1,0 +1,9 @@
+.buttons-write-product{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 175px;
+    margin-left: 20px;
+    margin-right: 20px;
+}

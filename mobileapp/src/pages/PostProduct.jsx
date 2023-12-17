@@ -174,10 +174,10 @@ const Write = () => {
       return;
     }
 
-    if (!price || price.trim() === "") {
-      setError("Price of the product required");
-      return;
-    }
+    // if (!price || price.trim() === "") {
+    //   setError("Price of the product required");
+    //   return;
+    // }
 
     if (!quantity || quantity.trim() === "") {
       setError("Quantity per unit of the product required");
@@ -217,7 +217,7 @@ const Write = () => {
           iduser,
           idbrand,
           barcode: combinedBarcode,
-          price,
+          price: 0,
           quantity,
           measurement,
           likes,
@@ -333,11 +333,11 @@ const Write = () => {
           />
         </div>
 
-        <input
+        {/* <input
           type="number"
           placeholder={t('price')}
           onChange={(e) => setPrice(e.target.value)}
-        />
+        /> */}
 
         <div className="measurement-container-write">
           <div className="quantity-input-write">
