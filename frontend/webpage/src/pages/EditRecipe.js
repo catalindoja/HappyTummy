@@ -7,6 +7,7 @@ import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import { Modal, Button } from 'react-bootstrap'; // Adjust the import based on your UI library
 import "./PostProduct.css";
+import { BACKEND_API_URL } from '../config/proxy.js';
 
 const EditRecipe = () => {
     const location = useLocation();
@@ -43,7 +44,7 @@ const EditRecipe = () => {
 
         try {
             // Patch
-            await axios.patch(`/recipes/${postId}`, {
+            await axios.patch(`${BACKEND_API_URL}/recipes/${postId}`, {
                 title: recipeData.title,
                 description: recipeData.description,
             });

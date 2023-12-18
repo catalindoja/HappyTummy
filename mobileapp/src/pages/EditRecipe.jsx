@@ -50,7 +50,7 @@ const EditRecipe = () => {
     const fetchProductDataFromServer = async () => {
         try {
             console.log("postId:", postId);
-            const response = await axios.get(`/recipes/${postId}`);
+            const response = await axios.get(`${BACKEND_API_URL}/recipes/${postId}`);
             const productData = response.data;
             setProductData({
                 ...productData,

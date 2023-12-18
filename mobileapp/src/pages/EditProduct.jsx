@@ -50,7 +50,7 @@ const EditProduct = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get(`/allergies`);
+                const res = await axios.get(`${BACKEND_API_URL}/allergies`);
                 setAllergies(res.data);
             } catch (err) {
                 console.log(err);
@@ -73,13 +73,13 @@ const EditProduct = () => {
 
         try {
             // Patch
-            await axios.patch(`/products/${postId}`, {
+            await axios.patch(`${BACKEND_API_URL}/products/${postId}`, {
                 product_name: productData.product_name,
                 product_description: productData.product_description,
             });
             const productId = postId;
             await Promise.all(selectedAllergies.map(async (idallergies) => {
-                await axios.post(`/productallergies/`, {
+                await axios.post(`${BACKEND_API_URL}/productallergies/`, {
                     idallergies: idallergies,
                     idproduct: productId
                 });
@@ -96,7 +96,7 @@ const EditProduct = () => {
     const fetchProductDataFromServer = async () => {
         try {
             console.log("postId:", postId);
-            const response = await axios.get(`/products/${postId}`);
+            const response = await axios.get(`${BACKEND_API_URL}/products/${postId}`);
             const productData = response.data;
             setProductData(productData);
         } catch (error) {
@@ -111,7 +111,7 @@ const EditProduct = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.patch(`/products/${postId}`, {
+            await axios.patch(`${BACKEND_API_URL}/products/${postId}`, {
                 product_name: productData.product_name,
                 product_description: productData.product_description,
             });
