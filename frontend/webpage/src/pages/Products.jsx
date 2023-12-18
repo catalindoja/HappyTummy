@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import ReactPaginate from "react-paginate";
 import Heart from "../img/heart.png";
