@@ -3,18 +3,28 @@ import backgroundImage from "../img/clearbackground.png";
 import './Register.css';
 import axios from "axios";
 import $ from "jquery";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { countries } from 'countries-list';
 import { useTranslation } from 'react-i18next';
+import { BACKEND_API_URL } from '../config/proxy.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import Configration from "../components/Configration";
 import i18n from "../components/i18n";
-import { BACKEND_API_URL } from '../config/proxy.js';
+import BackArrow from "../components/BackArrow";
+import Help from '../img/helpicon.png';
 
+// Register component
 const Register = () => {
   <Configration />
+
+  // Translation
   const { t } = useTranslation();
+
+  // Navigation
   const navigate = useNavigate();
 
+  // States for the form data
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     email: '',
@@ -22,22 +32,25 @@ const Register = () => {
     username: '',
     role: 3,
     premium: 0,
-    age: 0,
+    age: '',
     gender: '',
     realname: '',
     realsurname: '',
     country: ''
   });
 
+  // Set password and confirm password
   const [passwords, setPasswords] = useState({
     password: '',
     confirmPassword: ''
   });
 
+  // User id
   const [iduser, setIdUser] = useState({
     iduser: ''
   });
 
+  // Market data
   const [markets, setMarkets] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -51,6 +64,7 @@ const Register = () => {
     fetchData();
   }, []);
 
+  // Allergy data
   const [allergies, setAllergies] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -64,6 +78,7 @@ const Register = () => {
     fetchData();
   }, []);
 
+  // Brand data
   const [brands, setBrands] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -77,10 +92,12 @@ const Register = () => {
     fetchData();
   }, []);
 
+  // Selected markets, allergies and brands
   const [selectedMarkets, setSelectedMarkets] = useState([]);
   const [selectedAllergies, setSelectedAllergies] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
 
+  // Handle passwords
   const handlePasswords = (e) => {
     const { name, value } = e.target;
     setPasswords((prevData) => ({
@@ -91,6 +108,7 @@ const Register = () => {
 
   const [error, setError] = useState(null);
 
+  // Handle change
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -152,31 +170,37 @@ const Register = () => {
       }
     } else if (step === 2) {
       if (formData.username.trim() === "") {
-        alert("Please introduce an username!");
+        setError("Please introduce an username");
+        return;
       }
 
       if (formData.realname.trim() === "") {
-        alert("Please introduce a name!");
+        setError("Please introduce a name");
+        return;
       }
 
       if (formData.realsurname.trim() === "") {
-        alert("Please introduce a surname!");
-      }
-
-      if (formData.age.trim() === "") {
-        alert("Please introduce an age!");
+        setError("Please introduce a surname");
+        return;
       }
 
       if (passwords.password.trim() === "") {
-        alert("Please introduce a password!");
+        setError("Please introduce a password");
+        return;
       }
 
       if (passwords.confirmPassword.trim() === "") {
-        alert("Please confirm your password!");
+        setError("Please confirm your password");
+        return;
+      }
+
+      if (formData.age.trim() === "") {
+        formData.age = 0;
       }
 
       if (passwords.password !== passwords.confirmPassword) {
-        alert("Passwords do not match!");
+        setError("Passwords do not match");
+        return;
       } else {
         formData.password = passwords.password;
         console.log(formData.password);
@@ -235,30 +259,38 @@ const Register = () => {
     //console.log(formData.email);
   };
 
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   const renderStep = () => {
     switch (step) {
       case 1:
         return (
           <div className="container" style={{ backgroundImage: `url(${backgroundImage})` }}>
-            <Configration />
+            <BackArrow />
             <form onSubmit={handleNextStep}>
-              <div className="form-group my-3">
-                <label className='label1' htmlFor="exampleInputEmail1">{t("label_email")}</label>
+              <div className="form-group my-3 email-form">
+                <label className='email-title' htmlFor="exampleInputEmail1">{t("label_email")}</label>
                 <br />
                 <input name="email" type="email" value={formData.email} onChange={handleChange}
-                  className="form-control my-2" id="exampleInputEmail1" aria-describedby="emailHelp"
+                  className="form-control my-2 form-email" id="exampleInputEmail1" aria-describedby="emailHelp"
                   placeholder={t("placeholder_text_email")} />
-                <label id="errorMail" htmlFor="ErrorMail" className='invisible text-danger'>{t('email_existed')}</label>
               </div>
-              {error && <p className="error-msg">{error}</p>}
+
               <button
+                className="next-but"
                 onClick={print}
                 type="submit"
-                className="btn btn-primary"
-                style={{ marginTop: '-930px', marginLeft: '105px' }}
               >
                 {t("next")}
               </button>
+
+              <div className="infotex">
+                {"Do you have an account?"} <Link to="/login"><span className="text-center text-primary">{"Login"}</span></Link>
+              </div>
+
+              {error && <p className="error-msg">{error}</p>}
+              <label id="errorMail" htmlFor="ErrorMail" className='invisible text-danger'>{t('email_existed')}</label>
 
             </form>
           </div>
@@ -266,35 +298,11 @@ const Register = () => {
       case 2:
         const countryOptions = [t('select_country'), ...Object.values(countries).map(country => country.name)];
         return (
-          <div>
-            <Configration />
-            <h1 className='my-2 text-success'>{t('step2')}</h1>
+          <div className="container" style={{ backgroundImage: `url(${backgroundImage})` }}>
+            <BackArrow />
             <form onSubmit={handleNextStep}>
-              <div className="form-group">
-                <label htmlFor="realname">{t('name')}</label>
-                <input
-                  name="realname"
-                  type="text"
-                  value={formData.realname}
-                  onChange={handleChange}
-                  className="form-control my-1"
-                  id="realname"
-                  placeholder={t('placeholder_name')}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="realsurname">{t('surname')}</label>
-                <input
-                  name="realsurname"
-                  type="text"
-                  value={formData.realsurname}
-                  onChange={handleChange}
-                  className="form-control my-1" 
-                  id="realsurname"
-                  placeholder={t('placeholder_surname')}
-                />
-              </div>
-              <div className="form-group">
+              <h1 className='step2-title'>{t('step2')}</h1>
+              <div className="form-group step2-form">
                 <label htmlFor="username">{t('username')}</label>
                 <input
                   name="username"
@@ -306,31 +314,70 @@ const Register = () => {
                   placeholder={t('placeholder_username')}
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="password">{t('password')}</label>
+              <div className="form-group step2-form">
+                <label htmlFor="realname">{t('name')}</label>
                 <input
-                  name="password"
-                  type="password"
-                  value={passwords.password}
-                  onChange={handlePasswords}
+                  name="realname"
+                  type="text"
+                  value={formData.realname}
+                  onChange={handleChange}
                   className="form-control my-1"
-                  id="password"
-                  placeholder={t('placeholder_password')}
+                  id="realname"
+                  placeholder={t('placeholder_name')}
                 />
               </div>
-              <div className="form-group my-2">
-                <label htmlFor="confirmPassword">{t('confirm_password')}</label>
+              <div className="form-group step2-form">
+                <label htmlFor="realsurname">{t('surname')}</label>
                 <input
-                  name="confirmPassword"
-                  type="password"
-                  value={passwords.confirmPassword}
-                  onChange={handlePasswords}
+                  name="realsurname"
+                  type="text"
+                  value={formData.realsurname}
+                  onChange={handleChange}
                   className="form-control my-1"
-                  id="confirmPassword"
-                  placeholder={t('placeholder_confirm_password')}
+                  id="realsurname"
+                  placeholder={t('placeholder_surname')}
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group step2-form">
+                <label htmlFor="password">Password</label>
+                <div className="password-container">
+                  <input
+                    name="password"
+                    type={showPassword ? 'text' : 'password'}
+                    value={passwords.password}
+                    onChange={handlePasswords}
+                    className="form-control my-1"
+                    id="password"
+                    placeholder="Enter your password"
+                  />
+                  <FontAwesomeIcon
+                    icon={showPassword ? faEye : faEyeSlash}
+                    className="password-toggle"
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                </div>
+              </div>
+              <div className="form-group step2-form">
+                <label htmlFor="confirmPassword">Confirm Password</label>
+                <div className="password-container">
+                  <input
+                    name="confirmPassword"
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    value={passwords.confirmPassword}
+                    onChange={handlePasswords}
+                    className="form-control my-1"
+                    id="confirmPassword"
+                    placeholder="Confirm your password"
+                  />
+                  <FontAwesomeIcon
+                    icon={showConfirmPassword ? faEye : faEyeSlash}
+                    className="password-toggle"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  />
+                </div>
+              </div>
+              <label style={{ fontSize: '17.5px', marginTop: '10px' }}>{"Optional fields:"}</label>
+              <div className="form-group step2-form">
                 <label htmlFor="age">{t('age')}</label>
                 <input
                   name="age"
@@ -342,7 +389,7 @@ const Register = () => {
                   placeholder="Enter your age"
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group step2-form">
                 <label htmlFor="gender">{t('gender')}</label>
                 <select
                   name="gender"
@@ -355,7 +402,7 @@ const Register = () => {
                   <option value="f">{t('female')}</option>
                 </select>
               </div>
-              <div className="form-group">
+              <div className="form-group step2-form">
                 <label htmlFor="country">{t('country')}</label>
                 <select
                   name="country"
@@ -371,36 +418,28 @@ const Register = () => {
                   ))}
                 </select>
               </div>
-              <button type="submit" className="btn btn-primary">Next</button>
+
+              <button type="submit" className="next-but">Next</button>
+
+              {error && <p className="error-msg">{error}</p>}
+
             </form>
           </div>
         );
       case 3:
         return (
-          <div className="container">
+          <div className="container" style={{ backgroundImage: `url(${backgroundImage})` }}>
+            <BackArrow />
             <div className="form-container">
-              <h1>Step 3: Select Favorite Markets, Allergies, and Brands</h1>
               <form onSubmit={handleNextStep}>
+                <h1 className='step3-title'>Last details</h1>
+
+                <h1 className='step3-subtitle'>Your intolerances
+                  <Link to={`/app/allergies`}>
+                    <img src={Help} alt="Help" className="help-icon" />
+                  </Link>
+                </h1>
                 <div className="form-group">
-                  <h3>Markets</h3>
-                  {markets.map((market) => (
-                    <div key={`market-${market.id}`} className="form-check">
-                      <input
-                        type="checkbox"
-                        id={`market-${market.id}`}
-                        name="market"
-                        value={market.id}
-                        onChange={handleCheckboxes}
-                        className="form-check-input"
-                      />
-                      <label htmlFor={`market-${market.id}`} className="form-check-label">
-                        {market.name}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-                <div className="form-group">
-                  <h3>Allergies</h3>
                   {allergies.map((allergy) => (
                     <div key={`allergy-${allergy.id}`} className="form-check">
                       <input
@@ -417,8 +456,28 @@ const Register = () => {
                     </div>
                   ))}
                 </div>
+
+                <h1 className='step3-subtitle'>Favourite markets</h1>
                 <div className="form-group">
-                  <h3>Brands</h3>
+                  {markets.map((market) => (
+                    <div key={`market-${market.id}`} className="form-check">
+                      <input
+                        type="checkbox"
+                        id={`market-${market.id}`}
+                        name="market"
+                        value={market.id}
+                        onChange={handleCheckboxes}
+                        className="form-check-input"
+                      />
+                      <label htmlFor={`market-${market.id}`} className="form-check-label">
+                        {market.name}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+
+                <h1 className='step3-subtitle'>Favourite brands</h1>
+                <div className="form-group">
                   {brands.map((brand) => (
                     <div key={`brand-${brand.id}`} className="form-check">
                       <input
@@ -436,9 +495,7 @@ const Register = () => {
                   ))}
                 </div>
                 <div className='btn1 text-center mt-4'>
-                  <button type="submit" className="btn btn-primary">
-                    Next
-                  </button>
+                  <button type="submit" className="next-but">Finish</button>
                 </div>
               </form>
             </div>
@@ -452,10 +509,10 @@ const Register = () => {
   return (
     <div className='container'>
       {renderStep()}
-      
     </div>
-    
   );
+  
 };
 
+// Exporting Register component
 export default Register;

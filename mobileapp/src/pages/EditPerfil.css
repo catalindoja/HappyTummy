@@ -21,8 +21,9 @@
 option {
     background-color: #00cdf6;
 }
+
 option:hover {
-    color: #080;
+    color: rgb(165, 214, 165);
 }
 
 button.btn.btn-success {
@@ -31,5 +32,53 @@ button.btn.btn-success {
 }
 
 .form1 {
-    margin-top: -190px !important;
+    margin-top: -300px !important;
+}
+
+.editprofile-minititle {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.editprofile-button {
+    background-color: teal;
+    border: none;
+    text-align: center;
+}
+
+.editprofile-button:focus,
+.editprofile-button:active {
+    background-color: rgba(0, 128, 128, 0.651) !important;
+}
+
+.modal-content .logout-button {
+    background-color: inherit;
+    color: inherit;
+}
+
+.logout-button {
+    margin-top: 30px;
+    background-color: rgba(241, 19, 19, 0.707);
+    border: none;
+    text-align: center;
+    margin-bottom: -200px !important;
+}
+
+.logout-button:focus,
+.logout-button:active {
+    background-color: rgba(241, 19, 19, 0.484) !important;
+}
+
+.cancel-button {
+    background-color: rgba(241, 19, 19, 0.707);
+    border: none;
+    text-align: center;
+    margin-right: 18px;
+}
+
+.confirm-button {
+    background-color: rgba(0, 128, 51, 0.651);
+    border: none;
+    text-align: center;
+    margin-left: 18px;
 }

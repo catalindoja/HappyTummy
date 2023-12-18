@@ -1,31 +1,73 @@
-/* ProductCard.css */
-
-.card-border{
-    border: 4px solid #b9e7e7 !important; /* Borde azul celeste */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.card-header {
-    display: flex;
-    justify-content: space-between;
+.card-general {
+  flex-basis: calc(50% - 5px);
+  border: 3.5px solid #b9e7e7 !important;
+  margin: 6px 0;
 }
 
-.card-title{
-    font-weight: bold !important;
+.card-image {
+  width: 130px !important;
+  height: 130px !important;
+  margin: 8px auto;
+  border-radius: 8px;
 }
 
-.card-text{
-    text-align: justify;
+.card-miniheader {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f6f6f6;
+  border-radius: 5%;
 }
 
-.heart-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
+.card-title {
+  font-weight: bold;
+  font-size: 18px;
+  margin: 8px;
 }
 
-.blue-button {
-    background-color: rgb(95, 195, 235) !important;
-    border-color: rgb(95, 195, 235) !important;
-    /* background: #87CEEB; */
-    /* color: #fff;  */
+.card-text {
+  text-align: justify;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.card-heart-icon {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+  margin-top: 12px;
+}
+
+.card-button {
+  background-color: teal !important;
+  border-color: teal !important;
+}
+
+.allergens-contains {
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.fancy-allergy-icon {
+  margin-top: 3px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  margin-right: 2px;
+}
+
+.card-body {
+  margin-top: -20px;
+}
+
+.card-link {
+  display: block !important;
+  text-decoration: none !important;
+  color: inherit !important;
 }

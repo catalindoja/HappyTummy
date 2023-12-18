@@ -1,0 +1,14 @@
+.back-arrow-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.back-arrow-img {
+  width: 30px;
+  height: auto;
+}

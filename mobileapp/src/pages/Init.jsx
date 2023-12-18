@@ -1,34 +1,38 @@
 import React from "react";
-import Logo from "../img/logo2.png";
-import './Init.css';
-import backgroundImage from "../img/clearbackground.png";
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import './Init.css';
+import backgroundImage from "../img/clearbackground.png";
+import Logo from "../img/logo2.png";
 import Configration from "../components/Configration";
+import BackArrow from "../components/BackArrow";
 
+// Init component
 function Init() {
   const { t } = useTranslation();
   return (
-    <div className="login_content" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <div className="init_content" style={{ backgroundImage: `url(${backgroundImage})` }}>
       <Configration />
-      <h1 className="display-2">Happy Tummy</h1>
-      <p>{t('paragraph_init1')} <span className="text-danger" style={{ fontSize: '30px' }}>♥</span></p>
 
-      
-      <div className="login_logo">
+      <h1 className="display-2 init-title">Happy Tummy</h1>
+      <p className="welcome-text">{t('paragraph_init1')}</p>
+
+      <div className="init_logo">
         <img className="img11" src={Logo} alt="" />
       </div>
 
-      <div className="login_buttons">
+      <div className="init_buttons">
         <Link to={"/login"}>
-          <button type="button" className="btn btn-primary btn-sm">{t("login")}</button>
+          <button type="button" className="btn btn-primary btn-sm button-login">{t("login")}</button>
         </Link>
         <Link to={"/register"}>
-          <button type="button" className="btn btn-success btn-sm">{t("register")}</button>
+          <button type="button" className="btn btn-primary btn-sm button-reg">{t("register")}</button>
         </Link>
       </div>
+
     </div>
   );
 }
 
+// Exporting Init component
 export default Init;

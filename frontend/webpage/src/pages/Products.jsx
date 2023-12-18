@@ -11,6 +11,7 @@ const Products = () => {
   // Obtaining the products
   const [posts, setPosts] = useState([]);
   const { currentUser } = useContext(AuthContext);
+  const cat = useLocation().search;
 
   // Obtaining the users
   const [users, setUsers] = useState([]);

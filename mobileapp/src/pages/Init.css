@@ -1,4 +1,4 @@
-.login_content {
+.init_content {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -7,56 +7,61 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-family: 'Lato', sans-serif;
     background-color: #b9e7e7;
 }
 
-.display-2 {
+.init-title {
     margin-top: 0px;
     color: #505050;
     font-weight: bold;
+    background-color: #b9e7e7;
+    padding: 10px;
+    padding: 8px;
+    border-radius: 10px;
+    display: inline-block;
+    color: teal;
+    margin-top: 180px !important;
 }
 
-.login_logo img {
+.init_logo img {
     border-radius: 50%;
+    width: 250px !important;
+    height: auto !important;
 }
 
-.login_buttons button {
-    margin: 0 10px;
-    /* Separación horizontal entre los botones */
+.welcome-text {
+    font-size: 18px;
+    font-weight: bold;
+    color: #505050;
 }
 
-.login_buttons {
-    /* Separación horizontal entre los botones */
+.init_buttons {
     position: fixed;
     bottom: 0;
     width: 100%;
     background: #fff;
-    /* Puedes ajustar el color de fondo si es necesario */
     text-align: center;
     border: 1px solid #ccc;
-    /* Borde alrededor del rectángulo */
     padding: 25px 20px;
-    /* Espaciado interno */
     background-color: #b9e7e7;
 }
 
-.login_logo img {
-    width: 100px;
-    height: auto;
+.button-login,
+.button-reg {
+    margin: 0 10px;
+    width: calc(50% - 20px);
 }
 
-h1.display-2 {
-    color: #080;
-    margin-top: 180px !important;
+.button-login {
+    background-color: rgb(0, 97, 97);
+    color: white;
+    border: none;
+    font-size: 18px;
 }
 
-.img11 {
-    width: 70px !important;
-    height: 70px !important;
-}
-
-button.btn.btn-primary.btn-sm {
-    border-radius: 15px !important;
-    padding: 5px 10px !important;
+.button-reg {
+    background-color: white;
+    color: rgb(0, 97, 97);
+    border: 1px solid rgb(0, 97, 97);
+    font-size: 18px;
 }

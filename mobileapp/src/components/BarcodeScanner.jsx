@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import Quagga from 'quagga';
+import './BarcodeScanner.css';
 
+// BarcodeScanner component
 const BarcodeScanner = ({ onScan }) => {
   useEffect(() => {
     Quagga.init(
@@ -8,9 +10,9 @@ const BarcodeScanner = ({ onScan }) => {
         inputStream: {
           name: 'Live',
           type: 'LiveStream',
-          target: document.querySelector('#barcode-scanner'), // The container for the video element
+          target: document.querySelector('#barcode-scanner'), // Container for the video element
           constraints: {
-            width: 344
+            width: 890,
           }
         },
         decoder: {
@@ -38,4 +40,5 @@ const BarcodeScanner = ({ onScan }) => {
   return <div id="barcode-scanner"></div>;
 };
 
+// Exporting BarcodeScanner component
 export default BarcodeScanner;

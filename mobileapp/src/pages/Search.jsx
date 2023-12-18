@@ -9,15 +9,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBarcode } from '@fortawesome/free-solid-svg-icons';
 import Scanner from "./Scanner";
 import { BACKEND_API_URL } from '../config/proxy.js';
-
 import './Search.css';
-
 import { AuthContext } from "../context/authContext";
+import ReactPaginate from "react-paginate";
+import backgroundImage from "../img/clearbackground.png";
 
 function Search() {
 
     // Obtaining the current user
-    // const { currentUser } = useContext(AuthContext);
+    const { currentUser } = useContext(AuthContext);
 
     // Obtain products
     let [products, setProducts] = useState([]);
@@ -68,8 +68,16 @@ function Search() {
     // Choose between products and recipes
     const [activeSection, setActiveSection] = useState("products");
 
+    // Product pagination
+    const [pageNumberProduct, setPageNumberProduct] = useState(0);
+    const postsPerPageProduct = 4;
+    const pageCountProduct = Math.ceil(products.length / postsPerPageProduct);
+    const changePage = ({ selected }) => {
+        setPageNumberProduct(selected);
+    };
+
     return (
-        <div className="searchcontent"> 
+        <div className="searchcontent" style={{ backgroundImage: `url(${backgroundImage})` }}>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
 
             <div className="section-buttons">
@@ -88,7 +96,7 @@ function Search() {
             </div>
 
             {activeSection === "products" && (
-            <div className="searchproduct">
+                <div className="searchproduct">
                     <div className="boxes">
                         <fieldset className="search-fieldset">
                             <input
@@ -102,105 +110,80 @@ function Search() {
                         <Link to="/app/scanner">
                             <FontAwesomeIcon icon={faBarcode} className="barcode-icon" />
                         </Link>
-                        
+
                     </div>
 
-                {filteredProducts.length === 0 ? (
-                    <h3>Sorry, there are no products matching your search 😕</h3>
-                ) : (
-                    <div>
-                        <div className="card-container">
-                            {filteredProducts.map(post => (
-                                <ProductCard
-                                    image={post.image_url}
-                                    title={post.product_name}
-                                    desc={post.product_description}
-                                    id={post.id}
-                                />
-                            ))}
+                    {filteredProducts.length === 0 ? (
+                        <h3 className="sorry-text">Sorry, there are no products matching your search 😕</h3>
+                    ) : (
+                        <div>
+                            <div className="card-container">
+                                {filteredProducts
+                                    // .slice(pageNumberProduct * postsPerPageProduct, (pageNumberProduct + 1) * postsPerPageProduct)
+                                    .map(post => (
+                                        <ProductCard
+                                            image={post.image_url}
+                                            title={post.product_name}
+                                            desc={post.product_description}
+                                            id={post.id}
+                                            likes={post.likes}
+                                        />
+                                    ))}
+                            </div>
                         </div>
-                    </div>
-                )}
-            </div>
+                    )}
+
+                    {/* <ReactPaginate
+                        previousLabel={"Previous"}
+                        nextLabel={"Next"}
+                        pageCount={pageCountProduct}
+                        onPageChange={changePage}
+                        containerClassName={"pagination"}
+                        previousLinkClassName={"previous"}
+                        nextLinkClassName={"next"}
+                        disabledClassName={"disabled"}
+                        activeClassName={"active"}
+                    /> */}
+
+                </div>
             )}
 
             {activeSection === "recipes" && (
-            <div className="searchrecipe">
-                <div className="boxes">
-                    <fieldset>
-                        <input
-                            type="text"
-                            className="search"
-                            value={SearchTermRecipe}
-                            placeholder="What are you looking for?"
-                            onChange={(e) => setSearchTermRecipe(e.target.value)}
-                        />
-                    </fieldset>
-                </div>
-
-                {filteredRecipes.length === 0 ? (
-                    <h3>Sorry, there are no recipes matching your search 😕</h3>
-                ) : (
-                    <div>
-                        <div className="card-container">
-                            {filteredRecipes.map(post => (
-                                <RecipeCard
-                                    image={post.image_url}
-                                    title={post.title}
-                                    desc={post.description}
-                                    id={post.id}
-                                />
-                            ))}
-                        </div>
+                <div className="searchrecipe">
+                    <div className="boxes">
+                        <fieldset>
+                            <input
+                                type="text"
+                                className="search"
+                                value={SearchTermRecipe}
+                                placeholder="What are you looking for?"
+                                onChange={(e) => setSearchTermRecipe(e.target.value)}
+                            />
+                        </fieldset>
                     </div>
-                )}
-            </div>
+
+                    {filteredRecipes.length === 0 ? (
+                        <h3 className="sorry-text">Sorry, there are no recipes matching your search 😕</h3>
+                    ) : (
+                        <div>
+                            <div className="card-container">
+                                {filteredRecipes.map(post => (
+                                    <RecipeCard
+                                        image={post.image_url}
+                                        title={post.title}
+                                        desc={post.description}
+                                        id={post.id}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </div>
             )}
-        
-        
         </div>
     );
 
 };
 
+// Exporting the component
 export default Search;
-
-
-
-
-    // <div>
-    //     search product here! 
-
-    //     <div className="container-fluid d-flex align-items-center justify-content-center">
-    //         <div className="text-center">
-    //             <Popup
-    //                 trigger={<button className="btn btn-success">Publish a Product</button>}
-    //                 modal
-    //             >
-    //                 {(close) => (
-    //                     <>
-    //                         <div className="modal-header">
-    //                             <h5 className="modal-title text-center">Publish a New Post</h5>
-    //                             <button className="close" onClick={close} style={{ border: 'none', fontWeight: 'bold', fontSize: '30px' }}>
-    //                                 &times;
-    //                             </button>
-
-    //                         </div>
-    //                         <div className="modal-body">
-    //                             <publishNewProduct />
-    //                         </div>
-    //                         <div className="modal-footer text-center justify-content-center">
-    //                             <button className="btn btn-success" onClick={publishNewProduct}>
-    //                                 Product
-    //                             </button>
-
-    //                             <button className="btn btn-danger" onClick={publishNewProduct}>
-    //                                 Receipe
-    //                             </button> 
-    //                         </div>
-    //                     </>
-    //                 )}
-    //             </Popup>
-    //         </div>
-    //     </div>
-    // </div>

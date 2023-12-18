@@ -5,13 +5,14 @@
 }
 
 /* HEADER */
-.profile-header {
-  background-color: rgba(94, 255, 236, 0.333);
-  padding: 20px;
+
+.user-header {
+  background-color: rgba(94, 255, 236, 0.27);
+  padding: 5px;
   border-radius: 8px;
   color: #fff;
   display: flex;
-  justify-content: space-between;
+  margin-top: 30px;
 }
 
 .profile-profilepic {
@@ -24,7 +25,7 @@
 
 .profile-username {
   margin-top: 10px;
-  margin-left: 5px;
+  margin-left: 6px;
   font-size: 24px;
   font-weight: bold;
   color: #585858;
@@ -51,25 +52,16 @@
   opacity: 0.8;
 }
 
-.premium-star {
-  font-size: 30px;
-  margin-right: 100px;
-}
-
-.profile-username-premium {
-  margin-top: 10px;
-  margin-left: 5px;
-  font-size: 24px;
-  font-weight: bold;
-  color: rgb(246, 234, 4);
-  text-shadow:
-    -1px -1px 0 #585858,
-    1px -1px 0 #585858,
-    -1px 1px 0 #585858,
-    1px 1px 0 #585858
+.follow-button {
+  margin-left: 90px;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 19px;
+  cursor: pointer;
 }
 
 /* CONTENT */
+
 .profile-maintitles {
   font-weight: bold;
   margin-top: 15px;
@@ -86,6 +78,7 @@
 }
 
 /* MODAL */
+
 button {
   padding: 10px;
   font-size: 16px;
@@ -149,22 +142,4 @@ button {
   width: 30px;
   height: 30px;
   cursor: pointer;
-}
-
-.no-post-prod {
-  margin-top: 20px;
-  margin-left: 10px;
-  margin-bottom: 100px;
-  font-size: 25px;
-  font-weight: bold;
-  color: #585858;
-}
-
-.no-post-rec {
-  margin-top: 20px;
-  margin-left: 10px;
-  margin-bottom: 400px;
-  font-size: 25px;
-  font-weight: bold;
-  color: #585858;
 }

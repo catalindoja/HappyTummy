@@ -1,0 +1,68 @@
+.barcode-scanner-app-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.barcode-title {
+  color: teal;
+  text-align: center;
+}
+
+.barcode-text {
+  color: teal;
+  font-size: 18px;
+}
+
+.barcode-minititle {
+  color: teal;
+}
+
+.scanner-wrapper {
+  border: 2px solid teal;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+#barcode-scanner {
+  width: 100%;
+  height: 200px;
+}
+
+.scan-info,
+.product-info {
+  font-size: 18px;
+}
+
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.search-input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.search-query-input {
+  width: 100%;
+}
+
+.search-button {
+  flex: 0;
+}
+
+.search-btn {
+  background-color: teal;
+  color: #ffffff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.just-white {
+  margin-bottom: 400px;
+}

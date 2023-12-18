@@ -17,7 +17,26 @@ export const AuthProvider = ({ children }) => {
   const logout = async (inputs) => {
     await axios.post(`${BACKEND_API_URL}/logout`);
     setCurrentUser(null);
-    window.location.href = "/app/login";
+    window.location.href = "/";
+  };
+
+  const updatePremium = async () => {
+    try {
+      const updatedUser = await axios.patch(`${BACKEND_API_URL}/users/${currentUser.id}`, {
+        premium: 1,
+      });
+      setCurrentUser(updatedUser.data[0]);
+      localStorage.setItem("user", JSON.stringify(updatedUser.data[0]));
+    } catch (error) {
+      console.error("Error updating premium:", error);
+    }
+  };
+
+  const contextValue = {
+    currentUser,
+    login,
+    logout,
+    updatePremium,
   };
 
   useEffect(() => {
@@ -25,7 +44,7 @@ export const AuthProvider = ({ children }) => {
   }, [currentUser]);
 
   return (
-    <AuthContext.Provider value={{ currentUser, login, logout }}>
+    <AuthContext.Provider value={contextValue}>
       {children}
     </AuthContext.Provider>
   );

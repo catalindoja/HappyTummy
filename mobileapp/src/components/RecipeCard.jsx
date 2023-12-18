@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import heart from '../img/heart.png';
 import './RecipeCard.css';
 
+// RecipeCard component
 function RecipeCard(props) {
 
     // Limit description text
@@ -20,19 +22,25 @@ function RecipeCard(props) {
     };
 
     return (
-        <div className="card mb-2 d-flex card-border" style={{ width: "18rem;" }}>
-            <img src={props.image} className="card-img-top" alt={props.title} />
+        <Link to={`/app/recipes/${props.id}`} className="card mb-2 d-flex card-general">
+            <img
+                src={props.image}
+                className="card-img-top card-image"
+                alt={props.title}
+            />
             <div className="card-body">
-                <div className="card-header">
-                    <h5 className="card-title afw-bold">{props.title}</h5>
-                    <img src={heart} className="heart-icon" alt="Heart" />
+                <div className="card-miniheader">
+                    <h5 className="afw-bold card-title">{props.title}</h5>
+                    {/* <img src={heart} className="card-heart-icon" alt="Heart" /> */}
                 </div>
-                <p className="card-text">{limitText(getText(props.desc), 100)}</p>
-                <a href={`/app/recipes/${props.id}`} className="btn btn-primary blue-button">Read more</a>
+                <p className="card-text">{limitText(getText(props.desc), 90)}</p>
+
+                {/* <a href={`/app/recipes/${props.id}`} className="btn btn-primary card-button">Read more</a> */}
+
             </div>
-        </div>
+        </Link>
     );
 };
 
-
+// Exporting RecipeCard component
 export default RecipeCard;

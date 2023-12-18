@@ -10,21 +10,28 @@ import Arrow from "../img/arrow.png";
 import axios from "axios";
 import DOMPurify from "dompurify";
 import ReactQuill from 'react-quill';
+import moment from "moment";
 import "./SingleRecipe.css";
 import { BACKEND_API_URL } from '../config/proxy.js';
+import Modal from 'react-modal';
+import arrowImage from "../img/arrow.png";
+import warning from "../img/warning.png";
 
-// Create the SingleRecipe component
+// SingleRecipe component
 const SingleRecipe = () => {
 
+    // Location and navigation
     const location = useLocation();
     const navigate = useNavigate();
+
+    // Post id
     const postId = location.pathname.split("/")[3];
     const [post, setPosts] = useState([]);
 
     // Current user
-    // const { currentUser } = useContext(AuthContext);
-    // const idCurrent = currentUser.id;
-    // const usernameCurrent = currentUser.username;
+    const { currentUser } = useContext(AuthContext);
+    const idCurrent = currentUser.id;
+    const usernameCurrent = currentUser.username;
 
     // Owner of the post
     const idOwner = post.iduser;
@@ -38,6 +45,35 @@ const SingleRecipe = () => {
     // Write new comment
     const state = useLocation().state;
     const [value, setValue] = useState(state?.newComment || "");
+
+    const likes = 0;
+    // Post comment
+    const handleClick = async (e) => {
+        e.preventDefault();
+        try {
+            await axios.post(`/commentrecipes/`, {
+                iduser: idCurrent,
+                idrecipe: postId,
+                content: value,
+                likes,
+                date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+            });
+
+            window.location.reload();
+
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    // Report error modal
+    const [modalIsOpen2, setModalIsOpen2] = useState(false);
+    const openModal2 = () => {
+        setModalIsOpen2(true);
+    };
+    const closeModal2 = () => {
+        setModalIsOpen2(false);
+    };
 
     useEffect(() => {
         const fetchData = async () => {
@@ -90,17 +126,11 @@ const SingleRecipe = () => {
         fetchData();
     }, [postId, idOwner]);
 
-    // Obtaining the text
-    const getText = (html) => {
-        const doc = new DOMParser().parseFromString(html, "text/html")
-        return doc.body.textContent
-    }
-
     // Delete the recipe
     const handleDelete = async () => {
         try {
-            const productResponse = await axios.delete(`${BACKEND_API_URL}/recipes/${post.id}`);
-            navigate("/app/home")
+            await axios.delete(`${BACKEND_API_URL}/recipes/${post.id}`);
+            navigate("/app/profile")
         } catch (err) {
             if (err.response) {
                 console.log("Respuesta del servidor con estado de error:", err.response.status);
@@ -113,46 +143,154 @@ const SingleRecipe = () => {
     }
 
     // Like button
-    const handleLikeClick = async (commentId) => {
+    const handleLikeClick = async (postId) => {
         console.log("Like button clicked");
         try {
+            await axios.patch(`/recipes/${postId}`, {
+                likes: post.likes + 1,
+            });
+            window.location.reload();
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    // Comments like button
+    const handleCommentLikeClick = async (commentId, commentLikes) => {
+        try {
+            await axios.patch(`/commentrecipes/${commentId}`, {
+                likes: commentLikes + 1,
+            });
+
+            window.location.reload();
 
         } catch (err) {
-            console.error(err);
+            console.log(err);
         }
+    };
+
+    // Modal pop-up
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+    const openModal = () => {
+        setModalIsOpen(true);
+    };
+    const closeModal = () => {
+        setModalIsOpen(false);
     };
 
     // Render the SingleRecipe component
     return (
         <div>
-            <div className="single">
+            <div className="single-recipe">
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
                 <div className="content">
                     <Link to="#" onClick={() => window.history.back()}>
                         <img className="arrow-img" src={Arrow} alt="" />
                     </Link>
-                    <img className="super-image" src={post.image_url} alt="" />
                     <div className="user">
-                        <img src={ProfilePicture} />
-                        <div className="info">
+                        <img src={ProfilePicture} alt="" />
+                        <Link to={`/app/user/${userOwner.id}`} className="info">
                             <span className="username">{userOwner.username}</span>
-                        </div>
-                        {/* {currentUser.username === userOwner.username ? (
+                        </Link>
+                        {currentUser.username === userOwner.username ? (
                             <><div className="edit">
-                                <Link to={`/editpost`} state={post}>
+                                <Link to={`/app/editrecipe/${postId}`} state={post}>
                                     <img className="editimg" src={Edit} alt="" />
                                 </Link>
-                                <img className="delete" onClick={handleDelete} src={Delete} alt="" />
+
+                                <img className="delete" onClick={openModal} src={Delete} alt="" />
+                                <Modal
+                                    isOpen={modalIsOpen}
+                                    onRequestClose={closeModal}
+                                    shouldCloseOnOverlayClick={true}
+                                    shouldCloseOnEsc={true}
+                                    className="modal-content"
+                                    overlayClassName="modal-overlay"
+                                >
+                                    <div>
+                                        <span className="premium-description">
+                                            <p className="premium-text"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: DOMPurify.sanitize("Are you sure you want to delete this post?")
+                                                }}
+                                            ></p>
+                                        </span>
+                                        <div className="popup-confirm-buttons">
+                                            <button className="cancel-button" onClick={closeModal}>
+                                                Cancel
+                                            </button>
+                                            <button className="confirm-button" onClick={handleDelete}>
+                                                Confirm
+                                            </button>
+                                        </div>
+                                        <img
+                                            src={arrowImage}
+                                            alt="Close"
+                                            className="close-icon"
+                                            onClick={closeModal}
+                                        />
+                                    </div>
+                                </Modal>
+
                             </div> </>
                         ) : (
-                            <div className="like">
-                                <button onClick={handleLikeClick}>
-                                    <img src={Heart} alt="Heart Icon" className="heart-icon" />
-                                    <span className="likes-count">{post.likes}</span>
-                                </button>
+                            <div>
+                                <img className="delete" onClick={openModal2} src={warning} alt="" />
+                                <Modal
+                                    isOpen={modalIsOpen2}
+                                    onRequestClose={closeModal2}
+                                    shouldCloseOnOverlayClick={true}
+                                    shouldCloseOnEsc={true}
+                                    className="modal-content"
+                                    overlayClassName="modal-overlay"
+                                >
+                                    <div>
+                                        <span className="premium-description">
+                                            <p className="premium-text"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: DOMPurify.sanitize("Report an error in this post ⚠")
+                                                }}
+                                            ></p>
+                                        </span>
+
+                                        <div className="editorContainer-write">
+                                            <ReactQuill
+                                                modules={{
+                                                    toolbar: false, // Desactiva la barra de herramientas
+                                                    clipboard: { matchVisual: false }, // Desactiva las operaciones de copiar y pegar con formato
+                                                }}
+                                            />
+                                        </div>
+
+                                        <div className="popup-confirm-buttons">
+                                            <button className="cancel-button" onClick={closeModal2}>
+                                                Cancel
+                                            </button>
+                                            <button className="confirm-button" onClick={closeModal2}>
+                                                Confirm
+                                            </button>
+                                        </div>
+                                        <img
+                                            src={arrowImage}
+                                            alt="Close"
+                                            className="close-icon"
+                                            onClick={closeModal2}
+                                        />
+                                    </div>
+                                </Modal>
                             </div>
-                        )} */}
+                        )}
                     </div>
-                    <h4 className="recipe-name">{post.title}</h4>
+                    <div class="super-image-container">
+                        <img className="recipe-image" src={post.image_url} alt="" />
+                    </div>
+                    <div className="single-header">
+                        <h1 className="product-name my-3">{post.title}</h1>
+                        <button className="like" onClick={() => handleLikeClick(postId)}>
+                            <img src={Heart} alt="Heart Icon" className="heart-icon" />
+                            <div className="likes-count">{post.likes}</div>
+                        </button>
+                    </div>
                     <h3 className="specifications-heading">Specifications</h3>
                     <div className="more-data-container">
                         <div className="more-data-item">
@@ -177,7 +315,6 @@ const SingleRecipe = () => {
                         }}
                     ></p>
 
-
                     <h3 className="comments-heading">Comments</h3>
                     <ul className="comments-list">
                         {comments.length === 0 ? (
@@ -187,10 +324,14 @@ const SingleRecipe = () => {
                                 <li key={comment.id} className="comment">
                                     <div className="comment-content">
                                         <div className="user-info">
-                                            <img src={ProfilePicture} alt="Profile Picture" className="user-image" />
-                                            <span className="username">
+                                            <img src={ProfilePicture} alt="" className="user-image" />
+                                            <Link to={`/app/user/${userComments[comment.id] ? userComments[comment.id].id : "Unknown"}`} className="username">
                                                 {userComments[comment.id] ? userComments[comment.id].username : "Unknown"}
-                                            </span>
+                                            </Link>
+                                            <button className="comment-likes" onClick={() => handleCommentLikeClick(comment.id, comment.likes)}>
+                                                <img src={Heart} alt="Heart Icon" className="heart-icon" />
+                                                <div className="likes-count">{comment.likes}</div>
+                                            </button>
                                         </div>
                                         <p
                                             dangerouslySetInnerHTML={{
@@ -198,12 +339,7 @@ const SingleRecipe = () => {
                                             }}
                                         ></p>
                                     </div>
-                                    <div className="comment-likes">
-                                        <button className="comment-likes-button" onClick={handleLikeClick}>
-                                            <img src={Heart} alt="Heart Icon" className="heart-icon" />
-                                        </button>
-                                        <span className="likes-count">{comment.likes}</span>
-                                    </div>
+
                                 </li>
                             )
                             ))}
@@ -217,11 +353,24 @@ const SingleRecipe = () => {
                             theme="snow"
                             value={value}
                             onChange={setValue}
+                            modules={{
+                                toolbar: {
+                                    container: [
+                                        ["bold", "italic", "underline"],
+                                    ],
+                                },
+                                clipboard: { matchVisual: false },
+                                mention: false,
+                            }}
                         />
                     </div>
+
+                    <div className="comment-button">
+                        <button className="publishcomment-button" onClick={handleClick}> Publish</button>
+                    </div>
+
                 </div>
 
-                {/* MENU HERE */}
             </div>
         </div>
     );

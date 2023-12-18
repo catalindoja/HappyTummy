@@ -1,19 +1,22 @@
 .configration-container {
-    margin-left: auto;
+    margin-left: 290px;
     margin-right: 10px;
     text-align: right;
     top: 8px;
 }
 
-.font-size-18 {
-    font-size: 18px;
-}
-
 select#language-select {
-    background-color: #4444a0 !important;
+    margin-top: 10px !important;
+    background-color: teal !important;
     color: #fff;
     border: 1px solid #fff !important;
     padding: 4px;
     border-radius: 15px;
     margin-bottom: 10px;
+}
+
+#language-select option {
+    background-color: rgb(0, 148, 148) !important;
+    color: #fff !important;
+    font-size: 12px !important;
 }

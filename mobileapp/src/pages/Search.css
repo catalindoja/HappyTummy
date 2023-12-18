@@ -1,59 +1,71 @@
 .searchcontent {
-    padding: 20px;
-  }
-  
-  .section-buttons {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-  }
-  
-  button {
-    background-color: #87CEEB; /* Azul celeste */
-    color: #fff; /* Letras blancas */
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px !important;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-  }
-  
-  button.active {
-    background-color: #00a2ff; /* Azul más fuerte para el botón activo */
-    border-radius: 5%;
-  }
-  
-  .search {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    outline: none;
-  }
-  
-    .searchproduct .boxes {
-      display: flex;
-      align-items: center;
-    }
-  
-    .search-fieldset {
-      margin-right: 10px;
-    
-    }
-  
-    .barcode-icon {
-      font-size: 40px;
-      color: #000 !important;
-      margin-bottom: 10px !important;
-    }
+  padding: 10px;
+  margin-bottom: 100px;
+}
 
-    fieldset.search-fieldset {
-      width: 85% !important;
-      padding: 6px !important;
-    }
+.section-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  gap: -100px;
+}
 
-    input[type="text"]{ 
-      padding: 6px !important;
-    }
+button {
+  background-color: rgba(0, 128, 128, 0.425);
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px !important;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  border-radius: 5%;
+}
+
+button.active {
+  background-color: teal;
+}
+
+.search {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+}
+
+.searchproduct .boxes {
+  display: flex;
+  align-items: center;
+}
+
+.search-fieldset {
+  margin-right: 10px;
+}
+
+.barcode-icon {
+  font-size: 40px;
+  color: #555555 !important;
+  margin-bottom: 10px !important;
+  background-color: #b9e7e7;
+  padding: 10px;
+  padding: 8px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+fieldset.search-fieldset {
+  width: 85% !important;
+  padding: 6px !important;
+}
+
+input[type="text"] {
+  padding: 6px !important;
+}
+
+.sorry-text {
+  text-align: center;
+  margin-bottom: 660px;
+}
