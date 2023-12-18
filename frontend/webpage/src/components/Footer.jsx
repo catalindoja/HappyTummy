@@ -10,9 +10,15 @@ const Footer = () => {
     <footer>
       <img src={Logo2} alt="" className="logo" />
       <div className="social-icons">
-        <img src={instagram} alt="" />
-        <img src={twitter} alt="" />
-        <img src={facebook} alt="" />
+        <a href="https://www.instagram.com/">
+          <img src={instagram} alt="" />
+        </a>
+        <a href="https://twitter.com/">
+          <img src={twitter} alt="" />
+        </a>
+        <a href="https://www.facebook.com/">
+          <img src={facebook} alt="" />
+        </a>
       </div>
     </footer>
   );

@@ -13,6 +13,10 @@ const Products = () => {
   const { currentUser } = useContext(AuthContext);
   const cat = useLocation().search;
 
+  const handleNavigation = () => {
+    window.location.href = "/postproduct";
+  };
+
   // Obtaining the users
   const [users, setUsers] = useState([]);
   useEffect(() => {
@@ -108,6 +112,7 @@ const Products = () => {
   return (
     <div className="home">
       <h1 className="supertitle">Products 🛒</h1>
+      <button style={{"margin-left": "1em"}} onClick={handleNavigation}>New product</button>
       <div className="box">
         <div className="boxes">
           <fieldset>

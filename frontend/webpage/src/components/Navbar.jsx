@@ -8,12 +8,6 @@ import Dot from "../img/teal.png";
 const Navbar = () => {
   const { currentUser, logout } = useContext(AuthContext);
 
-  // Menu visible
-  const [isMenuVisible, setMenuVisible] = useState(false);
-  const handleOptionClick = (option) => {
-    setMenuVisible(false);
-  };
-
   // Render the Navbar component
   return (
     <div className="navbar">
@@ -51,30 +45,6 @@ const Navbar = () => {
             <span onClick={logout}>Logout</span>
           ) : (
             <span>Logout</span>)}
-
-          <div>
-            <span className="write" onClick={() => setMenuVisible(true)}>
-              Post
-            </span>
-
-            {isMenuVisible && (
-              <div className="menu">
-                <span className="close-icon" onClick={() => setMenuVisible(false)}>
-                  &#10006;
-                </span>
-                <h3 className="menu-title">What do you want to post?😏</h3>
-                <div className="menu-buttons">
-                  <div className="menu-item" onClick={() => handleOptionClick("product")}>
-                    <Link to="/postproduct">New product</Link>
-                  </div>
-                  <div className="menu-item" onClick={() => handleOptionClick("recipe")}>
-                    <Link to="/postrecipe">New recipe</Link>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
         </div>
       </div>
     </div >
