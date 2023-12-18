@@ -45,11 +45,11 @@ export const getRecipe = async (req, res) => {
  */
 export const createRecipe = async (req, res) => {
     try {
-        const {idproduct, iduser, title, description, likes, time, unit, ammountofpeople, image, image_url} = req.body
+        const {idproduct, iduser, title, description, likes, time, unit, ammountofpeople, image, image_url, steps} = req.body
 
         const [rows] = await pool.query(
-            'INSERT INTO recipe (idproduct, iduser, title, description, likes, time, unit, ammountofpeople, image, image_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
-            [idproduct, iduser, title, description, likes, time, unit, ammountofpeople, image, image_url])
+            'INSERT INTO recipe (idproduct, iduser, title, description, likes, time, unit, ammountofpeople, image, image_url, steps) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+            [idproduct, iduser, title, description, likes, time, unit, ammountofpeople, image, image_url, steps])
 
         res.send({
             id: rows.insertId,
@@ -62,7 +62,8 @@ export const createRecipe = async (req, res) => {
             unit,
             ammountofpeople,
             image,
-            image_url
+            image_url,
+            steps
         })
     } catch (error) {
         return res.status(500).json({
@@ -102,11 +103,11 @@ export const deleteRecipe = async (req, res) => {
 export const updateRecipe = async (req, res) => {
     try {
         const {id} = req.params
-        const {idproduct, iduser, title, description, likes, time, unit, ammountofpeople, image, image_url} = req.body
+        const {idproduct, iduser, title, description, likes, time, unit, ammountofpeople, image, image_url, steps} = req.body
 
         const [result] = await pool.query(
-            'UPDATE recipe SET idproduct = IFNULL(?, idproduct), iduser = IFNULL(?, iduser), title = IFNULL(?, title), description = IFNULL(?, description), likes = IFNULL(?, likes), time = IFNULL(?, time), unit = IFNULL(?, unit), ammountofpeople = IFNULL(?, ammountofpeople), image = IFNULL(?, image), image_url = IFNULL(?, image_url) WHERE id = ?',
-            [idproduct, iduser, title, description, likes, time, unit, ammountofpeople, image, image_url, id])
+            'UPDATE recipe SET idproduct = IFNULL(?, idproduct), iduser = IFNULL(?, iduser), title = IFNULL(?, title), description = IFNULL(?, description), likes = IFNULL(?, likes), time = IFNULL(?, time), unit = IFNULL(?, unit), ammountofpeople = IFNULL(?, ammountofpeople), image = IFNULL(?, image), image_url = IFNULL(?, image_url), steps = IFNULL(?, steps) WHERE id = ?',
+            [idproduct, iduser, title, description, likes, time, unit, ammountofpeople, image, image_url, steps, id])
 
         if(result.affectedRows === 0) return res.status(404).json({
             message: 'Recipe not found'

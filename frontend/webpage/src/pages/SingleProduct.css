@@ -1,0 +1,50 @@
+.reply-container {
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .reply-header {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .reply-body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .reply-textarea {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .reply-buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .submit-reply-button,
+  .cancel-reply-button {
+    margin-left: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    color: #fff;
+  }
+  
+  .submit-reply-button {
+    background-color: #5cb85c;
+  }
+  
+  .cancel-reply-button {
+    background-color: #d9534f;
+  }

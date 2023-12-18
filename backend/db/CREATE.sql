@@ -207,3 +207,29 @@ CREATE TABLE errorReport (
 		PRIMARY KEY (id),
       FOREIGN KEY (idProduct) REFERENCES product(id)
 );
+
+CREATE TABLE follower (
+	id  INT NOT NULL AUTO_INCREMENT,
+	idFollowed INT,
+	idFollower INT,
+	dateFollowing DATE,
+	PRIMARY KEY (id),
+    FOREIGN KEY (idFollowed) REFERENCES user(id) ON DELETE CASCADE,
+    FOREIGN KEY (idFollower) REFERENCES user(id) ON DELETE CASCADE
+);
+
+CREATE TABLE notification (
+	id  INT NOT NULL AUTO_INCREMENT,
+	idRecipient INT,
+	idReceiver INT,
+	idComment INT,
+	idRecipeComment INT,
+	idErrorReport INT,
+	content TEXT,
+	PRIMARY KEY (id),
+   FOREIGN KEY (idRecipient) REFERENCES user(id) ON DELETE CASCADE,
+   FOREIGN KEY (idReceiver) REFERENCES user(id) ON DELETE CASCADE,
+   FOREIGN KEY (idComment) REFERENCES comment(id) ON DELETE CASCADE,
+   FOREIGN KEY (idRecipeComment) REFERENCES commentRecipe(id) ON DELETE CASCADE,
+   FOREIGN KEY (idErrorReport) REFERENCES errorReport(id) ON DELETE CASCADE
+);
