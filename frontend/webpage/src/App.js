@@ -19,6 +19,8 @@ import PostRecipe from './pages/PostRecipe';
 import Markets from './pages/Markets';
 import SingleMarket from './pages/SingleMarket';
 import PostMarket from './pages/PostMarket';
+import EditRecipe from './pages/EditRecipe';
+import EditProduct from './pages/EditProduct';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import "./style.scss"
@@ -89,6 +91,14 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />
+      },
+      {
+        path: "/editrecipe/:id",
+        element: <EditRecipe />
+      },
+      {
+        path: "/editproduct/:id",
+        element: <EditProduct />
       },
     ]
   },
