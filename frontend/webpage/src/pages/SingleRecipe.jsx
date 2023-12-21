@@ -200,7 +200,7 @@ const SingleRecipe = () => {
                         </div>
                         {currentUser.username === userOwner.username ? (
                             <><div className="edit">
-                                <Link to={`/editpost`} state={post}>
+                                <Link to={`/editrecipe/${post.id}`} state={post}>
                                     <img className="editimg" src={Edit} alt="" />
                                 </Link>
                                 <img className="delete" onClick={handleDelete} src={Delete} alt="" />
