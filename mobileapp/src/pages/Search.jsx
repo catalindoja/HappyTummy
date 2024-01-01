@@ -93,6 +93,11 @@ function Search() {
                 >
                     Recipes
                 </button>
+                <Link to="/app/searchuser">
+                    <button>
+                        Users
+                    </button>
+                </Link>
             </div>
 
             {activeSection === "products" && (

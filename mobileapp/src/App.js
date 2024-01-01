@@ -20,6 +20,7 @@ import EditRecipe from './pages/EditRecipe';
 import { i18n } from 'i18next';
 import Allergies from './pages/Allergies';
 import Configuration from './components/Configration';
+import SearchUser from './pages/SearchUser';
 
 import {
   createBrowserRouter,
@@ -108,6 +109,10 @@ const router = createBrowserRouter([
       {
         path: "editrecipe/:id",
         element: <EditRecipe />
+      },
+      {
+        path: "searchuser",
+        element: <SearchUser />
       },
     ]
   }
