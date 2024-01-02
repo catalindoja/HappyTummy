@@ -7,7 +7,7 @@ import axios from "axios";
 
 // Create the Products component
 const Products = () => {
-
+  const [posts, setPosts] = useState([]);
   const [markets, setMarkets] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -90,7 +90,7 @@ const Products = () => {
       return text.slice(0, limit) + "...";
     }
   };
-
+ 
   // Obtaining the products
   useEffect(() => {
     const fetchData = async () => {

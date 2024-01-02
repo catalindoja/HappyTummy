@@ -19,6 +19,7 @@ import PostRecipe from './pages/PostRecipe';
 import Markets from './pages/Markets';
 import SingleMarket from './pages/SingleMarket';
 import PostMarket from './pages/PostMarket';
+import Login from "./pages/Login";
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import "./style.scss"

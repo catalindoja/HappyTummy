@@ -1,14 +1,18 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../context/authContext";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import axios from "axios";
 import moment from "moment";
-import { Modal, Button } from 'react-bootstrap'; // Adjust the import based on your UI library
+import { Modal, Button } from 'react-bootstrap';
 import "./PostProduct.css";
+import Help from '../img/helpicon.png';
+import BackArrow from "../components/BackArrow";
+import "./Editproduct.css";
 
+// EditProduct component
 const EditProduct = () => {
     const location = useLocation();
     const state = location.state || {};
@@ -20,7 +24,6 @@ const EditProduct = () => {
     const [productData, setProductData] = useState({
         product_name: "",
         product_description: "",
-        // Add other fields as needed
     });
 
     const [selectedAllergies, setSelectedAllergies] = useState([]);
@@ -48,10 +51,9 @@ const EditProduct = () => {
         const fetchData = async () => {
             try {
                 const res = await axios.get(`/allergies`);
-                //console.log(res.data)
                 setAllergies(res.data);
             } catch (err) {
-                //console.log(err);
+                console.log(err);
             }
         };
         fetchData();
@@ -83,14 +85,12 @@ const EditProduct = () => {
                 });
             }));
 
-            alert("Product updated successfully");
             hidePopup();
             navigate(`/app/products/${postId}`);
         } catch (err) {
             console.log(err);
         }
     };
-
 
     const fetchProductDataFromServer = async () => {
         try {
@@ -113,7 +113,6 @@ const EditProduct = () => {
             await axios.patch(`/products/${postId}`, {
                 product_name: productData.product_name,
                 product_description: productData.product_description,
-                // Add other fields as needed
             });
             alert("Product updated successfully");
             navigate(`/app/products/${postId}`);
@@ -122,96 +121,126 @@ const EditProduct = () => {
         }
     };
 
+    const [descriptionError, setDescriptionError] = useState(null);
+
+    const handleQuillChange = (value) => {
+        // Verificar si el contenido contiene imágenes o enlaces a imágenes
+        if (value.includes("<img") || value.match(/\bhttps?:\/\/\S+\b/) || value.match(/\b\w+\.(jpg|jpeg|png|gif|bmp)\b/)) {
+            setDescriptionError("Please enter text only, no images or links to images.");
+        } else {
+            setDescriptionError(null);
+            handleInputChange("product_description", value);
+        }
+    };
+
     return (
-        <div className="container">
-            <h2 className="supertitle-write">{t('edit_product')} <span className="text-danger">❤</span></h2>
-            <div className="add-write">
-                <div className="content-write">
-                    <input
-                        type="text"
-                        placeholder={t('name_product')}
-                        value={productData.product_name}
-                        onChange={(e) => handleInputChange("product_name", e.target.value)}
-                    />
+        <div className="add-write">
+            <BackArrow />
 
-                    <div className="editorContainer-write">
-                        <ReactQuill
-                            placeholder={t('product_description')}
-                            className="editor-write"
-                            theme="snow"
-                            value={productData.product_description}
-                            onChange={(value) => handleInputChange("product_description", value)}
+            <div className="content-write">
+
+                <h2 className="supertitle-write">{'Edit My Product'} <span className="text-danger">❤</span></h2>
+                <div className="add-write">
+                    <div className="content-write">
+                        <input
+                            type="text"
+                            placeholder={t('name_product')}
+                            value={productData.product_name}
+                            onChange={(e) => handleInputChange("product_name", e.target.value)}
                         />
-                    </div>
 
-                    <div className="boxes-write my-3">
-                        <fieldset>
-                            <legend>{t('allergies')}</legend>
-                            <span>{t('it_contains')}</span>
-                            {allergies.map((allergy) => (
-                                <div key={allergy.id}>
-                                    <input type="checkbox" id={allergy.allergy_name} name="alergies[]"
-                                        checked={selectedAllergies.includes(allergy.id)}
-                                        onChange={() => handleAllergyToggle(allergy.id)}
-                                        className="custom-checkbox-write" />
-                                    <label htmlFor={allergy.allergy_name}>{allergy.allergy_name}</label>
+                        <div className="editorContainer-write">
+                <ReactQuill
+                    placeholder={t('product_description')}
+                    theme="snow"
+                    value={productData.product_description}
+                    onChange={handleQuillChange}
+                    modules={{
+                        toolbar: {
+                            container: [
+                                ["bold", "italic", "underline"],
+                            ],
+                        },
+                        clipboard: { matchVisual: false },
+                        mention: false,
+                    }}
+                />
+            </div>
+            {descriptionError && <p className="error-message-write">{descriptionError}</p>}
+
+                        <legend>{t('allergies')}
+                            <Link to={`/app/allergies`}>
+                                <img src={Help} alt="Help" className="help-icon" />
+                            </Link>
+                        </legend>
+                        <span>{t('it_contains')}</span>
+                        <div className="form-group-post">
+                            <fieldset>
+                                {allergies.map((allergy) => (
+                                    <div key={allergy.id}>
+                                        <input type="checkbox" id={allergy.allergy_name} name="alergies[]"
+                                            checked={selectedAllergies.includes(allergy.id)}
+                                            onChange={() => handleAllergyToggle(allergy.id)}
+                                            className="form-check-input" />
+                                        <label className="form-check-label" htmlFor={allergy.allergy_name}>{allergy.allergy_name}</label>
+                                    </div>
+                                ))}
+                            </fieldset>
+                        </div>
+
+                        {error && <p className="error-message-write">{error}</p>}
+                        <div className="buttons-write-product">
+                            <button onClick={() => setShowPopup(true)}>Update</button>
+                        </div>
+
+                        <Modal show={showPopup} onHide={hidePopup} centered animation="slide-up">
+                            <Modal.Header closeButton>
+                                <h4
+                                    style={{
+                                        marginBottom: "-10px",
+                                        marginLeft: "65px",
+                                        marginTop: "10px",
+                                        textAlign: "center",
+                                        fontSize: "25px",
+                                    }}
+                                    classname="post-popup-text"
+                                >
+                                    Confirm changes
+                                </h4>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <div className="d-flex justify-content-around">
+                                    <Button className="cancel"
+                                        style={{
+                                            padding: "15px 15px",
+                                            fontSize: "20px",
+                                            backgroundColor: "lightgray",
+                                            color: "white",
+                                            border: "none",
+                                        }}
+                                        variant=""
+                                        onClick={hidePopup}
+                                    >
+                                        Cancel
+                                    </Button>
+                                    <Button
+                                        style={{
+                                            padding: "15px 15px",
+                                            fontSize: "20px",
+                                            backgroundColor: "teal",
+                                            color: "white",
+                                            border: "none",
+                                        }}
+                                        variant="primary"
+                                        onClick={handleClick}
+                                    >
+                                        Confirm
+                                    </Button>
                                 </div>
-                            ))}
-                        </fieldset>
+                            </Modal.Body>
+                        </Modal>
+
                     </div>
-
-                    {error && <p className="error-message-write">{error}</p>}
-                    <div className="buttons-write-recipe">
-                        <button onClick={() => setShowPopup(true)}>Update</button>
-                    </div>
-
-                    <Modal show={showPopup} onHide={hidePopup} centered animation="slide-up">
-                        <Modal.Header closeButton>
-                            <h4
-                                style={{
-                                    marginBottom: "-10px",
-                                    marginLeft: "30px",
-                                    marginTop: "10px",
-                                    textAlign: "center",
-                                    fontSize: "30px",
-                                }}
-                                classname="post-popup-text"
-                            >
-                                Confirm Update
-                            </h4>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <div className="d-flex justify-content-around">
-                                <Button
-                                    style={{
-                                        padding: "15px 15px",
-                                        fontSize: "20px",
-                                        backgroundColor: "teal",
-                                        color: "white",
-                                        border: "none",
-                                    }}
-                                    variant="primary"
-                                    onClick={handleClick}
-                                >
-                                    OK
-                                </Button>
-                                <Button className="cancel"
-                                    style={{
-                                        padding: "15px 15px",
-                                        fontSize: "20px",
-                                        backgroundColor: "lightgray",
-                                        color: "white",
-                                        border: "none",
-                                    }}
-                                    variant=""
-                                    onClick={hidePopup}
-                                >
-                                    Cancel
-                                </Button>
-                            </div>
-                        </Modal.Body>
-                    </Modal>
-
                 </div>
             </div>
         </div>

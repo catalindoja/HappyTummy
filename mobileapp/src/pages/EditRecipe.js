@@ -62,6 +62,8 @@ const EditRecipe = () => {
     const [error, setError] = useState(null);
     const [desciption, setValuedes] = useState(productData.description || "");
     const [valuesteps, setValuesteps] = useState(productData.valuesteps || "");
+    const [error_description, setErrorDescription] = useState(null);
+    const [error_steps, setErrorSteps] = useState(null);
 
 
     const fetchProductDataFromServer = async () => {
@@ -130,6 +132,26 @@ const EditRecipe = () => {
         navigate(`/app/recipes/${postId}`);
     };
 
+    const handleQuillChangeDescription = (value) => {
+        // Verificar si el contenido contiene imágenes o enlaces a imágenes
+        if (value.includes("<img") || value.match(/\bhttps?:\/\/\S+\b/) || value.match(/\b\w+\.(jpg|jpeg|png|gif|bmp)\b/)) {
+            setErrorDescription("Please enter text only, no images or links to images.");
+        } else {
+            setErrorDescription(null);
+            handleInputChange("description", value);
+        }
+    };
+
+    const handleQuillChangeSteps = (value) => {
+        // Verificar si el contenido contiene imágenes o enlaces a imágenes
+        if (value.includes("<img") || value.match(/\bhttps?:\/\/\S+\b/) || value.match(/\b\w+\.(jpg|jpeg|png|gif|bmp)\b/)) {
+            setErrorSteps("Please enter text only, no images or links to images.");
+        } else {
+            setErrorSteps(null);
+            handleInputChange("valuesteps", value);
+        }
+    };
+
     return (
         <div className="add-write add-write1">
             <h1 className="supertitle-write">Edit My Recipe <span className="text-danger">❤</span></h1>
@@ -179,7 +201,7 @@ const EditRecipe = () => {
                         className="editor"
                         theme="snow"
                         value={productData.description}
-                        onChange={(value) => handleInputChange("description", value)}
+                        onChange={(value) => handleQuillChangeDescription(value)}
                         modules={{
                             toolbar: {
                                 container: [
@@ -191,6 +213,7 @@ const EditRecipe = () => {
                         }}
                     />
                 </div>
+                {error_description && <p className="error-message-write">{error_description}</p>}
 
                 <div className="editorContainer-write">
                     <ReactQuill
@@ -198,7 +221,7 @@ const EditRecipe = () => {
                         className="editor"
                         theme="snow"
                         value={productData.valuesteps}
-                        onChange={(value) => handleInputChange("valuesteps", value)}
+                        onChange={(value) => handleQuillChangeSteps(value)}
                         modules={{
                             toolbar: {
                                 container: [
@@ -210,6 +233,8 @@ const EditRecipe = () => {
                         }}
                     />
                 </div>
+                {error_steps && <p className="error-message-write">{error_steps}</p>}
+
 
                 <h3 className="picture-title">Update a picture 📸</h3>
 

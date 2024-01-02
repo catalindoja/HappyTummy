@@ -295,6 +295,31 @@ const Write = () => {
     }
   };
 
+  const [productData, setProductData] = useState({
+    product_name: "",
+    product_description: "",
+  });
+
+  //const [descriptionError, setDescriptionError] = useState(null);
+  const handleInputChange = (field, value) => {
+    setProductData((prevProductData) => ({
+      ...prevProductData,
+      [field]: value,
+    }));
+  };
+
+  const [descriptionError, setDescriptionError] = useState(null);
+
+  const handleQuillChange = (value) => {
+    // Verificar si el contenido contiene imágenes o enlaces a imágenes
+    if (value.includes("<img") || value.match(/\bhttps?:\/\/\S+\b/) || value.match(/\b\w+\.(jpg|jpeg|png|gif|bmp)\b/)) {
+      setDescriptionError("Please enter text only, no images or links to images.");
+    } else {
+      setDescriptionError(null);
+      handleInputChange("product_description", value);
+    }
+  };
+
   // Return the JSX elements
   return (
     <div className="container">
@@ -311,12 +336,21 @@ const Write = () => {
           <div className="editorContainer-write">
             <ReactQuill
               placeholder={t('product_description')}
-              className="editor-write"
-              
-              value={value}
-              onChange={setValue}
+              theme="snow"
+              value={productData.product_description}
+              onChange={handleQuillChange}
+              modules={{
+                toolbar: {
+                  container: [
+                    ["bold", "italic", "underline"],
+                  ],
+                },
+                clipboard: { matchVisual: false },
+                mention: false,
+              }}
             />
           </div>
+          {descriptionError && <p className="error-message-write">{descriptionError}</p>}
   
           <input
             type="number"
