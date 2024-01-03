@@ -13,6 +13,9 @@ import './Search.css';
 import { AuthContext } from "../context/authContext";
 import ReactPaginate from "react-paginate";
 import backgroundImage from "../img/clearbackground.png";
+import "reactjs-popup/dist/index.css";
+import UserCard from "../components/UserCard";
+import community from "../img/community.png";
 
 function Search() {
 
@@ -65,7 +68,29 @@ function Search() {
         post.title.toLowerCase().includes(SearchTermRecipe.toLowerCase())
     );
 
-    // Choose between products and recipes
+    // Obtain users
+    const [users, setUsers] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get(`${BACKEND_API_URL}/users`);
+                console.log(res.data);
+                setUsers(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    // Filter users
+    const [SearchTermUser, setSearchTermUser] = useState("");
+    let filteredUsers = users.filter((user) =>
+        user.username.toLowerCase().includes(SearchTermUser.toLowerCase())
+    );
+
+    // Choose between products, recipes and users
     const [activeSection, setActiveSection] = useState("products");
 
     // Product pagination
@@ -93,11 +118,16 @@ function Search() {
                 >
                     Recipes
                 </button>
-                <Link to="/app/searchuser">
-                    <button>
-                        Users
-                    </button>
-                </Link>
+                <button
+                    className={`image-button ${activeSection === "users" ? "active" : ""}`}
+                    onClick={() => setActiveSection("users")}
+                >
+                    <img
+                        src={community}
+                        alt="Community"
+                        style={{ width: '35px', height: '25px', color: 'w' }}
+                    />
+                </button>
             </div>
 
             {activeSection === "products" && (
@@ -185,6 +215,38 @@ function Search() {
                     )}
                 </div>
             )}
+
+            {activeSection === "users" && (
+                <div className="userlist">
+
+                    <div className="boxes">
+                        <fieldset>
+                            <input
+                                type="text"
+                                className="search"
+                                value={SearchTermUser}
+                                placeholder="Who are you looking for?"
+                                onChange={(e) => setSearchTermUser(e.target.value)}
+                            />
+                        </fieldset>
+                    </div>
+
+                    {filteredUsers.length === 0 ? (
+                        <h3 className="sorry-text">Sorry, there are no usernames matching your search 😕</h3>
+                    ) : (
+                        <div>
+                            <div className="">
+                                {filteredUsers.map(user => (
+                                    <UserCard
+                                        key={user.id}
+                                        user={user} />
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            )}
+
         </div>
     );
 

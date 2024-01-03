@@ -8,13 +8,14 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
 import RecipeCard from "../components/RecipeCard";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import { useTranslation } from 'react-i18next';
 import { BACKEND_API_URL } from '../config/proxy.js';
 import Modal from 'react-modal';
 import arrowImage from "../img/arrow.png";
 import DOMPurify from "dompurify";
+import Help from '../img/helpicon.png';
 
 import Gluten from "../img/allergens/gluten.png";
 import Lactose from "../img/allergens/leche.png";
@@ -51,7 +52,7 @@ function Profile() {
         Lupins,
     };
 
-    const { t } = useTranslation(); 
+    const { t } = useTranslation();
     const navigate = useNavigate();
 
     // Obtaining the current user
@@ -60,7 +61,7 @@ function Profile() {
     // Edit profile route
     const handleEditProfile = () => {
         const user = JSON.parse(localStorage.getItem("user"))
-        console.log(user.id)
+        // console.log(user.id)
         navigate("/app/editprofile/" + user.id);
     }
 
@@ -70,7 +71,7 @@ function Profile() {
         const fetchData = async () => {
             try {
                 const res = await axios.get(`${BACKEND_API_URL}/products`);
-                console.log(res.data);
+                // console.log(res.data);
                 setMyproducts(res.data);
 
             } catch (err) {
@@ -88,7 +89,7 @@ function Profile() {
         const fetchData = async () => {
             try {
                 const res = await axios.get(`${BACKEND_API_URL}/recipes`);
-                console.log(res.data);
+                // console.log(res.data);
                 setMyrecipes(res.data);
 
             } catch (err) {
@@ -99,6 +100,30 @@ function Profile() {
         fetchData();
     }, []);
     myrecipes = myrecipes.filter((post) => currentUser && post.iduser === currentUser.id)
+
+    // Obtain allergies of the current user
+    const [myallergies, setMyallergens] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+
+            // Obtains allergies of the current user
+            const everyallergenuser = await axios.get(`${BACKEND_API_URL}/userallergies/`);
+            const myallergenuser = everyallergenuser.data.filter((userallergies) => userallergies.iduser == currentUser.id);
+
+            const allergensName = await axios.get(`${BACKEND_API_URL}/allergies/`);
+
+            // Extract ids from myallergenuser
+            const allergyIds = myallergenuser.map((userallergy) => userallergy.idallergy);
+
+            // Filter allergensName based on extracted ids
+            const filteredAllergies = allergensName.data.filter((allergy) => allergyIds.includes(allergy.id));
+
+            console.log(filteredAllergies);
+
+            setMyallergens(filteredAllergies);
+        };
+        fetchData();
+    }, []);
 
     // Modal pop-up
     const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -143,19 +168,6 @@ function Profile() {
         + '<p>Update your account for <strong>4.99€</strong> per month</p>'
         + '<p><strong>Enjoy your Premium account NOW!</strong></p>'
         ;
-
-    // Obtain allergies of the current user
-    const [myallergies, setMyallergens] = useState([]);
-    useEffect(() => {
-        const fetchData = async () => {
-
-            // Obtains allergies of the current user
-            const everyallergen = await axios.get(`${BACKEND_API_URL}/userallergies/`);
-            const myallergens = everyallergen.data.filter((userallergies) => userallergies.iduser == currentUser.id);
-            setMyallergens(myallergens);
-        };
-        fetchData();
-    }, []);
 
     return (
         <div className="profile-content">
@@ -211,23 +223,29 @@ function Profile() {
                 <img className="profile-edit" src={Edit} onClick={handleEditProfile} alt="" />
             </div>
 
-            {/* <div >
+            <div className="contains-main-heading">
+                <div className="intolerances-title">
+                    My intolerances
+                </div>
+                <Link to={`/app/allergies`}>
+                    <img src={Help} alt="Help" className="help-icon-user" />
+                </Link>
+            </div>
+            <div className="user-allergies-logos">
                 {myallergies.length === 0 ? (
-                    <p>I have no intolerances 😋</p>
+                    <p className="intolerances-title">I have no intolerances 😋</p>
                 ) : (
                     myallergies.map((allergy, index) => (
-                        <div>
-                            <spam>{allergy.allergy_name}</spam>
-                        <img
-                            className="fancy-allergy-icon"
-                            key={index}
-                            src={allergenIcons[allergy.allergy_name]}
-                            alt={allergy.allergy_name}
-                        />
+                        <div key={index}>
+                            <img
+                                className="fancy-allergy-icon-user"
+                                src={allergenIcons[allergy.allergy_name]}
+                                alt={allergy.allergy_name}
+                            />
                         </div>
                     ))
                 )}
-            </div> */}
+            </div>
 
             <h5 className="profile-maintitles">{t('my_products')} <span className="icon2">🛒</span></h5>
             {myproducts.length === 0 ? (

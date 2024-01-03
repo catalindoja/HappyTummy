@@ -110,10 +110,10 @@ const router = createBrowserRouter([
         path: "editrecipe/:id",
         element: <EditRecipe />
       },
-      {
-        path: "searchuser",
-        element: <SearchUser />
-      },
+      // {
+      //   path: "searchuser",
+      //   element: <SearchUser />
+      // },
     ]
   }
 ]);

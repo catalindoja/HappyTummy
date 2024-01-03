@@ -62,13 +62,13 @@ function ProductCard(props) {
             try {
                 // Obtain productallergies and allergies
                 const res3 = await axios.get(`${BACKEND_API_URL}/productallergies/`);
-                console.log(res3)
+                //console.log(res3)
                 const filteredProductallergies = res3.data.filter((productallergies) => productallergies.idproduct == props.id);
 
                 // Obtain the IDs of the allergies
                 const allergyIds = filteredProductallergies.map((productallergy) => productallergy.idallergies);
                 const res4 = await axios.get(`${BACKEND_API_URL}/allergies/`);
-                console.log(res4)
+                //console.log(res4)
                 const filteredAllergies = res4.data.filter((allergy) => allergyIds.includes(allergy.id));
                 setAllergies(filteredAllergies);
             } catch (err) {

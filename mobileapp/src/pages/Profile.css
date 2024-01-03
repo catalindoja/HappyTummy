@@ -6,7 +6,7 @@
 
 /* HEADER */
 .profile-header {
-  background-color: rgba(94, 255, 236, 0.333);
+  background-color: #aeeeee;
   padding: 20px;
   border-radius: 8px;
   color: #fff;
@@ -68,6 +68,42 @@
     -1px 1px 0 #585858,
     1px 1px 0 #585858
 }
+
+/* USER ALERGIES */
+.user-allergies-logos {
+  margin-top: 0px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  background-color: #aeeeee;
+  padding: 10px;
+  border-radius: 8px;
+  align-items: center;
+}
+
+.intolerances-title {
+  margin-top: 10px;
+  font-size: 19px;
+  font-weight: bold;
+  color:#585858;
+}
+
+.fancy-allergy-icon-user {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 50%; 
+}
+
+.help-icon-user {
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  margin-left: -5px;
+  margin-top: 3px;
+}
+
 
 /* CONTENT */
 .profile-maintitles {

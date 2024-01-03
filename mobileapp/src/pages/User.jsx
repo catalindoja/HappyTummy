@@ -5,12 +5,46 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import ProductCard from "../components/ProductCard.jsx";
 import RecipeCard from "../components/RecipeCard.jsx";
-import { useLocation } from "react-router-dom";
 import { AuthContext } from "../context/authContext.js";
 import { BACKEND_API_URL } from '../config/proxy.js';
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import Help from '../img/helpicon.png';
+
+import Gluten from "../img/allergens/gluten.png";
+import Lactose from "../img/allergens/leche.png";
+import Eggs from "../img/allergens/huevo.png";
+import Fish from "../img/allergens/pescado.png";
+import Peanuts from "../img/allergens/cacahuetes.png";
+import Soy from "../img/allergens/soja.png";
+import Nuts from "../img/allergens/frutossecos.png";
+import Seafood from "../img/allergens/marisco.png";
+import Molluscs from "../img/allergens/moluscos.png";
+import Mustard from "../img/allergens/mostaza.png";
+import Celery from "../img/allergens/apio.png";
+import Sulphites from "../img/allergens/sulfitos.png";
+import Sesame from "../img/allergens/sesamo.png";
+import Lupins from "../img/allergens/altramuces.png";
 
 // User profile page
 function User() {
+
+    // Every allergne has an icon and a name
+    const allergenIcons = {
+        Gluten,
+        Lactose,
+        Eggs,
+        Fish,
+        Peanuts,
+        Soy,
+        Nuts,
+        Seafood,
+        Molluscs,
+        Mustard,
+        Celery,
+        Sulphites,
+        Sesame,
+        Lupins,
+    };
 
     // Obtaining the current user
     const { currentUser } = useContext(AuthContext);
@@ -69,6 +103,30 @@ function User() {
     }, []);
     hisrecipes = hisrecipes.filter((post) => post.iduser === user.id)
 
+    // Obtain allergies of the user
+    const [hisallergies, setHisallergens] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+
+            // Obtains allergies of the current user
+            const everyallergenuser = await axios.get(`${BACKEND_API_URL}/userallergies/`);
+            const hisallergenuser = everyallergenuser.data.filter((userallergies) => userallergies.iduser == user.id);
+
+            const allergensName = await axios.get(`${BACKEND_API_URL}/allergies/`);
+
+            // Extract ids from hisallergenuser
+            const allergyIds = hisallergenuser.map((userallergy) => userallergy.idallergy);
+
+            // Filter allergensName based on extracted ids
+            const filteredAllergies = allergensName.data.filter((allergy) => allergyIds.includes(allergy.id));
+
+            console.log(filteredAllergies);
+
+            setHisallergens(filteredAllergies);
+        };
+        fetchData();
+    }, []);
+
     // Check if the current user is following the profile user
     const [isFollowing, setIsFollowing] = useState(false);
 
@@ -122,7 +180,30 @@ function User() {
                 <button className="follow-button" onClick={toggleFollow}>
                     {isFollowing ? "Following" : "Follow"}
                 </button>
+            </div>
 
+            <div className="contains-main-heading">
+                <div className="intolerances-title">
+                    Intolerances
+                </div>
+                <Link to={`/app/allergies`}>
+                    <img src={Help} alt="Help" className="help-icon-user" />
+                </Link>
+            </div>
+            <div className="user-allergies-logos">
+                {hisallergies.length === 0 ? (
+                    <p className="intolerances-title">I have no intolerances 😋</p>
+                ) : (
+                    hisallergies.map((allergy, index) => (
+                        <div key={index}>
+                            <img
+                                className="fancy-allergy-icon-user"
+                                src={allergenIcons[allergy.allergy_name]}
+                                alt={allergy.allergy_name}
+                            />
+                        </div>
+                    ))
+                )}
             </div>
 
             <h5 className="profile-maintitles"> Products <span className="icon2">🛒</span></h5>
