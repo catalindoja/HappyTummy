@@ -96,7 +96,7 @@ function Profile() {
                 console.log(err);
             }
         };
-
+ 
         fetchData();
     }, []);
     myrecipes = myrecipes.filter((post) => currentUser && post.iduser === currentUser.id)
@@ -118,9 +118,30 @@ function Profile() {
             // Filter allergensName based on extracted ids
             const filteredAllergies = allergensName.data.filter((allergy) => allergyIds.includes(allergy.id));
 
-            console.log(filteredAllergies);
-
             setMyallergens(filteredAllergies);
+        };
+        fetchData();
+    }, []);
+
+    // Obtain followers and following
+    let [followers, setfollowers] = useState([]);
+    let [following, setfollowing] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get(`${BACKEND_API_URL}/followers`);
+
+                // Followers
+                const followersData = res.data.filter(entry => entry.idFollowed === currentUser.id);
+                setfollowers(followersData);
+
+                // Following
+                const followingData = res.data.filter(entry => entry.idFollower === currentUser.id);
+                setfollowing(followingData);
+
+            } catch (err) {
+                console.log(err);
+            }
         };
         fetchData();
     }, []);
@@ -221,6 +242,21 @@ function Profile() {
                     </Modal>
                 </div>
                 <img className="profile-edit" src={Edit} onClick={handleEditProfile} alt="" />
+            </div>
+
+            <div className="follow-section">
+                <Link to={`/app/followers/${currentUser.id}`}>
+                    <div className="follower-count">
+                        <h5 className="follow-h5">Followers</h5>
+                        <p className="follow-p">{followers.length}</p>
+                    </div>
+                </Link>
+                <Link to={`/app/following/${currentUser.id}`}>
+                <div className="following-count">
+                    <h5 className="follow-h5">Following</h5>
+                    <p className="follow-p">{following.length}</p>
+                </div>
+                </Link>
             </div>
 
             <div className="contains-main-heading">

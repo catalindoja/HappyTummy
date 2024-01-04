@@ -19,6 +19,8 @@ import EditProduct from './pages/EditProduct';
 import EditRecipe from './pages/EditRecipe';
 import { i18n } from 'i18next';
 import Allergies from './pages/Allergies';
+import Followers from './pages/Followers';
+import Following from './pages/Following';
 import Configuration from './components/Configration';
 import SearchUser from './pages/SearchUser';
 
@@ -110,6 +112,14 @@ const router = createBrowserRouter([
         path: "editrecipe/:id",
         element: <EditRecipe />
       },
+      {
+        path: "followers/:id",
+        element: <Followers />
+      },
+      {
+        path: "following/:id",
+        element: <Following />
+      }
       // {
       //   path: "searchuser",
       //   element: <SearchUser />

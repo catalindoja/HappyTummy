@@ -69,6 +69,34 @@
     1px 1px 0 #585858
 }
 
+/* FOLLOWS */
+.follow-section {
+  display: flex;
+  justify-content: space-around;
+  padding: 8px;
+  background-color: #aeeeee;
+  border-radius: 10px;
+  margin: 10px 0 0;
+}
+
+.follower-count,
+.following-count {
+  text-align: center;
+}
+
+.follow-h5 {
+  color: #006166;
+  font-size: 1.5em;
+  margin-bottom: -5px;
+}
+
+.follow-p {
+  color: #006166;
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-bottom: 0px;
+}
+
 /* USER ALERGIES */
 .user-allergies-logos {
   margin-top: 0px;
@@ -86,14 +114,14 @@
   margin-top: 10px;
   font-size: 19px;
   font-weight: bold;
-  color:#585858;
+  color: #585858;
 }
 
 .fancy-allergy-icon-user {
   width: 40px;
   height: 40px;
   object-fit: contain;
-  border-radius: 50%; 
+  border-radius: 50%;
 }
 
 .help-icon-user {
