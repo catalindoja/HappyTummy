@@ -11,6 +11,7 @@ import "./PostProduct.css";
 import Help from '../img/helpicon.png';
 import './EditProduct.css';
 import BackArrow from "../components/BackArrow";
+import { BACKEND_API_URL } from '../config/proxy.js';
 
 // EditProduct component
 const EditProduct = () => {
