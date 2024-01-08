@@ -47,6 +47,7 @@ const SingleRecipe = () => {
     const [value, setValue] = useState(state?.newComment || "");
 
     const likes = 0;
+
     // Post comment
     const handleClick = async (e) => {
         e.preventDefault();
@@ -58,9 +59,8 @@ const SingleRecipe = () => {
                 likes,
                 date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
             });
-
+            await createNoti();
             window.location.reload();
-
         } catch (err) {
             console.log(err);
         }
@@ -149,6 +149,7 @@ const SingleRecipe = () => {
             await axios.patch(`/recipes/${postId}`, {
                 likes: post.likes + 1,
             });
+            await createNoti();
             window.location.reload();
         } catch (err) {
             console.log(err);
@@ -177,6 +178,30 @@ const SingleRecipe = () => {
     const closeModal = () => {
         setModalIsOpen(false);
     };
+
+    // Create new notification
+    const createNoti = async (e) => {
+        try {
+            const likeResponse = await axios.post(`${BACKEND_API_URL}/notifications/`, {
+                idReceiver: userOwner.id,
+                content: `${currentUser.username} liked your recipe ${post.title} ❤`
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    // Create new notification
+    const createNoti2 = async (e) => {
+        try {
+            const comResponse = await axios.post(`${BACKEND_API_URL}/notifications/`, {
+                idReceiver: userOwner.id,
+                content: `${currentUser.username} commented on your recipe ${post.title} 🗯`
+            });
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     // Render the SingleRecipe component
     return (

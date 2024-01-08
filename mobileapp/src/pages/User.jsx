@@ -139,10 +139,10 @@ function User() {
                 const followingData = res.data.filter(entry => entry.idFollower === user.id);
                 setfollowing(followingData);
 
-            } catch (err) { 
+            } catch (err) {
                 console.log(err);
             }
-        }; 
+        };
         fetchData();
     }, [user.id]);
 
@@ -171,13 +171,24 @@ function User() {
                     idFollower: currentUser.id,
                     idFollowed: user.id
                 });
-                console.log(followResponse);
+                await createNoti();
                 setIsFollowing(true);
             } else {
                 const unfollowResponse = await axios.delete(`${BACKEND_API_URL}/followers/${user.id}/${currentUser.id}`);
-                console.log(unfollowResponse);
                 setIsFollowing(false);
             }
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    // Create new notification
+    const createNoti = async (e) => {
+        try {
+            const followResponse = await axios.post(`${BACKEND_API_URL}/notifications/`, {
+                idReceiver: user.id,
+                content: `${currentUser.username} is now following you! 🤝`
+            });
         } catch (err) {
             console.log(err);
         }
@@ -209,10 +220,10 @@ function User() {
                     </div>
                 </Link>
                 <Link to={`/app/following/${user.id}`}>
-                <div className="following-count">
-                    <h5 className="follow-h5">Following</h5>
-                    <p className="follow-p">{following.length}</p>
-                </div>
+                    <div className="following-count">
+                        <h5 className="follow-h5">Following</h5>
+                        <p className="follow-p">{following.length}</p>
+                    </div>
                 </Link>
             </div>
 

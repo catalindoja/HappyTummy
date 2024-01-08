@@ -249,9 +249,8 @@ const SingleProduct = () => {
         likes,
         date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
       });
-
+      await createNoti2();
       window.location.reload();
-
     } catch (err) {
       console.log(err);
     }
@@ -263,9 +262,8 @@ const SingleProduct = () => {
       const productResponse = await axios.patch(`/products/${postId}`, {
         likes: post.likes + 1,
       });
-
+      await createNoti();
       window.location.reload();
-
     } catch (err) {
       console.log(err);
     }
@@ -277,9 +275,7 @@ const SingleProduct = () => {
       const commentResponse = await axios.patch(`/comments/${commentId}`, {
         likes: commentLikes + 1,
       });
-
       window.location.reload();
-
     } catch (err) {
       console.log(err);
     }
@@ -302,6 +298,30 @@ const SingleProduct = () => {
   const closeModal2 = () => {
     setModalIsOpen2(false);
   };
+
+  // Create new notification
+  const createNoti = async (e) => {
+    try {
+      const likeResponse = await axios.post(`${BACKEND_API_URL}/notifications/`, {
+        idReceiver: userOwner.id,
+        content: `${currentUser.username} liked your product ${post.product_name} ❤`
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // Create new notification
+  const createNoti2 = async (e) => {
+    try {
+      const comResponse = await axios.post(`${BACKEND_API_URL}/notifications/`, {
+        idReceiver: userOwner.id,
+        content: `${currentUser.username} commented on your product ${post.product_name} 🗯`
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className="single-product">

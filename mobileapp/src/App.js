@@ -23,6 +23,7 @@ import Followers from './pages/Followers';
 import Following from './pages/Following';
 import Configuration from './components/Configration';
 import SearchUser from './pages/SearchUser';
+import Notifications from './pages/Notifications';
 
 import {
   createBrowserRouter,
@@ -119,6 +120,10 @@ const router = createBrowserRouter([
       {
         path: "following/:id",
         element: <Following />
+      },
+      {
+        path: "notifications/:id",
+        element: <Notifications />
       }
       // {
       //   path: "searchuser",

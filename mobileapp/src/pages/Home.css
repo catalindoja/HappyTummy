@@ -22,6 +22,7 @@
   margin-bottom: 8px;
   font-style: italic;
   color: teal;
+  text-align: center;
 }
 
 .maintitles {
@@ -77,4 +78,10 @@ h5.maintitles.mb-4 {
 
 .home-recipes {
   margin-bottom: 40px;
+}
+
+.noti-icon{
+  margin-left: 30px;
+  height: auto;
+  width: 60px;
 }

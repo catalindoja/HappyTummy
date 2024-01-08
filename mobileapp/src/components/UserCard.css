@@ -5,20 +5,17 @@
     padding: 6px;
     margin: 16px;
     text-align: left;
-    background-color: white; /* Ajusta el color de fondo según tus preferencias */
+    background-color: white;
     transition: transform 0.2s;
-  
-    /* Agrega sombra para un efecto más visual */
+
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   
-    /* Estilo para el enlace dentro del UserCard */
     .user-link {
       text-decoration: none;
       color: teal;
       display: flex;
     }
   
-    /* Estilo para la imagen del usuario */
     .user-avatar {
       width: 60px;
       height: 60px;
@@ -27,14 +24,12 @@
       margin-bottom: 0px;
     }
   
-    /* Estilo para el nombre de usuario */
     .user-username {
       margin-top: 14px;
       font-size: 20px;
       font-weight: bold;
     }
   
-    /* Efecto de escala al pasar el ratón por encima */
     &:hover {
       transform: scale(1.05);
     }

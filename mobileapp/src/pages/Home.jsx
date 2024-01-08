@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { BACKEND_API_URL } from '../config/proxy.js';
 import { AuthContext } from "../context/authContext";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -18,6 +19,7 @@ import './Home.css';
 import Card from "../components/ProductCard";
 import ProductCard from "../components/ProductCard";
 import RecipeCard from "../components/RecipeCard";
+import Noti from "../img/noti.png";
 
 const localImages = [
     require("../img/imagehome1.jpeg"),
@@ -107,6 +109,9 @@ function Home() {
             <div className="home-header">
                 <img className="home-header-logo" src={Logo} alt="logo" />
                 <h2 className="home-header-text">Welcome {currentUser.username}!</h2>
+                <Link to={`/app/notifications/${currentUser.id}`}>
+                    <img className="noti-icon" src={Noti} alt="" />
+                </Link>
             </div>
 
             <div className="home-products">
