@@ -226,10 +226,18 @@ const SingleRecipe = () => {
                             <span className="more-data-value">{post.ammountofpeople} people</span>
                         </div>
                     </div>
-                    <h3 className="more-data-heading">Steps</h3>
+
+                    <h3 className="more-data-heading">Description</h3>
                     <p className="description"
                         dangerouslySetInnerHTML={{
                             __html: DOMPurify.sanitize(post.description),
+                        }}
+                    ></p>
+
+                    <h3 className="more-data-heading">Steps</h3>
+                    <p className="description"
+                        dangerouslySetInnerHTML={{
+                            __html: DOMPurify.sanitize(post.steps),
                         }}
                     ></p>
 

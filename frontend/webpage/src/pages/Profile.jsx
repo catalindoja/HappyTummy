@@ -44,7 +44,8 @@ const Profile = () => {
         <div className="personal-profile">
             <h1 className="supertitle">Profile 😉 </h1>
             <div>
-                <h2 className="heading">Personal data <img className="editimg" src={Edit} alt="" /> <img className="deleteimg" src={Delete} alt="" /></h2>
+                <h2 className="heading">Personal data </h2>
+                {/* <img className="editimg" src={Edit} alt="" /> <img className="deleteimg" src={Delete} alt="" /> */}
                 <div className="data">
                     <div className="item">
                         <span className="item-title">Username: </span>

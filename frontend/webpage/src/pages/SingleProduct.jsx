@@ -324,10 +324,10 @@ const SingleProduct = () => {
             <span className="more-data-label">Quantity per unit:</span>
             <span className="more-data-value">{post.quantity} {post.measurement}</span>
           </div>
-          <div className="more-data-item">
+          {/* <div className="more-data-item">
             <span className="more-data-label">Price:</span>
             <span className="more-data-value">{post.price} €</span>
-          </div>
+          </div> */}
           <div className="more-data-item">
             <span className="more-data-label">Barcode:</span>
             <span className="more-data-value">{post.barcode}</span>

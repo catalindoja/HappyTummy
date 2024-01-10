@@ -359,7 +359,7 @@ body {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 20px;
+          gap: 28px;
 
           .justadot {
             margin-left: 5px;
@@ -385,7 +385,6 @@ body {
             align-items: center;
             z-index: 999;
             display: block;
-
           }
 
           .menu-buttons {
@@ -551,101 +550,115 @@ body {
       }
 
       .posts {
-        margin-top: 50px;
+        margin-top: 40px;
         display: flex;
         flex-direction: column;
-        gap: 80px;
+        gap: 20px;
+
+        .post-username-general{
+          display: flex;
+          margin-bottom: -15px;
+        }
+
+        .post-user-icon{
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+        }
+
+        .post-username{
+          margin-top: 9px;
+        }
 
         .post {
           display: flex;
-          gap: 70px;
+          margin-bottom: 10px;
+        }
+        
+        .post .post-img {
+          width: 25%;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          overflow: hidden;
+        }
 
-          .img {
-            flex: 2;
-            position: relative;
+        .card-title{
+          font-size: 30px;
+          font-weight: bold;
+          margin-top: 0px;
+          margin-bottom: 5px;
+        }
+        
+        .post .post-img img {
+          width: 100%;
+          height: auto;
+          border-radius: 5%;
+        }
+        
+        .post .content {
+          padding: 20px;
+          width: 70%;
+          margin-left: 20px;
 
-            &::after {
-              content: "";
-              width: 100%;
-              height: 100%;
-              background-color: $lightGreen;
-              position: absolute;
-              top: 20px;
-              left: -20px;
-              z-index: -1;
-            }
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          overflow: hidden;
+          background-color: #b9e7e7c0;
+        }
+        
+        .post .content h1 {
+          color: #333;
+          margin-bottom: 10px;
+        }
+        
+        .post .content p {
+          color: #555;
+          margin-bottom: 15px;
+        }
+        
+        .post .comment-likes {
+          display: flex;
+          align-items: center;
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+        
+        .post .comment-likes .heart-icon {
+          width: 20px;
+          height: auto;
+          margin-right: 5px;
+        }
+        
+        .post .comment-likes .likes-count {
+          color: #ff6347;
+          font-size: 18px;
+        }
+        
+        .post button {
+          background-color: teal;
+          color: #fff;
+          padding: 10px 15px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+        
+        .post button:hover {
+          background-color: rgba(0, 128, 128, 0.64);
+        }
+        
+        .link {
+          text-decoration: none;
+          color: inherit;
+        }
+        
+        .link:hover {
+          text-decoration: underline;
+        }
 
-            img {
-              width: 100%;
-              max-height: 400px;
-              object-fit: cover;
-            }
-          }
-
-          .content {
-            flex: 3;
-            display: flex;
-            flex-direction: column;
-
-            h1 {
-              font-size: 40px;
-              margin-bottom: 0px;
-              background-color: $lightGreen;
-              padding: 10px;
-              padding: 8px;
-              border-radius: 10px;
-              display: inline-block;
-            }
-
-            p {
-              font-size: 20px;
-            }
-
-            .comment-likes {
-              display: flex;
-              align-items: center;
-
-              button {
-                border: none;
-                background-color: #e9fdfd;
-              }
-            }
-
-            .heart-icon {
-              width: 30px;
-              height: 30px;
-              margin-left: -3px;
-              margin-right: -7px;
-              margin-bottom: -7px;
-              margin-top: -4px;
-            }
-
-            .likes-count {
-              color: rgb(255, 0, 0);
-              font-weight: bold;
-              font-weight: bold;
-              margin-left: 11px;
-              font-size: 18px;
-            }
-
-            button {
-              margin-top: 40px;
-              font-size: 15px;
-              width: max-content;
-              padding: 10px 20px;
-              border: none;
-              cursor: pointer;
-              background-color: white;
-              border: 1px solid teal;
-              color: teal;
-
-              &:hover {
-                border: 1px solid white;
-                background-color: $lightGreen;
-                color: black;
-              }
-            }
-          }
+        .post-description{
+          text-align: justify;
+          font-size: 16px;
         }
       }
     }
@@ -699,15 +712,17 @@ body {
         gap: 30px;
 
         .arrow-img {
-          width: 80px;
-          height: 80px;
+          width: 40px;
+          height: 40px;
           margin-left: 0px;
           margin-top: -10px;
-          margin-bottom: -35px;
+          margin-bottom: -25px;
         }
 
         .super-image {
           background-color: $lightGreen;
+          border: 1px solid #ddd;
+          border-radius: 8px;
         }
 
         .fancy-allergy {
@@ -732,7 +747,7 @@ body {
         .contains-heading {
           font-size: 25px;
           font-weight: bold;
-          margin-top: 60px;
+          margin-top: 10px;
           margin-bottom: 0px;
         }
 
@@ -831,8 +846,8 @@ body {
         }
 
         .heart-icon {
-          width: 30px;
-          height: 30px;
+          width: 20px;
+          height: 20px;
           margin-left: -7px;
           margin-right: -7px;
           margin-bottom: -7px;
@@ -865,8 +880,8 @@ body {
           font-size: 14px;
 
           .heart-icon {
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             margin-left: -10px;
             margin-right: -6px;
             margin-bottom: -7px;
@@ -984,10 +999,17 @@ body {
             height: 200px;
             object-fit: cover;
             background-color: $lightGreen;
+            border: 1px solid #ddd;
+            border-radius: 8px;
           }
 
           h2 {
             color: #555;
+            background-color: $lightGreen;
+            padding: 10px;
+            padding: 8px;
+            border-radius: 10px;
+            display: inline-block;
           }
 
           button {

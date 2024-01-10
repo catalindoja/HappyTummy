@@ -54,13 +54,11 @@ const Markets = () => {
       <div className="posts">
         {posts.map((post) => (
           <div className="post" key={post.id}>
-            <div className="img">
+            <div className="post-img">
               <img src={post.image_url} alt="" />
             </div>
             <div className="content">
-              <Link className="link" to={`/markets/${post.id}`}>
-                <h1>{post.name}</h1>
-              </Link>
+              <h1>{post.name}</h1>
               <p>{limitText(getText(post.description), 210)}</p>
               <Link to={`/markets/${post.id}`}>
                 <button>Read More</button>

@@ -4,6 +4,7 @@ import { AuthContext } from "../context/authContext";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import Heart from "../img/heart.png";
+import Profile from "../img/profile.png";
 
 // Create the Recipes component
 const Recepies = () => {
@@ -29,6 +30,20 @@ const Recepies = () => {
       try {
         const res = await axios.get(`/recipes`);
         setPosts(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // Obtaining the users
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`/users`);
+        setUsers(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -65,26 +80,37 @@ const Recepies = () => {
   // Display filtered posts
   const displayFilteredPosts = filteredPosts
     .slice(pageNumber * postsPerPage, (pageNumber + 1) * postsPerPage)
-    .map((post) => (
-      <div className="post" key={post.id}>
-        <div className="img">
-          <img src={post.image_url} alt="" />
-        </div>
-        <div className="content">
-          <Link className="link" to={`/recipes/${post.id}`}>
-            <h1>{post.title}</h1>
-          </Link>
-          <p>{limitText(getText(post.description), 210)}</p>
-          <div className="comment-likes">
-            <img src={Heart} alt="Heart Icon" className="heart-icon" />
-            <span className="likes-count">{post.likes}</span>
+    .map((post) => {
+
+      // Obtain the username
+      const userForPost = users.find(user => user.id === post.iduser);
+      const usernameToShow = userForPost ? userForPost.username : "Unknown";
+
+      return (
+        <div className="post" key={post.id}>
+          <div className="post-img">
+            <img src={post.image_url} alt="" />
           </div>
-          <Link to={`/recipes/${post.id}`}>
-            <button>Read More</button>
-          </Link>
+          <div className="content">
+            <h1>{post.title}</h1>
+
+            <div className="post-username-general">
+              <img src={Profile} alt="" className="post-user-icon" />
+              <h3 className="post-username">{usernameToShow}</h3>
+            </div>
+
+            <p>{limitText(getText(post.description), 210)}</p>
+            <div className="comment-likes">
+              <img src={Heart} alt="Heart Icon" className="heart-icon" />
+              <span className="likes-count">{post.likes}</span>
+            </div>
+            <Link to={`/recipes/${post.id}`}>
+              <button>Read More</button>
+            </Link>
+          </div>
         </div>
-      </div>
-    ));
+      );
+    });
 
   const filterOptions = ["All", "Allergens", "Category", "Brand", "Supermarket"];
   const [filterOption, setFilterOption] = useState("All");
@@ -93,7 +119,7 @@ const Recepies = () => {
   return (
     <div className="home">
       <h1 className="supertitle">Recipes 🥧</h1>
-      <button style={{"margin-left": "1em"}} onClick={handleNavigation}>New recipe</button>
+      <button style={{ "margin-left": "1em" }} onClick={handleNavigation}>New recipe</button>
       <div className="box">
         <div className="boxes">
           <fieldset>
@@ -107,7 +133,7 @@ const Recepies = () => {
           </fieldset>
         </div>
 
-        <div className="boxes">
+        {/* <div className="boxes">
           <fieldset>
             <legend>Filter</legend>
             <select
@@ -121,7 +147,7 @@ const Recepies = () => {
               ))}
             </select>
           </fieldset>
-        </div>
+        </div> */}
 
         <button onClick={() => setIsButtonActivated(!isButtonActivated)}>
           {isButtonActivated ? "Show all recipes" : "Show my recipes"}
