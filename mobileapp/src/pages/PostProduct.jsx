@@ -151,6 +151,7 @@ const Write = () => {
   const [measurement, setSelectedMeasurement] = useState(state?.measurement || "");
   const [image_url, setImageUrl] = useState(state?.image_url || "");
   const [value, setValue] = useState(state?.product_description || "");
+  const [valueSteps, setValueSteps] = useState(state?.steps || "");
   const [product_name, setProductName] = useState(state?.product_name || "");
   const [file, setFile] = useState(null);
   
@@ -208,6 +209,7 @@ const Write = () => {
         const productResponse = await axios.post(`/products/`, {
            product_name,
            product_description: value,
+           steps: valueSteps,
            image: file ? imgUrl : "",
            date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
            idcategory,
@@ -252,6 +254,7 @@ const Write = () => {
         const productResponse = await axios.patch(`/products/${state.id}`, {
           product_name,
           product_description: value,
+          steps: valueSteps,
           image: file ? imgUrl : "",
           idcategory,
           iduser,
@@ -298,6 +301,7 @@ const Write = () => {
   const [productData, setProductData] = useState({
     product_name: "",
     product_description: "",
+    steps: ""
   });
 
   //const [descriptionError, setDescriptionError] = useState(null);
@@ -320,6 +324,16 @@ const Write = () => {
     }
   };
 
+  const handleQuillChangeSteps = (value) => {
+    // Verificar si el contenido contiene imágenes o enlaces a imágenes
+    if (value.includes("<img") || value.match(/\bhttps?:\/\/\S+\b/) || value.match(/\b\w+\.(jpg|jpeg|png|gif|bmp)\b/)) {
+      setDescriptionError("Please enter text only, no images or links to images.");
+    } else {
+      setDescriptionError(null);
+      handleInputChange("steps", valueSteps);
+    }
+  };
+
   // Return the JSX elements
   return (
     <div className="container">
@@ -338,6 +352,24 @@ const Write = () => {
               placeholder={t('product_description')}
               theme="snow"
               value={productData.product_description}
+              onChange={handleQuillChange}
+              modules={{
+                toolbar: {
+                  container: [
+                    ["bold", "italic", "underline"],
+                  ],
+                },
+                clipboard: { matchVisual: false },
+                mention: false,
+              }}
+            />
+          </div>
+
+          <div className="editorContainer-write">
+            <ReactQuill
+              placeholder="Steps of the receipe"
+              theme="snow"
+              value={productData.steps}
               onChange={handleQuillChange}
               modules={{
                 toolbar: {
