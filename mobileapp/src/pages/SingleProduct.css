@@ -155,11 +155,12 @@
 }
 
 .likes-count {
-  color: rgb(255, 0, 0);
+  color: rgb(255, 255, 255);
   font-weight: bold;
-  font-weight: bold;
-  margin-left: 3px;
-  font-size: 20px;
+  font-size: 15px;
+  position: absolute;
+  left: 25%;
+  z-index: 2;
 }
 
 .heart-icon {
@@ -167,13 +168,14 @@
   height: 30px;
   background-color: transparent;
   margin-right: 1px;
+  z-index: 1;
 }
 
 .comment-likes {
   display: flex;
   align-items: center;
-  margin-left: 150px;
   background-color: rgba(255, 255, 255, 0.0);
+  position: relative;
 }
 
 .comment-likes-button {

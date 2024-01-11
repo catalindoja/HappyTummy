@@ -242,7 +242,8 @@ const SingleProduct = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      const productResponse = await axios.post(`/comments/`, {
+      console.log("YES");
+      const productResponse = await axios.post(`${BACKEND_API_URL}/comments/`, {
         iduser: idCurrent,
         idproduct: postId,
         content: value,
@@ -490,10 +491,6 @@ const SingleProduct = () => {
                     <Link to={`/app/user/${userComments[comment.id] ? userComments[comment.id].id : "Unknown"}`} className="username">
                       {userComments[comment.id] ? userComments[comment.id].username : "Unknown"}
                     </Link>
-                    <button className="comment-likes" onClick={() => handleCommentLikeClick(comment.id, comment.likes)}>
-                      <img src={Heart} alt="Heart Icon" className="heart-icon" />
-                      <div className="likes-count">{comment.likes}</div>
-                    </button>
                   </div>
                   <p
                     dangerouslySetInnerHTML={{
@@ -501,6 +498,11 @@ const SingleProduct = () => {
                     }}
                   ></p>
                 </div>
+                <button className="comment-likes" onClick={() => handleCommentLikeClick(comment.id, comment.likes)}>
+                  <img src={Heart} alt="Heart Icon" className="heart-icon" />
+                  <div className="likes-count">{comment.likes}</div>
+                </button>
+
               </li>
             )
             ))}
