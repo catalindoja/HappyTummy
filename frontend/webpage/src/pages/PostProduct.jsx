@@ -315,15 +315,13 @@ const Write = () => {
 
           <div className="editorContainer">
             <ReactQuill
-              placeholder="Description of the recipe"
-              className={`editor ${errors.value ? "error" : ""}`}
+              placeholder="New comment"
+              className="editor"
               theme="snow"
               value={value}
-              onChange={(val) => handleQuillChange(val, setValue, "value", setErrors)}
+              onChange={(val) => handleQuillChange(val)}
             />
-            {errors.value && <p className="error-message">{errors.value}</p>}
           </div>
-
           
           <input
             type="number"

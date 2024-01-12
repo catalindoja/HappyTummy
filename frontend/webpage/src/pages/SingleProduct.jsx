@@ -148,6 +148,10 @@ const SingleProduct = () => {
 
     fetchData();
   }, [postId, idOwner, idBrand, idCategory]);
+  const handleInputChange = (fieldName, value) => {
+    // Placeholder function; you can implement the logic for handling input changes here
+    console.log(`Field '${fieldName}' changed to: ${value}`);
+  };
 
   // Obtener texto
   const getText = (html) => {
@@ -174,6 +178,7 @@ const SingleProduct = () => {
   // Write new comment
   const state = useLocation().state;
   const [value, setValue] = useState(state?.newComment || "");
+  const [descriptionError, setDescriptionError] = useState(null);
   
   // Post comment
   const handleClick = async (e) => {
@@ -200,6 +205,18 @@ const SingleProduct = () => {
     try {
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  const handleQuillChange = (value) => {
+    const containsImages = value.includes("<img") || value.match(/\bhttps?:\/\/\S+\b/) ||
+      value.match(/\b\w+\.(jpg|jpeg|png|gif|bmp)\b/);
+
+    if (containsImages) {
+      setDescriptionError("Please enter text only, no images or links to images.");
+    } else {
+      setDescriptionError(null);
+      handleInputChange("steps", value);
     }
   };
 
@@ -316,7 +333,7 @@ const SingleProduct = () => {
             className="editor"
             theme="snow"
             value={value}
-            onChange={setValue}
+            onChange={(val) => handleQuillChange(val)}
           />
         </div>
 
