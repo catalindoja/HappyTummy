@@ -68,6 +68,7 @@
   .comment-likes-component {
     display: flex;
     align-items: center;
+    justify-content: center;
     position: relative;
     background: none; /* Remove button background */
     border: none;     /* Remove button border */
