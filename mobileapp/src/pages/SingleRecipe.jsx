@@ -328,10 +328,6 @@ const SingleRecipe = () => {
                                             <Link to={`/app/user/${userComments[comment.id] ? userComments[comment.id].id : "Unknown"}`} className="username">
                                                 {userComments[comment.id] ? userComments[comment.id].username : "Unknown"}
                                             </Link>
-                                            <button className="comment-likes" onClick={() => handleCommentLikeClick(comment.id, comment.likes)}>
-                                                <img src={Heart} alt="Heart Icon" className="heart-icon" />
-                                                <div className="likes-count">{comment.likes}</div>
-                                            </button>
                                         </div>
                                         <p
                                             dangerouslySetInnerHTML={{
@@ -339,7 +335,10 @@ const SingleRecipe = () => {
                                             }}
                                         ></p>
                                     </div>
-
+                                    <button className="comment-likes-component" onClick={() => handleCommentLikeClick(comment.id, comment.likes)}>
+                                    <img src={Heart} alt="Heart Icon" className="heart-icon-component" />
+                                    <div className="likes-count-component">{comment.likes}</div>
+                                    </button>
                                 </li>
                             )
                             ))}

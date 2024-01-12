@@ -195,6 +195,33 @@
   margin-top: -4px;
 }
 
+.likes-count-component {
+  color: rgb(255, 255, 255) !important;
+  font-weight: bold;
+  font-size: 15px;
+  position: absolute;
+  z-index: 2;
+}
+
+.heart-icon-component {
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  margin-right: 1px;
+  z-index: 1;
+}
+
+.comment-likes-component {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: none; /* Remove button background */
+  border: none;     /* Remove button border */
+  padding: 0;       /* Remove button padding */
+  cursor: pointer;  /* Optional: Change cursor on hover */
+}
+
 .comment-likes-button {
   background-color: transparent;
   border: none;
