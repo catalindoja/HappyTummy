@@ -8,31 +8,29 @@ import moment from "moment";
 
 // Create the PostRecepie component
 function PostRecepie() {
-
     const { currentUser } = useContext(AuthContext);
     const iduser = currentUser.id;
     const state = useLocation().state;
+    const [steps, setSteps] = useState(state?.steps || "");
     const navigate = useNavigate();
 
-    // Set up the state variable 'error'
-    const [error, setError] = useState(null);
-
     // Set up the state variables
-    // - title: a string that represents the title of the recipe
-    // - value: a string that represents the description of the recipe
-    // - time: a string that represents the time of preparation of the recipe
-    // - ammountofpeople: a string that represents the number of people that the recipe is for
-    // - unit: a string that represents the time measure of the preparation of the recipe
-    // - file: a file that represents the image of the recipe
-    // - image_url: a string that represents the image url of the recipe
-    const likes = 0;
+    const [errors, setErrors] = useState({
+        title: false,
+        time: false,
+        unit: false,
+        ammountofpeople: false,
+        value: false,
+        steps: false,
+    });
+
     const [title, setRecipeTitle] = useState(state?.title || "");
     const [value, setValue] = useState(state?.description || "");
     const [time, setTime] = useState(state?.time || "");
     const [ammountofpeople, setPeople] = useState(state?.ammountofpeople || "");
     const [unit, setSelectedTimeMeasurement] = useState(state?.unit || "");
     const [file, setFile] = useState(null);
-    const [image_url, setImageUrl] = useState(null);
+    const [image_url, setImageUrl] = useState(state?.image_url || "");
 
     // Set up the function that uploads the image
     const upload = async () => {
@@ -47,61 +45,55 @@ function PostRecepie() {
     };
 
     // Set up the function that handles the form submission
-    // - if the user does not fill in the input fields, the function will set the error message
     const handleClick = async (e) => {
         e.preventDefault();
 
-        if (!title || title.trim() === "") {
-            setError("Tile of the recipe required");
-            return;
-        }
+        const fields = { title, time, unit, ammountofpeople, value, steps };
+        const errorFields = { title: false, time: false, unit: false, ammountofpeople: false, value: false, steps: false };
 
-        if (!time || time.trim() === "") {
-            setError("Time of preparation required");
-            return;
-        }
+        // Check for missing fields
+        Object.keys(fields).forEach((key) => {
+            if (!fields[key] || fields[key].trim() === "") {
+                errorFields[key] = true;
+            }
+        });
 
-        if (!unit) {
-            setError("Time measure of the preparation required");
-            return;
-        }
+        setErrors({ ...errorFields });
 
-        if (!ammountofpeople || ammountofpeople.trim() === "") {
-            setError("For how many people field required");
-            return;
-        }
-
-        if (!value || value.trim() === "") {
-            setError("Description of the recipe required");
+        // If any field is missing, return
+        if (Object.values(errorFields).some((value) => value)) {
             return;
         }
 
         const imgUrl = await upload();
+
         try {
             if (!state) {
                 // Post
-                const recipeResponse = await axios.post(`/recipes/`, {
+                await axios.post(`/recipes/`, {
                     iduser,
                     title,
                     time,
                     unit,
                     ammountofpeople,
                     description: value,
-                    likes,
+                    steps,
+                    likes: 0,
                     image: file ? imgUrl : "",
                     date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
                     image_url,
                 });
             } else {
                 // Patch
-                const recipeResponse = await axios.patch(`/recipes/`, {
+                await axios.patch(`/recipes/`, {
                     iduser,
                     title,
                     time,
                     unit,
                     ammountofpeople,
                     description: value,
-                    likes,
+                    steps,
+                    likes: 0,
                     image: file ? imgUrl : "",
                     date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
                     image_url,
@@ -113,7 +105,17 @@ function PostRecepie() {
         }
     };
 
-    // Return the JSX elements
+    // Set up the function to handle Quill change for description and steps
+    const handleQuillChange = (value, setValueFunction, errorState, setErrorState) => {
+        // Check if the content contains images or links to images
+        if (value.includes("<img") || value.match(/\bhttps?:\/\/\S+\b/) || value.match(/\b\w+\.(jpg|jpeg|png|gif|bmp)\b/)) {
+            setErrorState({ ...errors, [errorState]: `Please enter text only, no images or links to images for ${errorState}.` });
+        } else {
+            setErrorState({ ...errors, [errorState]: false });
+            setValueFunction(value);
+        }
+    };
+
     return (
         <div>
             <h1 className="supertitle">Post a new recipe ❤</h1>
@@ -157,11 +159,23 @@ function PostRecepie() {
                     <div className="editorContainer">
                         <ReactQuill
                             placeholder="Description of the recipe"
-                            className="editor"
+                            className={`editor ${errors.value ? "error" : ""}`}
                             theme="snow"
                             value={value}
-                            onChange={setValue}
+                            onChange={(val) => handleQuillChange(val, setValue, "value", setErrors)}
                         />
+                        {errors.value && <p className="error-message">{errors.value}</p>}
+                    </div>
+
+                    <div className="editorContainer">
+                        <ReactQuill
+                            placeholder="Steps of the recipe"
+                            className={`editor ${errors.steps ? "error" : ""}`}
+                            theme="snow"
+                            value={steps}
+                            onChange={(val) => handleQuillChange(val, setSteps, "steps", setErrors)}
+                        />
+                        {errors.steps && <p className="error-message">{errors.steps}</p>}
                     </div>
 
                     <input
@@ -186,7 +200,6 @@ function PostRecepie() {
                         </div>
                     </div>
 
-                    {error && <p className="error-message">{error}</p>}
                     <div className="buttons">
                         <button onClick={handleClick}>Publish</button>
                     </div>
@@ -196,6 +209,4 @@ function PostRecepie() {
         </div>
     );
 }
-
-// Export the PostRecepie component so that it can be used in other files.
 export default PostRecepie;

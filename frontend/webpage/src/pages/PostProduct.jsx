@@ -4,18 +4,26 @@ import { AuthContext } from "../context/authContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { useTranslation } from 'react-i18next';
 import axios from "axios";
 import moment from "moment";
 
 // Create the Write component
 const Write = () => {
 
+  const { t } = useTranslation();
   // Obtains the state from the location
   const state = useLocation().state;
   const navigate = useNavigate();
 
   // Obtains the list of brands from the backend
   const [brands, setBrands] = useState([]);
+  const [valuedes, setValuedes] = useState(state?.description || "");
+  const [descriptionError, setDescriptionError] = useState(null);
+  const handleInputChange = (fieldName, value) => {
+    // Implementa la lógica de manejo de cambios según tus necesidades
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -71,6 +79,10 @@ const Write = () => {
   // Obtains the current user from the context
   const { currentUser } = useContext(AuthContext);
   const iduser = currentUser.id;
+  const [errors, setErrors] = useState({
+    value: false,
+    // Add other error states as needed
+  });
 
   // Obtains the name of the market from the backend
   const [marketuser, setMarketNameUser] = useState("");
@@ -268,6 +280,19 @@ const Write = () => {
     }
   };
 
+  const handleQuillChange = (value) => {
+    // Verificar si el contenido contiene imágenes o enlaces a imágenes
+    const containsImages = value.includes("<img") || value.match(/\bhttps?:\/\/\S+\b/) || value.match(/\b\w+\.(jpg|jpeg|png|gif|bmp)\b/);
+
+    if (containsImages) {
+      setDescriptionError("Please enter text only, no images or links to images.");
+    } else {
+      setDescriptionError(null);
+      handleInputChange("steps", value);
+    }
+  };
+
+  
   // Return the JSX elements
   return (
     <div>
@@ -290,14 +315,16 @@ const Write = () => {
 
           <div className="editorContainer">
             <ReactQuill
-              placeholder="Description of the product"
-              className="editor"
+              placeholder="Description of the recipe"
+              className={`editor ${errors.value ? "error" : ""}`}
               theme="snow"
               value={value}
-              onChange={setValue}
+              onChange={(val) => handleQuillChange(val, setValue, "value", setErrors)}
             />
+            {errors.value && <p className="error-message">{errors.value}</p>}
           </div>
 
+          
           <input
             type="number"
             placeholder="Price"
