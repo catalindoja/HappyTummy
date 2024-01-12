@@ -4,6 +4,7 @@ import { AuthContext } from "../context/authContext";
 import ReactPaginate from "react-paginate";
 import Heart from "../img/heart.png";
 import axios from "axios";
+import '../style.scss';
 
 // Create the Products component
 const Products = () => {
