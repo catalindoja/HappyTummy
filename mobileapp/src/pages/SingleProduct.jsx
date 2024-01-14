@@ -297,7 +297,8 @@ const SingleProduct = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      const productResponse = await axios.post(`/comments/`, {
+      console.log("YES");
+      const productResponse = await axios.post(`${BACKEND_API_URL}/comments/`, {
         iduser: idCurrent,
         idproduct: postId,
         content: value,
@@ -570,9 +571,9 @@ const SingleProduct = () => {
                           <> replied to {userComments[parentComment.id]?.username}</>
                         )}
                       </Link>
-                      <button className="comment-likes" onClick={() => handleCommentLikeClick(comment.id, comment.likes)}>
-                        <img src={Heart} alt="Heart Icon" className="heart-icon" />
-                        <div className="likes-count">{comment.likes}</div>
+                      <button className="comment-likes-component" onClick={() => handleCommentLikeClick(comment.id, comment.likes)}>
+                        <img src={Heart} alt="Heart Icon" className="heart-icon-component" />
+                        <div className="likes-count-component">{comment.likes}</div>
                       </button>
                       <button onClick={() => handleReply(comment.id, userComments[comment.id]?.username)}>
                         <img src={Reply} alt="Reply Icon" className="heart-icon" />

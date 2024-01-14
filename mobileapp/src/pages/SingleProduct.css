@@ -154,26 +154,31 @@
   background-color: rgba(255, 255, 255, 0.0);
 }
 
-.likes-count {
-  color: rgb(255, 0, 0);
+.likes-count-component {
+  color: rgb(255, 255, 255) !important;
   font-weight: bold;
-  font-weight: bold;
-  margin-left: 3px;
-  font-size: 20px;
+  font-size: 15px;
+  position: absolute;
+  z-index: 2;
 }
 
-.heart-icon {
-  width: 30px;
-  height: 30px;
+.heart-icon-component {
+  width: 40px;
+  height: 40px;
   background-color: transparent;
   margin-right: 1px;
+  z-index: 1;
 }
 
-.comment-likes {
+.comment-likes-component {
   display: flex;
   align-items: center;
-  margin-left: 150px;
-  background-color: rgba(255, 255, 255, 0.0);
+  justify-content: center;
+  position: relative;
+  background: none; /* Remove button background */
+  border: none;     /* Remove button border */
+  padding: 0;       /* Remove button padding */
+  cursor: pointer;  /* Optional: Change cursor on hover */
 }
 
 .comment-likes-button {

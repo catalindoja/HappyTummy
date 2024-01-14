@@ -5,9 +5,10 @@ import Edit from "../img/edit.png";
 import Delete from "../img/delete.png";
 import ProfilePicture from "../img/profile.png";
 import Arrow from "../img/arrow.png";
-import Heart from "../img/heart.png";
 import Reply from "../img/reply.png";
+import Heart from "../img/heart.png"; 
 import Menu from "../components/MenuProducts";
+import CommentLikeButton from "../components/LikeButton";
 import axios from "axios";
 import moment from "moment";
 import DOMPurify from "dompurify";
@@ -259,6 +260,20 @@ const SingleProduct = () => {
     }
   };
 
+  // Comment like button
+  const handleCommentLikeClick = async (commentId, commentLikes) => {
+    try {
+      const commentResponse = await axios.patch(`/comments/${commentId}`, {
+        likes: commentLikes + 1,
+      });
+
+      window.location.reload();
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   // Return the JSX that renders the SingleProduct page
   return (
     <div className="single">
@@ -360,15 +375,10 @@ const SingleProduct = () => {
                       }}
                     ></p>
                   </div>
-                  <div className="comment-likes">
-                    <button onClick={() => handleReply(comment.id, userComments[comment.id]?.username)}>
-                      <img src={Reply} alt="Reply Icon" className="heart-icon" />
-                    </button>
-                    <button onClick={handleLikeClick}>
-                      <img src={Heart} alt="Heart Icon" className="heart-icon" />
-                    </button>
-                    <span className="likes-count">{comment.likes}</span>
-                  </div>
+                  <button className="comment-likes-component" onClick={() => handleCommentLikeClick(comment.id, comment.likes)}>
+                    <img src={Heart} alt="Heart Icon" className="heart-icon" />
+                    <div className="likes-count-component">{comment.likes}</div>
+                  </button>
                 </li>
               );
             }

@@ -184,6 +184,20 @@ const SingleRecipe = () => {
         }
     };
 
+    // Comment like button
+    const handleCommentLikeClick = async (commentId, commentLikes) => {
+      try {
+        const commentResponse = await axios.patch(`/comments/${commentId}`, {
+          likes: commentLikes + 1,
+        });
+  
+        window.location.reload();
+  
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
     // Render the SingleRecipe component
     return (
         <div>
@@ -267,15 +281,10 @@ const SingleRecipe = () => {
                                 }}
                                 ></p>
                             </div>
-                            <div className="comment-likes">
-                                <button onClick={() => handleReply(comment.id, userComments[comment.id]?.username)}>
-                                <img src={Reply} alt="Reply Icon" className="heart-icon" />
+                                <button className="comment-likes-component" onClick={() => handleCommentLikeClick(comment.id, comment.likes)}>
+                                    <img src={Heart} alt="Heart Icon" className="heart-icon-component" />
+                                    <div className="likes-count-component">{comment.likes}</div>
                                 </button>
-                                <button onClick={handleLikeClick}>
-                                <img src={Heart} alt="Heart Icon" className="heart-icon" />
-                                </button>
-                                <span className="likes-count">{comment.likes}</span>
-                            </div>
                             </li>
                         );
                         }
