@@ -36,6 +36,28 @@ export const getUser = async (req, res) => {
     }
 }
 
+export const getUserByUsername = async (req, res) => {
+    try {
+        const [rows] = await pool.query('SELECT * FROM user WHERE username = ?', [req.params.username])
+        res.json(rows[0])
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Something went wrong while retrieving the user'
+        })
+    }
+}
+
+export const getUserByMail = async (req, res) => {
+    try {
+        const [rows] = await pool.query('SELECT * FROM user WHERE email = ?', [req.params.email])
+        res.json(rows[0])
+    } catch (error) {
+        return res.status(500).json({
+            message: 'Something went wrong while retrieving the user'
+        })
+    }
+}
+
 /**
  * Creates a new user entry
  * @async

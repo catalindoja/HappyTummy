@@ -10,6 +10,7 @@ import Configration from "../components/Configration";
 import { useTranslation } from 'react-i18next';
 import backgroundImage from "../img/clearbackground.png";
 import BackArrow from "../components/BackArrow";
+import axios from "axios";
 
 // Login component
 const Login = () => {
@@ -51,8 +52,18 @@ const Login = () => {
     }
 
     try {
-      await login(inputs)
-      navigate("/app/home");
+      const res = await axios.get(`/users/by-username/${inputs.username}`);
+      console.log(res.data)
+      if (res.data.length === 0) {
+        setError("The username does not exist");
+        return;
+      }else if (res.data.role === 1 || res.data.role === 3) {
+        await login(inputs)
+        navigate("/app/home");
+      }else{
+        setError("The username does not have permission to access the mobile app");
+        return;
+      }
     } catch (err) {
       setError(err.response.data);
     }

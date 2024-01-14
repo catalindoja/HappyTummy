@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import backgroundImage from "../img/background.png";
+import axios from "axios";
 
 // Create the Login component
 const Login = () => {
@@ -42,8 +43,18 @@ const Login = () => {
     }
 
     try {
-      await login(inputs)
-      navigate("/products");
+      const res = await axios.get(`/users/by-username/${inputs.username}`);
+      console.log(res.data)
+      if (res.data.length === 0) {
+        setError("The username does not exist");
+        return;
+      }else if (res.data.role === 1 || res.data.role === 2) {
+        await login(inputs)
+        navigate("/products");
+      }else{
+        setError("The username does not have permission to access this page");
+        return;
+      }
     } catch (err) {
       setError(err.response.data);
     }
