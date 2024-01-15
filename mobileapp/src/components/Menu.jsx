@@ -24,16 +24,16 @@ const Menu = () => {
     <div className="w-100 sticky-bottom">
       <div className="d-flex justify-content-around w-100" style={{ backgroundColor: '#C9FFFF', border: '3.5px solid #acf9f9' }}>
 
-        <Link to="/app/home" style={{ color: location.pathname === '/app/home' ? 'black' : '#555' }}>
+        <Link to="/app/home" style={{ color: location.pathname === '/app/home' ? 'teal' : '#555' }}>
           <FontAwesomeIcon icon={faHome} className="p-2" style={{ width: '26px', height: '26px' }} />
         </Link>
         <div onClick={togglePopup}>
-          <FontAwesomeIcon icon={faPlus} className="p-2" style={{ color: (location.pathname === '/app/postproduct' || location.pathname === '/app/postrecipe') ? 'black' : '#555', width: '26px', height: '26px' }} />
+          <FontAwesomeIcon icon={faPlus} className="p-2" style={{ color: (location.pathname === '/app/postproduct' || location.pathname === '/app/postrecipe') ? 'teal' : '#555', width: '26px', height: '26px' }} />
         </div>
-        <Link to="/app/search" style={{ color: location.pathname === '/app/search' ? 'black' : '#555' }}>
+        <Link to="/app/search" style={{ color: location.pathname === '/app/search' ? 'teal' : '#555' }}>
           <FontAwesomeIcon icon={faSearch} className="p-2" style={{ width: '26px', height: '26px' }} />
         </Link>
-        <Link to="/app/profile" style={{ color: location.pathname === '/app/profile' ? 'black' : '#555' }}>
+        <Link to="/app/profile" style={{ color: location.pathname === '/app/profile' ? 'teal' : '#555' }}>
           <FontAwesomeIcon icon={faUser} className="p-2" style={{ width: '26px', height: '26px' }} />
         </Link>
       </div>

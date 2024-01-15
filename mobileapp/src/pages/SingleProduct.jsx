@@ -337,6 +337,15 @@ const SingleProduct = () => {
     }
   };
 
+  // Info of allergen popup
+  const [modalIsOpenInfo, setModalIsOpenInfo] = useState(true);
+  const openModalInfo = () => {
+    setModalIsOpenInfo(true);
+  };
+  const closeModalInfo = () => {
+    setModalIsOpenInfo(false);
+  };
+
   // Modal pop-up
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const openModal = () => {
@@ -382,6 +391,7 @@ const SingleProduct = () => {
   return (
     <div className="single-product">
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"></link>
+
       <div className="content">
         <Link to="#" onClick={() => window.history.back()}>
           <img className="arrow-img" src={Arrow} alt="" />
@@ -491,12 +501,41 @@ const SingleProduct = () => {
           </button>
         </div>
 
+        <Modal
+          isOpen={modalIsOpenInfo}
+          onRequestClose={closeModalInfo}
+          shouldCloseOnOverlayClick={true}
+          shouldCloseOnEsc={true}
+          className="modal-content"
+          overlayClassName="modal-overlay"
+        >
+          <div>
+            <span className="alert-info-popup">
+              {canUserEat() ? (
+                <div class="alert alert-success alert-info-popup" role="alert" onClick={openModalInfo}>
+                  Based on your preferences, you can consume this product without any problems 😄
+                </div>
+              ) : (
+                <div class="alert alert-danger alert-info-popup" role="alert" onClick={openModalInfo}>
+                  Based on your preferences, this product contains allergens that may negatively affect you 😥
+                </div>
+              )}
+            </span>
+            <img
+              src={arrowImage}
+              alt="Close"
+              className="close-icon"
+              onClick={closeModalInfo}
+            />
+          </div>
+        </Modal>
+
         {canUserEat() ? (
-          <div class="alert alert-success" role="alert">
+          <div class="alert alert-success" role="alert" onClick={openModalInfo}>
             You can consume this product 😄
           </div>
         ) : (
-          <div class="alert alert-danger" role="alert">
+          <div class="alert alert-danger" role="alert" onClick={openModalInfo}>
             This product may be harmful for you 😥
           </div>
         )}
