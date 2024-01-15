@@ -1,14 +1,13 @@
-import React, { useContext, useEffect, useState, useRef  } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import Edit from "../img/edit.png";
 import Delete from "../img/delete.png";
 import ProfilePicture from "../img/profile.png";
 import Arrow from "../img/arrow.png";
+import Heart from "../img/heart.png";
 import Reply from "../img/reply.png";
-import Heart from "../img/heart.png"; 
 import Menu from "../components/MenuProducts";
-import CommentLikeButton from "../components/LikeButton";
 import axios from "axios";
 import moment from "moment";
 import DOMPurify from "dompurify";
@@ -25,7 +24,7 @@ const SingleProduct = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const postId = location.pathname.split("/")[2];
-    
+
   // - post: an object that contains the details of the post
   const [post, setPost] = useState({});
 
@@ -206,7 +205,7 @@ const SingleProduct = () => {
     fetchData();
   }, [postId, idOwner, idBrand, idCategory]);
 
-  // Obtener texto
+  // Obtain text
   const getText = (html) => {
     const doc = new DOMParser().parseFromString(html, "text/html")
     return doc.body.textContent
@@ -231,7 +230,7 @@ const SingleProduct = () => {
   // Write new comment
   const state = useLocation().state;
   const [value, setValue] = useState(state?.newComment || "");
-  
+
   // Post comment
   const handleClick = async (e) => {
     e.preventDefault();
@@ -260,20 +259,6 @@ const SingleProduct = () => {
     }
   };
 
-  // Comment like button
-  const handleCommentLikeClick = async (commentId, commentLikes) => {
-    try {
-      const commentResponse = await axios.patch(`/comments/${commentId}`, {
-        likes: commentLikes + 1,
-      });
-
-      window.location.reload();
-
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   // Return the JSX that renders the SingleProduct page
   return (
     <div className="single">
@@ -281,30 +266,37 @@ const SingleProduct = () => {
         <Link to="#" onClick={() => window.history.back()}>
           <img className="arrow-img" src={Arrow} alt="" />
         </Link>
-        <img className="super-image" src={post.image_url} alt="" />
+
         <div className="user">
           <img src={ProfilePicture} />
           <div className="info">
             <span className="username">{userOwner.username}</span>
           </div>
-          {currentUser.username === userOwner.username ? (
+
+          {currentUser.username === userOwner.username && (
             <><div className="edit">
               <Link to={`/editproduct/${post.id}`} state={post}>
                 <img className="editimg" src={Edit} alt="" />
               </Link>
               <img className="delete" onClick={handleDelete} src={Delete} alt="" />
             </div> </>
-          ) : (
+          )}
+        </div>
+
+        <img className="super-image" src={post.image_url} alt="" />
+
+        <div className="product-info-container">
+          <h1 className="product-name">{post.product_name}</h1>
+          <div className="user">
             <div className="like">
               <button onClick={handleLikeClick}>
                 <img src={Heart} alt="Heart Icon" className="heart-icon" />
                 <span className="likes-count">{post.likes}</span>
               </button>
             </div>
-          )}
+          </div>
         </div>
 
-        <h1 className="product-name">{post.product_name}</h1>
         <p className="description"
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(post.product_description),
@@ -356,7 +348,7 @@ const SingleProduct = () => {
           ) : (
             comments.map(comment => {
               const parentComment = comments.find(c => c.id === comment.parentId);
-            
+
               return (
                 <li key={comment.id} className="comment">
                   <div className="comment-content">
@@ -375,10 +367,15 @@ const SingleProduct = () => {
                       }}
                     ></p>
                   </div>
-                  <button className="comment-likes-component" onClick={() => handleCommentLikeClick(comment.id, comment.likes)}>
-                    <img src={Heart} alt="Heart Icon" className="heart-icon" />
-                    <div className="likes-count-component">{comment.likes}</div>
-                  </button>
+                  <div className="comment-likes">
+                    <button onClick={() => handleReply(comment.id, userComments[comment.id]?.username)}>
+                      <img src={Reply} alt="Reply Icon" className="heart-icon" />
+                    </button>
+                    <button onClick={handleLikeClick}>
+                      <img src={Heart} alt="Heart Icon" className="heart-icon" />
+                    </button>
+                    <span className="likes-count">{comment.likes}</span>
+                  </div>
                 </li>
               );
             }
@@ -413,6 +410,15 @@ const SingleProduct = () => {
             theme="snow"
             value={value}
             onChange={setValue}
+            modules={{
+              toolbar: {
+                container: [
+                  ["bold", "italic", "underline"],
+                ],
+              },
+              clipboard: { matchVisual: false },
+              mention: false,
+            }}
           />
         </div>
 

@@ -52,6 +52,14 @@ const Login = () => {
     }
 
     try {
+      await login(inputs)
+      navigate("/app/home");
+    } catch (err) {
+      setError(err.response.data);
+    }
+
+    /*
+    try {
       const res = await axios.get(`/users/by-username/${inputs.username}`);
       console.log(res.data)
       if (res.data.length === 0) {
@@ -67,6 +75,7 @@ const Login = () => {
     } catch (err) {
       setError(err.response.data);
     }
+    */
   };
 
   // Password visibility

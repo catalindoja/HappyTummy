@@ -170,15 +170,24 @@
   z-index: 1;
 }
 
+.heart-icon-top {
+  width: 30px;
+  height: 30px;
+}
+
 .comment-likes-component {
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  background: none; /* Remove button background */
-  border: none;     /* Remove button border */
-  padding: 0;       /* Remove button padding */
-  cursor: pointer;  /* Optional: Change cursor on hover */
+  background: none;
+  /* Remove button background */
+  border: none;
+  /* Remove button border */
+  padding: 0;
+  /* Remove button padding */
+  cursor: pointer;
+  /* Optional: Change cursor on hover */
 }
 
 .comment-likes-button {
@@ -230,4 +239,20 @@
 
 .publishcomment-button {
   background-color: teal;
+}
+
+.reply-icon {
+  width: 25px;
+  height: 25px;
+  margin-left: 0px;
+}
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.likeandreply {
+  display: flex;
 }

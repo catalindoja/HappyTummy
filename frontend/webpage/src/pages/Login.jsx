@@ -58,6 +58,15 @@ const Login = () => {
     } catch (err) {
       setError(err.response.data);
     }
+
+    /*
+    try {
+      await login(inputs)
+      navigate("/products");
+    } catch (err) {
+      setError(err.response.data);
+    }
+    */
   };
 
   // Return the JSX elements

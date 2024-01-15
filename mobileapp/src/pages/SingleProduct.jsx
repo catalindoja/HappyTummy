@@ -110,58 +110,58 @@ const SingleProduct = () => {
   const idCategory = post.idcategory;
   const [categoryProduct, setCategory] = useState("");
 
-   // Add state variables for handling reply functionality
-   const [replyingTo, setReplyingTo] = useState(null); // To store the ID of the comment being replied to
-   const [replyContent, setReplyContent] = useState(""); // To store the content of the reply
-   const [isReplyVisible, setIsReplyVisible] = useState(false);
- 
-   // Inside your functional component
-   const replyContainerRef = useRef(null);
- 
-   // Use useEffect to trigger the scroll when isReplyVisible changes
-   useEffect(() => {
-     if (isReplyVisible && replyContainerRef.current) {
-       replyContainerRef.current.scrollIntoView({
-         behavior: 'smooth',
-         block: 'start',
-       });
-     }
-   }, [isReplyVisible]);
- 
-   // Function to handle opening the reply pop-up
-   const handleReply = (commentId, username) => {
-     setReplyingTo(commentId);
-     setIsReplyVisible(true);
-   };
- 
-   // Function to handle submitting the reply
-   const submitReply = async () => {
-     try {
-       // Send the reply to the backend
-       await axios.post(`/comments/`, {
-         iduser: idCurrent,
-         idproduct: postId,
-         content: replyContent,
-         likes: 0, // Assuming initial likes count is 0
-         parentId: replyingTo, // Add the ID of the comment being replied to
-       });
-       // Close the modal/pop-up and reset state variables
-       setIsReplyVisible(false);
-       setReplyingTo(null);
-       setReplyContent("");
-       // Refresh comments or update state to include the new reply
- 
-       window.location.reload();
-     } catch (err) {
-       console.log(err);
-     }
-   };
- 
-   const closeReplyModal = () => {
-     setIsReplyVisible(false);
-     setReplyingTo(null);
-     setReplyContent("");
-   };
+  // Add state variables for handling reply functionality
+  const [replyingTo, setReplyingTo] = useState(null); // To store the ID of the comment being replied to
+  const [replyContent, setReplyContent] = useState(""); // To store the content of the reply
+  const [isReplyVisible, setIsReplyVisible] = useState(false);
+
+  // Inside your functional component
+  const replyContainerRef = useRef(null);
+
+  // Use useEffect to trigger the scroll when isReplyVisible changes
+  useEffect(() => {
+    if (isReplyVisible && replyContainerRef.current) {
+      replyContainerRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  }, [isReplyVisible]);
+
+  // Function to handle opening the reply pop-up
+  const handleReply = (commentId, username) => {
+    setReplyingTo(commentId);
+    setIsReplyVisible(true);
+  };
+
+  // Function to handle submitting the reply
+  const submitReply = async () => {
+    try {
+      // Send the reply to the backend
+      await axios.post(`/comments/`, {
+        iduser: idCurrent,
+        idproduct: postId,
+        content: replyContent,
+        likes: 0, // Assuming initial likes count is 0
+        parentId: replyingTo, // Add the ID of the comment being replied to
+      });
+      // Close the modal/pop-up and reset state variables
+      setIsReplyVisible(false);
+      setReplyingTo(null);
+      setReplyContent("");
+      // Refresh comments or update state to include the new reply
+
+      window.location.reload();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const closeReplyModal = () => {
+    setIsReplyVisible(false);
+    setReplyingTo(null);
+    setReplyContent("");
+  };
 
   // Nuevo estado para manejar si el usuario puede comer el producto o no
   const [canUserEatProduct, setCanUserEatProduct] = useState(null);
@@ -486,7 +486,7 @@ const SingleProduct = () => {
         <div className="single-header">
           <h1 className="product-name my-3">{post.product_name}</h1>
           <button className="like" onClick={() => handleLikeClick(postId)}>
-            <img src={Heart} alt="Heart Icon" className="heart-icon" />
+            <img src={Heart} alt="Heart Icon" className="heart-icon-top" />
             <div className="likes-count">{post.likes}</div>
           </button>
         </div>
@@ -558,26 +558,22 @@ const SingleProduct = () => {
           {comments.length == 0 ? (
             <p>No comments yet!</p>
           ) : (
-            comments.map(comment => {  
+            comments.map(comment => {
               const parentComment = comments.find(c => c.id === comment.parentId);
-              return(
+              return (
                 <li key={comment.id} className="comment">
                   <div className="comment-content">
-                    <div className="user-info">
-                      <img src={ProfilePicture} alt="Profile Picture" className="user-image" />
-                      <Link to={`/app/user/${userComments[comment.id] ? userComments[comment.id].id : "Unknown"}`} className="username">
-                        {userComments[comment.id] ? userComments[comment.id].username : "Unknown"}
-                        {comment.parentId && parentComment && (
-                          <> replied to {userComments[parentComment.id]?.username}</>
-                        )}
-                      </Link>
-                      <button className="comment-likes-component" onClick={() => handleCommentLikeClick(comment.id, comment.likes)}>
-                        <img src={Heart} alt="Heart Icon" className="heart-icon-component" />
-                        <div className="likes-count-component">{comment.likes}</div>
-                      </button>
-                      <button onClick={() => handleReply(comment.id, userComments[comment.id]?.username)}>
-                        <img src={Reply} alt="Reply Icon" className="heart-icon" />
-                      </button>
+                    <div className="comment-header">
+
+                      <div className="user-info">
+                        <img src={ProfilePicture} alt="Profile Picture" className="user-image" />
+                        <Link to={`/app/user/${userComments[comment.id] ? userComments[comment.id].id : "Unknown"}`} className="username">
+                          {userComments[comment.id] ? userComments[comment.id].username : "Unknown"}
+                          {comment.parentId && parentComment && (
+                            <> replied to {userComments[parentComment.id]?.username}</>
+                          )}
+                        </Link>
+                      </div>
                     </div>
                     <p
                       dangerouslySetInnerHTML={{
@@ -585,8 +581,17 @@ const SingleProduct = () => {
                       }}
                     ></p>
                   </div>
+                  <div className="likeandreply">
+                    <button className="comment-likes-component" onClick={() => handleCommentLikeClick(comment.id, comment.likes)}>
+                      <img src={Heart} alt="Heart Icon" className="heart-icon-component" />
+                      <div className="likes-count-component">{comment.likes}</div>
+                    </button>
+                    <button onClick={() => handleReply(comment.id, userComments[comment.id]?.username)}>
+                      <img src={Reply} alt="Reply Icon" className="reply-icon" />
+                    </button>
+                  </div>
                 </li>
-            )
+              )
             }
             ))}
         </ul>

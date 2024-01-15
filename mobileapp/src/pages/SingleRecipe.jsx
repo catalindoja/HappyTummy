@@ -367,7 +367,7 @@ const SingleRecipe = () => {
                     <div className="single-header">
                         <h1 className="product-name my-3">{post.title}</h1>
                         <button className="like" onClick={() => handleLikeClick(postId)}>
-                            <img src={Heart} alt="Heart Icon" className="heart-icon" />
+                            <img src={Heart} alt="Heart Icon" className="heart-icon-top" />
                             <div className="likes-count">{post.likes}</div>
                         </button>
                     </div>
@@ -401,36 +401,39 @@ const SingleRecipe = () => {
                             <p>No comments yet!</p>
                         ) : (
                             comments.map(comment => {
-                                const parentComment = comments.find(c => c.id === comment.idparent);
-                                
-                                return(
+                                const parentComment = comments.find(c => c.id === comment.idparent);                 
+                                return (
                                     <li key={comment.id} className="comment">
-                                        <div className="comment-content">
-                                            <div className="user-info">
-                                                <img src={ProfilePicture} alt="" className="user-image" />
-                                                <Link to={`/app/user/${userComments[comment.id] ? userComments[comment.id].id : "Unknown"}`} className="username">
-                                                    {userComments[comment.id] ? userComments[comment.id].username : "Unknown"}
-                                                    {comment.idparent && parentComment && (
-                                                    <> replied to {userComments[parentComment.id]?.username}</>
-                                                    )}
-                                                </Link>
-                                                <button className="comment-likes" onClick={() => handleCommentLikeClick(comment.id, comment.likes)}>
-                                                    <img src={Heart} alt="Heart Icon" className="heart-icon" />
-                                                    <div className="likes-count">{comment.likes}</div>
-                                                </button>
-                                                <button onClick={() => handleReply(comment.id, userComments[comment.id]?.username)}>
-                                                    <img src={Reply} alt="Reply Icon" className="heart-icon" />
-                                                </button>
-                                            </div>
-                                            <p
-                                                dangerouslySetInnerHTML={{
-                                                    __html: DOMPurify.sanitize(comment.content)
-                                                }}
-                                            ></p>
+                                      <div className="comment-content">
+                                        <div className="comment-header">
+                    
+                                          <div className="user-info">
+                                            <img src={ProfilePicture} alt="Profile Picture" className="user-image" />
+                                            <Link to={`/app/user/${userComments[comment.id] ? userComments[comment.id].id : "Unknown"}`} className="username">
+                                              {userComments[comment.id] ? userComments[comment.id].username : "Unknown"}
+                                              {comment.parentId && parentComment && (
+                                                <> replied to {userComments[parentComment.id]?.username}</>
+                                              )}
+                                            </Link>
+                                          </div>
                                         </div>
-
+                                        <p
+                                          dangerouslySetInnerHTML={{
+                                            __html: DOMPurify.sanitize(comment.content)
+                                          }}
+                                        ></p>
+                                      </div>
+                                      <div className="likeandreply">
+                                        <button className="comment-likes-component" onClick={() => handleCommentLikeClick(comment.id, comment.likes)}>
+                                          <img src={Heart} alt="Heart Icon" className="heart-icon-component" />
+                                          <div className="likes-count-component">{comment.likes}</div>
+                                        </button>
+                                        <button onClick={() => handleReply(comment.id, userComments[comment.id]?.username)}>
+                                          <img src={Reply} alt="Reply Icon" className="reply-icon" />
+                                        </button>
+                                      </div>
                                     </li>
-                                )
+                                  )
                             }
                             ))}
                     </ul>

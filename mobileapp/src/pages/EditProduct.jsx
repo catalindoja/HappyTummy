@@ -46,6 +46,50 @@ const EditProduct = () => {
         }));
     };
 
+    // Obtains the list of brands from the backend
+    const [brands, setBrands] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get(`${BACKEND_API_URL}/brands`);
+                console.log(res.data)
+                setBrands(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        fetchData();
+    }, []);
+
+    // Obtains the list of categories from the backend
+    const [categories, setCategories] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get(`${BACKEND_API_URL}/categories`);
+                console.log(res.data)
+                setCategories(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        fetchData();
+    }, []);
+
+    // Obtains the list of categories from the backend
+    const [supermarkets, setSupermarkets] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await axios.get(`${BACKEND_API_URL}/markets`);
+                setSupermarkets(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        fetchData();
+    }, []);
+
     // Obtains the list of allergies from the backend
     const [allergies, setAllergies] = useState([]);
     useEffect(() => {
@@ -175,6 +219,93 @@ const EditProduct = () => {
                                     </div>
                                 ))}
                             </fieldset>
+                        </div>
+
+                        <legend>{t('supermarkets')}</legend>
+                        <div className="form-group-post">
+                            <fieldset>
+                                {supermarkets.map((market) => (
+
+                                    <div key={market.id}>
+                                        <input type="checkbox"
+                                            id={market.name}
+                                            name="markets[]"
+                                            checked={selectedSupermarkets.includes(market.id)}
+                                            className="form-check-input" />
+
+                                        <label htmlFor={market.name}
+                                            className="form-check-label">
+                                            {market.name}
+                                        </label>
+                                    </div>
+
+                                ))}
+                            </fieldset>
+                        </div>
+
+                        <legend>{t('brand')}</legend>
+                        <div className="form-group-post">
+                            <fieldset>
+                                {brands.map((brand) => (
+
+                                    <div key={brand.id}>
+                                        <input type="radio"
+                                            id={brand.name}
+                                            name="idbrand"
+                                            value={brand.id}
+                                            className="form-check-input" />
+
+                                        <label htmlFor={brand.name}
+                                            className="form-check-label">
+                                            {brand.name}
+                                        </label>
+                                    </div>
+
+                                ))}
+                            </fieldset>
+                        </div>
+
+                        <legend>{t('category')}</legend>
+                        <div className="form-group-post">
+                            <fieldset>
+                                {categories.map((category) => (
+
+                                    <div key={category.id}>
+                                        <input type="radio"
+                                            id={category.category_name}
+                                            name="iccategory"
+                                            value={category.id}
+                                            className="form-check-input" />
+
+                                        <label htmlFor={category.category_name}
+                                            className="form-check-label">
+                                            {category.category_name}
+                                        </label>
+                                    </div>
+
+                                ))}
+                            </fieldset>
+                        </div>
+
+                        <h3 className="picture-title">{t('update')} 📸</h3>
+                        <input
+                            type="text"
+                            placeholder="Image url"
+                        />
+
+                        <div className="image-write">
+                            <div className="image-container-write">
+                                <input
+                                    style={{ display: "none" }}
+                                    type="file"
+                                    id="file"
+                                    name=""
+                                />
+                                <label className="file-write" htmlFor="file">
+                                    {t('upload')}
+                                </label>
+
+                            </div>
                         </div>
 
                         {error && <p className="error-message-write">{error}</p>}
