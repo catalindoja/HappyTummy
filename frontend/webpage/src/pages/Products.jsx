@@ -125,14 +125,14 @@ const Products = () => {
       );
     });
 
-  const filterOptions = ["All", "Allergens", "Category", "Brand", "Supermarket"];
-  const [filterOption, setFilterOption] = useState("All");
+  // const filterOptions = ["All", "Allergens", "Category", "Brand", "Supermarket"];
+  // const [filterOption, setFilterOption] = useState("All");
 
   // Display posts
   return (
     <div className="home">
       <h1 className="supertitle">Products 🛒</h1>
-      <button style={{ "margin-left": "1em" }} onClick={handleNavigation}>New product</button>
+      <button className="new-post-button" onClick={handleNavigation}>New product</button>
       <div className="box">
         <div className="boxes">
           <fieldset>

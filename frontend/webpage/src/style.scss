@@ -79,6 +79,8 @@ body {
   color: #555;
   margin: 5px 0;
   margin-bottom: 17px;
+  max-height: 400px;
+  overflow-y: auto;
 }
 
 .personal-profile {
@@ -118,7 +120,7 @@ body {
     border-radius: 5px;
     margin-top: 0px;
     font-size: 18px;
-    width: 55%;
+    width: 65%;
     margin-bottom: 40px;
 
     .item {
@@ -132,6 +134,7 @@ body {
 
       .item-value {
         color: #333;
+        text-align: right;
       }
     }
   }
@@ -155,6 +158,16 @@ body {
     font-weight: bold;
     margin-top: 0px;
   }
+}
+
+.statistics-container{
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.statistics-name{
+  margin-bottom: 10px;
+  margin-left: 15px;
 }
 
 .allergies-intro {
@@ -206,7 +219,7 @@ body {
   justify-content: center;
   list-style: none;
   padding: 0;
-  margin-top: 120px;
+  margin-top: 60px;
   margin-bottom: 0px;
 }
 
@@ -218,7 +231,7 @@ body {
   margin: 0 10px;
   border: 1px solid $lightGreen;
   background-color: $lightGreen;
-  color: #fff;
+  color: #909090;
   border-radius: 15px;
   padding: 10px 20px;
 }
@@ -497,9 +510,18 @@ body {
         height: 40px;
         gap: 15px;
       }
+
+      .social-icons-single{
+        // width: 40px;
+        // height: 40px;
+      }
     }
 
     .home {
+
+      .new-post-button{
+        margin-left: 25px;
+      }
 
       button {
         margin-top: 20px;
@@ -711,12 +733,19 @@ body {
         flex-direction: column;
         gap: 30px;
 
+        .product-name{
+          font-size: 40px;
+          font-weight: bold;
+          margin-top: 15px;
+          margin-bottom: -10px;
+        }
+
         .arrow-img {
           width: 40px;
           height: 40px;
           margin-left: 0px;
           margin-top: -10px;
-          margin-bottom: -25px;
+          margin-bottom: -15px;
         }
 
         .super-image {
@@ -747,7 +776,7 @@ body {
         .contains-heading {
           font-size: 25px;
           font-weight: bold;
-          margin-top: 10px;
+          margin-top: -8px;
           margin-bottom: 0px;
         }
 
@@ -762,7 +791,7 @@ body {
           border: 1px solid #ccc;
           padding: 10px;
           border-radius: 5px;
-          margin-top: -10px;
+          margin-top: 0px;
           font-size: 18px;
         }
 
@@ -783,7 +812,7 @@ body {
         .comments-heading {
           font-size: 25px;
           font-weight: bold;
-          margin-top: 20px;
+          margin-top: 0px;
           margin-bottom: -10px;
         }
 
@@ -791,6 +820,8 @@ body {
           list-style: none;
           padding: 0;
           margin-top: -20px;
+          max-height: 400px;
+          overflow-y: auto; 
         }
 
         .comment {
@@ -898,7 +929,8 @@ body {
           button {
             border: none;
             background-color: #ffffff;
-            margin-left: 450px;
+            margin-left: 30px;
+            margin-top: 15px;
           }
 
           .likes-count {
@@ -921,10 +953,10 @@ body {
 
         .edit {
           display: flex;
-          gap: 17px;
+          gap: 10px;
 
           .editimg {
-            margin-left: 280px;
+            margin-left: 450px;
             width: 35px;
             height: 35px;
             cursor: pointer;
@@ -936,6 +968,11 @@ body {
             height: 37px;
             cursor: pointer;
           }
+        }
+
+        .product-info-container{
+          display: flex;
+          // gap: 10px;
         }
 
         h1 {

@@ -38,22 +38,22 @@ const SingleRecipe = () => {
     // Write new comment
     const state = useLocation().state;
     const [value, setValue] = useState(state?.newComment || "");
-    
+
     // Post comment
     const handleClick = async (e) => {
         e.preventDefault();
         try {
-        const productResponse = await axios.post(`/commentrecipes/`, {
-            iduser: idCurrent,
-            idproduct: postId,
-            content: value,
-            likes: 0
-        });
+            const productResponse = await axios.post(`/commentrecipes/`, {
+                iduser: idCurrent,
+                idproduct: postId,
+                content: value,
+                likes: 0
+            });
 
-        window.location.reload();
+            window.location.reload();
 
         } catch (err) {
-        console.log(err);
+            console.log(err);
         }
     }
 
@@ -68,10 +68,10 @@ const SingleRecipe = () => {
     // Use useEffect to trigger the scroll when isReplyVisible changes
     useEffect(() => {
         if (isReplyVisible && replyContainerRef.current) {
-        replyContainerRef.current.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-        });
+            replyContainerRef.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+            });
         }
     }, [isReplyVisible]);
 
@@ -84,23 +84,23 @@ const SingleRecipe = () => {
     // Function to handle submitting the reply
     const submitReply = async () => {
         try {
-        // Send the reply to the backend
-        await axios.post(`/commentrecipes/`, {
-            iduser: idCurrent,
-            idrecipe: postId,
-            content: replyContent,
-            likes: 0, // Assuming initial likes count is 0
-            idparent: replyingTo, // Add the ID of the comment being replied to
-        });
-        // Close the modal/pop-up and reset state variables
-        setIsReplyVisible(false);
-        setReplyingTo(null);
-        setReplyContent("");
-        // Refresh comments or update state to include the new reply
+            // Send the reply to the backend
+            await axios.post(`/commentrecipes/`, {
+                iduser: idCurrent,
+                idrecipe: postId,
+                content: replyContent,
+                likes: 0, // Assuming initial likes count is 0
+                idparent: replyingTo, // Add the ID of the comment being replied to
+            });
+            // Close the modal/pop-up and reset state variables
+            setIsReplyVisible(false);
+            setReplyingTo(null);
+            setReplyContent("");
+            // Refresh comments or update state to include the new reply
 
-        window.location.reload();
+            window.location.reload();
         } catch (err) {
-        console.log(err);
+            console.log(err);
         }
     };
 
@@ -129,8 +129,8 @@ const SingleRecipe = () => {
                 // Create an object that contains the details of the users who wrote the comments
                 const userCommentsData = {};
                 userResponses.forEach((response, index) => {
-                const comment = filteredComments[index];
-                userCommentsData[comment.id] = response.data;
+                    const comment = filteredComments[index];
+                    userCommentsData[comment.id] = response.data;
                 });
 
                 // Set the state variable 'userComments' to the object that contains the details of the users who wrote the comments
@@ -192,29 +192,36 @@ const SingleRecipe = () => {
                     <Link to="#" onClick={() => window.history.back()}>
                         <img className="arrow-img" src={Arrow} alt="" />
                     </Link>
-                    <img className="super-image" src={post.image_url} alt="" />
+
                     <div className="user">
                         <img src={ProfilePicture} />
                         <div className="info">
                             <span className="username">{userOwner.username}</span>
                         </div>
-                        {currentUser.username === userOwner.username ? (
+                        {currentUser.username === userOwner.username && (
                             <><div className="edit">
                                 <Link to={`/editrecipe/${post.id}`} state={post}>
                                     <img className="editimg" src={Edit} alt="" />
                                 </Link>
                                 <img className="delete" onClick={handleDelete} src={Delete} alt="" />
                             </div> </>
-                        ) : (
+                        )}
+                    </div>
+
+                    <img className="super-image" src={post.image_url} alt="" />
+
+                    <div className="product-info-container">
+                        <h1 className="product-name">{post.title}</h1>
+                        <div className="user">
                             <div className="like">
                                 <button onClick={handleLikeClick}>
                                     <img src={Heart} alt="Heart Icon" className="heart-icon" />
                                     <span className="likes-count">{post.likes}</span>
                                 </button>
                             </div>
-                        )}
+                        </div>
                     </div>
-                    <h1>{post.title}</h1>
+
                     <h3 className="more-data-heading">Specifications</h3>
                     <div className="more-data-container">
                         <div className="more-data-item">
@@ -243,78 +250,87 @@ const SingleRecipe = () => {
 
                     <h3 className="comments-heading">Comments</h3>
                     <ul className="comments-list">
-                    {comments.length === 0 ? (
-                        <p>No comments yet!</p>
-                    ) : (
-                        comments.map(comment => {
-                        const parentComment = comments.find(c => c.id === comment.idparent);
-                        
-                        return (
-                            <li key={comment.id} className="comment">
-                            <div className="comment-content">
-                                <div className="user-info">
-                                <img src={ProfilePicture} alt="Profile Picture" className="user-image" />
-                                <span className="username">
-                                    {userComments[comment.id] ? userComments[comment.id].username : "Unknown"}
-                                    {comment.idparent && parentComment && (
-                                    <> replied to {userComments[parentComment.id]?.username}</>
-                                    )}
-                                </span>
-                                </div>
-                                <p
-                                dangerouslySetInnerHTML={{
-                                    __html: DOMPurify.sanitize(comment.content)
-                                }}
-                                ></p>
-                            </div>
-                            <div className="comment-likes">
-                                <button onClick={() => handleReply(comment.id, userComments[comment.id]?.username)}>
-                                <img src={Reply} alt="Reply Icon" className="heart-icon" />
-                                </button>
-                                <button onClick={handleLikeClick}>
-                                <img src={Heart} alt="Heart Icon" className="heart-icon" />
-                                </button>
-                                <span className="likes-count">{comment.likes}</span>
-                            </div>
-                            </li>
-                        );
-                        }
-                        ))}
+                        {comments.length === 0 ? (
+                            <p>No comments yet!</p>
+                        ) : (
+                            comments.map(comment => {
+                                const parentComment = comments.find(c => c.id === comment.idparent);
+
+                                return (
+                                    <li key={comment.id} className="comment">
+                                        <div className="comment-content">
+                                            <div className="user-info">
+                                                <img src={ProfilePicture} alt="Profile Picture" className="user-image" />
+                                                <span className="username">
+                                                    {userComments[comment.id] ? userComments[comment.id].username : "Unknown"}
+                                                    {comment.idparent && parentComment && (
+                                                        <> replied to {userComments[parentComment.id]?.username}</>
+                                                    )}
+                                                </span>
+                                            </div>
+                                            <p
+                                                dangerouslySetInnerHTML={{
+                                                    __html: DOMPurify.sanitize(comment.content)
+                                                }}
+                                            ></p>
+                                        </div>
+                                        <div className="comment-likes">
+                                            <button onClick={() => handleReply(comment.id, userComments[comment.id]?.username)}>
+                                                <img src={Reply} alt="Reply Icon" className="heart-icon" />
+                                            </button>
+                                            <button onClick={handleLikeClick}>
+                                                <img src={Heart} alt="Heart Icon" className="heart-icon" />
+                                            </button>
+                                            <span className="likes-count">{comment.likes}</span>
+                                        </div>
+                                    </li>
+                                );
+                            }
+                            ))}
                     </ul>
 
                     {isReplyVisible && (
-                    <div ref={replyContainerRef} className="reply-container">
-                        <div className="reply-header">
-                        <span>Replying to: {userComments[replyingTo]?.username}</span>
+                        <div ref={replyContainerRef} className="reply-container">
+                            <div className="reply-header">
+                                <span>Replying to: {userComments[replyingTo]?.username}</span>
+                            </div>
+                            <div className="reply-body">
+                                <textarea
+                                    value={replyContent}
+                                    onChange={(e) => setReplyContent(e.target.value)}
+                                    placeholder="Write your reply..."
+                                    className="reply-textarea"
+                                />
+                                <div className="reply-buttons">
+                                    <button onClick={submitReply} className="submit-reply-button">Submit</button>
+                                    <button onClick={closeReplyModal} className="cancel-reply-button">Cancel</button>
+                                </div>
+                            </div>
                         </div>
-                        <div className="reply-body">
-                        <textarea
-                            value={replyContent}
-                            onChange={(e) => setReplyContent(e.target.value)}
-                            placeholder="Write your reply..."
-                            className="reply-textarea"
-                        />
-                        <div className="reply-buttons">
-                            <button onClick={submitReply} className="submit-reply-button">Submit</button>
-                            <button onClick={closeReplyModal} className="cancel-reply-button">Cancel</button>
-                        </div>
-                        </div>
-                    </div>
                     )}
 
                     <h3 className="write-comment-heading">Write a new comment!</h3>
                     <div className="editorContainer">
-                    <ReactQuill
-                        placeholder="New comment"
-                        className="editor"
-                        theme="snow"
-                        value={value}
-                        onChange={setValue}
-                    />
+                        <ReactQuill
+                            placeholder="New comment"
+                            className="editor"
+                            theme="snow"
+                            value={value}
+                            onChange={setValue}
+                            modules={{
+                                toolbar: {
+                                    container: [
+                                        ["bold", "italic", "underline"],
+                                    ],
+                                },
+                                clipboard: { matchVisual: false },
+                                mention: false,
+                            }}
+                        />
                     </div>
 
                     <div className="buttons">
-                    <button onClick={handleClick}> Publish</button>
+                        <button onClick={handleClick}> Publish</button>
                     </div>
                 </div>
                 {<Menu />}

@@ -119,7 +119,7 @@ const Recepies = () => {
   return (
     <div className="home">
       <h1 className="supertitle">Recipes 🥧</h1>
-      <button style={{ "margin-left": "1em" }} onClick={handleNavigation}>New recipe</button>
+      <button className="new-post-button" onClick={handleNavigation}>New recipe</button>
       <div className="box">
         <div className="boxes">
           <fieldset>
