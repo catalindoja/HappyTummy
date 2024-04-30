@@ -10,3 +10,4 @@ In addition, Happy Tummy offers a diverse selection of selected recipes, which s
 
 As a quick summary, the service consists of two platforms: a website adapted to official markets accounts, providing them with an easy-to-use interface for publishing verified products and recommended recipes, as well as engaging with customers and efficiently managing their accounts; at the same time, there is a mobile application designed for ordinary users, which allows them to conveniently access the wealth of information provided from virtually anywhere and at any time. They also have the ability to publish products from any supermarket and homemade recipes.
 
+![logo](https://github.com/catalindoja/HappyTummy/assets/79216573/4cd6ab7b-1b4d-4eee-a941-bb24015453bb)
