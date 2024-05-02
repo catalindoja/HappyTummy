@@ -64,7 +64,8 @@ function Home() {
                     return !myallergens.some(userAllergy => productAllergyIds.includes(userAllergy.idallergy));
                 });
                 const specificProducts = filteredProducts.filter(product => ProductIds.includes(product.id));
-                setProducts(specificProducts.slice(0, maxItemsToShow));
+                //console.log(res.data);
+                setProducts(res.data);
             } catch (err) {
                 console.log(err);
             }
@@ -79,7 +80,7 @@ function Home() {
         const fetchData = async () => {
             try {
                 const res = await axios.get(`${BACKEND_API_URL}/recipes`);
-                console.log(res.data);
+                //console.log(res.data);
                 setRecipes(res.data);
 
             } catch (err) {
